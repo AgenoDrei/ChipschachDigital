@@ -30,3 +30,6 @@ Entwickler: Simon Müller, Oliver Berg
 ###Code Conventions:
 - Curly braces opening on same line, never omit curly braces
 - indention as 4 spaces
+
+## TODO:
+- BrowserSync

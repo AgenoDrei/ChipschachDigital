@@ -7,15 +7,16 @@ var bodyParser = require('body-parser');
 
 var app = express();
 
-// uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));    // TODO: insert favicon
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //Deliver Frontend files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'frontend/build')));
+app.use('/libs', express.static(path.resolve(__dirname, 'node_modules')));
+
 
 //Route Definitions (REST Controller)
 app.use('/api/v1', require('./controller/index'));
@@ -27,7 +28,7 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-//Set header for whole applikation
+//Set header for whole application
 app.use(function (req, res, next) {
   res.header("Content-Type",'application/json');
   next();
