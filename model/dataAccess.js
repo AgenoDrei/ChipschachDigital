@@ -1,4 +1,5 @@
-f = require('util').format,
+var f = require('util').format;
+var Promise = require('promise');
 
 module.exports = function(configuration, mongoClient) {
 	var baseUrl = configuration.database.url + ':' + configuration.database.port + '/' + configuration.database.db;
@@ -19,12 +20,23 @@ module.exports = function(configuration, mongoClient) {
   		console.log("Database connected");
   		this.db = db;
 	});
-	return this;
 
-	var getDb = function() {
+	this.getDb = function() {
 		return this.db;
-	}
+	};
 
+	this.createLevel = function(level) {
+		return new Promise(function(fulfill, reject) {
+			db.collection('levels').insertOne(level, function(err, doc) {
+				if(err) {
+					reject(err);
+				}
+				fulfill(doc);
+			});
+		});
+	};
+
+	return this;
 	
 };
 

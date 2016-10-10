@@ -25,7 +25,7 @@ var dataAccess = require('./model/dataAccess')(config, mongoClient);
 
 //Route Definitions (REST Controller)
 app.use('/api/v1', require('./controller/index'));
-app.use('/api/v1', require('./controller/level'));
+app.use('/api/v1', require('./controller/level')(dataAccess));
 
 
 // catch 404 and forward to error handler
