@@ -2,7 +2,7 @@ const gulp = require('gulp');
 const browserSync = require('browser-sync');
 const del = require('del');
 const ts = require('gulp-typescript');
-// const sourcemaps = require('gulp-sourcemaps');
+// const sourcemaps = require('gulp-sourcemaps');       // TODO: make sourcemaps work
 
 
 gulp.task('clean', function () {
@@ -36,9 +36,9 @@ gulp.task('start', function(){
         server: './',
         startPath: '/index.html'
     });
-    gulp.watch('frontend/app/**/*', function() { gulp.start('refresh'); });     // TODO: ...
+    gulp.watch('frontend/app/**/*', function() { gulp.start('refresh'); });     // TODO: make browser-sync work
     gulp.watch('frontend/*.html', function() { gulp.start('refresh'); });
     gulp.watch('frontend/*.js', function() { gulp.start('refresh'); });
 });
 
-gulp.task('default', ['build', 'start']);
+gulp.task('default', ['build']);

@@ -13,13 +13,13 @@ Entwickler: Simon Müller, Oliver Berg
 - Tests: unbestimmt
 
 ###Ordner Struktur:
-- app: Angular files
 - bin: Binary files
-- public: Frontend Dateien (nicht minifiziert, für Dev Umgebung)
-- build: Minifizierte Frontenddateien (für Produktion Umgebung)
 - controller: Kontroller für aufgabenspezifische REST APIs
-- config: Konfigurationsdateien
+- frontend: Frontend Dateien (nicht minifiziert, für Dev Umgebung)
+- frontend\app: Angular files
+- frontend\build: Minifizierte & geparste Frontenddateien (für Produktion Umgebung)
 - model: Datenbank Module
+- typings: TypeScript specs
 
 ###Bestes Practices:
 - Frontend Struktur: Trennung nach Funktion, module bekommen das suffix '.module.ts'

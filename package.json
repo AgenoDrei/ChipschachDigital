@@ -2,6 +2,10 @@
   "name": "ChipschachDigital",
   "version": "0.0.1",
   "private": true,
+  "contributors": [
+    "Simon Mueller",
+    "Oliver Berg <oliver.daniel.berg@gmail.com>"
+  ],
   "scripts": {
     "start": "gulp build && node bin/www "
   },
