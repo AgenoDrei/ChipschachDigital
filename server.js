@@ -4,6 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var config = require('./config/config');
+var mongoClient = require('mongodb').MongoClient;
+
 
 var app = express();
 
@@ -17,9 +20,13 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 app.use('/libs', express.static(path.resolve(__dirname, 'node_modules')));
 
+//Database initalization
+var dataAccess = require('./model/dataAccess')(config, mongoClient);
 
 //Route Definitions (REST Controller)
 app.use('/api/v1', require('./controller/index'));
+app.use('/api/v1', require('./controller/level')(dataAccess));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
