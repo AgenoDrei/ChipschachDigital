@@ -36,6 +36,31 @@ module.exports = function(configuration, mongoClient) {
 		});
 	};
 
+	this.getLevelById = function(levelId) {
+		return new Promise(function(fulfill, reject) {
+			db.collection('levels').findOne({ _id: levelId }, function(err, doc) {
+				if(err) {
+					reject(err);
+				}
+				if(doc == null) {
+					reject('No document found!'); 
+				}
+				fulfill(doc);
+			});
+		});
+	};
+
+	this.getAllLevelIds = function() {
+		return new Promise(function(fulfill, reject) {
+			db.collection('levels').find({}, { 'name': 1 }).toArray(function(err, doc) {
+				if(err) {
+					reject(err);
+				}
+				fulfill(doc);
+			});
+		});
+	};
+
 	return this;
 	
 };
