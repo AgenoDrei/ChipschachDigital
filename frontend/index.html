@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Angular QuickStart</title>
+    <base href="/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Polyfill(s) for older browsers -->
@@ -8,13 +9,23 @@
     <script src="libs/zone.js/dist/zone.js"></script>
     <script src="libs/reflect-metadata/Reflect.js"></script>
     <script src="libs/systemjs/dist/system.src.js"></script>
-
     <script src="systemjs.config.js"></script>
+    <script src="libs/jquery/dist/jquery.min.js"></script>
+    <script src="libs/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
         System.import('app').catch(function(err){ console.error(err); });
     </script>
+
+    <title>Chipschach Digital</title>
+
+    <link rel="stylesheet" type="text/css" href="libs/bootstrap/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-image: url('/img/muster2.png');
+        }
+    </style>
 </head>
 <body>
-    <my-app>Loading...</my-app>
+    <app>Loading...</app>
 </body>
 </html>

@@ -1,5 +1,5 @@
 const gulp = require('gulp');
-const browserSync = require('browser-sync');
+const nodemon = require('gulp-nodemon');
 const del = require('del');
 const ts = require('gulp-typescript');
 // const sourcemaps = require('gulp-sourcemaps');       // TODO: make sourcemaps work
@@ -29,16 +29,24 @@ gulp.task('compileTS', ['clean'], function () {
 
 gulp.task('build', ['compileTS', 'copy:assets']);
 
-gulp.task('refresh', ['build'], browserSync.reload);
+gulp.task('nodemon', function(cb){
+    var started = false;
 
-gulp.task('start', function(){
-    browserSync.init({
-        server: './',
-        startPath: '/index.html'
+    return nodemon({
+        script: 'bin/www'
+    }).on('start', function () {
+        // to avoid nodemon being started multiple times
+        if (!started) {
+            cb();
+            started = true;
+        }
     });
-    gulp.watch('frontend/app/**/*', function() { gulp.start('refresh'); });     // TODO: make browser-sync work
-    gulp.watch('frontend/*.html', function() { gulp.start('refresh'); });
-    gulp.watch('frontend/*.js', function() { gulp.start('refresh'); });
 });
 
-gulp.task('default', ['build']);
+gulp.task('watchFrontend', function(){
+    gulp.watch('frontend/app/**/*', function() { gulp.start('build'); });
+    gulp.watch('frontend/*.html', function() { gulp.start('build'); });
+    gulp.watch('frontend/*.js', function() { gulp.start('build'); });
+});
+
+gulp.task('default', ['build', 'watchFrontend', 'nodemon']);

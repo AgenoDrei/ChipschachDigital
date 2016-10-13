@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 app.use('/libs', express.static(path.resolve(__dirname, 'node_modules')));
 
-//Database initalization
+//Database initialization
 var dataAccess = require('./model/dataAccess')(config, mongoClient);
 
 //Route Definitions (REST Controller)
