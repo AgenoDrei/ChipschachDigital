@@ -5,11 +5,12 @@ const ts = require('gulp-typescript');
 // const sourcemaps = require('gulp-sourcemaps');       // TODO: make sourcemaps work
 
 
-gulp.task('clean', function () {
-    return del('frontend/build');
+gulp.task('clean', function (cb) {
+    del('frontend/build')
+    return cb();
 });
 
-gulp.task('copy:assets', ['clean'], function() {
+gulp.task('copy:assets', function() {
     return gulp.src([
         'frontend/**/*',
         '!frontend/**/*.ts'
@@ -18,7 +19,7 @@ gulp.task('copy:assets', ['clean'], function() {
         .pipe(gulp.dest('frontend/build'))
 });
 
-gulp.task('compileTS', ['clean'], function () {
+gulp.task('compileTS', function () {
     var tsProject = ts.createProject('tsconfig.json');
     var tsResult = tsProject.src()
         .pipe(tsProject());
@@ -27,13 +28,16 @@ gulp.task('compileTS', ['clean'], function () {
         .pipe(gulp.dest('frontend/build/app'));
 });
 
-gulp.task('build', ['compileTS', 'copy:assets']);
+gulp.task('build', ['clean', 'compileTS', 'copy:assets'], function(cb) {
+    cb();
+});
 
-gulp.task('nodemon', function(cb){
+gulp.task('nodemon', ['watchFrontend'], function(cb){
     var started = false;
 
     return nodemon({
-        script: 'bin/www'
+        script: 'bin/www',
+        ignore: 'frontend'
     }).on('start', function () {
         // to avoid nodemon being started multiple times
         if (!started) {
@@ -43,10 +47,11 @@ gulp.task('nodemon', function(cb){
     });
 });
 
-gulp.task('watchFrontend', function(){
-    gulp.watch('frontend/app/**/*', function() { gulp.start('build'); });
-    gulp.watch('frontend/*.html', function() { gulp.start('build'); });
-    gulp.watch('frontend/*.js', function() { gulp.start('build'); });
+gulp.task('watchFrontend', ['build'], function(cb){
+    gulp.watch('frontend/app/**/*', function() { gulp.start('compileTS'); });
+    gulp.watch('frontend/*.html', function() { gulp.start('copy:assets'); });
+    gulp.watch('frontend/*.js', function() { gulp.start('copy:assets'); });
+    cb();
 });
 
 gulp.task('default', ['build', 'watchFrontend', 'nodemon']);
