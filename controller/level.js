@@ -54,7 +54,7 @@ module.exports = function(dataAccess) {
 		if(validLevel != undefined) {
 			return res.status(500).json(validLevel);
 		}
-		console.log(dataAccess.createLevel);
+		//console.log(dataAccess.createLevel);
 		dataAccess.createLevel(level).then(function() {
 			return res.send({ msg: 'Created Level successfull' });
 		},
