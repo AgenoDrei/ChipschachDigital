@@ -1,12 +1,17 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node",
+    "noImplicitAny": true,
+    "noEmitOnError": true,
     "removeComments": false,
-    "noImplicitAny": false
-  }
+    "sourceMap": true,
+    "module": "commonjs",
+    "target": "es5"
+  },
+  "exclude": [
+    "bower_components",
+    "node_modules"
+  ]
 }
