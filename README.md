@@ -4,28 +4,27 @@ Zweite Auflage von Chipschach mit verbessertem responsive Design, verbesserter S
 
 Entwickler: Simon Müller, Oliver Berg
 
-###Architektur Entscheidungen:
-
-- Server Framework: express
-- Build Framework: grunt
+###Architectural Decisions:
+- Server Framework: express, JS
+- Build Framework: gulp
 - Frontend Framework: angular2 
-- Datenbank: wahrscheinlich mongoDB
+- Database: mongoDB
 - Tests: unbestimmt
 
-###Ordner Struktur:
-- app: Angular files
+###Folder Structure:
 - bin: Binary files
-- public: Frontend Dateien (nicht minifiziert, für Dev Umgebung)
-- build: Minifizierte Frontenddateien (für Produktion Umgebung)
-- controller: Kontroller für aufgabenspezifische REST APIs
-- config: Konfigurationsdateien
-- model: Datenbank Module
+- config: Config files (e.g. DB)
+- controller: Controller for REST APIs
+- frontend: frontend-files (not minified, for dev environment)
+- frontend\app: Angular files
+- frontend\build: Minified & parsed frontend-files (--> production)
+- model: Database model
+- typings: TypeScript specs
 
-###Bestes Practices:
-- Frontend Struktur: Trennung nach Funktion, module bekommen das suffix '.module.ts'
-- Backend Server mit Javascript
-- Tests: End2End eigener Ordner, Unit Tests mit funktionalen Dateien
-- Master- & Development branch no-ff-merge-only
+###Best Practices:
+- Frontend structure: Separation by function, moduls get suffix '.module.ts', components get '.component.ts', etc.
+- Tests: End2End own folder, Unit Tests with functional files
+- Git: Master- & Development branch no-ff-merge-only, features named after current task **#SIMON_KNOWS_WHY**
 
 ###Code Conventions:
 - Curly braces opening on same line, never omit curly braces
@@ -33,3 +32,4 @@ Entwickler: Simon Müller, Oliver Berg
 
 ## TODO:
 - BrowserSync
+- LESS/SASS
