@@ -42,7 +42,12 @@ import { ClassicComponent } from "./classic.component";
     ],
     declarations: [
         AppComponent,
-        MenuComponent
+        MenuComponent,
+        SingleComponent,
+        MultiLocalComponent,
+        MultiGlobalComponent,
+        MiniComponent,
+        ClassicComponent
     ],
     bootstrap: [
         AppComponent
