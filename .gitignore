@@ -1,4 +1,8 @@
+# dir
 .idea/
+.tscache/
 node_modules/
 frontend/build/
-.tscache/
+
+# files
+*.tmp.txt

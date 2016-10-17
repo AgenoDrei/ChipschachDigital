@@ -11,12 +11,16 @@
                [ngStyle]="{'background-image': 'url(../img/multi_lokal.png)', 'background-color': 'white'}">
                 <p>Mehrspieler lokal</p>
             </a>
-            <a href="#" data-toggle="modal" data-target="#multiGlobal"
-               [ngStyle]="{'background-image': 'url(../img/multi_global.png)', 'background-color': 'white'}">
+            <!--<a href="#" data-toggle="modal" data-target="#multiGlobal"-->
+               <!--[ngStyle]="{'background-image': 'url(../img/multi_global.png)', 'background-color': 'white'}">-->
+                <!--<p>Mehrspieler global</p>-->
+            <!--</a>-->
+            <a href="#"
+               [ngStyle]="{'background-image': 'url(../img/multi_global.png)', 'background-color': 'purple'}">
                 <p>Mehrspieler global</p>
             </a>
         </div>
-
+		
         <div class="row">
             <a href="#" data-target="modal" data-toggle="#mini"
                [ngStyle]="{'background-image': 'url(../img/minischach.png)', 'background-color': 'white'}">
@@ -55,7 +59,7 @@
             <div class="modal-body">
                     <img src="../img/logo_small.png" height="150px">
                     <h3>
-                        Chipschach© ist eine Software der pädagogischen Initiative Schach für Kids e.V. (SfK), erstellt in Kooperation mit der IBM
+                        Chipschach© ist eine Software der pädagogischen Initiative Schach für Kids e.V. (SfK), erstellt in Kooperation mit der IBM Deutschland GmbH
                     </h3>
                     <ul>
                         <li>Initiator: Ralf Schreiber, SfK</li>
@@ -63,10 +67,6 @@
                         <li>Programmierung: Simon Müller, IBM</li>
                         <li>Programmierung: Oliver Berg, IBM</li>
                     </ul>
-                    <h4>
-                        Informationen gibt es unter:<br>
-
-                    </h4>
             </div>
             <div class="modal-footer">
                 Weitere Informationen unter <a href="http://www.schach-fuer-kids.de">schach-fuer-kids.de</a> <br>

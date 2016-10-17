@@ -11,7 +11,12 @@ module.exports = function(grunt) {
 	grunt.initConfig({
 		pkg: grunt.file.readJSON('package.json'),
 
-		clean: ['frontend/build'],
+		clean: {
+			all: ['.tscache/', 'frontend/build'],
+			assets: ['.tscache/', 'frontend/build/**/*', '!frontend/build/app/**'],	// all except .js & .map in app (assets will be overwritten)
+			compiled: ['.tscache/', 'frontend/build/**/*.js', 'frontend/build/**/*.map', '!frontend/build/*.js'],		//deletes all JS-files + maps (compiled from TS ...) except the ones on top-level
+			second_build_dir: ['frontend/build/build']
+		},
 
 		copy: {
 			main: {
@@ -23,9 +28,9 @@ module.exports = function(grunt) {
 
 		ts: {
 			build: {
-				src: ["frotend/**/*.ts"],
+				src: ["frotend/app/**/*.ts"],
 				dest: 'frontend/build/app',
-              	tsconfig: 'tsconfig.json',
+              	tsconfig: 'tsconfig.json'
 			}
 		},
 
@@ -34,7 +39,23 @@ module.exports = function(grunt) {
 				files: ['frontend/**', '!frontend/build/**'],
 				tasks: ['build'],
 				options: {
-      				debounceDelay: 250,
+      				debounceDelay: 4200,
+      				spawn: false
+    			}
+			},
+			ts: {
+				files: ['frontend/app/**/*.ts', '!frontend/build/**'],
+				tasks: ['build_ts'],
+				options: {
+      				debounceDelay: 4200,
+      				spawn: false
+    			}
+			},
+			assets: {
+				files: ['frontend/**', '!frontend/app/**/*.ts', '!frontend/build/**'],
+				tasks: ['build_copy'],
+				options: {
+      				debounceDelay: 4200,
       				spawn: false
     			}
 			}
@@ -49,7 +70,7 @@ module.exports = function(grunt) {
 
 		concurrent: {
    			watchers: {
-        		tasks: ['nodemon', 'watch'],
+        		tasks: ['nodemon', 'watch:assets', 'watch:ts'],
         		options: {
             		logConcurrentOutput: true
         		}
@@ -58,8 +79,10 @@ module.exports = function(grunt) {
 	});
 
 	//Define Tasks
-	grunt.registerTask('build', ['clean', 'copy', 'ts:build']);
-	grunt.registerTask("serve", ["concurrent:watchers"]);
+	grunt.registerTask('build_copy', ['clean:assets', 'copy', 'clean:second_build_dir']);
+	grunt.registerTask('build_ts', ['clean:compiled', 'ts:build']);
+	grunt.registerTask('build', ['clean:all', 'copy', 'ts:build']);
+	grunt.registerTask('serve', ["concurrent:watchers"]);
 	grunt.registerTask('default', ['build', 'serve']);
 
 };
