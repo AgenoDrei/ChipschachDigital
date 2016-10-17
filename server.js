@@ -16,16 +16,18 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-//Deliver Frontend files
+//Deliver Frontend files - VIEW
 app.use(express.static(path.join(__dirname, 'frontend/build')));
 app.use('/libs', express.static(path.resolve(__dirname, 'node_modules')));
 
-//Database initialization
+//Database and GameHandler initalization - MODEL 
 var dataAccess = require('./model/dataAccess')(config, mongoClient);
+var gameHandler = require('./model/gameHandler')(dataAccess);
 
-//Route Definitions (REST Controller)
+//Route Definitions (REST Controller) - CONTROLLER
 app.use('/api/v1', require('./controller/index'));
 app.use('/api/v1', require('./controller/level')(dataAccess));
+app.use('/api/v1', require('./controller/game')(dataAccess, gameHandler));
 
 
 // catch 404 and forward to error handler
