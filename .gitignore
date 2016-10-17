@@ -2,3 +2,4 @@
 node_modules/
 frontend/build/
 .tscache/
+frontend/app/.baseDir.ts
