@@ -29,24 +29,25 @@ module.exports = function(grunt) {
 			}
 		},
 
+		//watch Frontend Files for change
 		watch: {
 			main: {
 				files: ['frontend/**', '!frontend/build/**'],
 				tasks: ['build'],
 				options: {
-      				debounceDelay: 250,
+      				debounceDelay: 5000,
       				spawn: false
     			}
 			}
 		},
-
+		//watch Server files for change
 		nodemon: {
   			dev: {
     			script: 'bin/www',
     			ignore: ['node_modules/**', 'frontend/**']
   			}
 		},
-
+		//start watch for Server and Frontend in parallel
 		concurrent: {
    			watchers: {
         		tasks: ['nodemon', 'watch'],

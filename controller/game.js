@@ -4,7 +4,10 @@ var validate = require("validate.js");
 
 var gameConstraint = {
 	type: {
-		presence: true
+		presence: true,
+		 format: {
+      		pattern: /(SP|MP|MINI)/
+      	}
 	},
 	level: {
 		presence: true
@@ -22,11 +25,34 @@ module.exports = function(dataAccess, gameHandler) {
 		if(validGame != undefined) {
 			return res.status(500).json(validGame);
 		}
-		var gameId = gameHandler.createGame(game).then(function(gameId) {
+		gameHandler.createGame(game).then(function(gameId) {
 			return res.json({ gameId: gameId });
 		}, function(err) {
 			return res.status(500).json({ msg: err });
 		});
+	});
+
+	router.get('/game', function(req, res, next) {
+		console.log('API GET /game called');
+		gameHandler.getGameList().then(function(games) {
+			return res.json(games);
+		}, function(err) {
+			return res.status(500).json({ msg: err });
+		});
+	});
+
+	router.get('/game/:gameId', function(req, res, next) {
+		console.log('API GET /game/:gameId called');
+		var gameId = req.params.gameId;
+		if(gameId == undefined){
+			return res.status(500).json({ msg: 'No gameId defined!' });
+		}
+		gameHandler.joinGame(gameId).then(function(msg) {
+			return res.json({ msg: msg });
+		}, function(err){
+			return res.status(500).json({ msg: err });
+		});
+
 	});
 
 	return router;
