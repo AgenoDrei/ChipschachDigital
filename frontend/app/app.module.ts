@@ -27,7 +27,7 @@ import { ClassicComponent } from "./classic.component";
                 component: MultiLocalComponent
             },
             {
-                path: 'multiplayer-gobal',
+                path: 'multiplayer-global',
                 component: MultiGlobalComponent
             },
             {
