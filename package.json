@@ -19,7 +19,6 @@
     "@angular/platform-browser-dynamic": "~2.0.1",
     "@angular/router": "~3.0.1",
     "@angular/upgrade": "~2.0.1",
-    "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.9",
     "body-parser": "~1.15.1",
     "bootstrap": "^3.3.7",
     "cookie-parser": "~1.4.3",
@@ -40,7 +39,6 @@
   },
   "devDependencies": {
     "concurrently": "^3.0.0",
-    "del": "^2.2.2",
     "grunt": "^1.0.1",
     "grunt-concurrent": "^2.3.1",
     "grunt-contrib-clean": "^1.0.0",

@@ -68,13 +68,11 @@ a:active, a:focus{
   height: 150px;
   margin-top: -75px;
 }
-.inDaMiddle > img {
+.inDaMiddle a, .inDaMiddle img {
   height: 75px;
   margin: 10px auto;
 }
-.inDaMiddle > span > img {
-}
-.inDaMiddle > div { 
+.inDaMiddle div { 
   height: 40px;
   max-width: 100px;
 }

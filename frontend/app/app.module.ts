@@ -1,7 +1,7 @@
 import { NgModule }      from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule }   from '@angular/router';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu.component';
@@ -11,10 +11,12 @@ import { MultiGlobalComponent } from "./multiGlobal.component";
 import { MiniComponent } from "./mini.component";
 import { ClassicComponent } from "./classic.component";
 
+import { LevelService } from './level.service';
+
 @NgModule({
     imports: [
         BrowserModule,
-        NgbModule.forRoot(),
+        HttpModule,
         RouterModule.forRoot([
             {
                 path: '',
@@ -50,6 +52,9 @@ import { ClassicComponent } from "./classic.component";
         MultiGlobalComponent,
         MiniComponent,
         ClassicComponent
+    ],
+    providers: [
+        LevelService
     ],
     bootstrap: [
         AppComponent
