@@ -1,4 +1,5 @@
 import { NgModule }      from '@angular/core';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule }   from '@angular/router';
 
@@ -13,6 +14,7 @@ import { ClassicComponent } from "./classic.component";
 @NgModule({
     imports: [
         BrowserModule,
+        NgbModule.forRoot(),
         RouterModule.forRoot([
             {
                 path: '',
@@ -54,4 +56,4 @@ import { ClassicComponent } from "./classic.component";
     ]
 })
 
-export class AppModule { }
+export class AppModule {}

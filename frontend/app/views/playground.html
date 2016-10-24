@@ -2,46 +2,42 @@
 
   <!-- Navigation -->
   <div id="sidebar-wrapper">
-    <ul class="sidebar-nav">
 
-      <a data-toggle="modal" data-target="#menuModal">TEST</a>
-
-<!--       <div class="profile-container" [ngStyle]="{'top': '0'}">
-        <div class="navicon pic">
-          <img src="../img/profilPicErsatz.bmp">
-        </div>
-        <div id="counter-container">
-          <div class="navicon counter">
-            <img src="../img/chips'n'figures/ChipGreen.png">
-            <div id="counter-val1">
-              -
-            </div>
+    <div class="nav-container" [ngStyle]="{'top': '0'}">
+      <div class="navicon pic">
+        <img src="../img/profilPicErsatz.bmp">
+      </div>
+      <div id="counter-container">
+        <div class="navicon counter">
+          <img src="../img/chips'n'figures/ChipGreen.png">
+          <div id="counter-val1">
+            -
           </div>
         </div>
       </div>
+    </div>
 
-      <div id="inDaMiddle-container"> -->
-        <!--<img src="../img/remis.png" title="Remis anbieten" class="navButtons"> -->
-        <!--<img src="../img/help/help.png" title="Hilfe anzeigen" height="75px" id="showHelp">-->
-<!--         <img src="../../img/close.png" title="zum Hauptmenü" id="close">
-        <img src="../../img/yield.png" title="Aufgeben" class="buttonz" id="yield">
-      </div>
-      
-      <div class="profile-container" [ngStyle]="{'bottom': '0'}">
-        <div id="counter-container">
-          <div class="navicon counter">
-            <img src="../img/chips'n'figures/ChipGreen.png" style="width:50px; height: 50px;">
-            <div id="counter-val2">
-              -
-            </div>
+    <div class="nav-container inDaMiddle"><!-- 
+      <img src="../img/remis.png" title="Remis anbieten">  -->
+      <img src="../img/help/help.png" title="Hilfe anzeigen" id="showHelp">
+      <img src="../../img/close.png" title="zum Hauptmenü" id="close"><!-- 
+      <img src="../../img/yield.png" title="Aufgeben" id="yield"> -->
+    </div>
+    
+    <div class="nav-container" [ngStyle]="{'bottom': '0'}">
+      <div id="counter-container">
+        <div class="navicon counter">
+          <img src="../img/chips'n'figures/ChipGreen.png" style="width:50px; height: 50px;">
+          <div id="counter-val2">
+            -
           </div>
         </div>
-        <div class="navicon pic">
-          <img src="../img/profilPicErsatz.bmp">
-        </div>
-      </div> -->
+      </div>
+      <div class="navicon pic">
+        <img src="../img/profilPicErsatz.bmp">
+      </div>
+    </div>
 
-    </ul>
   </div>
 
   <!-- Content -->
@@ -67,8 +63,8 @@
 </div>  
 
 
-<!-- Modal: Menu -->
-<div id="menuModal" class="modal fade" role="dialog">
+<!-- Modal: Start -->
+<div id="startModal" class="modal" role="dialog" [class.show]="!levelStarted" [class.fade]="levelStarted">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -79,7 +75,7 @@
               <img src="../img/logo_small.png" height="150px" />
               <h3>Dieses Level ist noch nicht erstellt.</h3>
               <div id="start">
-                <button type="button" class="btn btn-success btn-lg" id="btn_sp_start">Start!</button> <br>
+                <button type="button" class="btn btn-success btn-lg" (click)="levelStarted = true;">Start!</button> <br>
                 <button type="button" class="btn btn-success btn-lg" id="btn_nextLevel">Weiter ins nächstes Level!</button>
               </div>
             </div>
@@ -89,6 +85,8 @@
         </div>
     </div>
 </div>
+
+
 <!-- <div id="nav">
   <div id="btn_menu"></div>
   <div id="profile-container1">

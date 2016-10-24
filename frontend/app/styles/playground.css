@@ -12,24 +12,15 @@ a:active, a:focus{
 }
 
 /* sidebar */
-.profile-container {
+#wrapper #sidebar-wrapper {
+  background: url('/img/muster.png');
+  background-size: 20px;
+}
+.nav-container {
   position: absolute;
-  
   left: 0px;
   right: 0px;
   margin: 0 auto;
-}
-.inDaMiddle-container {
-  position: absolute; /* Zentrierung */
-
-  width: 160px;
-  height: 110px;
-  
-  top: 0px;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
-  margin: auto auto;
 }
 .navicon {
   position: relative;
@@ -68,24 +59,34 @@ a:active, a:focus{
   line-height: 1;
   text-align: center;
 }
-.inDaMiddle .buttonz {
-    margin: 10px auto;
-    display: block;
-    height: 35px;
+.inDaMiddle {  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  top: 50%;
+  height: 150px;
+  margin-top: -75px;
 }
-#close {     
+.inDaMiddle > img {
+  height: 75px;
+  margin: 10px auto;
+}
+.inDaMiddle > span > img {
+}
+.inDaMiddle > div { 
+  height: 40px;
+  max-width: 100px;
+}
+#close {
     transform: scaleX(-1);
     filter: FlipH;
-    display: block; 
-    height: 75px;
-    margin: 0 auto;
 }
 
 
 /* content */
 #sidebar_toggle {
-  left: -65px;
-  top: 10px;
+  margin-left: -15px;
   width: 50px;
   height: 50px;
   opacity: 0.7;
