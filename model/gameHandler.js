@@ -35,18 +35,12 @@ module.exports = function(dataAccess) {
 		return new Promise(function(fulfill, reject) {
 			for(var i = 0; i < games.length; i++) {
 				if(games[i].id == gameId) {
-					if(games[i].player1 == null) {
-						games[i].player1 = {
-							state: 'joined',
-							connection: null
-						};
-						fulfill('You joined as player 1');
-					} else if(games[i].player2 == null && games[i].type != gameTypes.SP) {
-						games[i].player2 = {
-							state: 'joined',
-							connection: null
-						};
-						fulfill('You joined as player 2');
+					if(games[i].player1.state == 'empty') {
+						games[i].player1.state = 'joined';
+						fulfill('You joined as player 1 with joinId ' + games[i].player1.joinId);
+					} else if(games[i].player2.state == 'empty' && games[i].type != gameTypes.SP) {
+						games[i].player2.state = 'joined';
+						fulfill('You joined as player 2 with joinId ' + games[i].player2.joinId);
 					} else {
 						reject('Game with id ' + gameId + ' full!')
 					}
