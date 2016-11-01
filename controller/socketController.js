@@ -88,20 +88,17 @@ module.exports = function(configuration, gameHandler) {
             case 'yield':
                 rooms[roomID].game.yield(convertPlayer(rooms[roomID].currentTurn));
                 break;
+            case 'end':
+                gameHandler.endGame(gameId).then(function(msg) {
+                    var response = { type: 'exit', msg: msg };
+                    connection.sendUTF(JSON.stringify(response));
+                }, function(err) {
+                    errorResponse.message = err;
+                    connection.sendUTF(JSON.stringify(errorResponse));
+                });
             default: //Not used in the protocol
                 connection.sendUTF('{"type": "error", "message": "cmd"}');
                 break;
-        }
-    }
-
-    /*
-     * Closes all connections
-     */
-    this.endGame = function(connection) {
-        try {
-            //TODO: Send message to room inhabitants to disconnect
-        } catch (e) {} finally {
-            //TODO: reset the game room
         }
     }
 

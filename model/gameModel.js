@@ -1,6 +1,10 @@
 var shortid = require('shortid');
 var gameTypes = require('./gameTypes');
 var Promise = require('promise');
+var conStates = require('./connectionStates');
+var Board = require('./gameBoard');
+
+
 
 class Game {
 	constructor(type, mode, level) {
@@ -10,14 +14,15 @@ class Game {
 		this.id = shortid.generate();
 		this.player1 = {
 			connection: null,
-			state: 'empty',
+			state: conStates.EMPTY,
 			joinId: shortid.generate()
 		};
 		this.player2 = {
 			connection: null,
-			state: 'empty',
+			state: conStates.EMPTY,
 			joinId: shortid.generate()
 		};
+		this.board = new Board();
 		console.log('New Game created with ID: ', this.id);
 		console.log('Level used: ', this.level._id);
 	}
@@ -37,17 +42,25 @@ class Game {
     	debugger;
         return new Promise(function(fulfill, reject) {
         	debugger;
-            if (joinId == player1.joinId && player1.state == 'joined') {
+            if (joinId == player1.joinId && player1.state == conStates.JOINED) {
                 player1.connection = connection
-                player1.state = 'connected';
+                player1.state = conStates.CONNECTED;
                 fulfill('Player 1');
-            } else if (joinId == player2.joinId && player2.state == 'joined') {
+            } else if (joinId == player2.joinId && player2.state == conStates.JOINED) {
                 player1.connection = connection
-                player2.state = 'connected';
+                player2.state = conStates.CONNECTED;
                 fulfill('Player 2');
             }
             reject('Invalid joinId or already joined');
         });
+    }
+
+    endGame() {
+    	try {
+    		player1.connection.sendUTF('{"type": "exit"}');
+    		player1.connection.sendUTF('{"type": "exit"}');
+    	} catch(e) {
+    	}
     }
 
 }

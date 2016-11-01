@@ -3,3 +3,5 @@ node_modules/
 frontend/build/
 .tscache/
 frontend/app/.baseDir.ts
+npm-debug.log
+tscommand-8b3f5e4c.tmp.txt

@@ -1,6 +1,7 @@
 var Promise = require('promise');
 var Game = require('./gameModel');
 var gameTypes = require('./gameTypes');
+var conStates = require('./connectionStates');
 
 module.exports = function(dataAccess) {
 	this.games = [];
@@ -35,14 +36,14 @@ module.exports = function(dataAccess) {
 		return new Promise(function(fulfill, reject) {
 			for(var i = 0; i < games.length; i++) {
 				if(games[i].id == gameId) {
-					if(games[i].player1.state == 'empty') {
-						games[i].player1.state = 'joined';
-						fulfill('You joined as player 1 with joinId ' + games[i].player1.joinId);
-					} else if(games[i].player2.state == 'empty' && games[i].type != gameTypes.SP) {
-						games[i].player2.state = 'joined';
-						fulfill('You joined as player 2 with joinId ' + games[i].player2.joinId);
+					if(games[i].player1.state == conStates.EMPTY) {
+						games[i].player1.state = conStates.JOINED;
+						fulfill(games[i].player1.joinId);
+					} else if(games[i].player2.state == conStates.EMPTY && games[i].type != gameTypes.SP) {
+						games[i].player2.state = conStates.JOINED;
+						fulfill(games[i].player2.joinId);
 					} else {
-						reject('Game with id ' + gameId + ' full!')
+						reject('Game with id ' + gameId + ' full!');
 					}
 				}
 			}
@@ -60,6 +61,20 @@ module.exports = function(dataAccess) {
 			reject('gameId not found');
 		});
 	};
+
+	this.endGame = function(gameId) {
+		return new Promise(function(fulfill, reject) {
+			for(var i = 0; i < games.length; i++){
+				if(games[i].id == gameId) {
+					games[i].endGame();
+					games = games.splice(i, 1);
+					fulfill('Game ended successfull!');
+				}
+			}
+			reject('gameId not found');
+		});
+	}
+
 
 	return this;
 }
