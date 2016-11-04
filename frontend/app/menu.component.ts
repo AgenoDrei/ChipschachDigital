@@ -17,6 +17,13 @@ export class MenuComponent implements OnInit {
 	constructor(private levelService:LevelService) {}
 
 	ngOnInit():void {
-		console.log(this.levelService.getLevelIDs());
+		this.levelService.getLevelIDs()
+			.then(function(allAvails) {
+				allAvails.forEach(function(lvl) {
+					
+				})
+			});
+
+		this.levelService.getLevel('mp_pawn_1_1').then(res => console.log(res));
 	}
 }

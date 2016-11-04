@@ -31,7 +31,7 @@ Entwickler: Simon Müller, Oliver Berg
 - indention as 4 spaces
 
 ## TODO:
-- BrowserSync
 - LESS/SASS
 -- Consider Pflichtenheft (siehe treffen auf burg) to do
 - favicon
+- Make CSS beautifull again

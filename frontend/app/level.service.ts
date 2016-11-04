@@ -5,12 +5,20 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class LevelService {
-	private levelUrl = 'https://localhost:3000/api/v1/level'
+	private levelsUrl = '/api/v1/level'
 
 	constructor(private http:Http) {}
 
-	getLevelIDs():Promise<String[]> {
-		return this.http.get(this.levelUrl)
+	getLevelIDs():Promise<LevelDeclaration[]> {	
+		console.log('calling getLevelIDs');
+		return this.http.get(this.levelsUrl)
+			.toPromise()
+			.then(res => res.json())
+			.catch(this.handleError);
+	}
+
+	getLevel(id:String):Promise<Level> {
+		return this.http.get(this.levelsUrl + '/' + id)
 			.toPromise()
 			.then(res => res.json())
 			.catch(this.handleError);
