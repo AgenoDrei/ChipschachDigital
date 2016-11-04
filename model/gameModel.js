@@ -23,6 +23,7 @@ class Game {
 			joinId: shortid.generate()
 		};
 		this.board = new Board();
+		this.board.loadLevel(level);
 		console.log('New Game created with ID: ', this.id);
 		console.log('Level used: ', this.level._id);
 	}

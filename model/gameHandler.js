@@ -53,12 +53,14 @@ module.exports = function(dataAccess) {
 
 	this.getGame = function(gameId) {
 		return new Promise(function(fulfill, reject) {
+			if(gameId == null || gameId == undefined) 
+				reject('gameId not found!');
 			for(var i = 0; i < games.length; i++){
 				if(games[i].id == gameId) {
 					fulfill(games[i]);
 				}
 			}
-			reject('gameId not found');
+			reject('gameId not found!');
 		});
 	};
 

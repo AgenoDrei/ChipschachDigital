@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf8">
+<head>
+	<title>WS Test</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	var ws = null;
+	function openWS(url) {
+		ws = new WebSocket(url, ['kekse']);
+		ws.onopen = function() {
+			console.log('Connection open!');
+		};
+		ws.onerror = function (error) {
+  			console.log('WebSocket Error ' + error);
+		};
+
+		// Log messages from the server
+		ws.onmessage = function (e) {
+ 			console.log('Server: ' + e.data);
+		};
+	}
+
+	function send(msg) {
+		ws.send(msg);
+	}
+</script>
+
+</body>
+</html>
