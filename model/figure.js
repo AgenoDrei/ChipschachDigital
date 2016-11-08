@@ -14,7 +14,11 @@ class Figure {
 	}
 
 	beat(beater) {
-
+		if(helper.enemy(beater.player, player)) {
+			this.board[this.x][this.y] = null;
+			return true;
+		}
+		return false;
 	}
 }
 

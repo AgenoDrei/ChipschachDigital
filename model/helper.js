@@ -1,9 +1,10 @@
 var figureType = require('./figureType');
 
-module.exports.enemy = function(player) {
-	if(player == figureType.PLAYERONE) {
-		return figureType.PLAYERTWO;
-	} else if(player == figureType.PLAYERTWO) {
-		return figureType.PLAYERONE;
-	return null;
+module.exports.enemy = function(player1, player2) {
+	if(player1 == player2) {
+		return false;
+	} else if(player1 == figureType.NONE || player2 == figureType.NONE) {
+		return false;
+	}
+	return true;
 }

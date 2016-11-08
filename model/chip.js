@@ -11,12 +11,6 @@ class Chip extends Figure{
 		console.log('You cannot move a Chip!');
 		return false;
 	}
-
-	beat(beater) {
-		if(helper.enemy(beater.player) == this.player) {
-			
-		}
-	}
 }
 
 module.exports = Chip;
