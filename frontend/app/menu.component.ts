@@ -2,6 +2,20 @@ import {Component, OnInit} from '@angular/core';
 
 import {LevelService} from './level.service';
 
+export enum LevelType {
+	sp = 0,
+	mp = 1,
+	mini = 2
+}
+export enum LevelSubtype {
+	pawn = 0,
+	knight = 1,
+	bishop = 2,
+	rook = 3,
+	queen = 4,
+	king = 5
+}
+
 @Component({
     selector: 'menu',
     templateUrl: 'app/views/menu.html',
@@ -9,21 +23,15 @@ import {LevelService} from './level.service';
     providers: [LevelService]
 })
 export class MenuComponent implements OnInit {
-	public spLevels:Level[];
-	public mpLevels:Level[];
-	public miniLevels:Level[];
-	public classicLevels:Level[];
-	
+	allAvailLvls:LvlDeclTypedList;
+
 	constructor(private levelService:LevelService) {}
 
 	ngOnInit():void {
 		this.levelService.getLevelIDs()
-			.then(function(allAvails) {
-				allAvails.forEach(function(lvl) {
-					
-				})
-			});
+			.then(res => this.allAvailLvls = this.levelService.typeLevelIDs(res));
+			// .then(res => console.log(res));
 
-		this.levelService.getLevel('mp_pawn_1_1').then(res => console.log(res));
+		// this.levelService.getLevel('mp_pawn_1_1').then(res => console.log(res));
 	}
 }

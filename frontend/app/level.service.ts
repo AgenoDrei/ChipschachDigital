@@ -13,8 +13,34 @@ export class LevelService {
 		console.log('calling getLevelIDs');
 		return this.http.get(this.levelsUrl)
 			.toPromise()
-			.then(res => res.json())
+			.then(res => res.json() as LevelDeclaration[])
 			.catch(this.handleError);
+	}
+
+	typeLevelIDs(allAvails:LevelDeclaration[]):LvlDeclTypedList {
+		// init empty return typedList & pseudo-callback-counter
+		var typedLevels:LvlDeclTypedList = {
+			'sp': [],
+			'mp': [],
+			'mini': []
+		};
+		var counter:number = 0;
+		
+		// sort all available levels into types as well as subtypes
+		for (let lvl of allAvails) {
+			for (let type in typedLevels) {
+				if (typedLevels.hasOwnProperty(type) && type === lvl.type) {
+					typedLevels[type].push(lvl);
+				}
+			}
+
+
+			counter++;
+			if(counter == allAvails.length){
+				console.log(typedLevels);
+				return typedLevels;
+			}
+		}
 	}
 
 	getLevel(id:String):Promise<Level> {
