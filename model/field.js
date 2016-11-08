@@ -9,6 +9,10 @@ class Field {
 	getFigure() {
 		return this.figure;
 	}
+
+	setFigure(figure) {
+		this.figure = figure;
+	}
 }
 
 module.exports = Field;

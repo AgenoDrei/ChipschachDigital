@@ -1,5 +1,5 @@
 var figureType = require('./figureType');
-var figure = require('./figure');
+var Figure = require('./figure');
 var helper = require('./helper');
 
 class Chip extends Figure{
