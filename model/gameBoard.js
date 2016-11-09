@@ -2,7 +2,7 @@ var Field = require('./field');
 var Figure = require('./figure');
 var Rook = require('./rook');
 var Chip = require('./chip');
-var figureType = require('./figureType');
+var playerType = require('./playerType');
 
 class Board {
 	constructor() {
@@ -36,7 +36,7 @@ class Board {
 			debugger;
 			switch(currentFigure.type) {
 				case 'CHIP':
-					newFigure = new Chip(this, currentFigure.x, currentFigure.y, figureType.BOTH);
+					newFigure = new Chip(this, currentFigure.x, currentFigure.y, playerType.BOTH);
 					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
 					break;
 				case 'ROOK': 

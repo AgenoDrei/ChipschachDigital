@@ -73,20 +73,12 @@ module.exports = function(configuration, gameHandler) {
                 });
                 break;
             case "turn": // Client sends a turn order
-                if ((rooms[roomID].currentTurn == 1 && rooms[roomID].connection1 == connection) //Is it the turn of the client 1....
-                    ||
-                    (rooms[roomID].currentTurn == 2 && rooms[roomID].connection2 == connection)) { //... or 2?
-                    var gameState = rooms[roomID].game.turn(convertPlayer(rooms[roomID].currentTurn), m.x, m.y, m.oldX, m.oldY); //Let the game logic do its work
-                    respond(connection, m, gameState, roomID); //Answer the client
-                } else {
-                    connection.sendUTF('{"type": "error", "message": "turn"}'); //It is not your turn!
-                }
+               	gameHandler.turn(m.gameId, connection, m.origX, m.origY, m.destX, m.destY);
+               	gameHandler.sendToAll(m);
                 break;
             case "undo": //Not used, only debug
-                rooms[roomID].game.undo(rooms[roomID].currentTurn);
                 break;
             case 'yield':
-                rooms[roomID].game.yield(convertPlayer(rooms[roomID].currentTurn));
                 break;
             case 'end':
                 gameHandler.endGame(gameId).then(function(msg) {
@@ -111,59 +103,3 @@ module.exports = function(configuration, gameHandler) {
 
     return this;
 };
-
-/*
- * Respond to the client dependent on the gameState
- * 
- *  0: normal turn, is allowed
- *  1: turn allowed, player 1 wins
- *  2: turn allowed, player 2 wins
- *  
- *  -1: turn forbidden, the player was put in check
- *  -2: turn forbidden, field blocked, or invalid turn	
- *  
- */
-function respond(connection, m, gameState, roomID) {
-    // Check wether the turn is allowed/someone won
-    switch (gameState) {
-        case 0:
-            // Turn allowed
-            rooms[roomID].connection1.sendUTF('{"type": "turn", "x": "' + m.x + '", "y": "' + m.y + '", "oldX": "' + m.oldX + '", "oldY": "' + m.oldY + '", "player": "' + rooms[roomID].currentTurn + '"}');
-            rooms[roomID].connection2.sendUTF('{"type": "turn", "x": "' + m.x + '", "y": "' + m.y + '", "oldX": "' + m.oldX + '", "oldY": "' + m.oldY + '", "player": "' + rooms[roomID].currentTurn + '"}');
-            if (rooms[roomID].currentTurn == 1)
-                rooms[roomID].currentTurn = 2;
-            else
-                rooms[roomID].currentTurn = 1;
-            break;
-        case 1:
-            // Turn allowed
-            rooms[roomID].connection1.sendUTF('{"type": "win", "x": "' + m.x + '", "y": "' + m.y + '", "oldX": "' + m.oldX + '", "oldY": "' + m.oldY + '", "player": "' + rooms[roomID].currentTurn + '"}');
-            rooms[roomID].connection2.sendUTF('{"type": "win", "x": "' + m.x + '", "y": "' + m.y + '", "oldX": "' + m.oldX + '", "oldY": "' + m.oldY + '", "player": "' + rooms[roomID].currentTurn + '"}');
-            //		endGame(connection); // end the game
-            break;
-        case 2:
-            // Turn allowed, player 2 wins
-            rooms[roomID].connection1.sendUTF('{"type": "win", "x": "' + m.x + '", "y": "' + m.y + '", "oldX": "' + m.oldX + '", "oldY": "' + m.oldY + '", "player": "' + rooms[roomID].currentTurn + '"}');
-            rooms[roomID].connection2.sendUTF('{"type": "win", "x": "' + m.x + '", "y": "' + m.y + '", "oldX": "' + m.oldX + '", "oldY": "' + m.oldY + '", "player": "' + rooms[roomID].currentTurn + '"}');
-            //		endGame(connection); //end the game
-            break;
-        case -1:
-            // Turn forbidden, check
-            connection.sendUTF('{"type": "error", "message": "check"}');
-            break;
-        case -2:
-            // Turn forbidden, no valid turn
-            connection.sendUTF('{"type": "error", "message": "impossible"}');
-            break;
-    }
-}
-
-/* 
- * convert player number to 'yellow' or 'blue'
- */
-function convertPlayer(player) {
-    if (player == 1)
-        return 'yellow';
-    else if (player == 2)
-        return 'blue';
-}

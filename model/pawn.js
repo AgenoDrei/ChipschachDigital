@@ -1,10 +1,10 @@
-var figureType = require('./figureType');
-var figure = require('./figure');
+var playerType = require('./playerType');
+var Figure = require('./figure');
 var helper = require('./helper');
 
 class Pawn extends Figure{
 	constructor(parentBoard, x, y, player) {
-		if(player != figureType.PLAYERONE || player != figureType.PLAYERTWO) {
+		if(player != playerType.PLAYERONE || player != playerType.PLAYERTWO) {
 			throw 'Illegal player type!';
 		}
 		this.firstMove = true;

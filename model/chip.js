@@ -1,4 +1,4 @@
-var figureType = require('./figureType');
+var playerType = require('./playerType');
 var Figure = require('./figure');
 var helper = require('./helper');
 

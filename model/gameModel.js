@@ -3,11 +3,14 @@ var gameTypes = require('./gameTypes');
 var Promise = require('promise');
 var conStates = require('./connectionStates');
 var Board = require('./gameBoard');
-
+var Chip = require('./chip');
+var playerType = require('./playerType');
+var helper = require('./helper');
 
 
 class Game {
 	constructor(type, mode, level) {
+		this.toBeNext = playerType.PLAYERONE;
 		this.type = type;
 		this.mode = mode;
 		this.level = level;
@@ -32,9 +35,24 @@ class Game {
 		return this.id;
 	}
 
-	turn() {
+	//TODO: Test for win
+	turn(origX, origY, destX, destY, player) {
+		if(this.player1.state != conStates.CONNECTED || (this.player2.state != conStates.CONNECTED && this.type != gameTypes.SP)) {
+			return gameStates.PLAYER_DISCONNECTED;
+		}
+		if(this.board.getField(origX, origY).getFigure() == null || this.board.getField(origX, origY).getFigure() instanceof Chip) {
+			return gameStates.INVALID_TURN;
+		}
+		if(this.toBeNext != player) {
+			return gameStates.INVALID_TURN;
+		}
+		var currentFigure = this.board.getField(origX, origY).getFigure();
+		if(!currentFigure.move(destX, destY)) {
+			return gameStates.INVALID_TURN;
+		}
+		this.toBeNext = helper.getEnemy(this.toBeNext);
 		//TODO: Implement Game Logics
-		return 0;
+		return gameStates.VALID_TURN;
 	}
 
     connect(joinId, connection) {
@@ -54,6 +72,15 @@ class Game {
             }
             reject('Invalid joinId or already joined');
         });
+    }
+
+    //ToDo: Refactor
+    sendToAll(message) {
+    	try {
+    		player1.connection.sendUTF(message);
+    		player1.connection.sendUTF(message);
+    	} catch(e) {
+    	}
     }
 
     endGame() {

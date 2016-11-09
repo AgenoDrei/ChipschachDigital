@@ -2,6 +2,8 @@ var Promise = require('promise');
 var Game = require('./gameModel');
 var gameTypes = require('./gameTypes');
 var conStates = require('./connectionStates');
+var playerType = require('./playerType');
+var gameState = require('./gameStates');
 
 module.exports = function(dataAccess) {
 	this.games = [];
@@ -63,6 +65,33 @@ module.exports = function(dataAccess) {
 			reject('gameId not found!');
 		});
 	};
+
+	//TODO: Remove gameID
+	this.turn = function(gameId, connection, origX, origY, destX, destY) {
+		var resTurn = -99;
+		return new Promise(function(fulfill, reject) {
+			getGame(gameId).then(function(game) {
+				if(game.player1.connection == connection) {
+					resTurn = game.turn(origX, origY, destX, destY, playerType.PLAYERONE);
+				} else if(game.player2.connection == connection) {
+					resTurn = game.turn(origX, origY, destX, destY, playerType.PLAYERTWO);
+				} else {
+					reject('Invalid connection');
+				}
+				if(resTurn < 0) {
+						reject(helper.enumToString(gameState, resTurn));
+				}
+				fulfill(helper.enumToString(gameState, resTurn));
+			},
+			reject('gameId not found!');
+		});
+	}
+
+	this.sendToAll = function(gameId, message) {
+		getGame(gameId).then(function(game) {
+			game.sendToAll(message);
+		});
+	}
 
 	this.endGame = function(gameId) {
 		return new Promise(function(fulfill, reject) {

@@ -1,4 +1,4 @@
-var figureType = require('./figureType');
+var playerType = require('./playerType');
 
 class Figure {
 	constructor(parentBoard, x, y, player) {
