@@ -18,6 +18,7 @@ app.use(cookieParser());
 
 //Deliver Frontend files - VIEW
 app.use(express.static(path.join(__dirname, 'frontend/build')));
+app.use('/graphics_engine', express.static(path.join(__dirname, 'graphics_engine'))); //ToDo: Remove when ported to angular
 app.use('/libs', express.static(path.resolve(__dirname, 'node_modules')));
 
 //Database and GameHandler initalization - MODEL 

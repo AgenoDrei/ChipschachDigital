@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<meta charset="utf-8">
+<title>Hello World</title>
+<body>
+	<script src="/libs/jquery/dist/jquery.min.js"></script>
+	<script src="/libs/pixi.js/bin/pixi.min.js"></script>
+	<script>
+		var height = 800, width = 800;
+		var sprSize = width/8;
+		var renderer = new PIXI.CanvasRenderer(width, height);
+		document.body.appendChild(renderer.view);
+		var stage = new PIXI.Container();
+		var level = null;
+		$.get( "/api/v1/level/sp_rook_debug", function( data ) {
+ 			console.log('Level: ', data);	
+ 			level = data;
+
+ 			PIXI.loader
+			.add("img/board.png")
+  			.add("img/BishopBlue.png")
+  			.add("img/BishopYellow.png")
+  			.add("img/ChipBlue.png")
+  			.add("img/ChipYellow.png")
+  			.add("img/ChipGreen.png")
+  			.add("img/ChipRed.png")
+  			.add("img/KingBlue.png")
+  			.add("img/KingYellow.png")
+  			.add("img/KnightBlue.png")
+  			.add("img/KnightYellow.png")
+  			.add("img/PawnBlue.png")
+  			.add("img/PawnYellow.png")
+  			.add("img/QueenBlue.png")
+  			.add("img/QueenYellow.png")
+  			.add("img/RookBlue.png")
+  			.add("img/RookYellow.png")
+  			.load(setup);
+		});
+
+  		function setup() {
+  			//Background
+  			var background = new PIXI.Sprite(PIXI.loader.resources["img/board.png"].texture);
+  			background.width = width;
+  			background.height = height;
+  			stage.addChild(background);
+
+  			//level
+  			for(var i = 0; i < level.board.length; i++) {
+  				var cur = level.board[i]
+  				var figure = null;
+  				switch(cur.type) {
+  					case "ROOK":
+  						if(cur.color == 1) {
+  							figure = new PIXI.Sprite(PIXI.loader.resources["img/RookBlue.png"].texture);
+  						} else if(cur.color == 0) {
+  							figure = new PIXI.Sprite(PIXI.loader.resources["img/RookYellow.png"].texture);
+  						}
+  						break;
+  					case "CHIP":
+  						if(cur.color == 0) {
+  							figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipYellow.png"].texture);
+  						} else if(cur.color == 1) {
+  							figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipBlue.png"].texture);
+  						} else if(cur.color == 2) {
+  							figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipGreen.png"].texture);
+  						} else if(cur.color == 3) {
+  							figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipRed.png"].texture);
+  						}
+  						break;
+  					default:
+  						break;
+  				}
+  				figure.position.x = calcPosX(cur.x);
+  				figure.position.y = calcPosX(cur.y);
+  				figure.width = figure.height = sprSize;
+  				figure.backgroundColor = 0xffffff;
+  				stage.addChild(figure);
+  			}
+
+  			renderer.render(stage);
+		}
+
+		function calcPosX(x) {
+			return width / 8  * (x-1);
+		}
+		function calcPosY(y) {
+			return height / 8  * (y-1);
+		}
+
+	</script>
+	</body>
+</html>
