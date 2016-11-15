@@ -70,20 +70,23 @@ module.exports = function(dataAccess) {
 	this.turn = function(gameId, connection, origX, origY, destX, destY) {
 		var resTurn = -99;
 		return new Promise(function(fulfill, reject) {
-			getGame(gameId).then(function(game) {
-				if(game.player1.connection == connection) {
-					resTurn = game.turn(origX, origY, destX, destY, playerType.PLAYERONE);
-				} else if(game.player2.connection == connection) {
-					resTurn = game.turn(origX, origY, destX, destY, playerType.PLAYERTWO);
-				} else {
-					reject('Invalid connection');
-				}
-				if(resTurn < 0) {
+			getGame(gameId).then(
+				function(game) {	
+					if(game.player1.connection == connection) {
+						resTurn = game.turn(origX, origY, destX, destY, playerType.PLAYERONE);
+					} else if(game.player2.connection == connection) {
+						resTurn = game.turn(origX, origY, destX, destY, playerType.PLAYERTWO);
+					} else {
+						reject('Invalid connection');
+					}
+					if(resTurn < 0) {
 						reject(helper.enumToString(gameState, resTurn));
-				}
-				fulfill(helper.enumToString(gameState, resTurn));
-			},
-			reject('gameId not found!');
+					}
+					fulfill(helper.enumToString(gameState, resTurn));
+				},
+				function() {
+					reject('gameId not found!');
+				});
 		});
 	}
 
@@ -105,7 +108,5 @@ module.exports = function(dataAccess) {
 			reject('gameId not found');
 		});
 	}
-
-
 	return this;
 }

@@ -17,7 +17,7 @@ module.exports.getEnemy = function(player) {
 	}
 };
 
-module.exports.enumToString = function(enum,value)  {
-  for (var k in enum) if (enum[k] == value) return k;
+module.exports.enumToString = function(enumObj, value)  {
+  for (var k in enumObj) if (enumObj[k] == value) return k;
   return null;
 };

@@ -73,21 +73,28 @@ module.exports = function(configuration, gameHandler) {
                 });
                 break;
             case "turn": // Client sends a turn order
-               	gameHandler.turn(m.gameId, connection, m.origX, m.origY, m.destX, m.destY);
-               	gameHandler.sendToAll(m);
+               	gameHandler.turn(m.gameId, connection, m.origX, m.origY, m.destX, m.destY).then(function(msg) {
+               		gameHandler.sendToAll(m);
+               	},
+               	function(err) {
+               		errorResponse.message = err;
+                    console.log('Server> ', errorResponse);
+                    connection.sendUTF(JSON.stringify(errorResponse));
+               	});
                 break;
             case "undo": //Not used, only debug
                 break;
             case 'yield':
                 break;
             case 'end':
-                gameHandler.endGame(gameId).then(function(msg) {
+                gameHandler.endGame(m.gameId).then(function(msg) {
                     var response = { type: 'exit', msg: msg };
                     connection.sendUTF(JSON.stringify(response));
                 }, function(err) {
                     errorResponse.message = err;
                     connection.sendUTF(JSON.stringify(errorResponse));
                 });
+                break;
             default: //Not used in the protocol
                 connection.sendUTF('{"type": "error", "message": "cmd"}');
                 break;

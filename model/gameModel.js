@@ -50,7 +50,9 @@ class Game {
 		if(!currentFigure.move(destX, destY)) {
 			return gameStates.INVALID_TURN;
 		}
-		this.toBeNext = helper.getEnemy(this.toBeNext);
+		if(this.type != gamesTypes.SP) {
+			this.toBeNext = helper.getEnemy(this.toBeNext);
+		}
 		//TODO: Implement Game Logics
 		return gameStates.VALID_TURN;
 	}
