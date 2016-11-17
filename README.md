@@ -6,7 +6,7 @@ Entwickler: Simon Müller, Oliver Berg
 
 ###Architectural Decisions:
 - Server Framework: express, JS
-- Build Framework: gulp
+- Build Framework: grunt
 - Frontend Framework: angular2 
 - Database: mongoDB
 - Tests: unbestimmt
@@ -31,5 +31,7 @@ Entwickler: Simon Müller, Oliver Berg
 - indention as 4 spaces
 
 ## TODO:
-- BrowserSync
 - LESS/SASS
+-- Consider Pflichtenheft (siehe treffen auf burg) to do
+- favicon
+- Make CSS beautifull again

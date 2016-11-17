@@ -1,5 +1,10 @@
+# dir
 .idea/
+.tscache/
 node_modules/
 frontend/build/
-.tscache/
 frontend/app/.baseDir.ts
+
+# files
+*.tmp.txt
+*.log

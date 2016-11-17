@@ -1,6 +1,7 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule }   from '@angular/router';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu.component';
@@ -10,9 +11,12 @@ import { MultiGlobalComponent } from "./multiGlobal.component";
 import { MiniComponent } from "./mini.component";
 import { ClassicComponent } from "./classic.component";
 
+import { LevelService } from './level.service';
+
 @NgModule({
     imports: [
         BrowserModule,
+        HttpModule,
         RouterModule.forRoot([
             {
                 path: '',
@@ -27,7 +31,7 @@ import { ClassicComponent } from "./classic.component";
                 component: MultiLocalComponent
             },
             {
-                path: 'multiplayer-gobal',
+                path: 'multiplayer-global',
                 component: MultiGlobalComponent
             },
             {
@@ -42,11 +46,19 @@ import { ClassicComponent } from "./classic.component";
     ],
     declarations: [
         AppComponent,
-        MenuComponent
+        MenuComponent,
+        SingleComponent,
+        MultiLocalComponent,
+        MultiGlobalComponent,
+        MiniComponent,
+        ClassicComponent
+    ],
+    providers: [
+        LevelService
     ],
     bootstrap: [
         AppComponent
     ]
 })
 
-export class AppModule { }
+export class AppModule {}
