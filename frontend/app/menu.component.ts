@@ -1,20 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 
 import {LevelService} from './level.service';
-
-export enum LevelType {
-	sp = 0,
-	mp = 1,
-	mini = 2
-}
-export enum LevelSubtype {
-	pawn = 0,
-	knight = 1,
-	bishop = 2,
-	rook = 3,
-	queen = 4,
-	king = 5
-}
 
 @Component({
     selector: 'menu',
@@ -22,16 +8,51 @@ export enum LevelSubtype {
     styleUrls: ['app/styles/menu.css'],
     providers: [LevelService]
 })
-export class MenuComponent implements OnInit {
-	allAvailLvls:LvlDeclTypedList;
+export class MenuComponent {
+	dictIconNames:Object = {
+		sp: 'Lokaler Einzelspieler',
+		mp: 'Lokaler Mehrspieler',
+		mini: 'Minischach-Aufgaben'
+	}
+	dictSubtypes:Object = {
+		pawn: 'Bauer',
+		knight: 'Springer',
+		bishop: 'Läufer',
+		rook: 'Turm',
+		queen: 'Dame',
+		king: 'König'
+	}
+	iconArrangement:Icon[][] = [
+		[
+			{id:'sp', picId:'single', name:'Einzelspieler'},
+			{id:'mp', picId:'multiLocal', name:'Lokaler Mehrspieler'},
+			{id:'mp_g', picId:'multiGlobal', name:'Globaler Mehrspieler'}
+		],[
+			{id:'mini', picId:'mini', name:'Minischach'},
+			{id:'impressum', picId:'logoLg', name:''},
+			{id:'classic', picId:'classic', name:'Klassisches Schach'}
+		],[
+			{id:'', picId:'', name:''},
+			{id:'editor', picId:'editor', name:'Editor'},
+			{id:'', picId:'', name:''}
+		]
+	];
 
-	constructor(private levelService:LevelService) {}
+	allAvailLvls:LvlDeclTypedList = {
+		sp: {},
+		mp: {},
+		mini: {}
+	};
 
-	ngOnInit():void {
+	constructor(private levelService:LevelService) {
 		this.levelService.getLevelIDs()
 			.then(res => this.allAvailLvls = this.levelService.typeLevelIDs(res));
-			// .then(res => console.log(res));
+	}
 
-		// this.levelService.getLevel('mp_pawn_1_1').then(res => console.log(res));
+	getTypes() : Array<string> {
+		return Object.keys(this.allAvailLvls);
+	}
+	getSubtypes(type:String) : Array<string> {
+		return Object.keys(this.allAvailLvls[<string>type]);
 	}
 }

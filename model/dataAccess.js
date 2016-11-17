@@ -52,7 +52,7 @@ module.exports = function(configuration, mongoClient) {
 
 	this.getAllLevelIds = function() {
 		return new Promise(function(fulfill, reject) {
-			db.collection('levels').find({}, { 'name': 1, 'type': 1 }).toArray(function(err, doc) {
+			db.collection('levels').find({}, { 'name': 1, 'type': 1 , 'subtype': 1}).toArray(function(err, doc) {
 				if(err) {
 					reject(err);
 				}

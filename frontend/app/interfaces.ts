@@ -1,32 +1,39 @@
-interface LevelDeclaration {
-	_id: String;
-	description: String;
-	type: String;		// sp, mp, mini
-	subtype: String;		// pawn, knight, ...
+interface Icon {
+	id:String;
+	picId:String;
+	name:String;
 }
+
 
 interface LvlDeclTypedList {		// SP, MP & MINI fixed, adding each subtype as separate object
-	sp: Object[];
-	mp: Object[];
-	mini: Object[];
-	[key:string]: Object[];
+	sp: SubtypedList;
+	mp: SubtypedList;
+	mini: SubtypedList;
+	[key:string]: SubtypedList;
 }
 
-
-/* Game Engine */
+interface SubtypedList {
+	pawn?: Level[];
+	knight?: Level[];
+	bishop?: Level[];
+	rook?: Level[];
+	queen?: Level[];
+	king?: Level[];
+	[key:string]: Level[];
+}
 
 interface Level {
-    _id: string,
-    type: string,
-    // board: Figure[],
-    board: Object[],
-    name: string,
-    description: string
+    _id: string;
+	type: String;		// sp, mp, mini
+	subtype: String;		// pawn, knight, ...
+    board?: Figure[];		// board optional in case of menu only laoding id & type
+    name: string;
+    description?: string;
 }
 
 interface Figure {
-	type: string,
-	color: string,
-	x: number,
-	y: number
+	type: string;
+	color: number;
+	x: number;
+	y: number;
 }
