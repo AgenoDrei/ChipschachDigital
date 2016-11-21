@@ -14,7 +14,8 @@ module.exports = function(configuration, mongoClient) {
 	
 	mongoClient.connect(url, function(err, db) {
   		if(err) {
-  			console.log('Database connection error: ', err)
+  			console.log('Database connection error: ')
+  			throw err;
   			return null;
   		}
   		console.log("Database connected");
