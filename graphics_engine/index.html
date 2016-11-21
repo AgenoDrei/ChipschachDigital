@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<meta charset="utf-8">
+<title>Hello World</title>
+<body>
+	<script src="/libs/jquery/dist/jquery.min.js"></script>
+	<script src="/libs/pixi.js/bin/pixi.min.js"></script>
+	<script>
+		var height = 800,
+		    width = 800;
+		var sprSize = width / 8;
+		var sprList = [];
+		var stage = null;
+		var renderer = null;
+		var selectedField = null;
+		var background = null;
+		init(600, 600, document.body, function() {
+		    $.get("/api/v1/level/sp_rook_debug", function(data) {
+		        console.log('Level: ', data);
+		        loadLevel(data, function() {
+		            render();
+		        });
+		    });
+		});
+
+
+		function init(w, h, anchor, callback) {
+		    height = h;
+		    width = w;
+		    sprSize = width / 8;
+		    renderer = new PIXI.CanvasRenderer(width, height);
+		    anchor.appendChild(renderer.view);
+		    stage = new PIXI.Container();
+		    var level = null;
+		    PIXI.loader
+		        .add("img/board.png")
+		        .add("img/BishopBlue.png")
+		        .add("img/BishopYellow.png")
+		        .add("img/ChipBlue.png")
+		        .add("img/ChipYellow.png")
+		        .add("img/ChipGreen.png")
+		        .add("img/ChipRed.png")
+		        .add("img/KingBlue.png")
+		        .add("img/KingYellow.png")
+		        .add("img/KnightBlue.png")
+		        .add("img/KnightYellow.png")
+		        .add("img/PawnBlue.png")
+		        .add("img/PawnYellow.png")
+		        .add("img/QueenBlue.png")
+		        .add("img/QueenYellow.png")
+		        .add("img/RookBlue.png")
+		        .add("img/RookYellow.png")
+		        .load(callback);
+		}
+
+		function moveFigure(origX, origY, destX, destY) {
+			var figure = getFigure(origX, origY);
+
+			if((other = getFigure(destX, destY)) != null) {
+				other.alpha = 0;
+			}
+			figure.position.x = calcPosX(destX);
+			figure.position.y = calcPosY(destY);
+			render();
+		}
+
+		function switchSelection(x, y) {
+		    if (selectedField != null && selectedField.position.x == calcPosX(x) && selectedField.position.y == calcPosY(y)) {
+		    	selectedField.alpha = 0;
+		        selectedField = null;
+		        render();
+		    } else if(selectedField == null) {
+		        var graphics = new PIXI.Graphics();
+		        selectedField = graphics;
+		        graphics.beginFill(0x00FF00);
+		        //graphics.lineStyle(2, 0x00AA00);
+		        graphics.alpha = 0.5;
+		        graphics.blendMode = PIXI.BLEND_MODES.MULTIPLY;
+		        graphics.drawRect(calcPosX(x), calcPosX(y), sprSize, sprSize);
+		        stage.addChild(graphics);
+		        render();
+		    } else {
+		    	selectedField.position.x = calcPosX(x);
+		    	selectedField.position.y = calcPosY(y);
+		    	render();
+		    }
+		}
+		function getFigure(x, y) {
+			var realX = sprSize * (x-1);
+			var realY = sprSize * (y-1);
+
+			for(var key in sprList) {
+				var figure = sprList[key];
+				if(figure.position._x == realX && figure.position._y == realY) {
+					return figure;
+				}
+			}
+			return null;
+		}
+
+		function render() {
+		    renderer.render(stage);
+		}
+
+		function calcPosX(x) {
+		    return sprSize * (x - 1);
+		}
+		function calcPosY(y) {
+		    return sprSize * (y - 1);
+		}
+
+
+		function rotateBoard() {
+			for(figureKey in sprList) {
+				var figure = sprList[figureKey];
+				figure.position.x = calcPosX(9 - (figure.position.x/sprSize +1));
+				figure.position.y = calcPosY(9 - (figure.position.y/sprSize +1));
+			}
+			render();
+		}
+
+		function clearBoard() {
+			for(figureKey in sprList) {
+				var figure = sprList[figureKey];
+				figure.destroy();
+			}
+			render();
+		}
+
+
+		function loadLevel(level, callback) {
+		    //Background
+		    background = new PIXI.Sprite(PIXI.loader.resources["img/board.png"].texture);
+		    background.width = width;
+		    background.height = height;
+		    stage.addChild(background);
+
+		    //level
+		    for (var i = 0; i < level.board.length; i++) {
+		        var cur = level.board[i]
+		        var figure = null;
+		        switch (cur.type) {
+		            case "ROOK":
+		                if (cur.color == 1) {
+		                    figure = new PIXI.Sprite(PIXI.loader.resources["img/RookBlue.png"].texture);
+		                } else if (cur.color == 0) {
+		                    figure = new PIXI.Sprite(PIXI.loader.resources["img/RookYellow.png"].texture);
+		                }
+		                break;
+		            case "CHIP":
+		                if (cur.color == 0) {
+		                    figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipYellow.png"].texture);
+		                } else if (cur.color == 1) {
+		                    figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipBlue.png"].texture);
+		                } else if (cur.color == 2) {
+		                    figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipGreen.png"].texture);
+		                } else if (cur.color == 3) {
+		                    figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipRed.png"].texture);
+		                }
+		                break;
+		            default:
+		                break;
+		        }
+		        if (figure != null) {
+		            figure.position.x = calcPosX(cur.x);
+		            figure.position.y = calcPosX(cur.y);
+		            figure.width = figure.height = sprSize;
+		            sprList.push(figure);
+		            stage.addChild(figure);
+		        }
+		    }
+
+		    callback();
+		}
+	</script>
+	</body>
+</html>
