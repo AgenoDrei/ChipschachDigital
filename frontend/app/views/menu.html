@@ -38,7 +38,9 @@
                             <div [id]="'' + type + subtype" class="panel-collapse collapse">
                                 <div class="panel-body">
                                     <p *ngFor="let lvl of allAvailLvls[type][subtype]">
-                                        {{lvl.name}}
+                                        <a [routerLink]="type + '/' + lvl._id" routerLinkActive="active">
+                                            {{lvl.name}}
+                                        </a>
                                     </p>
                                 </div>
                             </div>

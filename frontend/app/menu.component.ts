@@ -44,9 +44,9 @@ export class MenuComponent {
 		mini: {}
 	};
 
-	constructor(private levelService:LevelService) {
-		this.levelService.getLevelIDs()
-			.then(res => this.allAvailLvls = this.levelService.typeLevelIDs(res));
+	constructor(private service:LevelService) {
+		this.service.getLevelIDs()
+			.then(res => this.allAvailLvls = this.service.typeLevelIDs(res));
 	}
 
 	getTypes() : Array<string> {
