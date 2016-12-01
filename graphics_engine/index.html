@@ -109,6 +109,16 @@
 		    return sprSize * (y - 1);
 		}
 
+		function onClick (e) {
+			var rawX = e.data.global.x - stage.getGlobalPosition().x;
+			var rawY = e.data.global.y - stage.getGlobalPosition().y;
+			var x = Math.floor(rawX / sprSize) + 1;
+			var y = Math.floor(rawY / sprSize) + 1;
+
+    		console.log('Clicked: (' + x + '|' + y + ')');
+
+		}	
+
 
 		function rotateBoard() {
 			for(figureKey in sprList) {
@@ -133,6 +143,10 @@
 		    background = new PIXI.Sprite(PIXI.loader.resources["img/board.png"].texture);
 		    background.width = width;
 		    background.height = height;
+		    background.interactive = true;
+		    background.on('mousedown', onClick);
+		    background.on('touchstart', onClick);
+
 		    stage.addChild(background);
 
 		    //level
