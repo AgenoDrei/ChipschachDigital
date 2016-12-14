@@ -47,8 +47,8 @@ module.exports = function(dataAccess, gameHandler) {
 		if(gameId == undefined){
 			return res.status(500).json({ msg: 'No gameId defined!' });
 		}
-		gameHandler.joinGame(gameId).then(function(msg) {
-			return res.json({ msg: msg });
+		gameHandler.joinGame(gameId).then(function(joinId) {
+			return res.json({ joinId: joinId, msg: "You joined the game successfull" });
 		}, function(err){
 			return res.status(500).json({ msg: err });
 		});

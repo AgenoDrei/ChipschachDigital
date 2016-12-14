@@ -30,6 +30,9 @@ app.use('/api/v1', require('./controller/index'));
 app.use('/api/v1', require('./controller/level')(dataAccess));
 app.use('/api/v1', require('./controller/game')(dataAccess, gameHandler));
 
+//Websocket Controller
+var communicationSocket = require('./controller/socketController')(config, gameHandler);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

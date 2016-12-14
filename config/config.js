@@ -6,5 +6,11 @@ module.exports = {
 		password: "8xUAvLgqn7r2vqbN",
 		db: "test",
 		authSource: "admin"
+	},
+	server: {
+		port: 4000
+	},
+	socket: {
+		port: 4001
 	}
 }

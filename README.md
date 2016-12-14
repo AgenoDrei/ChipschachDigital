@@ -30,8 +30,12 @@ Entwickler: Simon Müller, Oliver Berg
 - Curly braces opening on same line, never omit curly braces
 - indention as 4 spaces
 
+###Milestones:
+- Running version with single- and multiplayer chip chess support. Logic should be running on Server and a new graphics engine should be in place.
+
 ## TODO:
-- LESS/SASS
 -- Consider Pflichtenheft (siehe treffen auf burg) to do
 - favicon
 - Make CSS beautifull again
+- BrowserSync
+- LESS/SASS

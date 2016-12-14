@@ -46,6 +46,7 @@ module.exports = function(configuration, mongoClient) {
 				if(doc == null) {
 					reject('No document found!'); 
 				}
+				//console.log("Level got from DB: ", doc);
 				fulfill(doc);
 			});
 		});
