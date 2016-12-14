@@ -40,20 +40,13 @@ export class SingleComponent  implements OnInit {
 			});
 		});
 
-	    // init(600, 600, document.body, function() {
-	    //     $.get("/api/v1/level/sp_rook_debug", function(data) {
-	    //         console.log('Level: ', data);
-	    //         loadLevel(data, function() {
-	    //             render();
-	    //         });
-	    //     });
-	    // });
-
-		// engine_init(600, 600, document.getElementById('board-anchor'), function() {
-			
-	 //        engine_loadLevel(lvl, function() {
-	 //            engine_render();
-	 //        });
-		// });
+		// init (600, 600, document.body, function() {
+		//     $.get("/api/v1/level/sp_rook_debug", function(data) {
+		//         console.log('Level: ', data);
+		//         loadLevel(data, function() {
+		//             render();
+		//         });
+		//     });
+	 	// });
 	}
 }

@@ -1,84 +1,99 @@
 var PixiGameEngineJS = {
-    height : 0,
-    width : 0,
-    sprSize : 0,    
-    sprList : [],
-    stage : null,
-    renderer : null,
-    selectedField : null,
-    background : null,
-
-    PixiEngine : function (w, h) {
-        this.height = h,
-        this.width = w,
-        this.sprSize = w / 8
-    },
+    height: 800,
+    width: 800,
+    sprSize: this.width / 8,
+    sprList: [],
+    stage: null,
+    renderer: null,
+    selectedField: null,
+    background: null,
+    moveCallback: null,
+    turn: 0,
+    self,
 
     init: function(w, h, anchor, callback) {
+        this.self = this;
         this.height = h;
         this.width = w;
-        this.sprSize = width / 8;
-        this.renderer = new PIXI.CanvasRenderer(width, height);
-        anchor.appendChild(renderer.view);
+        this.sprSize = this.width / 8;
+        this.renderer = new PIXI.CanvasRenderer(this.width, this.height);
+        anchor.appendChild(this.renderer.view);
         this.stage = new PIXI.Container();
         var level = null;
         PIXI.loader
-            .add("../img/board.png")
-            .add("../img/BishopBlue.png")
-            .add("../img/BishopYellow.png")
-            .add("../img/ChipBlue.png")
-            .add("../img/ChipYellow.png")
-            .add("../img/ChipGreen.png")
-            .add("../img/ChipRed.png")
-            .add("../img/KingBlue.png")
-            .add("../img/KingYellow.png")
-            .add("../img/KnightBlue.png")
-            .add("../img/KnightYellow.png")
-            .add("../img/PawnBlue.png")
-            .add("../img/PawnYellow.png")
-            .add("../img/QueenBlue.png")
-            .add("../img/QueenYellow.png")
-            .add("../img/RookBlue.png")
-            .add("../img/RookYellow.png")
+            .add("img/board.png")
+            .add("img/BishopBlue.png")
+            .add("img/BishopYellow.png")
+            .add("img/ChipBlue.png")
+            .add("img/ChipYellow.png")
+            .add("img/ChipGreen.png")
+            .add("img/ChipRed.png")
+            .add("img/KingBlue.png")
+            .add("img/KingYellow.png")
+            .add("img/KnightBlue.png")
+            .add("img/KnightYellow.png")
+            .add("img/PawnBlue.png")
+            .add("img/PawnYellow.png")
+            .add("img/QueenBlue.png")
+            .add("img/QueenYellow.png")
+            .add("img/RookBlue.png")
+            .add("img/RookYellow.png")
             .load(callback);
+
+    },
+
+    switchTurn: function() {
+        if(this.turn == 0) {
+            this.turn = 1;
+        } else {
+            this.turn = 0;
+        }
+    },
+
+    setMoveCallback: function(callback) {
+        this.moveCallback = callback;
     },
 
     moveFigure: function(origX, origY, destX, destY) {
-        var figure = getFigure(origX, origY);
+        if(origX == destX && origY == destY) {
+            return;
+        }
+        var figure = this.getFigure(origX, origY);
 
-        if((other = getFigure(destX, destY)) != null) {
+        if((other = this.getFigure(destX, destY)) != null) {
             other.alpha = 0;
         }
-        figure.position.x = this.this.calcPosX(destX);
-        figure.position.y = calcPosY(destY);
-        render();
+        figure.position.x = this.calcPosX(destX);
+        figure.position.y = this.calcPosY(destY);
+        this.switchTurn();
+        this.render();
     },
 
-    switchSelection : function(x, y) {
-        if (selectedField != null && selectedField.position.x == this.calcPosX(x) && selectedField.position.y == calcPosY(y)) {
-            selectedField.alpha = 0;
-            selectedField = null;
-            render();
-        } else if(selectedField == null) {
+    switchSelection: function(x, y) {
+        if(this.selectedField == null) {
             var graphics = new PIXI.Graphics();
-            selectedField = graphics;
             graphics.beginFill(0x00FF00);
-            //graphics.lineStyle(2, 0x00AA00);
             graphics.alpha = 0.5;
             graphics.blendMode = PIXI.BLEND_MODES.MULTIPLY;
-            graphics.drawRect(this.calcPosX(x), this.calcPosX(y), sprSize, sprSize);
+            graphics.drawRect(this.calcPosX(x), this.calcPosX(y), this.sprSize, this.sprSize);
+            this.selectedField = graphics;
+            this.selectedField.pos = {};
+            this.selectedField.pos.x = x;
+            this.selectedField.pos.y = y;
             this.stage.addChild(graphics);
-            render();
-        } else {
-            selectedField.position.x = this.calcPosX(x);
-            selectedField.position.y = calcPosY(y);
-            render();
+        } else if(this.selectedField != null) {
+            var tmp = this.selectedField.pos;
+            this.selectedField.destroy();
+            this.selectedField = null;
+            if(tmp.x != x || tmp.y != y)
+                switchSelection(x,y);
         }
+        this.render();
     },
 
-    getFigure : function(x, y) {
-        var realX = sprSize * (x-1);
-        var realY = sprSize * (y-1);
+    getFigure: function(x, y) {
+        var realX = this.sprSize * (x-1);
+        var realY = this.sprSize * (y-1);
 
         for(var key in this.sprList) {
             var figure = this.sprList[key];
@@ -89,42 +104,71 @@ var PixiGameEngineJS = {
         return null;
     },
 
-    render : function() {
-        renderer.render(stage);
+    render: function() {
+        this.renderer.render(this.stage);
     },
 
-    calcPosX : function(x) {
-        return sprSize * (x - 1);
+    calcPosX: function(x) {
+        return this.sprSize * (x - 1);
     },
 
-    calcPosY : function(y) {
-        return sprSize * (y - 1);
+    calcPosY: function(y) {
+        return this.sprSize * (y - 1);
     },
 
+    onClick: function(e) {
+        var rawX = e.data.global.x - PixiGameEngineJS.stage.getGlobalPosition().x;
+        var rawY = e.data.global.y - PixiGameEngineJS.stage.getGlobalPosition().y;
+        var x = Math.floor(rawX / PixiGameEngineJS.sprSize) + 1;
+        var y = Math.floor(rawY / PixiGameEngineJS.sprSize) + 1;
 
-    rotateBoard : function() {
+        console.log('Clicked: (' + x + '|' + y + ')');
+
+        if(PixiGameEngineJS.selectedField == null  && PixiGameEngineJS.getFigure(x,y) != null) {
+            var figure = PixiGameEngineJS.getFigure(x, y);
+            if(PixiGameEngineJS.turn != figure.color) {
+                return;
+            }
+            PixiGameEngineJS.switchSelection(x, y);
+            return;
+        }
+        if(PixiGameEngineJS.selectedField != null) { 
+            if(PixiGameEngineJS.moveCallback != null) 
+                PixiGameEngineJS.moveCallback(PixiGameEngineJS.selectedField.pos.x, PixiGameEngineJS.selectedField.pos.y, x, y);
+            else 
+                PixiGameEngineJS.moveFigure(PixiGameEngineJS.selectedField.pos.x, PixiGameEngineJS.selectedField.pos.y, x, y);
+            PixiGameEngineJS.switchSelection(PixiGameEngineJS.selectedField.pos.x, PixiGameEngineJS.selectedField.pos.y);
+            return;
+        }
+    },  
+
+
+    rotateBoard: function() {
         for(figureKey in this.sprList) {
             var figure = this.sprList[figureKey];
-            figure.position.x = this.calcPosX(9 - (figure.position.x/sprSize +1));
-            figure.position.y = this.calcPosY(9 - (figure.position.y/sprSize +1));
+            figure.position.x = this.calcPosX(9 - (figure.position.x/this.sprSize +1));
+            figure.position.y = this.calcPosY(9 - (figure.position.y/this.sprSize +1));
         }
-        render();
+        this.render();
     },
 
-    clearBoard : function() {
+    clearBoard: function() {
         for(figureKey in this.sprList) {
             var figure = this.sprList[figureKey];
             figure.destroy();
         }
-        render();
+        this.render();
     },
 
-
-    loadLevel : function(level, callback) {
+    loadLevel: function(level, callback) {
         //Background
-        background = new PIXI.Sprite(PIXI.loader.resources["../img/board.png"].texture);
-        background.width = width;
-        background.height = height;
+        background = new PIXI.Sprite(PIXI.loader.resources["img/board.png"].texture);
+        background.width = this.width;
+        background.height = this.height;
+        background.interactive = true;
+        background.on('mousedown', this.onClick);
+        background.on('touchstart', this.onClick);
+
         this.stage.addChild(background);
 
         //level
@@ -134,20 +178,20 @@ var PixiGameEngineJS = {
             switch (cur.type) {
                 case "ROOK":
                     if (cur.color == 1) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["../img/RookBlue.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["img/RookBlue.png"].texture);
                     } else if (cur.color == 0) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["../img/RookYellow.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["img/RookYellow.png"].texture);
                     }
                     break;
                 case "CHIP":
                     if (cur.color == 0) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["../img/ChipYellow.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipYellow.png"].texture);
                     } else if (cur.color == 1) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["../img/ChipBlue.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipBlue.png"].texture);
                     } else if (cur.color == 2) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["../img/ChipGreen.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipGreen.png"].texture);
                     } else if (cur.color == 3) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["../img/ChipRed.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipRed.png"].texture);
                     }
                     break;
                 default:
@@ -156,7 +200,8 @@ var PixiGameEngineJS = {
             if (figure != null) {
                 figure.position.x = this.calcPosX(cur.x);
                 figure.position.y = this.calcPosX(cur.y);
-                figure.width = figure.height = sprSize;
+                figure.width = figure.height = this.sprSize;
+                figure.color = cur.color;
                 this.sprList.push(figure);
                 this.stage.addChild(figure);
             }
@@ -164,4 +209,4 @@ var PixiGameEngineJS = {
 
         callback();
     }
-};
+}
