@@ -46,7 +46,7 @@ export class MenuComponent {
 
 	constructor(private service:LevelService) {
 		this.service.getLevelIDs()
-			.then(res => this.allAvailLvls = this.service.typeLevelIDs(res));
+			.then(res => console.log('Level retrieved and sorted by types:', this.allAvailLvls = this.service.typeLevelIDs(res)));
 	}
 
 	getTypes() : Array<string> {

@@ -5,23 +5,55 @@ import 'rxjs/add/operator/switchMap';
 
 import {LevelService} from './level.service';
 
+declare var PixiGameEngineJS:any;
+
 @Component({
     selector: 'singleplayer',
-    template: `<h2>Singleplayer WIP</h2>`,
+    templateUrl: 'app/views/playgroundSingle.html',
+    styleUrls: ['app/styles/playground.css', 'app/styles/simple-sidebar.css'],
     providers: [LevelService]
 })
 export class SingleComponent  implements OnInit {
+	public pixiEngine:any = PixiGameEngineJS;
 	public lvl:Level;
 
 	constructor (
 		private route: ActivatedRoute,
 		private router: Router,
 		private service: LevelService
-	) {}
+	) {
+		// this.pixiEngine = new PixiEngine();
+	}
 	
 	ngOnInit() {
 	  	this.route.params
 	    	.switchMap((params: Params) => this.service.getLevel(params['id']))
-	    	.subscribe((lvl: Level) => console.log(this.lvl = lvl));
+	    	.subscribe((lvl:Level) => this.initPixi(this.lvl = lvl));
+	}
+
+	initPixi(lvl:Level):void {
+		console.log('Level: ', lvl);
+		
+		PixiGameEngineJS.init(600, 600, document.getElementById('board-anchor'), function() {
+			PixiGameEngineJS.loadLevel(lvl, function() {
+				PixiGameEngineJS.render();
+			});
+		});
+
+	    // init(600, 600, document.body, function() {
+	    //     $.get("/api/v1/level/sp_rook_debug", function(data) {
+	    //         console.log('Level: ', data);
+	    //         loadLevel(data, function() {
+	    //             render();
+	    //         });
+	    //     });
+	    // });
+
+		// engine_init(600, 600, document.getElementById('board-anchor'), function() {
+			
+	 //        engine_loadLevel(lvl, function() {
+	 //            engine_render();
+	 //        });
+		// });
 	}
 }

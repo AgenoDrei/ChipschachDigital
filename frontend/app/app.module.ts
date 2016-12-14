@@ -32,11 +32,11 @@ import { LevelService } from './level.service';
             },
             {
                 path: 'mini/:id',
-                component: MultiGlobalComponent
+                component: MiniComponent
             }
             // {
-            //     path: 'mini-chess',
-            //     component: MiniComponent
+            //     path: 'mp_g/:id',
+            //     component: MultiGlobalComponent
             // },
             // {
             //     path: 'classic-chess',
