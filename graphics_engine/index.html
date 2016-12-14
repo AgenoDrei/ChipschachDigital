@@ -14,6 +14,9 @@
 		var renderer = null;
 		var selectedField = null;
 		var background = null;
+		var moveCallback = null;
+		var turn = 0;
+
 		init(600, 600, document.body, function() {
 		    $.get("/api/v1/level/sp_rook_debug", function(data) {
 		        console.log('Level: ', data);
@@ -53,7 +56,22 @@
 		        .load(callback);
 		}
 
+		function switchTurn() {
+			if(turn == 0) {
+				turn = 1;
+			} else {
+				turn = 0;
+			}
+		}
+
+		function setMoveCallback(callback) {
+			moveCallback = callback;
+		}
+
 		function moveFigure(origX, origY, destX, destY) {
+			if(origX == destX && origY == destY) {
+				return;
+			}
 			var figure = getFigure(origX, origY);
 
 			if((other = getFigure(destX, destY)) != null) {
@@ -61,29 +79,30 @@
 			}
 			figure.position.x = calcPosX(destX);
 			figure.position.y = calcPosY(destY);
+			switchTurn();
 			render();
 		}
 
 		function switchSelection(x, y) {
-		    if (selectedField != null && selectedField.position.x == calcPosX(x) && selectedField.position.y == calcPosY(y)) {
-		    	selectedField.alpha = 0;
-		        selectedField = null;
-		        render();
-		    } else if(selectedField == null) {
-		        var graphics = new PIXI.Graphics();
-		        selectedField = graphics;
-		        graphics.beginFill(0x00FF00);
-		        //graphics.lineStyle(2, 0x00AA00);
-		        graphics.alpha = 0.5;
+		    if(selectedField == null) {
+		    	var graphics = new PIXI.Graphics();
+		    	graphics.beginFill(0x00FF00);
+		    	graphics.alpha = 0.5;
 		        graphics.blendMode = PIXI.BLEND_MODES.MULTIPLY;
 		        graphics.drawRect(calcPosX(x), calcPosX(y), sprSize, sprSize);
+		        selectedField = graphics;
+		        selectedField.pos = {};
+		    	selectedField.pos.x = x;
+		    	selectedField.pos.y = y;
 		        stage.addChild(graphics);
-		        render();
-		    } else {
-		    	selectedField.position.x = calcPosX(x);
-		    	selectedField.position.y = calcPosY(y);
-		    	render();
+		    } else if(selectedField != null) {
+		    	var tmp = selectedField.pos;
+		    	selectedField.destroy();
+		    	selectedField = null;
+		    	if(tmp.x != x || tmp.y != y)
+		    		switchSelection(x,y);
 		    }
+		    render();
 		}
 		function getFigure(x, y) {
 			var realX = sprSize * (x-1);
@@ -116,6 +135,24 @@
 			var y = Math.floor(rawY / sprSize) + 1;
 
     		console.log('Clicked: (' + x + '|' + y + ')');
+
+
+    		if(selectedField == null  && getFigure(x,y) != null) {
+    			var figure = getFigure(x, y);
+    			if(turn != figure.color) {
+					return;
+				}
+    			switchSelection(x, y);
+    			return;
+    		}
+    		if(selectedField != null) {	
+    			if(moveCallback != null) 
+    				moveCallback(selectedField.pos.x, selectedField.pos.y, x, y);
+    			else 
+    				moveFigure(selectedField.pos.x, selectedField.pos.y, x, y);
+    			switchSelection(selectedField.pos.x, selectedField.pos.y);
+    			return;
+    		}
 
 		}	
 
@@ -179,6 +216,7 @@
 		            figure.position.x = calcPosX(cur.x);
 		            figure.position.y = calcPosX(cur.y);
 		            figure.width = figure.height = sprSize;
+		            figure.color = cur.color;
 		            sprList.push(figure);
 		            stage.addChild(figure);
 		        }
