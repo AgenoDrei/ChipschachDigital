@@ -24,7 +24,6 @@ export class SingleComponent  implements OnInit {
 	) {
 		// this.pixiEngine = new PixiEngine();
 	}
-	
 	ngOnInit() {
 	  	this.route.params
 	    	.switchMap((params: Params) => this.service.getLevel(params['id']))
