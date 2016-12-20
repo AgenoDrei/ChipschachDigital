@@ -23,25 +23,25 @@ import { LevelService } from './level.service';
                 component: MenuComponent
             },
             {
-                path: 'singleplayer',
+                path: 'sp/:id',
                 component: SingleComponent
             },
             {
-                path: 'multiplayer-local',
+                path: 'mp/:id',
                 component: MultiLocalComponent
             },
             {
-                path: 'multiplayer-global',
-                component: MultiGlobalComponent
-            },
-            {
-                path: 'mini-chess',
+                path: 'mini/:id',
                 component: MiniComponent
-            },
-            {
-                path: 'classic-chess',
-                component: ClassicComponent
             }
+            // {
+            //     path: 'mp_g/:id',
+            //     component: MultiGlobalComponent
+            // },
+            // {
+            //     path: 'classic-chess',
+            //     component: ClassicComponent
+            // }
         ])
     ],
     declarations: [

@@ -62,8 +62,6 @@ export class LevelService {
 					for (let subtype in typedLevels[type])
 						if (typedLevels[type][subtype].length === 0)
 							delete typedLevels[type][subtype];
-				console.log('Level retrieved and sorted by types:');
-				console.log(typedLevels);
 				return typedLevels;
 			}
 		}
