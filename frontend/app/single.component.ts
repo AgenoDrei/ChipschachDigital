@@ -30,9 +30,11 @@ export class SingleComponent  implements OnInit {
 	    	.subscribe((lvl:Level) => this.initPixi(this.lvl = lvl));
 	}
 
+
 	initPixi(lvl:Level):void {
 		console.log('Level: ', lvl);
 		
+		PixiGameEngineJS.destroy();
 		PixiGameEngineJS.init(600, 600, document.getElementById('board-anchor'), function() {
 			PixiGameEngineJS.loadLevel(lvl, function() {
 				PixiGameEngineJS.render();
