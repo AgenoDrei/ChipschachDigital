@@ -42,6 +42,14 @@ var PixiGameEngineJS = {
 
     },
 
+    destroy: function() {
+        if(this.stage != null)
+            this.stage.destroy();
+        if(this.renderer!= null)
+            this.renderer.destroy();
+        PIXI.loader.reset();
+    },
+
     switchTurn: function() {
         if(this.turn == 0) {
             this.turn = 1;
