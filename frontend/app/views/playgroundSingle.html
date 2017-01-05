@@ -4,25 +4,23 @@
   <div id="sidebar-wrapper">
 
     <div class="nav-container" [ngStyle]="{'top': '0'}">
-      <div class="navicon pic">
+      <div class="profile-container">
         <img src="../img/profilPicErsatz.bmp">
       </div>
-      <div id="counter-container">
-        <div class="navicon counter">
-          <img src="../img/ChipGreen.png">
-          <div id="counter-val1">
-            -
-          </div>
+      <div class="counter-container">
+        <img src="../img/ChipGreen.png">
+        <div id="counter-val1">
+          -
         </div>
       </div>
     </div>
 
-    <div class="nav-container inDaMiddle">
-      <a>
-        <img src="../../img/help/help.png" title="Hilfe anzeigen" id="showHelp">
-      </a>
+    <div class="nav-container iconBar">
       <a routerLink="/">
         <img src="../img/close.png" title="zum Hauptmenü" id="close">
+      </a>
+      <a>
+        <img src="../../img/help/help.png" title="Hilfe anzeigen" id="showHelp">
       </a>
     </div>
 

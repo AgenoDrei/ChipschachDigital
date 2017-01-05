@@ -21,9 +21,8 @@ export class SingleComponent  implements OnInit {
 		private route: ActivatedRoute,
 		private router: Router,
 		private service: LevelService
-	) {
-		// this.pixiEngine = new PixiEngine();
-	}
+	) {}
+
 	ngOnInit() {
 	  	this.route.params
 	    	.switchMap((params: Params) => this.service.getLevel(params['id']))
@@ -35,19 +34,10 @@ export class SingleComponent  implements OnInit {
 		console.log('Level: ', lvl);
 		
 		PixiGameEngineJS.destroy();
-		PixiGameEngineJS.init(600, 600, document.getElementById('board-anchor'), function() {
+		PixiGameEngineJS.init(600, 600, 0, document.getElementById('board-anchor'), function() {
 			PixiGameEngineJS.loadLevel(lvl, function() {
 				PixiGameEngineJS.render();
 			});
 		});
-
-		// init (600, 600, document.body, function() {
-		//     $.get("/api/v1/level/sp_rook_debug", function(data) {
-		//         console.log('Level: ', data);
-		//         loadLevel(data, function() {
-		//             render();
-		//         });
-		//     });
-	 	// });
 	}
 }

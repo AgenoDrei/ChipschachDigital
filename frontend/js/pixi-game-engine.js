@@ -9,12 +9,12 @@ var PixiGameEngineJS = {
     background: null,
     moveCallback: null,
     turn: 0,
-    self,
+    operationMode: 0,       // 0 == singleplayer, 1 == multiplayer
 
-    init: function(w, h, anchor, callback) {
-        this.self = this;
+    init: function(w, h, opMode, anchor, callback) {
         this.height = h;
         this.width = w;
+        this.operationMode = opMode,
         this.sprSize = this.width / 8;
         this.renderer = new PIXI.CanvasRenderer(this.width, this.height);
         anchor.appendChild(this.renderer.view);
@@ -47,6 +47,7 @@ var PixiGameEngineJS = {
             this.stage.destroy();
         if(this.renderer!= null)
             this.renderer.destroy();
+        this.turn = 0;
         PIXI.loader.reset();
     },
 
@@ -73,7 +74,8 @@ var PixiGameEngineJS = {
         }
         figure.position.x = this.calcPosX(destX);
         figure.position.y = this.calcPosY(destY);
-        this.switchTurn();
+        if (this.operationMode != 0)        // if not singleplayer
+            this.switchTurn();
         this.render();
     },
 
