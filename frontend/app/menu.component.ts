@@ -24,17 +24,17 @@ export class MenuComponent {
 	}
 	iconArrangement:Icon[][] = [
 		[
-			{id:'sp', picId:'single', name:'Einzelspieler'},
-			{id:'mp', picId:'multiLocal', name:'Lokaler Mehrspieler'},
-			{id:'mp_g', picId:'multiGlobal', name:'Globaler Mehrspieler'}
+			{id:'sp', picId:'single', name:'Einzelspieler', color:'white'},
+			{id:'mp', picId:'multiLocal', name:'Lokaler Mehrspieler', color:'white'},
+			{id:'mp_g', picId:'multiGlobal', name:'Globaler Mehrspieler', color:'purple'}
 		],[
-			{id:'mini', picId:'mini', name:'Minischach'},
-			{id:'impressum', picId:'logoLg', name:''},
-			{id:'classic', picId:'classic', name:'Klassisches Schach'}
+			{id:'mini', picId:'mini', name:'Minischach', color:'purple'},
+			{id:'impressum', picId:'logoLg', name:'', color:'white'},
+			{id:'classic', picId:'classic', name:'Klassisches Schach', color:'purple'}
 		],[
-			{id:'', picId:'', name:''},
-			{id:'editor', picId:'editor', name:'Editor'},
-			{id:'', picId:'', name:''}
+			{id:'', picId:'', name:'', color:'purple'},
+			{id:'editor', picId:'editor', name:'Editor', color:'purple'},
+			{id:'', picId:'', name:'', color:'purple'}
 		]
 	];
 

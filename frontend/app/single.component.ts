@@ -15,7 +15,13 @@ declare var PixiGameEngineJS:any;
 })
 export class SingleComponent  implements OnInit {
 	public pixiEngine:any = PixiGameEngineJS;
-	public lvl:Level;
+	public lvl:Level = {
+		_id: 'dummy',
+		type: 'sp',
+		subtype: 'dummy',
+		name: 'dummy',
+		description: 'dummy'
+	};
 
 	constructor (
 		private route: ActivatedRoute,
@@ -28,7 +34,6 @@ export class SingleComponent  implements OnInit {
 	    	.switchMap((params: Params) => this.service.getLevel(params['id']))
 	    	.subscribe((lvl:Level) => this.initPixi(this.lvl = lvl));
 	}
-
 
 	initPixi(lvl:Level):void {
 		console.log('Level: ', lvl);

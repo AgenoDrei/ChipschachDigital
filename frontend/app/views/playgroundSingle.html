@@ -19,9 +19,9 @@
       <a routerLink="/">
         <img src="../img/close.png" title="zum Hauptmenü" id="close">
       </a>
-      <a>
+      <!-- <a>
         <img src="../../img/help/help.png" title="Hilfe anzeigen" id="showHelp">
-      </a>
+      </a> -->
     </div>
 
   </div>
@@ -31,16 +31,9 @@
     <div class="container-fluid">
 
       <div id="sidebar_toggle" (click)='menuToggled = !menuToggled'></div>
-      <div id="board-anchor">
-        
-      </div>
+      <div id="board-anchor"></div>
 
     </div>
-  </div>
-
-  <!-- Error msg -->
-  <div id="errorInfo">
-    <h1>Fenster ist zu klein</h1>
   </div>
 
 </div>  
@@ -48,23 +41,24 @@
 
 <!-- Modal: Start -->
 <div id="startModal" class="modal" role="dialog" [class.show]="!levelStarted" [class.fade]="levelStarted">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Multiplayer Level (lokal)</h4>
-            </div>
-            <div class="modal-body" style="text-align: center">
-              <img src="../img/logoSm.png" height="150px" />
-              <h3>Dieses Level ist noch nicht erstellt.</h3>
-              <div id="start">
-                <button type="button" class="btn btn-success btn-lg" (click)="levelStarted = true;">Start!</button> <br>
-                <button type="button" class="btn btn-success btn-lg" id="btn_nextLevel">Weiter ins nächstes Level!</button>
-              </div>
-            </div>
-            <div class="modal-footer">
-                Loesse das Level in moeglichst wenig Zuegen indem du alle Figuren schlaegst!
-            </div>
-        </div>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">
+          {{lvl.name}}
+        </h4>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <img src="../img/logoSm.png" height="150px" />
+        <h3>
+          {{lvl.description}}
+        </h3>
+        <button type="button" class="btn btn-success btn-lg" (click)="levelStarted = true;">Start!</button>
+      </div>
+      <div class="modal-footer">
+          Lösse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips &amp; Figuren schlägst!
+      </div>
     </div>
+  </div>
 </div>

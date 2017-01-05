@@ -74,8 +74,10 @@ var PixiGameEngineJS = {
         }
         figure.position.x = this.calcPosX(destX);
         figure.position.y = this.calcPosY(destY);
-        if (this.operationMode != 0)        // if not singleplayer
+        if (this.operationMode != 0) {       // if not singleplayer
             this.switchTurn();
+            // this.rotateBoard();
+        }
         this.render();
     },
 

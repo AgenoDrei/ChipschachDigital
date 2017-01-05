@@ -68,14 +68,10 @@ a:active, a:focus{
   top: 50%;
   height: 75px;
   margin-top: -50px;
+  text-align: center;
 }
 .iconBar a, .iconBar img {
   height: 100%;
-  margin: auto 10px;
-}
-.iconBar div { 
-  height: 40px;
-  max-width: 100px;
 }
 
 #close {
