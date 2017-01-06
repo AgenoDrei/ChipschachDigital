@@ -7,7 +7,7 @@ var PixiGameEngineJS = {
     renderer: null,
     selectedField: null,
     background: null,
-    moveCallback: null,
+    moveCallback: null,     // params: {x, y, newX, newY}
     turn: 0,
     operationMode: 0,       // 0 == singleplayer, 1 == multiplayer
 
@@ -47,6 +47,8 @@ var PixiGameEngineJS = {
             this.stage.destroy();
         if(this.renderer!= null)
             this.renderer.destroy();
+        if (this.moveCallback != null)
+            this.moveCallback = null;
         this.turn = 0;
         PIXI.loader.reset();
     },
