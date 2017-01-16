@@ -1,3 +1,11 @@
+/* 
+msg = {
+   type: String,
+   gameID: String,
+   joinID: String 
+}
+*/
+
 //Requirements
 var WebSocketServer = require('websocket').server; //Websockets
 var http = require('http'); //HTTP-Server
@@ -10,7 +18,7 @@ module.exports = function(configuration, gameHandler) {
         res.end();
     });
     server.listen(configuration.socket.port, function() { //start http server
-        console.log("Websocket opend on port " + configuration.socket.port);
+        console.log("Websocket opened on port " + configuration.socket.port);
     });
 
     // Upgrade http server to WebSocket
@@ -29,7 +37,6 @@ module.exports = function(configuration, gameHandler) {
         connection.on("message", function(message) {
             console.log("Client> ", message.utf8Data);
             evaluate(connection, message); //Do some stuff with it, analytics you know :P
-
         });
 
         //When a client closes the connection
@@ -37,7 +44,6 @@ module.exports = function(configuration, gameHandler) {
             console.log("Server> Connection " + connection.remoteAddress + " closed (reason: " + reasonCode + ").");
             endGame(connection); //Close all connections
         });
-
     });
 
     //Evaluates the message -> look at the protocol in the wiki

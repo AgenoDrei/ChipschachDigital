@@ -16,18 +16,19 @@ a:active, a:focus{
   background: url('/img/muster.png');
   background-size: 20px;
 }
+
 .nav-container {
   position: absolute;
   left: 0px;
   right: 0px;
   margin: 0 auto;
 }
-.navicon {
+
+.profile-container {
   position: relative;
   margin: 10px auto;
   display: block;
-}
-.pic {
+
   width: 150px;
   height: 160px;
   padding: 20px;
@@ -35,19 +36,22 @@ a:active, a:focus{
   background-color: white;
   text-align: center;
 }
-.pic img {
+.profile-container img {
   width: 110px;
   height: 120px;
 }
 
-.counter {
+.counter-container {
+  position: relative;
+  margin: 10px auto;
+  display: block;
   width: 125px;
 }
-.counter > img {
+.counter-container > img {
   width: 50px;
   height: 50px;
 }
-.counter > div {
+.counter-container > div {
   width: 75px;
   height: 50px;
   padding: 5px;
@@ -59,23 +63,17 @@ a:active, a:focus{
   line-height: 1;
   text-align: center;
 }
-.inDaMiddle {  
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 
+.iconBar {
   top: 50%;
-  height: 150px;
-  margin-top: -75px;
-}
-.inDaMiddle a, .inDaMiddle img {
   height: 75px;
-  margin: 10px auto;
+  margin-top: -50px;
+  text-align: center;
 }
-.inDaMiddle div { 
-  height: 40px;
-  max-width: 100px;
+.iconBar a, .iconBar img {
+  height: 100%;
 }
+
 #close {
     transform: scaleX(-1);
     filter: FlipH;
@@ -93,6 +91,10 @@ a:active, a:focus{
   background-position: center;
   background-color: white;
   border-radius: 50%;
+}
+
+#board-anchor {
+  text-align: center;
 }
 
 

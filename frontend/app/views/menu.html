@@ -1,12 +1,9 @@
 <div id="body-container">
-    <!-- Seitenleiste links -->
-    <!--<div id="nav"><img src="../img/close.png" title="abmelden" height="75px" class="navicon" id="close"></div>-->
-
     <div class="table" >
         <div class="row" *ngFor="let row of iconArrangement">
             <template ngFor let-icon [ngForOf]="row">
                 <a *ngIf="icon?.id?.length" data-toggle="modal" [attr.data-target]="'#' + icon.id" 
-                    [ngStyle]="{'background-image': 'url(../img/' + icon.picId + '.png)', 'background-color': 'white'}">
+                    [ngStyle]="{'background-image': 'url(../img/' + icon.picId + '.png)', 'background-color': icon.color}">
                     <p>{{icon.name}}</p>
                 </a>
                 <a *ngIf="!icon?.id?.length" [ngStyle]="{'cursor': 'default'}"></a>
@@ -86,23 +83,3 @@
         </div>
     </div>
 </div>
-
-
-<!-- Modal: Close -->
-<!-- <div id="close" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Zeit zu gehen</h4>
-            </div>
-            <div class="modal-body">
-                <a href="http://www.schach-fuer-kids.de/">
-                    <img src="../img/logoSm.png" height="150px">
-                </a>
-            <div class="modal-footer">
-                Klicke auf das Logo um zur Schach-für-Kids Webseite zu gelangen
-            </div>
-        </div>
-    </div>
-</div> -->

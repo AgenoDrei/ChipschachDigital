@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var config = require('./config/config');
 var mongoClient = require('mongodb').MongoClient;
 
-
 var app = express();
 
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));    // TODO: insert favicon

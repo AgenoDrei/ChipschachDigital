@@ -34,8 +34,8 @@ Entwickler: Simon Müller, Oliver Berg
 - Running version with single- and multiplayer chip chess support. Logic should be running on Server and a new graphics engine should be in place.
 
 ## TODO:
--- Consider Pflichtenheft (siehe treffen auf burg) to do
+-- Consider Pflichtenheft (siehe treffen auf burg) to do <<Delivery Status?>>
 - favicon
-- Make CSS beautifull again
-- BrowserSync
-- LESS/SASS
+- Chip-counter
+- Next-Level indexing, lvl-referencing
+- Level-parsing!

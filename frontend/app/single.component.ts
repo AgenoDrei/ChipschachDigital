@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
 import {LevelService} from './level.service';
+import {WebSocketService} from './websocket.service';
 
 declare var PixiGameEngineJS:any;
 
@@ -11,43 +12,46 @@ declare var PixiGameEngineJS:any;
     selector: 'singleplayer',
     templateUrl: 'app/views/playgroundSingle.html',
     styleUrls: ['app/styles/playground.css', 'app/styles/simple-sidebar.css'],
-    providers: [LevelService]
+    providers: [LevelService, WebSocketService]
 })
 export class SingleComponent  implements OnInit {
 	public pixiEngine:any = PixiGameEngineJS;
-	public lvl:Level;
+	public lvl:Level = {
+		_id: 'dummy',
+		type: 'sp',
+		subtype: 'dummy',
+		name: 'dummy',
+		description: 'dummy'
+	};
 
 	constructor (
 		private route: ActivatedRoute,
-		private router: Router,
-		private service: LevelService
-	) {
-		// this.pixiEngine = new PixiEngine();
-	}
+		// private router: Router,
+		private lvlService: LevelService,
+		private socketService: WebSocketService
+	) {}
+
 	ngOnInit() {
 	  	this.route.params
-	    	.switchMap((params: Params) => this.service.getLevel(params['id']))
-	    	.subscribe((lvl:Level) => this.initPixi(this.lvl = lvl));
+	    	.switchMap((params: Params) => this.lvlService.getLevel(params['id']))
+			.subscribe((lvl:Level) => this.initPixi(this.lvl = lvl, this.setMoveCallback(this.socketService)));
 	}
 
-
-	initPixi(lvl:Level):void {
+	initPixi(lvl:Level, callback:any):void {
 		console.log('Level: ', lvl);
-		
 		PixiGameEngineJS.destroy();
-		PixiGameEngineJS.init(600, 600, document.getElementById('board-anchor'), function() {
+		PixiGameEngineJS.init(600, 600, 0, document.getElementById('board-anchor'), function() {
 			PixiGameEngineJS.loadLevel(lvl, function() {
 				PixiGameEngineJS.render();
+				callback();
 			});
 		});
+	}
 
-		// init (600, 600, document.body, function() {
-		//     $.get("/api/v1/level/sp_rook_debug", function(data) {
-		//         console.log('Level: ', data);
-		//         loadLevel(data, function() {
-		//             render();
-		//         });
-		//     });
-	 	// });
+	setMoveCallback(socketService:WebSocketService) {
+	    // socketService.connect('ws://127.0.0.1:4001/');
+		PixiGameEngineJS.setMoveCallback(function(origX:number, origY:number, destX:number, destY:number) {
+			
+		})
 	}
 }

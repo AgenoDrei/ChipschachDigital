@@ -1,5 +1,6 @@
 # dir
 .idea/
+.vscode/
 .tscache/
 node_modules/
 frontend/build/

@@ -2,6 +2,7 @@ interface Icon {
 	id:String;
 	picId:String;
 	name:String;
+	color?:String;
 }
 
 
