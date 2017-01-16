@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import 'rxjs/add/operator/switchMap';
 
@@ -26,7 +26,7 @@ export class SingleComponent  implements OnInit {
 
 	constructor (
 		private route: ActivatedRoute,
-		private router: Router,
+		// private router: Router,
 		private lvlService: LevelService,
 		private socketService: WebSocketService
 	) {}
@@ -49,6 +49,7 @@ export class SingleComponent  implements OnInit {
 	}
 
 	setMoveCallback(socketService:WebSocketService) {
+	    // socketService.connect('ws://127.0.0.1:4001/');
 		PixiGameEngineJS.setMoveCallback(function(origX:number, origY:number, destX:number, destY:number) {
 			
 		})

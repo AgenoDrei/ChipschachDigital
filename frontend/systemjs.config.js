@@ -24,6 +24,7 @@
             '@ng-bootstrap/ng-bootstrap': 'npm:@ng-bootstrap/ng-bootstrap/bundles/ng-bootstrap.js',
             // other libraries
             'rxjs':                      'npm:rxjs',
+            'angular2-websocket': 'npm:angular2-websocket',
         },
         // packages tells the System loader how to load when no filename and/or no extension
         packages: {
