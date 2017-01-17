@@ -9,6 +9,45 @@ var mongoClient = require('mongodb').MongoClient;
 
 var app = express();
 
+//set ejs and general view stuff
+app.set('view engine', 'ejs');
+app.get('/', function(req, res) {
+    var iconRows = [
+        [
+            {id:'sp', picId:'single', name:'Einzelspieler'},
+            {id:'mp', picId:'multiLocal', name:'Lokaler Mehrspieler'},
+            {id:'mini', picId:'mini', name:'Minischach'}
+        ],[
+            {id:'mp_g', picId:'multiGlobal', name:'Globaler Mehrspieler'},
+            {id:'impressum', picId:'logoLg', name:''},
+            {id:'classic', picId:'classic', name:'Klassisches Schach'}
+        ],[
+            {id:'', picId:'', name:''},
+            {id:'editor', picId:'editor', name:'Editor'},
+            {id:'', picId:'', name:''}
+        ]
+    ];
+    var accTypes = [
+        {id: 'sp', name: 'Lokaler Einzelspieler'},
+        {id: 'mp', name: 'Lokaler Mehrspieler'},
+        {id: 'mini', name: 'Minischach-Aufgaben'}
+    ];
+    var subtypes = [
+        {id: 'pawn', name: 'Bauer'},
+        {id: 'knight', name: 'Springer'},
+        {id: 'bishop', name: 'Läufer'},
+        {id: 'rook', name: 'Turm'},
+        {id: 'queen', name: 'Dame'},
+        {id: 'king', name: 'König'}
+    ];
+
+    res.render('menu', {
+        iconRows: iconRows,
+        accTypes: accTypes,
+        subtypes: subtypes
+    });
+});
+
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));    // TODO: insert favicon
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -16,7 +55,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //Deliver Frontend files - VIEW
-app.use(express.static(path.join(__dirname, 'frontend/build')));
+app.use(express.static(path.join(__dirname, 'views')));
 app.use('/graphics_engine', express.static(path.join(__dirname, 'graphics_engine'))); //ToDo: Remove when ported to angular
 app.use('/libs', express.static(path.resolve(__dirname, 'node_modules')));
 
