@@ -3,106 +3,77 @@
 <head>
     <% include ./partials/head %>
 
-    <title>Chipschach Digital</title>
-    <link rel="stylesheet" type="text/css" href="../css/menu.css">
+    <script src="/libs/pixi.js/dist/pixi.min.js"></script>
+    <script src="/js/pixi-game-engine.js"></script>
+    <script src="/js/playground.js"></script>
+    <title>Lokaler Einzelspieler</title>
+    <link rel="stylesheet" type="text/css" href="/css/simple-sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/css/playground.css">
 </head>
 
 <body>
-<div id="body-container">
-    <div id="menuAnchor" class="table">
-        <% iconRows.forEach(function(row) { %>
-        <div class="row">
-            <% row.forEach(function(icon) { %>
-            <%if (icon.id != '') {%>
-            <a data-toggle="modal" data-target="#<%= icon.id %>"
-               style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
-                <p><%= icon.name %></p>
-            </a>
-            <% } else { %>
-            <a style="cursor:default;"></a>
-            <% } %>
-            <% }); %>
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <div id="sidebar-wrapper">
+
+        <div class="nav-container" style="top: '0';">
+            <div class="profile-container">
+                <img src="../img/profilPicErsatz.bmp">
+            </div>
+            <div class="counter-container">
+                <img src="../img/ChipGreen.png">
+                <div id="counter-val1">
+                    -
+                </div>
+            </div>
         </div>
-        <% }); %>
+
+        <div class="nav-container iconBar">
+            <a href="/">
+                <img src="../img/close.png" title="zum Hauptmenü" id="close">
+            </a>
+            <!-- <a>
+              <img src="../../img/help/help.png" title="Hilfe anzeigen" id="showHelp">
+            </a> -->
+        </div>
+
     </div>
+
+    <!-- Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+
+            <div id="sidebar_toggle" onclick="toggleSidebar();"></div>
+            <div id="board-anchor"></div>
+
+        </div>
+    </div>
+
 </div>
 
-<!-- Modals: sp, mp (for local), mini -->
-<% accTypes.forEach(function(type) { %>
-<div id="<%= type.id %>" class="modal fade" role="dialog">
+<!-- Modal: Start -->
+<div id="startModal" class="modal show" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><%= type.name %></h4>
+                <h4 id="lvlName" class="modal-title">
+
+                </h4>
             </div>
-            <div class="modal-body">
-                <div id="acc_<%= type.id %>" class="panel-group">
-                    <% availSubtypes.forEach(function(subtype) { %>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h4 class="panel-title">
-                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#acc_<%= type.id %>"
-                                   href="#<%= type.id %><%= subtype.id %>">
-                                    <%= subtype.name %>
-                                </a>
-                            </h4>
-                        </div>
-                        <div id="<%= type.id %><%= subtype.id %>" class="panel-collapse collapse">
-                            <div class="panel-body">
-                                <% availLvls.forEach(function(lvl) { %>
-                                <%if (lvl.type == type.id && lvl.subtype == subtype.id) {%>
-                                <p>
-                                    <a href="<%= type.href %>/<%= lvl.id %>">
-                                        <%= lvl.name %>
-                                    </a>
-                                </p>
-                                <% }; %>
-                                <% }); %>
-                            </div>
-                        </div>
-                    </div>
-                    <% }); %>
-                </div>
+            <div class="modal-body" style="text-align: center">
+                <img src="../img/logoSm.png" height="150px" />
+                <h3 id="lvlDescr">
+
+                </h3>
+                <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
             </div>
             <div class="modal-footer">
-                Wähle ein Mehrspieler-Level aus um gegen einen Freund am gleichen Rechner Problemstellungen zu lösen.
+                Löse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips &amp; Figuren schlägst!
             </div>
         </div>
     </div>
 </div>
-<% }); %>
-
-
-<!-- Modal: Impressum -->
-<!--<div id="impressum" class="modal fade" role="dialog">-->
-<!--<div class="modal-dialog">-->
-<!--<div class="modal-content">-->
-<!--<div class="modal-header">-->
-<!--<button type="button" class="close" data-dismiss="modal">&times;</button>-->
-<!--<h4 class="modal-title">Impressum</h4>-->
-<!--</div>-->
-<!--<div class="modal-body">-->
-<!--<a href="http://www.schach-fuer-kids.de/">-->
-<!--<img src="../img/logoSm.png" height="150px">-->
-<!--</a>-->
-<!--<h3>-->
-<!--Chipschach© ist eine Software der pädagogischen Initiative Schach für Kids e.V. (SfK), erstellt in Kooperation mit der IBM Deutschland GmbH-->
-<!--</h3>-->
-<!--<ul>-->
-<!--<li>Initiator: Ralf Schreiber, SfK</li>-->
-<!--<li>Leitung: Peter Kusterer, IBM</li>-->
-<!--<li>Programmierung: Simon Müller, IBM</li>-->
-<!--<li>Programmierung: Oliver Berg, IBM</li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--<div class="modal-footer">-->
-<!--Weitere Informationen unter <a href="http://www.schach-fuer-kids.de">schach-fuer-kids.de</a> <br>-->
-<!--Kontakt: <a href="mailto:chipschach@schach-fuer-kids.de?Subject=Anfrage" target="_top">chipschach@schach-fuer-kids.de</a>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
 </body>
 </html>

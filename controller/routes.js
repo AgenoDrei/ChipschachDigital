@@ -1,4 +1,6 @@
 module.exports = function(app, dataAccess) {
+
+
     app.get('/', function(req, res) {
         var iconRows = [
             [
@@ -30,7 +32,8 @@ module.exports = function(app, dataAccess) {
         ];
 
         dataAccess.getAllLevelIds().then(function(availLvls) {
-            console.log('Available Levels retrieved');
+            console.log('Available Levels retrieved: ', availLvls);
+
             res.render('menu', {
                 iconRows: iconRows,
                 accTypes: accTypes,
@@ -40,7 +43,10 @@ module.exports = function(app, dataAccess) {
         });
     });
 
-    app.get('/singleplayer', function(req, res) {
-       res.render('singleplayer', {});
+    app.get('/singleplayer/:levelId', function(req, res) {
+        res.render('singleplayer');
+        // dataAccess.getLevelById(req.params.levelId).then(function(lvl){
+        //     console.log('Gotten lvl: ', lvl);
+        // });
     });
 };

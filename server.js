@@ -19,7 +19,7 @@ app.use(cookieParser());
 //Deliver Frontend files - VIEW
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/graphics_engine', express.static(path.join(__dirname, 'graphics_engine'))); //ToDo: Remove when ported to angular
-app.use('/libs', express.static(path.resolve(__dirname, 'node_modules')));
+app.use('/libs', express.static(path.join(__dirname, 'node_modules')));
 
 //Database and GameHandler initalization - MODEL 
 var dataAccess = require('./model/dataAccess')(config, mongoClient);

@@ -1,4 +1,4 @@
-var PixiGameEngineJS = {
+var PixiEngine = {
     height: 800,
     width: 800,
     sprSize: this.width / 8,
@@ -21,23 +21,23 @@ var PixiGameEngineJS = {
         this.stage = new PIXI.Container();
         var level = null;
         PIXI.loader
-            .add("img/board.png")
-            .add("img/BishopBlue.png")
-            .add("img/BishopYellow.png")
-            .add("img/ChipBlue.png")
-            .add("img/ChipYellow.png")
-            .add("img/ChipGreen.png")
-            .add("img/ChipRed.png")
-            .add("img/KingBlue.png")
-            .add("img/KingYellow.png")
-            .add("img/KnightBlue.png")
-            .add("img/KnightYellow.png")
-            .add("img/PawnBlue.png")
-            .add("img/PawnYellow.png")
-            .add("img/QueenBlue.png")
-            .add("img/QueenYellow.png")
-            .add("img/RookBlue.png")
-            .add("img/RookYellow.png")
+            .add("/img/board.png")
+            .add("/img/BishopBlue.png")
+            .add("/img/BishopYellow.png")
+            .add("/img/ChipBlue.png")
+            .add("/img/ChipYellow.png")
+            .add("/img/ChipGreen.png")
+            .add("/img/ChipRed.png")
+            .add("/img/KingBlue.png")
+            .add("/img/KingYellow.png")
+            .add("/img/KnightBlue.png")
+            .add("/img/KnightYellow.png")
+            .add("/img/PawnBlue.png")
+            .add("/img/PawnYellow.png")
+            .add("/img/QueenBlue.png")
+            .add("/img/QueenYellow.png")
+            .add("/img/RookBlue.png")
+            .add("/img/RookYellow.png")
             .load(callback);
 
     },
@@ -131,27 +131,27 @@ var PixiGameEngineJS = {
     },
 
     onClick: function(e) {
-        var rawX = e.data.global.x - PixiGameEngineJS.stage.getGlobalPosition().x;
-        var rawY = e.data.global.y - PixiGameEngineJS.stage.getGlobalPosition().y;
-        var x = Math.floor(rawX / PixiGameEngineJS.sprSize) + 1;
-        var y = Math.floor(rawY / PixiGameEngineJS.sprSize) + 1;
+        var rawX = e.data.global.x - PixiEngine.stage.getGlobalPosition().x;
+        var rawY = e.data.global.y - PixiEngine.stage.getGlobalPosition().y;
+        var x = Math.floor(rawX / PixiEngine.sprSize) + 1;
+        var y = Math.floor(rawY / PixiEngine.sprSize) + 1;
 
         console.log('Clicked: (' + x + '|' + y + ')');
 
-        if(PixiGameEngineJS.selectedField == null  && PixiGameEngineJS.getFigure(x,y) != null) {
-            var figure = PixiGameEngineJS.getFigure(x, y);
-            if(PixiGameEngineJS.turn != figure.color) {
+        if(PixiEngine.selectedField == null  && PixiEngine.getFigure(x,y) != null) {
+            var figure = PixiEngine.getFigure(x, y);
+            if(PixiEngine.turn != figure.color) {
                 return;
             }
-            PixiGameEngineJS.switchSelection(x, y);
+            PixiEngine.switchSelection(x, y);
             return;
         }
-        if(PixiGameEngineJS.selectedField != null) { 
-            if(PixiGameEngineJS.moveCallback != null) 
-                PixiGameEngineJS.moveCallback(PixiGameEngineJS.selectedField.pos.x, PixiGameEngineJS.selectedField.pos.y, x, y);
+        if(PixiEngine.selectedField != null) { 
+            if(PixiEngine.moveCallback != null) 
+                PixiEngine.moveCallback(PixiEngine.selectedField.pos.x, PixiEngine.selectedField.pos.y, x, y);
             else 
-                PixiGameEngineJS.moveFigure(PixiGameEngineJS.selectedField.pos.x, PixiGameEngineJS.selectedField.pos.y, x, y);
-            PixiGameEngineJS.switchSelection(PixiGameEngineJS.selectedField.pos.x, PixiGameEngineJS.selectedField.pos.y);
+                PixiEngine.moveFigure(PixiEngine.selectedField.pos.x, PixiEngine.selectedField.pos.y, x, y);
+            PixiEngine.switchSelection(PixiEngine.selectedField.pos.x, PixiEngine.selectedField.pos.y);
             return;
         }
     },  
@@ -176,7 +176,7 @@ var PixiGameEngineJS = {
 
     loadLevel: function(level, callback) {
         //Background
-        background = new PIXI.Sprite(PIXI.loader.resources["img/board.png"].texture);
+        background = new PIXI.Sprite(PIXI.loader.resources["/img/board.png"].texture);
         background.width = this.width;
         background.height = this.height;
         background.interactive = true;
@@ -192,20 +192,20 @@ var PixiGameEngineJS = {
             switch (cur.type) {
                 case "ROOK":
                     if (cur.color == 1) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["img/RookBlue.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/RookBlue.png"].texture);
                     } else if (cur.color == 0) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["img/RookYellow.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/RookYellow.png"].texture);
                     }
                     break;
                 case "CHIP":
                     if (cur.color == 0) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipYellow.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/ChipYellow.png"].texture);
                     } else if (cur.color == 1) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipBlue.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/ChipBlue.png"].texture);
                     } else if (cur.color == 2) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipGreen.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/ChipGreen.png"].texture);
                     } else if (cur.color == 3) {
-                        figure = new PIXI.Sprite(PIXI.loader.resources["img/ChipRed.png"].texture);
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/ChipRed.png"].texture);
                     }
                     break;
                 default:
