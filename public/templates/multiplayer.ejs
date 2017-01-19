@@ -33,9 +33,27 @@
             <a href="/">
                 <img src="../img/close.png" title="zum Hauptmenü" id="close">
             </a>
-            <!-- <a>
+            <!--<a>
               <img src="../../img/help/help.png" title="Hilfe anzeigen" id="showHelp">
             </a> -->
+            <!-- <a>
+              <img src="../img/remis.png" title="Remis anbieten">
+            </a> -->
+            <!-- <a>
+              <img src="../../img/yield.png" title="Aufgeben" id="yield">
+            </a> -->
+        </div>
+
+        <div class="nav-container" style="bottom: 0;">
+            <div class="counter-container">
+                <img src="../img/ChipGreen.png">
+                <div id="counter-val1">
+                    -
+                </div>
+            </div>
+            <div class="profile-container">
+                <img src="../img/profilPicErsatz.bmp">
+            </div>
         </div>
 
     </div>
@@ -58,7 +76,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">
+                <h4 id="lvlName" class="modal-title">
                     <%= name %>
                 </h4>
             </div>
@@ -70,7 +88,7 @@
                 <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
             </div>
             <div class="modal-footer">
-                Löse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips &amp; Figuren schlägst!
+                Schlagen mehr Chips als dein Gegner!
             </div>
         </div>
     </div>

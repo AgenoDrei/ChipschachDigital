@@ -1,7 +1,10 @@
 module.exports = function(app, dataAccess) {
-
+    var availLvls = [],
+        nameDict = {},
+        descrDict = {};
 
     app.get('/', function(req, res) {
+        self = this;
         var iconRows = [
             [
                 {id:'sp', picId:'single', name:'Einzelspieler'},
@@ -31,22 +34,35 @@ module.exports = function(app, dataAccess) {
             {id: 'king', name: 'König'}
         ];
 
-        dataAccess.getAllLevelIds().then(function(availLvls) {
-            console.log('Available Levels retrieved: ', availLvls);
-
+        dataAccess.getAllLevelIds().then(function(obtainedLvls) {
             res.render('menu', {
                 iconRows: iconRows,
                 accTypes: accTypes,
-                availSubtypes: availSubtypes,   //TODO: only show actually available ones
-                availLvls: availLvls
+                availSubtypes: availSubtypes,
+                availLvls: obtainedLvls
+            });
+
+            //saved stuff for mitgeben von name and description when separate level called
+            this.availLvls = obtainedLvls;
+            obtainedLvls.forEach(function(lvl) {
+                nameDict[lvl._id] = lvl.name;
+                descrDict[lvl._id] = lvl.description;
             });
         });
     });
 
     app.get('/singleplayer/:levelId', function(req, res) {
-        res.render('singleplayer');
-        // dataAccess.getLevelById(req.params.levelId).then(function(lvl){
-        //     console.log('Gotten lvl: ', lvl);
-        // });
+        console.log(nameDict);
+        res.render('singleplayer', {
+            name: nameDict[req.params.levelId],
+            descr: descrDict[req.params.levelId]
+        });
+    });
+
+    app.get('/multiplayer/:levelId', function(req, res) {
+        res.render('multiplayer', {
+            name: nameDict[req.params.levelId],
+            descr: descrDict[req.params.levelId]
+        });
     });
 };
