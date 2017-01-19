@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('./config/config');
 var mongoClient = require('mongodb').MongoClient;
+var ejs = require('ejs');
 
 var app = express();
 
@@ -16,9 +17,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 //Deliver Frontend files - VIEW
-app.use(express.static(path.join(__dirname, 'frontend/build')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use('/graphics_engine', express.static(path.join(__dirname, 'graphics_engine'))); //ToDo: Remove when ported to angular
-app.use('/libs', express.static(path.resolve(__dirname, 'node_modules')));
+app.use('/libs', express.static(path.join(__dirname, 'node_modules')));
 
 //Database and GameHandler initalization - MODEL 
 var dataAccess = require('./model/dataAccess')(config, mongoClient);
@@ -29,9 +30,14 @@ app.use('/api/v1', require('./controller/index'));
 app.use('/api/v1', require('./controller/level')(dataAccess));
 app.use('/api/v1', require('./controller/game')(dataAccess, gameHandler));
 
+//set ejs and general view stuff
+app.set('view engine', 'ejs');
+app.set('views',__dirname + '/public/templates');
+app.set('view options', { layout:false, root: __dirname + '/templates' } );
+require('./controller/routes')(app, dataAccess);
+
 //Websocket Controller
 var communicationSocket = require('./controller/socketController')(config, gameHandler);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

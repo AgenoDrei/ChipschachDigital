@@ -16,7 +16,7 @@
 .row {
     display: table-row;
 }
-.row > a {
+.row a {
     display: table-cell;
     width: 200px;
     height: 200px;

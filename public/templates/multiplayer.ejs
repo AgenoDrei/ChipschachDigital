@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <% include ./partials/head %>
+
+    <script src="/libs/pixi.js/dist/pixi.min.js"></script>
+    <script src="/js/pixi-game-engine.js"></script>
+    <script src="/js/playground.js"></script>
+    <title>Lokaler Einzelspieler</title>
+    <link rel="stylesheet" type="text/css" href="/css/simple-sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/css/playground.css">
+</head>
+
+<body>
+<div id="wrapper">
+
+    <!-- Navigation -->
+    <div id="sidebar-wrapper">
+
+        <div class="nav-container" style="top: 0;">
+            <div class="profile-container">
+                <img src="../img/profilPicErsatz.bmp">
+            </div>
+            <div class="counter-container">
+                <img src="../img/ChipGreen.png">
+                <div id="counter-val1">
+                    -
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-container iconBar">
+            <a href="/">
+                <img src="../img/close.png" title="zum Hauptmenü" id="close">
+            </a>
+            <!--<a>
+              <img src="../../img/help/help.png" title="Hilfe anzeigen" id="showHelp">
+            </a> -->
+            <!-- <a>
+              <img src="../img/remis.png" title="Remis anbieten">
+            </a> -->
+            <!-- <a>
+              <img src="../../img/yield.png" title="Aufgeben" id="yield">
+            </a> -->
+        </div>
+
+        <div class="nav-container" style="bottom: 0;">
+            <div class="counter-container">
+                <img src="../img/ChipGreen.png">
+                <div id="counter-val1">
+                    -
+                </div>
+            </div>
+            <div class="profile-container">
+                <img src="../img/profilPicErsatz.bmp">
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+
+            <div id="sidebar_toggle" onclick="toggleSidebar();"></div>
+            <div id="board-anchor"></div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal: Start -->
+<div id="startModal" class="modal show" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 id="lvlName" class="modal-title">
+                    <%= name %>
+                </h4>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <img src="../img/logoSm.png" height="150px" />
+                <h3 id="lvlDescr">
+                    <%= descr %>
+                </h3>
+                <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
+            </div>
+            <div class="modal-footer">
+                Schlagen mehr Chips als dein Gegner!
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
