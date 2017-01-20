@@ -14,7 +14,7 @@ module.exports = function(dataAccess) {
 				var type = gameTypes[gameParameters.type];	
 				var newGame = new Game(type, gameParameters.mode, level);
 
-				games.push(newGame);
+				this.games.push(newGame);
 
 				fulfill(newGame.getId());
 			}, 
@@ -88,13 +88,13 @@ module.exports = function(dataAccess) {
 					reject('gameId not found!');
 				});
 		});
-	}
+	};
 
 	this.sendToAll = function(gameId, message) {
 		getGame(gameId).then(function(game) {
 			game.sendToAll(message);
 		});
-	}
+	};
 
 	this.endGame = function(gameId) {
 		return new Promise(function(fulfill, reject) {
@@ -107,6 +107,6 @@ module.exports = function(dataAccess) {
 			}
 			reject('gameId not found');
 		});
-	}
+	};
 	return this;
-}
+};

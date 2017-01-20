@@ -3,7 +3,7 @@ var forceReloadCounter = 0;
 
 var toggleSidebar = function() {
     $('#wrapper').hasClass('toggled') ? $('#wrapper').removeClass('toggled') : $('#wrapper').addClass('toggled');
-}
+};
 
 var startGame = function() {
     if (lvl !== undefined) {
@@ -21,7 +21,7 @@ var startGame = function() {
         toastr.info('Level wird noch geladen, einen Moment Geduld noch ...')
         forceReloadCounter++;
     }
-}
+};
 
 $('document').ready(function() {
     var xmlhttp = new XMLHttpRequest();

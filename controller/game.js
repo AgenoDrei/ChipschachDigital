@@ -5,8 +5,8 @@ var validate = require("validate.js");
 var gameConstraint = {
 	type: {
 		presence: true,
-		 format: {
-      		pattern: /(SP|MP|MINI)/
+		format: {
+			pattern: /(SP|MP|MINI)/
       	}
 	},
 	level: {
@@ -14,12 +14,15 @@ var gameConstraint = {
 	},
 	mode: {
 		presence: true,
+		format: {
+		    pattern: /(beatable|unbeatable)/
+        }
 	}
 };
 
 module.exports = function(dataAccess, gameHandler) {
 	router.post('/game', function(req, res, next) {
-		console.log('API POST /game called!');;
+		console.log('API POST /game called!');
 		var game = req.body;
 		var validGame = validate(game, gameConstraint);
 		if(validGame != undefined) {

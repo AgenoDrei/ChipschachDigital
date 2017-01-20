@@ -33,7 +33,6 @@ class Board {
 		var board = level.board;
 		for(var key in board) {
 			var currentFigure = board[key];
-			debugger;
 			switch(currentFigure.type) {
 				case 'CHIP':
 					newFigure = new Chip(this, currentFigure.x, currentFigure.y, playerType.BOTH);
