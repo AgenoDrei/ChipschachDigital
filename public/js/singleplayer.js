@@ -19,7 +19,8 @@ var startGame = function() {
 };
 
 $('document').ready(function() {
-    levelId = window.location.href.split('/')[4];
+    //TODO: Catch 500 to then reload page
+    var levelId = window.location.href.split('/')[4];
     $.post('/api/v1/game', {type: 'SP', level: levelId, mode: 'unbeatable'}, function(res) {
         $.get('/api/v1/game/' + res.gameId, function(res) {
             console.log('You joined a game:', res);
