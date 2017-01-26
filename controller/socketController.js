@@ -64,9 +64,7 @@ module.exports = function(configuration, gameHandler) {
         switch (m.type) { //see protocol
             case "hello":
                 gameHandler.getGame(m.gameId).then(function(game) {
-                    debugger;
                     game.connect(m.joinId, connection).then(function(player) {
-                        debugger;
                         var response = {
                             type: "hello",
                             message: "You entered game " + game.getId() + " as " + player
@@ -75,7 +73,6 @@ module.exports = function(configuration, gameHandler) {
                         connection.sendUTF(JSON.stringify(response));
                     },
                     function(err) {
-                        debugger;
                         errorResponse.message = err;
                         console.log('Server> ', errorResponse);
                         connection.sendUTF(JSON.stringify(errorResponse));
@@ -84,7 +81,7 @@ module.exports = function(configuration, gameHandler) {
                 break;
             case "turn": // Client sends a turn order
                	gameHandler.turn(m.gameId, connection, m.origX, m.origY, m.destX, m.destY).then(function(msg) {
-               		gameHandler.sendToAll(m);
+               		gameHandler.sendToAll(m.gameId, m);
                	},
                	function(err) {
                		errorResponse.message = err;
