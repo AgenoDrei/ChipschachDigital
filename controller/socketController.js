@@ -64,7 +64,9 @@ module.exports = function(configuration, gameHandler) {
         switch (m.type) { //see protocol
             case "hello":
                 gameHandler.getGame(m.gameId).then(function(game) {
+                    debugger;
                     game.connect(m.joinId, connection).then(function(player) {
+                        debugger;
                         var response = {
                             type: "hello",
                             message: "You entered game " + game.getId() + " as " + player
@@ -73,6 +75,7 @@ module.exports = function(configuration, gameHandler) {
                         connection.sendUTF(JSON.stringify(response));
                     },
                     function(err) {
+                        debugger;
                         errorResponse.message = err;
                         console.log('Server> ', errorResponse);
                         connection.sendUTF(JSON.stringify(errorResponse));
