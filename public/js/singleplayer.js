@@ -44,6 +44,8 @@ var createConnection = function() {
 var handleMessage = function(msg) {
     var msgObj = JSON.parse(msg.data);
     console.log("Server> ", msgObj);
+
+    evaluate(msgObj);
 } 
 
 var handleMoves = function(origX, origY, x, y) {
@@ -60,6 +62,16 @@ var handleMoves = function(origX, origY, x, y) {
     ws.send(JSON.stringify(moveObj));
 }
 
+var evaluate = function(message) {
+    switch(message.type) {
+        case "turn":
+            PixiEngine.moveFigure(message.origX, message.origY, message.destX, message.destY);
+        break;
+        case "error":
+            toastr.error('MEEP Error!');
+        break;
+    }
+}
 
 
 $('document').ready(function() {

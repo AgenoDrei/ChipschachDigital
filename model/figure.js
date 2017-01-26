@@ -1,4 +1,5 @@
 var playerType = require('./playerType');
+var helper = require('./helper');
 
 class Figure {
 	constructor(parentBoard, x, y, player) {
@@ -14,8 +15,8 @@ class Figure {
 	}
 
 	beat(beater) {
-		if(helper.enemy(beater.player, player)) {
-			this.board[this.x][this.y] = null;
+		if(helper.enemy(beater.player, this.player)) {
+			this.board.fields[this.x][this.y].setFigure(null);
 			return true;
 		}
 		return false;

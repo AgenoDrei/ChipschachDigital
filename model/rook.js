@@ -16,12 +16,12 @@ class Rook extends Figure{
 
 		if (this.y == destY) {
 			if (this.x > destX) {
-				for (var i = this.x - 1; i >= destX; i--) {
+				for (var i = this.x - 1; i > destX; i--) {
 					if (this.board.getField(i, this.y).getFigure() != null)
 						return false;
 				}
 			} else if (destX > this.x) {
-				for (var i = this.x + 1; i <= destX; i++) {
+				for (var i = this.x + 1; i < destX; i++) {
 					if (this.board.getField(i, this.y).getFigure() != null)
 						return false;
 				}
@@ -29,18 +29,27 @@ class Rook extends Figure{
 			}
 		} else if (this.x == destX) {
 			if (this.y > destY) {
-				for (var i = this.y - 1; i >= destY; i--) {
+				for (var i = this.y - 1; i > destY; i--) {
 					if (this.board.getField(this.x, i).getFigure() != null)
 						return false;
 				}
 			} else if (destY > this.y) {
-				for (var i = this.y + 1; i <= destX; i++) {
+				for (var i = this.y + 1; i < destX; i++) {
 					if (this.board.getField(this.x, i).getFigure() != null)
 						return false;
 				}
 			}
 		}
-		return this.board.beat(destX, destY, this);
+		debugger;
+
+		if(this.board.beat(destX, destY, this)) {
+			this.board.getField(this.x,this.y).setFigure(null);
+			this.x = destX;
+			this.y = destY;
+			this.board.getField(this.x,this.y).setFigure(this);
+			return true;
+		}
+		return false;
 	}
 }
 
