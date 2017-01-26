@@ -1,3 +1,8 @@
+var opMode = {
+    SP: 0,
+    MP: 1,
+}
+
 var PixiEngine = {
     height: 800,
     width: 800,
@@ -9,12 +14,12 @@ var PixiEngine = {
     background: null,
     moveCallback: null,     // params: {x, y, newX, newY}
     turn: 0,
-    operationMode: 0,       // 0 == singleplayer, 1 == multiplayer
+    operationMode: opMode.SP,
 
-    init: function(w, h, opMode, anchor, callback) {
+    init: function(w, h, operationMode, anchor, callback) {
         this.height = h;
         this.width = w;
-        this.operationMode = opMode,
+        this.operationMode = operationMode,
         this.sprSize = this.width / 8;
         this.renderer = new PIXI.CanvasRenderer(this.width, this.height);
         anchor.appendChild(this.renderer.view);
@@ -76,7 +81,7 @@ var PixiEngine = {
         }
         figure.position.x = this.calcPosX(destX);
         figure.position.y = this.calcPosY(destY);
-        if (this.operationMode != 0) {       // if not singleplayer
+        if (this.operationMode != opMode.SP) {       // if not singleplayer
             this.switchTurn();
             // this.rotateBoard();
         }

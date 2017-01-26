@@ -1,4 +1,5 @@
-var lvl;
+var gameID, joinID, lvl, ws;
+
 
 var toggleSidebar = function() {
     $('#wrapper').hasClass('toggled') ? $('#wrapper').removeClass('toggled') : $('#wrapper').addClass('toggled');
@@ -9,7 +10,7 @@ var startGame = function() {
         $('#startModal').removeClass('show');
 
         PixiEngine.destroy();
-        PixiEngine.init(600, 600, 0, document.getElementById('board-anchor'), function() {
+        PixiEngine.init(600, 600, opMode.SP, document.getElementById('board-anchor'), function() {
             PixiEngine.loadLevel(lvl, function() {
                 PixiEngine.render();
             });
@@ -18,27 +19,41 @@ var startGame = function() {
         toastr.info('Level wird noch geladen, einen Moment Geduld noch ...');
 };
 
+
+
 $('document').ready(function() {
-    //TODO: Catch 500 to then reload page
-    var levelId = window.location.href.split('/')[4];
+    let levelId = window.location.href.split('/')[4];
+
     $.post('/api/v1/game', {type: 'SP', level: levelId, mode: 'unbeatable'}, function(res) {
+        gameID = res.gameId;
         $.get('/api/v1/game/' + res.gameId, function(res) {
-            console.log('You joined a game:', res);
+            joinID = res.joinId;
             $.get('/api/v1/level/' + levelId, function(res) {
                 lvl = res;
+
+                if (window.WebSocket) {
+                    ws = new WebSocket('ws://localhost:4001', 'kekse');
+
+                    ws.onopen = function() {
+                        ws.send(JSON.stringify({
+                            type: 'hello',
+                            gameId: gameID,
+                            joinID: joinID
+                        }));
+                    };
+
+                    ws.onmessage = function(e) {
+                      console.log('Server:', e.data)
+                    };
+                    // ws.addEventListener('message', function(msg) {
+                    //     console.log(msg);
+                    // });
+                } else {
+                    alert('Dieser Browser ist nicht aktuell genug (kein Websocket Support).');
+                    //TODO: ... implement alternative ? ...
+                }
             });
         });
     });
 
-    //////
-    /// AJAX ... just in case I guess ^^
-    // var xmlhttp = new XMLHttpRequest();
-    // xmlhttp.onreadystatechange = function() {
-    //     if (this.readyState == 4 && this.status == 200) {
-    //         lvl = JSON.parse(this.responseText);
-    //         console.log('Level retrieved: ', lvl);
-    //     }
-    // }
-    // xmlhttp.open("GET", "/api/v1/level/" + window.location.href.split('/')[4]);
-    // xmlhttp.send();
 });
