@@ -4,6 +4,7 @@ var gameTypes = require('./gameTypes');
 var conStates = require('./connectionStates');
 var playerType = require('./playerType');
 var gameState = require('./gameStates');
+var helper = require('./helper');
 
 module.exports = function(dataAccess) {
 	this.games = [];
@@ -14,7 +15,7 @@ module.exports = function(dataAccess) {
 				var type = gameTypes[gameParameters.type];	
 				var newGame = new Game(type, gameParameters.mode, level);
 
-				games.push(newGame);
+				this.games.push(newGame);
 
 				fulfill(newGame.getId());
 			}, 
@@ -71,7 +72,7 @@ module.exports = function(dataAccess) {
 		var resTurn = -99;
 		return new Promise(function(fulfill, reject) {
 			getGame(gameId).then(
-				function(game) {	
+				function(game) {
 					if(game.player1.connection == connection) {
 						resTurn = game.turn(origX, origY, destX, destY, playerType.PLAYERONE);
 					} else if(game.player2.connection == connection) {
@@ -88,13 +89,16 @@ module.exports = function(dataAccess) {
 					reject('gameId not found!');
 				});
 		});
-	}
+	};
 
 	this.sendToAll = function(gameId, message) {
 		getGame(gameId).then(function(game) {
 			game.sendToAll(message);
+		},
+		function(err) {
+			console.log("Problem?");
 		});
-	}
+	};
 
 	this.endGame = function(gameId) {
 		return new Promise(function(fulfill, reject) {
@@ -107,6 +111,6 @@ module.exports = function(dataAccess) {
 			}
 			reject('gameId not found');
 		});
-	}
+	};
 	return this;
-}
+};

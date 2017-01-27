@@ -2,7 +2,8 @@
 msg = {
    type: String,
    gameID: String,
-   joinID: String 
+   joinID: String,
+   [origX, origY, destX, destY]
 }
 */
 
@@ -64,23 +65,23 @@ module.exports = function(configuration, gameHandler) {
             case "hello":
                 gameHandler.getGame(m.gameId).then(function(game) {
                     game.connect(m.joinId, connection).then(function(player) {
-                            var response = {
-                                type: "hello",
-                                message: "You entered game " + game.getId() + " as " + player
-                            };
-                            console.log('Server> ', response);
-                            connection.sendUTF(JSON.stringify(response));
-                        },
-                        function(err) {
-                            errorResponse.message = err;
-                            console.log('Server> ', errorResponse);
-                            connection.sendUTF(JSON.stringify(errorResponse));
-                        });
+                        var response = {
+                            type: "hello",
+                            message: "You entered game " + game.getId() + " as " + player
+                        };
+                        console.log('Server> ', response);
+                        connection.sendUTF(JSON.stringify(response));
+                    },
+                    function(err) {
+                        errorResponse.message = err;
+                        console.log('Server> ', errorResponse);
+                        connection.sendUTF(JSON.stringify(errorResponse));
+                    });
                 });
                 break;
             case "turn": // Client sends a turn order
                	gameHandler.turn(m.gameId, connection, m.origX, m.origY, m.destX, m.destY).then(function(msg) {
-               		gameHandler.sendToAll(m);
+               		gameHandler.sendToAll(m.gameId, m);
                	},
                	function(err) {
                		errorResponse.message = err;

@@ -51,11 +51,16 @@
                                 <div id="<%= type.id %><%= subtype.id %>" class="panel-collapse collapse">
                                     <div class="panel-body">
                                         <% availLvls.forEach(function(lvl) { %>
-                                            <%if (lvl.type == type.id && lvl.subtype == subtype.id) {%>
+                                            <%if (lvl.type == type.id && lvl.subtype == subtype.id) { %>
                                                 <p>
-                                                    <a href="<%= type.href %>/<%= lvl._id %>">
-                                                        <%= lvl.name %>
-                                                    </a>
+                                                    <%if (type.href == 'MP') { %>
+                                                        <a href="/MP/<%= lvl._id %>/unbeatable"> <%= lvl.name %> </a>(Figuren-Schlagen nicht erlaubt) <br>
+                                                        <a href="/MP/<%= lvl._id %>/beatable"> <%= lvl.name %> </a> (Figuren-Schlagen erlaubt)
+                                                    <% } else { %>
+                                                        <a href="/<%= type.href%>/<%= lvl._id %>">
+                                                            <%= lvl.name %>
+                                                        </a>
+                                                    <% };%>
                                                 </p>
                                             <% }; %>
                                         <% }); %>
@@ -66,7 +71,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                Wähle ein Mehrspieler-Level aus um gegen einen Freund am gleichen Rechner Problemstellungen zu lösen.
+                    <%= type.footer %>
                 </div>
             </div>
         </div>

@@ -19,11 +19,16 @@ class Board {
 	}
 
 	getField(x, y) {
-		return fields[x][y];
+		return this.fields[x][y];
 	}
 
 	beat(x, y, attacker) {
-		return fields[x][y].getFigure().beat(attacker);
+		var defender = this.fields[x][y].getFigure();
+		if(defender == null) {
+			return true;
+		} else {
+			return this.fields[x][y].getFigure().beat(attacker);
+		}
 	}
 
 	//ToDo: Create intellignet algorithm for figure creation
@@ -33,7 +38,6 @@ class Board {
 		var board = level.board;
 		for(var key in board) {
 			var currentFigure = board[key];
-			debugger;
 			switch(currentFigure.type) {
 				case 'CHIP':
 					newFigure = new Chip(this, currentFigure.x, currentFigure.y, playerType.BOTH);

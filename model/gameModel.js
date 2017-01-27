@@ -2,6 +2,7 @@ var shortid = require('shortid');
 var gameTypes = require('./gameTypes');
 var Promise = require('promise');
 var conStates = require('./connectionStates');
+var gameStates = require('./gameStates');
 var Board = require('./gameBoard');
 var Chip = require('./chip');
 var playerType = require('./playerType');
@@ -46,11 +47,12 @@ class Game {
 		if(this.toBeNext != player) {
 			return gameStates.INVALID_TURN;
 		}
-		var currentFigure = this.board.getField(origX, origY).getFigure();
+		var currentField = this.board.getField(origX, origY);
+		var currentFigure = currentField.getFigure();
 		if(!currentFigure.move(destX, destY)) {
 			return gameStates.INVALID_TURN;
 		}
-		if(this.type != gamesTypes.SP) {
+		if(this.type != gameTypes.SP) {
 			this.toBeNext = helper.getEnemy(this.toBeNext);
 		}
 		//TODO: Implement Game Logics
@@ -60,9 +62,7 @@ class Game {
     connect(joinId, connection) {
     	var player1 = this.player1;
     	var player2 = this.player2;
-    	debugger;
         return new Promise(function(fulfill, reject) {
-        	debugger;
             if (joinId == player1.joinId && player1.state == conStates.JOINED) {
                 player1.connection = connection
                 player1.state = conStates.CONNECTED;
@@ -78,17 +78,18 @@ class Game {
 
     //ToDo: Refactor
     sendToAll(message) {
+    	debugger;
     	try {
-    		player1.connection.sendUTF(message);
-    		player1.connection.sendUTF(message);
+    		this.player1.connection.sendUTF(JSON.stringify(message));
+    		this.player2.connection.sendUTF(JSON.stringify(message));
     	} catch(e) {
     	}
     }
 
     endGame() {
     	try {
-    		player1.connection.sendUTF('{"type": "exit"}');
-    		player1.connection.sendUTF('{"type": "exit"}');
+    		this.player1.connection.sendUTF('{"type": "exit"}');
+    		this.player2.connection.sendUTF('{"type": "exit"}');
     	} catch(e) {
     	}
     }

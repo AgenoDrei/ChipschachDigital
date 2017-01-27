@@ -21,9 +21,12 @@ module.exports = function(app, dataAccess) {
             ]
         ];
         var accTypes = [
-            {id: 'sp', name: 'Lokaler Einzelspieler', href: 'singleplayer'},
-            {id: 'mp', name: 'Lokaler Mehrspieler', href: 'multiplayer'},
-            {id: 'mini', name: 'Minischach-Aufgaben', href: 'minichess'}
+            {id: 'sp', name: 'Lokaler Einzelspieler', href: 'SP',
+                footer: 'Wähle ein Einzelspieler-Level und schlage alle Chips so schnell du kannst!'},
+            {id: 'mp', name: 'Lokaler Mehrspieler', href: 'MP',
+                footer: 'Wähle ein Mehrspieler-Level aus um gegen einen Freund am gleichen Rechner Problemstellungen zu lösen!'},
+            {id: 'mini', name: 'Minischach-Aufgaben', href: 'MINI',
+                footer: 'Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!'}
         ];
         var availSubtypes = [
             {id: 'pawn', name: 'Bauer'},
@@ -51,15 +54,18 @@ module.exports = function(app, dataAccess) {
         });
     });
 
-    app.get('/singleplayer/:levelId', function(req, res) {
-        console.log(nameDict);
-        res.render('singleplayer', {
-            name: nameDict[req.params.levelId],
-            descr: descrDict[req.params.levelId]
-        });
+    app.get('/:type/:levelId', function(req, res) {
+        if (req.params.type === 'SP') {
+            res.render('singleplayer', {
+                name: nameDict[req.params.levelId],
+                descr: descrDict[req.params.levelId]
+            });
+        } else if (req.params.type === 'MINI') {
+            //TODO
+        }
     });
 
-    app.get('/multiplayer/:levelId', function(req, res) {
+    app.get('/MP/:levelId/:mode', function(req, res) {
         res.render('multiplayer', {
             name: nameDict[req.params.levelId],
             descr: descrDict[req.params.levelId]
