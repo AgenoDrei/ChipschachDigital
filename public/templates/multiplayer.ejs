@@ -5,7 +5,7 @@
 
     <script src="/libs/pixi.js/dist/pixi.min.js"></script>
     <script src="/js/pixi-game-engine.js"></script>
-    <script src="/js/multiplayer.js"></script>
+    <script src="/js/sp_mp.js"></script>
     <title>Lokaler Einzelspieler</title>
     <link rel="stylesheet" type="text/css" href="/css/simple-sidebar.css">
     <link rel="stylesheet" type="text/css" href="/css/playground.css">
@@ -89,6 +89,28 @@
             </div>
             <div class="modal-footer">
                 Schlagen mehr Chips als dein Gegner!
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Finish -->
+<div id="finishModal" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <%= name %>
+                </h4>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <img src="/img/logoSm.png" height="150px" />
+                <h3>
+                    Level beendet!
+                </h3>
+                <button type="button" class="btn btn-warning btn-lg" onclick="window.location ='/';">Zurück zum Menü</button>
+                <button type="button" class="btn btn-success btn-lg" onclick="nextLevelForward();">Nächstes Level</button>
             </div>
         </div>
     </div>
