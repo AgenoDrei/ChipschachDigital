@@ -39,14 +39,13 @@ class Board {
 	//ToDo: Create intellignet algorithm for figure creation
 	loadLevel(level) {
 		console.log('Level', level);
-		debugger;
 		var newFigure = null;
 		var board = level.board;
 		for(var key in board) {
 			var currentFigure = board[key];
 			switch(currentFigure.type) {
 				case 'CHIP':
-					newFigure = new Chip(this, currentFigure.x, currentFigure.y, playerType.BOTH);
+					newFigure = new Chip(this, currentFigure.x, currentFigure.y, currentFigure.color);
 					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
 					break;
 				case 'ROOK': 

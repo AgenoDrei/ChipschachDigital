@@ -79,7 +79,6 @@ class Game {
 
     //ToDo: Refactor
     sendToAll(message) {
-    	debugger;
     	try {
     		this.player1.connection.sendUTF(JSON.stringify(message));
     		this.player2.connection.sendUTF(JSON.stringify(message));

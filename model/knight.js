@@ -11,15 +11,10 @@ class Knight extends Figure{
 	}
 
 	checkRules(destX, destY) {
-		return false;
+		if (((Math.abs(destX - this.x) == 2) && (Math.abs(destY - this.y) == 1)) || ((Math.abs(destY - this.y) == 2) && (Math.abs(destX - this.x) == 1)))
+			return this.board.beat(destX, destY, this);
 	}
 
-	move(destX, destY) {
-		this.board.getField(this.x,this.y).setFigure(null);
-		this.x = destX;
-		this.y = destY;
-		this.board.getField(this.x,this.y).setFigure(this);
-	}		
 }
 
 module.exports = Knight;

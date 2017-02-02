@@ -11,15 +11,38 @@ class Bishop extends Figure{
 	}
 
 	checkRules(destX, destY) {
-		return false;
-	}
+		if (Math.abs(this.x - destX) != Math.abs(this.y - destY)) {
+			return false;
+		}
 
-	move(destX, destY) {
-		this.board.getField(this.x,this.y).setFigure(null);
-		this.x = destX;
-		this.y = destY;
-		this.board.getField(this.x,this.y).setFigure(this);
-	}		
+			if ((this.x - destX < 0) && (this.y - destY > 0)) { // zieht nach RechtsOben
+				for (var i = 1; i < Math.abs(this.x - destX); i++) {
+					if (this.board.getField(this.x + i, this.y - i).getFigure() != null)
+						return false;
+				}
+			} else if ((this.x - destX < 0) && (this.y - destY < 0)) { // zieht nach
+				// RechtsUnten
+				for (var i = 1; i < Math.abs(this.x - destX); i++) {
+					if (this.board.getField(this.x + i, this.y + i).getFigure() != null)
+						return false;
+				}
+			} else if ((this.x - destX > 0) && (this.y - destY < 0)) { // zieht nach
+				// LinksUnten
+				for (var i = 1; i < Math.abs(this.x - destX); i++) {
+					if (this.board.getField(this.x - i, this.y + i).getFigure() != null)
+						return false;
+				}
+			} else if ((this.x - destX > 0) && (this.y - destY > 0)) { // zieht nach
+				// RechtsOben
+				for (var i = 1; i < Math.abs(this.x - destX); i++) {
+					if (this.board.getField(this.x - i, this.y - i).getFigure() != null)
+						return false;
+				}
+			}
+
+			return this.board.beat(destX, destY, this);
+		
+	}
 }
 
 module.exports = Bishop;

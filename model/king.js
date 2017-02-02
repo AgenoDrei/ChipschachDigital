@@ -11,15 +11,28 @@ class King extends Figure{
 	}
 
 	checkRules(destX, destY) {
-		return false;
+		if ((Math.abs(this.x - destX) > 1) || (Math.abs(this.y - destY) > 1)) {
+			return false;
+		}
+		
+		for (var i = -1; i <= 1; i++) {
+			for (var j = -1; j <= 1; j++) {
+				debugger;
+				if(destX + i == this.x && destY + j == this.y) {
+					continue;
+				}
+				if (this.board.getField(destX + i, destY + j).getFigure() != null) { //Check for not empty field
+					 if(this.board.getField(destX + i, destY + j).getFigure().constructor.name == 'King') { //Check for other King
+					 	return false;
+					 }
+					 /*if(this.board.getFigure(destX + i, destY + j).getFigure().player != this.board.getFigure(this.x, this.y).player) {
+						return false;
+					}*/
+				}
+			}	
+		}
+		return this.board.beat(destX, destY, this);
 	}
-
-	move(destX, destY) {
-		this.board.getField(this.x,this.y).setFigure(null);
-		this.x = destX;
-		this.y = destY;
-		this.board.getField(this.x,this.y).setFigure(this);
-	}		
 }
 
 module.exports = King;

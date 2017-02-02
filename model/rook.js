@@ -40,18 +40,8 @@ class Rook extends Figure{
 				}
 			}
 		}
-		if(this.board.beat(destX, destY, this)) {
-			return true;
-		}
-		return false;
+		return this.board.beat(destX, destY, this);
 	}
-
-	move(destX, destY) {
-		this.board.getField(this.x,this.y).setFigure(null);
-		this.x = destX;
-		this.y = destY;
-		this.board.getField(this.x,this.y).setFigure(this);
-	}		
 }
 
 module.exports = Rook;

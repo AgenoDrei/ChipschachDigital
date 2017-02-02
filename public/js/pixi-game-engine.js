@@ -77,7 +77,8 @@ var PixiEngine = {
         var figure = this.getFigure(origX, origY);
 
         if((other = this.getFigure(destX, destY)) != null) {
-            other.alpha = 0;
+            other.position.x = -99;
+            other.position.y = -99;
         }
         figure.position.x = this.calcPosX(destX);
         figure.position.y = this.calcPosY(destY);
@@ -149,6 +150,10 @@ var PixiEngine = {
                 return;
             }
             PixiEngine.switchSelection(x, y);
+            return;
+        }
+        if(PixiEngine.selectedField != null && PixiEngine.selectedField.pos.x == x && PixiEngine.selectedField.pos.y == y) {
+            PixiEngine.switchSelection(x,y);
             return;
         }
         if(PixiEngine.selectedField != null) { 
