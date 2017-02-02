@@ -1,4 +1,32 @@
 var gameID, joinID, lvl;
+var comHandle = {
+    ws: null,
+
+    connect: function(url, port, messageCallback) {
+        if (window.WebSocket) {
+            ws = new WebSocket('ws://' + url + ':' + port, 'kekse');
+            ws.onopen = function() {
+                var conObj = {
+                    type: 'hello',
+                    gameId: gameID,
+                    joinId: joinID
+                };
+                console.log("Client> ", conObj);
+                ws.send(JSON.stringify(conObj));
+            };
+
+            ws.onmessage = messageCallback;
+            return ws;
+        } else {
+            console.error('Dieser Browser ist nicht aktuell genug (kein Websocket Support).');
+            return null;
+        }
+    },
+
+    send: function(message) {
+        ws.send(message);
+    }
+};
 
 
 var toggleSidebar = function() {
@@ -8,9 +36,13 @@ var toggleSidebar = function() {
 var startGame = function() {
     if (lvl !== undefined) {
         $('#startModal').removeClass('show');
+        if (lvl.type === 'sp')
+            var operationMode = opMode.SP;
+        if (lvl.type === 'mp' || lvl.type === 'mini')
+            var operationMode = opMode.MP
 
         PixiEngine.destroy();
-        PixiEngine.init(600, 600, opMode.SP, document.getElementById('board-anchor'), function() {
+        PixiEngine.init(600, 600, operationMode, document.getElementById('board-anchor'), function() {
             PixiEngine.loadLevel(lvl, function() {
                 PixiEngine.setMoveCallback(handleMoves);
                 PixiEngine.render();
@@ -30,17 +62,13 @@ var nextLevelForward = function() {     // assumes ordered level_list of dbCall
                 window.location = '/';
             }, 3000);
         } else {
-            window.location = '/SP/' + lvls[idx + 1]._id;
+            let link = '/' + window.location.href.split('/')[3].toUpperCase() + '/' + lvls[idx + 1]._id; // _/type/id
+            if (lvl.type === 'mp')
+                link += '/' + window.location.href.split('/')[5];        // +/mode
+            window.location = link;
         }
     });
-}
-
-var handleMessage = function(msg) {
-    var msgObj = JSON.parse(msg.data);
-    console.log("Server> ", msgObj);
-
-    evaluate(msgObj);
-} 
+};
 
 var handleMoves = function(origX, origY, x, y) {
     console.log("Moved!!!");
@@ -56,22 +84,27 @@ var handleMoves = function(origX, origY, x, y) {
     comHandle.send(JSON.stringify(moveObj));
 }
 
-var evaluate = function(message) {
-    switch(message.type) {
+var handleMessage = function(msg) {
+    var msgObj = JSON.parse(msg.data);
+    console.log("Server> ", msgObj);
+
+    switch(msgObj.type) {
         case "turn":
-            PixiEngine.moveFigure(message.origX, message.origY, message.destX, message.destY);
-        break;
+            PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
+            break;
         case "error":
             toastr.error('MEEP Error!');
-        break;
+            break;
     }
-}
-
+};
 
 $('document').ready(function() {
-    let levelId = window.location.href.split('/')[4];
+    let split = window.location.href.split('/');
+    let type = split[3],
+        levelId = split[4],
+        mode = split[5] === undefined ? 'unbeatable' : split[5];
 
-    $.post('/api/v1/game', {type: 'SP', level: levelId, mode: 'unbeatable'}, function(res) {
+    $.post('/api/v1/game', {type: type, level: levelId, mode: mode}, function(res) {
         gameID = res.gameId;
         $.get('/api/v1/game/' + res.gameId, function(res) {
             joinID = res.joinId;
@@ -81,5 +114,4 @@ $('document').ready(function() {
             });
         });
     });
-
 });
