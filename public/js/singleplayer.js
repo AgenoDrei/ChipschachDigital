@@ -20,6 +20,21 @@ var startGame = function() {
         toastr.info('Level wird noch geladen, einen Moment Geduld noch ...');
 };
 
+var nextLevelForward = function() {     // assumes ordered level_list of dbCall
+    $.get('/api/v1/level', function(lvls) {
+        let idx = lvls.findIndex(x => x._id==lvl._id);
+
+        if (lvls[idx + 1].type !== lvl.type || lvls[idx + 1].subtype !== lvl.subtype || lvls[idx + 1] === undefined) {
+            toastr.success('Du hast alle Level dieser Kategorie erfolgreich absolviert!');
+            window.setTimeout(function() {
+                window.location = '/';
+            }, 3000);
+        } else {
+            window.location = '/SP/' + lvls[idx + 1]._id;
+        }
+    });
+}
+
 var handleMessage = function(msg) {
     var msgObj = JSON.parse(msg.data);
     console.log("Server> ", msgObj);
