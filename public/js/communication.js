@@ -1,6 +1,5 @@
 var comHandle = {
-	ws: null,
-
+    ws: null,
 	connect: function(url, port, messageCallback) {
     	if (window.WebSocket) {
         	ws = new WebSocket('ws://' + url + ':' + port, 'kekse');
@@ -19,14 +18,15 @@ var comHandle = {
             ws.onclose = function() {
                 console.error("WebSocket closed!");
             }
-            return ws;
-    	} else {
-        	console.error('Dieser Browser ist nicht aktuell genug (kein Websocket Support).');
-        	return null;
-    	}
-	},
 
-	send: function(message) {
-		ws.send(message);
-	}
+            return ws;
+        } else {
+            console.error('Dieser Browser ist nicht aktuell genug (kein Websocket Support).');
+            return null;
+        }
+    },
+
+    send: function(message) {
+        ws.send(message);
+    }
 };
