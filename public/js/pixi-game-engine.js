@@ -202,6 +202,41 @@ var PixiEngine = {
                         figure = new PIXI.Sprite(PIXI.loader.resources["/img/RookYellow.png"].texture);
                     }
                     break;
+                case "KNIGHT":
+                    if (cur.color == 1) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/KnightBlue.png"].texture);
+                    } else if (cur.color == 0) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/KnightYellow.png"].texture);
+                    }
+                    break;
+                case "BISHOP":
+                    if (cur.color == 1) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/BishopBlue.png"].texture);
+                    } else if (cur.color == 0) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/BishopYellow.png"].texture);
+                    }
+                    break;
+                case "QUEEN":
+                    if (cur.color == 1) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/QueenBlue.png"].texture);
+                    } else if (cur.color == 0) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/QueenYellow.png"].texture);
+                    }
+                    break;
+                case "KING":
+                    if (cur.color == 1) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/KingBlue.png"].texture);
+                    } else if (cur.color == 0) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/KingYellow.png"].texture);
+                    }
+                    break;
+                case "PAWN":
+                    if (cur.color == 1) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/PawnBlue.png"].texture);
+                    } else if (cur.color == 0) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/PawnYellow.png"].texture);
+                    }
+                    break;    
                 case "CHIP":
                     if (cur.color == 0) {
                         figure = new PIXI.Sprite(PIXI.loader.resources["/img/ChipYellow.png"].texture);

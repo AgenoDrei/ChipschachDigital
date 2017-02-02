@@ -2,7 +2,7 @@ var playerType = require('./playerType');
 var Figure = require('./figure');
 var helper = require('./helper');
 
-class Pawn extends Figure{
+class Queen extends Figure{
 	constructor(parentBoard, x, y, player) {
 		if(player != playerType.PLAYERONE && player != playerType.PLAYERTWO) {
 			throw 'Illegal player type!';
@@ -22,4 +22,4 @@ class Pawn extends Figure{
 	}		
 }
 
-module.exports = Pawn;
+module.exports = Queen;
