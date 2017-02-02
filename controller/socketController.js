@@ -80,8 +80,9 @@ module.exports = function(configuration, gameHandler) {
                 });
                 break;
             case "turn": // Client sends a turn order
-               	gameHandler.turn(m.gameId, connection, m.origX, m.origY, m.destX, m.destY).then(function(msg) {
-               		gameHandler.sendToAll(m.gameId, m);
+               	gameHandler.turn(m.gameId, connection, m.origX, m.origY, m.destX, m.destY).then(function(msg, resTurn) {
+               		console.log('Server> ', resTurn);
+                    gameHandler.sendToAll(m.gameId, m);
                	},
                	function(err) {
                		errorResponse.message = err;

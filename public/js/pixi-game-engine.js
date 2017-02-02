@@ -141,7 +141,7 @@ var PixiEngine = {
         var x = Math.floor(rawX / PixiEngine.sprSize) + 1;
         var y = Math.floor(rawY / PixiEngine.sprSize) + 1;
 
-        console.log('Clicked: (' + x + '|' + y + ')');
+        //console.log('Clicked: (' + x + '|' + y + ')');
 
         if(PixiEngine.selectedField == null  && PixiEngine.getFigure(x,y) != null) {
             var figure = PixiEngine.getFigure(x, y);

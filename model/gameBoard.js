@@ -34,6 +34,7 @@ class Board {
 	//ToDo: Create intellignet algorithm for figure creation
 	loadLevel(level) {
 		console.log('Level', level);
+		debugger;
 		var newFigure = null;
 		var board = level.board;
 		for(var key in board) {
