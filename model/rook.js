@@ -10,7 +10,7 @@ class Rook extends Figure{
 		super(parentBoard, x, y, player);
 	}
 
-	move(destX, destY) {
+	checkRules(destX, destY) {
 		if (this.x != destX && this.y != destY)
 			return false;
 
@@ -40,16 +40,7 @@ class Rook extends Figure{
 				}
 			}
 		}
-		debugger;
-
-		if(this.board.beat(destX, destY, this)) {
-			this.board.getField(this.x,this.y).setFigure(null);
-			this.x = destX;
-			this.y = destY;
-			this.board.getField(this.x,this.y).setFigure(this);
-			return true;
-		}
-		return false;
+		return this.board.beat(destX, destY, this);
 	}
 }
 

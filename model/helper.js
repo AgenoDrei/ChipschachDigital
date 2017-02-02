@@ -3,7 +3,7 @@ var playerType = require('./playerType');
 module.exports.enemy = function(attacker, defender) {
 	if(attacker == defender) {
 		return false;
-	} else if(attacker == playerType.NONE) {
+	} else if(defender == playerType.NONE || attacker == playerType.NONE) {
 		return false; //TODO: Check for validity
 	}
 	return true;

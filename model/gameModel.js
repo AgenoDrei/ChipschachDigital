@@ -47,10 +47,11 @@ class Game {
 		if(this.toBeNext != player) {
 			return gameStates.INVALID_TURN;
 		}
-		var currentField = this.board.getField(origX, origY);
-		var currentFigure = currentField.getFigure();
-		if(!currentFigure.move(destX, destY)) {
+		var currentFigure = this.board.getField(origX, origY).getFigure();
+		if(!currentFigure.checkRules(destX, destY)) {
 			return gameStates.INVALID_TURN;
+		} else {
+			currentFigure.move(destX, destY);
 		}
 		if(this.type != gameTypes.SP) {
 			this.toBeNext = helper.getEnemy(this.toBeNext);
@@ -78,7 +79,6 @@ class Game {
 
     //ToDo: Refactor
     sendToAll(message) {
-    	debugger;
     	try {
     		this.player1.connection.sendUTF(JSON.stringify(message));
     		this.player2.connection.sendUTF(JSON.stringify(message));

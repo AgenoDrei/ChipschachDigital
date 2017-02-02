@@ -15,6 +15,10 @@ var comHandle = {
         	};
                     
         	ws.onmessage = messageCallback;
+
+            ws.onclose = function() {
+                console.error("WebSocket closed!");
+            }
             return ws;
     	} else {
         	console.error('Dieser Browser ist nicht aktuell genug (kein Websocket Support).');

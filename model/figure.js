@@ -10,9 +10,12 @@ class Figure {
 
 	}
 
-	move(destX, destY){
-
-	}
+	move(destX, destY) {
+		this.board.getField(this.x,this.y).setFigure(null);
+		this.x = destX;
+		this.y = destY;
+		this.board.getField(this.x,this.y).setFigure(this);
+	}		
 
 	beat(beater) {
 		if(helper.enemy(beater.player, this.player)) {

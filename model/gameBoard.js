@@ -1,6 +1,11 @@
 var Field = require('./field');
 var Figure = require('./figure');
 var Rook = require('./rook');
+var Bishop = require('./bishop');
+var Knight = require('./knight');
+var Queen = require('./queen');
+var King = require('./king');
+var Pawn = require('./pawn');
 var Chip = require('./chip');
 var playerType = require('./playerType');
 
@@ -40,11 +45,31 @@ class Board {
 			var currentFigure = board[key];
 			switch(currentFigure.type) {
 				case 'CHIP':
-					newFigure = new Chip(this, currentFigure.x, currentFigure.y, playerType.BOTH);
+					newFigure = new Chip(this, currentFigure.x, currentFigure.y, currentFigure.color);
 					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
 					break;
 				case 'ROOK': 
 					newFigure = new Rook(this, currentFigure.x, currentFigure.y, currentFigure.color);
+					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+					break;
+				case 'KNIGHT': 
+					newFigure = new Knight(this, currentFigure.x, currentFigure.y, currentFigure.color);
+					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+					break;
+				case 'BISHOP': 
+					newFigure = new Bishop(this, currentFigure.x, currentFigure.y, currentFigure.color);
+					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+					break;
+				case 'QUEEN': 
+					newFigure = new Queen(this, currentFigure.x, currentFigure.y, currentFigure.color);
+					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+					break;
+				case 'KING': 
+					newFigure = new King(this, currentFigure.x, currentFigure.y, currentFigure.color);
+					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+					break;
+				case 'PAWN': 
+					newFigure = new Pawn(this, currentFigure.x, currentFigure.y, currentFigure.color);
 					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
 					break;
 				default:

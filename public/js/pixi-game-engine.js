@@ -77,7 +77,8 @@ var PixiEngine = {
         var figure = this.getFigure(origX, origY);
 
         if((other = this.getFigure(destX, destY)) != null) {
-            other.alpha = 0;
+            other.position.x = -99;
+            other.position.y = -99;
         }
         figure.position.x = this.calcPosX(destX);
         figure.position.y = this.calcPosY(destY);
@@ -141,7 +142,7 @@ var PixiEngine = {
         var x = Math.floor(rawX / PixiEngine.sprSize) + 1;
         var y = Math.floor(rawY / PixiEngine.sprSize) + 1;
 
-        console.log('Clicked: (' + x + '|' + y + ')');
+        //console.log('Clicked: (' + x + '|' + y + ')');
 
         if(PixiEngine.selectedField == null  && PixiEngine.getFigure(x,y) != null) {
             var figure = PixiEngine.getFigure(x, y);
@@ -149,6 +150,10 @@ var PixiEngine = {
                 return;
             }
             PixiEngine.switchSelection(x, y);
+            return;
+        }
+        if(PixiEngine.selectedField != null && PixiEngine.selectedField.pos.x == x && PixiEngine.selectedField.pos.y == y) {
+            PixiEngine.switchSelection(x,y);
             return;
         }
         if(PixiEngine.selectedField != null) { 
@@ -202,6 +207,41 @@ var PixiEngine = {
                         figure = new PIXI.Sprite(PIXI.loader.resources["/img/RookYellow.png"].texture);
                     }
                     break;
+                case "KNIGHT":
+                    if (cur.color == 1) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/KnightBlue.png"].texture);
+                    } else if (cur.color == 0) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/KnightYellow.png"].texture);
+                    }
+                    break;
+                case "BISHOP":
+                    if (cur.color == 1) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/BishopBlue.png"].texture);
+                    } else if (cur.color == 0) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/BishopYellow.png"].texture);
+                    }
+                    break;
+                case "QUEEN":
+                    if (cur.color == 1) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/QueenBlue.png"].texture);
+                    } else if (cur.color == 0) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/QueenYellow.png"].texture);
+                    }
+                    break;
+                case "KING":
+                    if (cur.color == 1) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/KingBlue.png"].texture);
+                    } else if (cur.color == 0) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/KingYellow.png"].texture);
+                    }
+                    break;
+                case "PAWN":
+                    if (cur.color == 1) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/PawnBlue.png"].texture);
+                    } else if (cur.color == 0) {
+                        figure = new PIXI.Sprite(PIXI.loader.resources["/img/PawnYellow.png"].texture);
+                    }
+                    break;    
                 case "CHIP":
                     if (cur.color == 0) {
                         figure = new PIXI.Sprite(PIXI.loader.resources["/img/ChipYellow.png"].texture);
