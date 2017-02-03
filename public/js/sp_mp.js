@@ -1,33 +1,4 @@
 var gameID, joinID, lvl;
-var comHandle = {
-    ws: null,
-
-    connect: function(url, port, messageCallback) {
-        if (window.WebSocket) {
-            ws = new WebSocket('ws://' + url + ':' + port, 'kekse');
-            ws.onopen = function() {
-                var conObj = {
-                    type: 'hello',
-                    gameId: gameID,
-                    joinId: joinID
-                };
-                console.log("Client> ", conObj);
-                ws.send(JSON.stringify(conObj));
-            };
-
-            ws.onmessage = messageCallback;
-            return ws;
-        } else {
-            console.error('Dieser Browser ist nicht aktuell genug (kein Websocket Support).');
-            return null;
-        }
-    },
-
-    send: function(message) {
-        ws.send(message);
-    }
-};
-
 
 var toggleSidebar = function() {
     $('#wrapper').hasClass('toggled') ? $('#wrapper').removeClass('toggled') : $('#wrapper').addClass('toggled');
@@ -104,7 +75,7 @@ $('document').ready(function() {
         levelId = split[4],
         mode = split[5] === undefined ? 'unbeatable' : split[5];
 
-    $.post('/api/v1/game', {type: type, level: levelId, mode: mode}, function(res) {
+    $.post('/api/v1/game', {type: type, level: levelId, mode: mode, local: true}, function(res) {
         gameID = res.gameId;
         $.get('/api/v1/game/' + res.gameId, function(res) {
             joinID = res.joinId;

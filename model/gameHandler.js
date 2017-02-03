@@ -12,8 +12,8 @@ module.exports = function(dataAccess) {
 	this.createGame = function(gameParameters) {
 		return new Promise(function(fulfill, reject) {
 			dataAccess.getLevelById(gameParameters.level).then(function(level) {
-				var type = gameTypes[gameParameters.type];	
-				var newGame = new Game(type, gameParameters.mode, level);
+				var type = gameTypes[gameParameters.type];
+				var newGame = new Game(type, gameParameters.mode, gameParameters.local, level);
 
 				this.games.push(newGame);
 

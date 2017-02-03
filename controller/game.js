@@ -17,6 +17,9 @@ var gameConstraint = {
 		format: {
 		    pattern: /(beatable|unbeatable)/
         }
+	},
+	local: {
+		presence: true
 	}
 };
 

@@ -7,7 +7,7 @@ var comHandle = {
             	var conObj = {
                 	type: 'hello',
                 	gameId: gameID,
-                	joinId: joinID
+                	joinId: joinID,
             	};
             	console.log("Client> ", conObj);
             	ws.send(JSON.stringify(conObj));

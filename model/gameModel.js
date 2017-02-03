@@ -10,10 +10,11 @@ var helper = require('./helper');
 
 
 class Game {
-	constructor(type, mode, level) {
+	constructor(type, mode, local, level) {
 		this.toBeNext = playerType.PLAYERONE;
 		this.type = type;
 		this.mode = mode;
+		this.local = (local == 'true');
 		this.level = level;
 		this.id = shortid.generate();
 		this.player1 = {
@@ -38,13 +39,14 @@ class Game {
 
 	//TODO: Test for win
 	turn(origX, origY, destX, destY, player) {
-		if(this.player1.state != conStates.CONNECTED || (this.player2.state != conStates.CONNECTED && this.type != gameTypes.SP)) {
+		debugger;
+		if(this.player1.state != conStates.CONNECTED || (this.player2.state != conStates.CONNECTED && !this.local)) {
 			return gameStates.PLAYER_DISCONNECTED;
 		}
 		if(this.board.getField(origX, origY).getFigure() == null || this.board.getField(origX, origY).getFigure() instanceof Chip) {
 			return gameStates.INVALID_TURN;
 		}
-		if(this.toBeNext != player) {
+		if(this.toBeNext != player && !this.local) {
 			return gameStates.INVALID_TURN;
 		}
 		var currentFigure = this.board.getField(origX, origY).getFigure();
