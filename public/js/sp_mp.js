@@ -1,4 +1,6 @@
-var gameID, joinID, lvl;
+var gameId,
+    joins = [],
+    lvl;
 var comHandle = {
     ws: null,
 
@@ -6,13 +8,15 @@ var comHandle = {
         if (window.WebSocket) {
             ws = new WebSocket('ws://' + url + ':' + port, 'kekse');
             ws.onopen = function() {
-                var conObj = {
-                    type: 'hello',
-                    gameId: gameID,
-                    joinId: joinID
-                };
-                console.log("Client> ", conObj);
-                ws.send(JSON.stringify(conObj));
+                joins.forEach(function(joinId) {
+                    var conObj = {
+                        type: 'hello',
+                        gameId: gameId,
+                        joinId: joinId
+                    };
+                    console.log("Client> ", conObj);
+                    ws.send(JSON.stringify(conObj));
+                })
             };
 
             ws.onmessage = messageCallback;
@@ -74,7 +78,7 @@ var handleMoves = function(origX, origY, x, y) {
     console.log("Moved!!!");
     var moveObj = {
         type: "turn",
-        gameId: gameID,
+        gameId: gameId,
         origX: origX,
         origY: origY,
         destX: x,
@@ -105,12 +109,15 @@ $('document').ready(function() {
         mode = split[5] === undefined ? 'unbeatable' : split[5];
 
     $.post('/api/v1/game', {type: type, level: levelId, mode: mode}, function(res) {
-        gameID = res.gameId;
-        $.get('/api/v1/game/' + res.gameId, function(res) {
-            joinID = res.joinId;
-            $.get('/api/v1/level/' + levelId, function(res) {
-                lvl = res;
-                comHandle.connect("localhost", "4001", handleMessage);
+        gameId = res.gameId;
+        $.get('/api/v1/game/' + gameId, function(res) {
+            joins.push(res.joinId);       // append first joinId
+            $.get('/api/v1/game/' + gameId, function(res) {
+                joins.push(res.joinId);       // append second joinId
+                $.get('/api/v1/level/' + levelId, function (res) {
+                    lvl = res;
+                    comHandle.connect("localhost", "4001", handleMessage);
+                });
             });
         });
     });

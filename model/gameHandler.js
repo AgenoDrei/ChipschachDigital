@@ -42,7 +42,7 @@ module.exports = function(dataAccess) {
 					if(games[i].player1.state == conStates.EMPTY) {
 						games[i].player1.state = conStates.JOINED;
 						fulfill(games[i].player1.joinId);
-					} else if(games[i].player2.state == conStates.EMPTY && games[i].type != gameTypes.SP) {
+					} else if(games[i].player2.state == conStates.EMPTY) {
 						games[i].player2.state = conStates.JOINED;
 						fulfill(games[i].player2.joinId);
 					} else {
