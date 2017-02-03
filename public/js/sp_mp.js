@@ -1,4 +1,7 @@
 var gameID, joinID, lvl;
+var gameId,
+    joins = [],
+    lvl;
 
 var toggleSidebar = function() {
     $('#wrapper').hasClass('toggled') ? $('#wrapper').removeClass('toggled') : $('#wrapper').addClass('toggled');
@@ -45,7 +48,7 @@ var handleMoves = function(origX, origY, x, y) {
     console.log("Moved!!!");
     var moveObj = {
         type: "turn",
-        gameId: gameID,
+        gameId: gameId,
         origX: origX,
         origY: origY,
         destX: x,
@@ -76,12 +79,15 @@ $('document').ready(function() {
         mode = split[5] === undefined ? 'unbeatable' : split[5];
 
     $.post('/api/v1/game', {type: type, level: levelId, mode: mode, local: true}, function(res) {
-        gameID = res.gameId;
-        $.get('/api/v1/game/' + res.gameId, function(res) {
-            joinID = res.joinId;
-            $.get('/api/v1/level/' + levelId, function(res) {
-                lvl = res;
-                comHandle.connect("localhost", "4001", handleMessage);
+        gameId = res.gameId;
+        $.get('/api/v1/game/' + gameId, function(res) {
+            joins.push(res.joinId);       // append first joinId
+            $.get('/api/v1/game/' + gameId, function(res) {
+                joins.push(res.joinId);       // append second joinId
+                $.get('/api/v1/level/' + levelId, function (res) {
+                    lvl = res;
+                    comHandle.connect("localhost", "4001", handleMessage);
+                });
             });
         });
     });

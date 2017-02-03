@@ -1,41 +1,39 @@
 #ChipschachDigital
 
-Zweite Auflage von Chipschach mit verbessertem responsive Design, verbesserter Server Nutzung und einem ausgereiften Build System.
+Zweite Auflage von Chipschach mit verbessertem responsive Design, verbesserter Server Nutzung und ausgereifterem deployment.
 
 Entwickler: Simon Müller, Oliver Berg
 
-###Architectural Decisions:
-- Server Framework: express, JS
-- Build Framework: grunt
-- Frontend Framework: angular2 
-- Database: mongoDB
-- Tests: unbestimmt
+## How to build
 
-###Folder Structure:
-- bin: Binary files
-- config: Config files (e.g. DB)
-- controller: Controller for REST APIs
-- frontend: frontend-files (not minified, for dev environment)
-- frontend\app: Angular files
-- frontend\build: Minified & parsed frontend-files (--> production)
-- model: Database model
-- typings: TypeScript specs
+> $ npm install<br>
+> $ npm start
 
-###Best Practices:
-- Frontend structure: Separation by function, moduls get suffix '.module.ts', components get '.component.ts', etc.
+## Specifications
+
+### Architectural Decisions:
+- _Server Framework_: express, JS
+- _Frontend Views_: EJS
+- _Database_: mongoDB
+- _Tests_: unbestimmt
+
+### Folder Structure:
+- _bin_: Binary files
+- _config_: Config files (e.g. DB)
+- _controller_: Controller for REST APIs
+- _docs_: Documents and Specifications in file-format
+- _model_: Database model
+- _public_: frontend-files
+- _test_: Tests
+
+### Best Practices:
 - Tests: End2End own folder, Unit Tests with functional files
-- Git: Master- & Development branch no-ff-merge-only, features named after current task **#SIMON_KNOWS_WHY**
+- Git: Follow basic git-flow (tool "git-flow") with Master, Development, feature/, release/, hotfix/
 
-###Code Conventions:
+### Code Conventions:
 - Curly braces opening on same line, never omit curly braces
 - indention as 4 spaces
 
-###Milestones:
-- Running version with single- and multiplayer chip chess support. Logic should be running on Server and a new graphics engine should be in place.
+### Milestones & TODOs:
+- See Git-Repo Milestones & Issues
 
-## TODO:
--- Consider Pflichtenheft (siehe treffen auf burg) to do <<Delivery Status?>>
-- favicon
-- Chip-counter
-- Next-Level indexing, lvl-referencing
-- Level-parsing!
