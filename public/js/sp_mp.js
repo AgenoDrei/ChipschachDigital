@@ -1,4 +1,3 @@
-var gameID, joinID, lvl;
 var gameId,
     joins = [],
     lvl;
@@ -86,7 +85,7 @@ $('document').ready(function() {
                 joins.push(res.joinId);       // append second joinId
                 $.get('/api/v1/level/' + levelId, function (res) {
                     lvl = res;
-                    comHandle.connect("localhost", "4001", handleMessage);
+                    comHandle.connect("localhost", "4001", handleMessage, gameId, joins[0]);
                 });
             });
         });
