@@ -12,7 +12,6 @@ class Pawn extends Figure{
 	}
 
 	checkRules(destX, destY) {
-		debugger; 
 		if(this.player == playerType.PLAYERONE) {
 			if(this.x != destX) { //Hit a figure
 				if(Math.abs(this.x - destX) != 1 || (this.y - destY) != 1)
@@ -20,6 +19,9 @@ class Pawn extends Figure{
 				if(this.board.getField(destX, destY).getFigure() == null)
 					return false;
 			} else if((this.y - destY) <= 2 && this.x == destX) { //Move forward
+				if (this.y - destY < 0) { //backwards?!
+				    return false;
+                }
 				if(this.y - destY == 2) { //Two fields
 					if(!this.firstMove)
 						return false;
