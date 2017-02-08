@@ -1,8 +1,10 @@
 var comHandle = {
     ws: null,
+    connectionRetry: false,
 	connect: function(url, port, messageCallback, gameId, joinId) {
-    	if (window.WebSocket) {
-        	ws = new WebSocket('ws://' + url + ':' + port, 'kekse');
+    	if (window.WebSocket) {   
+            ws = new WebSocket('ws://' + url + ':' + port, 'kekse');
+        	
         	ws.onopen = function() {
             	var conObj = {
                 	type: 'hello',
@@ -12,11 +14,20 @@ var comHandle = {
             	console.log("Client> ", conObj);
             	ws.send(JSON.stringify(conObj));
         	};
+
+            ws.onerror = function(error) {
+                console.error('Connecition error occured!');
+                if(!comHandle.connectionRetry) {
+                    comHandle.connectionRetry = true;
+                    console.error('Try to reconnect to localhost now!');
+                    comHandle.connect("localhost", "4001", messageCallback, gameId, joinId);
+                }
+            }
                     
         	ws.onmessage = messageCallback;
 
-            ws.onclose = function() {
-                console.error("WebSocket closed!");
+            ws.onclose = function(e) {
+                console.log("WebSocket closed!", e.code);
             }
 
             return ws;

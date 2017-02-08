@@ -2,6 +2,7 @@ var gameId,
     joins = [],
     lvl;
 
+var host = "agenodrei.de";
 var toggleSidebar = function() {
     $('#wrapper').hasClass('toggled') ? $('#wrapper').removeClass('toggled') : $('#wrapper').addClass('toggled');
 };
@@ -85,7 +86,7 @@ $('document').ready(function() {
                 joins.push(res.joinId);       // append second joinId
                 $.get('/api/v1/level/' + levelId, function (res) {
                     lvl = res;
-                    comHandle.connect("localhost", "4001", handleMessage, gameId, joins[0]);
+                    comHandle.connect(host, "4001", handleMessage, gameId, joins[0]);
                 });
             });
         });
