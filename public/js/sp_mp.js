@@ -30,7 +30,7 @@ var nextLevelForward = function() {     // assumes ordered level_list of dbCall
     $.get('/api/v1/level', function(lvls) {
         let idx = lvls.findIndex(x => x._id==lvl._id);
 
-        if (lvls[idx + 1].type !== lvl.type || lvls[idx + 1].subtype !== lvl.subtype || lvls[idx + 1] === undefined) {
+        if (lvls[idx + 1] === undefined || lvls[idx + 1].type !== lvl.type || lvls[idx + 1].subtype !== lvl.subtype) {
             toastr.success('Du hast alle Level dieser Kategorie erfolgreich absolviert!');
             window.setTimeout(function() {
                 window.location = '/';
