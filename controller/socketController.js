@@ -1,8 +1,8 @@
 /* 
 msg = {
    type: String,
-   gameID: String,
-   joinID: String,
+   gameId: String,
+   joinId: String,
    [origX, origY, destX, destY]
 }
 */
@@ -80,8 +80,8 @@ module.exports = function(configuration, gameHandler) {
                 });
                 break;
             case "turn": // Client sends a turn order
-               	gameHandler.turn(m.gameId, connection, m.origX, m.origY, m.destX, m.destY).then(function(msg, resTurn) {
-               		console.log('Server> ', resTurn);
+               	gameHandler.turn(m.gameId, m.joinId, connection, m.origX, m.origY, m.destX, m.destY).then(function(msg) {
+               		console.log('Server> ', msg);
                     gameHandler.sendToAll(m.gameId, m);
                	},
                	function(err) {

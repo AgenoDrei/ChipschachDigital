@@ -17,6 +17,24 @@ module.exports.getEnemy = function(player) {
 	}
 };
 
+module.exports.determinePlayer = function(connection, joinId, player1, player2) {
+	if(joinId) {
+		if(player1.joinId == joinId)
+			return playerType.PLAYERONE;
+		else if(player2.joinId == joinId)
+			return playerType.PLAYERTWO;
+		else
+			return playerType.NONE;
+	} else {
+		if(player1.connection == connection)
+			return playerType.PLAYERONE;
+		else if(player2.connection == connection)
+			return playerType.PLAYERTWO;
+		else
+			return playerType.NONE;
+	}
+};
+
 module.exports.enumToString = function(enumObj, value)  {
   for (var k in enumObj) if (enumObj[k] == value) return k;
   return null;

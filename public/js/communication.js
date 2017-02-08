@@ -38,6 +38,7 @@ var comHandle = {
     },
 
     send: function(message) {
-        ws.send(message);
+        var m = JSON.stringify(message);
+        ws.send(m);
     }
 };

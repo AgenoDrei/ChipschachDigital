@@ -68,17 +68,16 @@ module.exports = function(dataAccess) {
 	};
 
 	//TODO: Remove gameID
-	this.turn = function(gameId, connection, origX, origY, destX, destY) {
+	this.turn = function(gameId, joinId, connection, origX, origY, destX, destY) {
 		var resTurn = -99;
 		return new Promise(function(fulfill, reject) {
 			getGame(gameId).then(
 				function(game) {
-					if(game.player1.connection == connection) {
-						resTurn = game.turn(origX, origY, destX, destY, playerType.PLAYERONE);
-					} else if(game.player2.connection == connection) {
-						resTurn = game.turn(origX, origY, destX, destY, playerType.PLAYERTWO);
+					var currentPlayer = helper.determinePlayer(connection, joinId, game.player1, game.player2);
+					if(currentPlayer != playerType.NONE) {
+						resTurn = game.turn(origX, origY, destX, destY, currentPlayer);
 					} else {
-						reject('Invalid connection');
+						reject('could not match player to game!');
 					}
 					if(resTurn < 0) {
 						reject(helper.enumToString(gameState, resTurn));

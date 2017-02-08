@@ -1,5 +1,5 @@
 var gameId,
-    joins = [],
+    joinIds = [],
     lvl;
 
 var host = "agenodrei.de";
@@ -49,13 +49,14 @@ var handleMoves = function(origX, origY, x, y) {
     var moveObj = {
         type: "turn",
         gameId: gameId,
+        joinId: joinIds[0],
         origX: origX,
         origY: origY,
         destX: x,
         destY: y
     };
     console.log("Client> ", moveObj);
-    comHandle.send(JSON.stringify(moveObj));
+    comHandle.send(moveObj);
 }
 
 var handleMessage = function(msg) {
@@ -81,12 +82,12 @@ $('document').ready(function() {
     $.post('/api/v1/game', {type: type, level: levelId, mode: mode, local: true}, function(res) {
         gameId = res.gameId;
         $.get('/api/v1/game/' + gameId, function(res) {
-            joins.push(res.joinId);       // append first joinId
+            joinIds.push(res.joinId);       // append first joinId
             $.get('/api/v1/game/' + gameId, function(res) {
-                joins.push(res.joinId);       // append second joinId
+                joinIds.push(res.joinId);       // append second joinId
                 $.get('/api/v1/level/' + levelId, function (res) {
                     lvl = res;
-                    comHandle.connect(host, "4001", handleMessage, gameId, joins[0]);
+                    comHandle.connect(host, "4001", handleMessage, gameId, joinIds[0]);
                 });
             });
         });
