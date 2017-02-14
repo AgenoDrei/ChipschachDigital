@@ -67,6 +67,9 @@ var handleMessage = function(msg) {
         case "turn":
             PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
             break;
+        case "win":
+            $('#finishModal').show();
+            break;
         case "error":
             toastr.error('MEEP Error!');
             break;
