@@ -1,2 +1,11 @@
+# dir
+.idea/
+.vscode/
+.tscache/
 node_modules/
-build/
+frontend/build/
+frontend/app/.baseDir.ts
+
+# files
+*.tmp.txt
+*.log

@@ -1,0 +1,43 @@
+#body-container {
+    width: 800px;
+    height: 640px;
+    margin: auto;
+    position: absolute;
+    right: 0; left: 0;
+    top: 0; bottom: 0;
+}
+.table {
+    display: table;
+    margin: 0px -80px 0;
+    border-spacing: 20px 10px;
+    min-width: 960px;
+    width: 70%;
+}
+.row {
+    display: table-row;
+}
+.row a {
+    display: table-cell;
+    width: 200px;
+    height: 200px;
+    border-radius: 70px;
+
+    background-size: 120px 120px;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    text-align: center;
+    vertical-align: middle;
+    font-weight: bold;
+    font-size: 27px;
+    line-height: 1.1;
+    color: #333366;
+
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.modal img {
+    display: block;
+    margin: auto;
+}
