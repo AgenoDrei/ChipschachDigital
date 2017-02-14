@@ -27,7 +27,6 @@ Entwickler: Simon Müller, Oliver Berg
 - _test_: Tests
 
 ### Best Practices:
-- Tests: End2End own folder, Unit Tests with functional files
 - Git: Follow basic git-flow (tool "git-flow") with Master, Development, feature/, release/, hotfix/
 
 ### Code Conventions:
@@ -35,5 +34,5 @@ Entwickler: Simon Müller, Oliver Berg
 - indention as 4 spaces
 
 ### Milestones & TODOs:
-- See Git-Repo Milestones & Issues
+- See Git-Repo Milestones and *Issues*
 
