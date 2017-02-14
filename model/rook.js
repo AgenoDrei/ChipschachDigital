@@ -34,7 +34,7 @@ class Rook extends Figure{
 						return false;
 				}
 			} else if (destY > this.y) {
-				for (var i = this.y + 1; i < destX; i++) {
+				for (var i = this.y + 1; i < destY; i++) {
 					if (this.board.getField(this.x, i).getFigure() != null)
 						return false;
 				}

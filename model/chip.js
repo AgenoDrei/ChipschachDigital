@@ -11,6 +11,15 @@ class Chip extends Figure{
 		console.log('You cannot move a Chip!');
 		return false;
 	}
+
+	beat(beater) {
+		if(helper.enemy(beater.player, this.player)) {
+			this.board.fields[this.x][this.y].setFigure(null);
+			this.board.parentGame.win.captureChip(beater.player, this.player);
+			return true;
+		}
+		return false;
+	}
 }
 
 module.exports = Chip;

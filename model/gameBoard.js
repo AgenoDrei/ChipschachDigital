@@ -10,10 +10,12 @@ var Chip = require('./chip');
 var playerType = require('./playerType');
 
 class Board {
-	constructor() {
+	constructor(parent) {
 		this.width = 8;
 		this.height = 8;
 		this.fields = [];
+		this.chips = [0,0,0,0];
+		this.parentGame = parent;
 		for(var x = 1; x <= this.height; x++) {
 			this.fields[x] = [];
 			for(var y = 1; y <= this.width; y++) {
@@ -47,6 +49,7 @@ class Board {
 				case 'CHIP':
 					newFigure = new Chip(this, currentFigure.x, currentFigure.y, currentFigure.color);
 					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+					this.chips[currentFigure.color]++;
 					break;
 				case 'ROOK': 
 					newFigure = new Rook(this, currentFigure.x, currentFigure.y, currentFigure.color);
