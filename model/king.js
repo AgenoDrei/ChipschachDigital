@@ -11,7 +11,6 @@ class King extends Figure{
 	}
 
 	checkRules(destX, destY) {
-		debugger;
 		if ((Math.abs(this.x - destX) > 1) || (Math.abs(this.y - destY) > 1)) {
 			return false;
 		}

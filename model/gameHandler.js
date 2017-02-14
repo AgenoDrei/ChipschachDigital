@@ -82,7 +82,8 @@ module.exports = function(dataAccess) {
 					if(resTurn < 0) {
 						reject(helper.enumToString(gameState, resTurn));
 					}
-					fulfill(helper.enumToString(gameState, resTurn));
+					//fulfill(helper.enumToString(gameState, resTurn));
+					fulfill(resTurn);
 				},
 				function() {
 					reject('gameId not found!');

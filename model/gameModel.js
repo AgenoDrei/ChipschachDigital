@@ -7,6 +7,7 @@ var Board = require('./gameBoard');
 var Chip = require('./chip');
 var playerType = require('./playerType');
 var helper = require('./helper');
+var ProgressModel = require('./progressModel');
 
 
 class Game {
@@ -27,8 +28,9 @@ class Game {
 			state: conStates.EMPTY,
 			joinId: shortid.generate()
 		};
-		this.board = new Board();
+		this.board = new Board(this);
 		this.board.loadLevel(this.level);
+		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2]);
 		console.log('New Game created with ID: ', this.id);
 		console.log('Level used: ', this.level._id);
 	}
@@ -39,7 +41,6 @@ class Game {
 
 	//TODO: Test for win
 	turn(origX, origY, destX, destY, player) {
-		debugger;
 		if(this.player1.state != conStates.CONNECTED || (this.player2.state != conStates.CONNECTED && !this.local)) {
 			return gameStates.PLAYER_DISCONNECTED;
 		}
@@ -55,10 +56,13 @@ class Game {
 		} else {
 			currentFigure.move(destX, destY);
 		}
+		var winner = this.win.checkProgress()
+		if(winner != gameStates.VALID_TURN) {
+			return winner;
+		}
 		if(this.type != gameTypes.SP) {
 			this.toBeNext = helper.getEnemy(this.toBeNext);
 		}
-		//TODO: Implement Game Logics
 		return gameStates.VALID_TURN;
 	}
 
