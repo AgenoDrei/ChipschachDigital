@@ -11,14 +11,17 @@ class King extends Figure{
 	}
 
 	checkRules(destX, destY) {
+		debugger;
 		if ((Math.abs(this.x - destX) > 1) || (Math.abs(this.y - destY) > 1)) {
 			return false;
 		}
 		
 		for (var i = -1; i <= 1; i++) {
 			for (var j = -1; j <= 1; j++) {
-				debugger;
 				if(destX + i == this.x && destY + j == this.y) {
+					continue;
+				}
+				if(destX + i > 8 || destY + j > 8 || destX + i < 1 || destY + j < 1) {
 					continue;
 				}
 				if (this.board.getField(destX + i, destY + j).getFigure() != null) { //Check for not empty field
