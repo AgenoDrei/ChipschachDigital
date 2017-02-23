@@ -17,7 +17,7 @@ module.exports = function(app, dataAccess) {
             ],[
                 {id:'', picId:'', name:''},
                 {id:'editor', picId:'editor', name:'Editor'},
-                {id:'', picId:'', name:''}
+                {id:'exit', picId:'close', name:'Verlassen'}
             ]
         ];
         var accTypes = [
