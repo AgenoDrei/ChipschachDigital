@@ -13,7 +13,11 @@
         <% iconRows.forEach(function(row) { %>
             <div class="row">
                 <% row.forEach(function(icon) { %>
-                    <%if (icon.id != '') {%>
+                    <% if (icon.id == 'exit') { %>
+                        <a href="http://www.schach-fuer-kids.de/" style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+                            <p><%= icon.name %></p>
+                        </a>
+                    <% } else if (icon.id != '') {%>
                         <a data-toggle="modal" data-target="#<%= icon.id %>"
                            style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
                             <p><%= icon.name %></p>

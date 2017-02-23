@@ -7,7 +7,8 @@
     "Oliver Berg <oliver.daniel.berg@gmail.com>"
   ],
   "scripts": {
-    "start": "node bin/www"
+    "start": "node bin/www",
+    "debug": "node debug bin/www"
   },
   "dependencies": {
     "body-parser": "~1.15.1",

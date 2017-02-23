@@ -2,21 +2,29 @@ var gameId,
     joinIds = [],
     lvl;
 
-var host = "agenodrei.de";
+var host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
 var toggleSidebar = function() {
-    $('#wrapper').hasClass('toggled') ? $('#wrapper').removeClass('toggled') : $('#wrapper').addClass('toggled');
+    var wrapper = $('#wrapper');
+    wrapper.hasClass('toggled') ? wrapper.removeClass('toggled') : wrapper.addClass('toggled');
 };
 
 var startGame = function() {
     if (lvl !== undefined) {
         $('#startModal').removeClass('show');
+        var operationMode;
         if (lvl.type === 'sp')
-            var operationMode = opMode.SP;
+            operationMode = opMode.SP;
         if (lvl.type === 'mp' || lvl.type === 'mini')
-            var operationMode = opMode.MP
+            operationMode = opMode.MP
 
         PixiEngine.destroy();
-        PixiEngine.init(600, 600, operationMode, document.getElementById('board-anchor'), function() {
+        $('#board-layer-behind').css({
+            'width': '640',
+            'height': '640',
+            'padding': '40',
+            'background-image': 'url(/img/board_named.png)'
+        });
+        PixiEngine.init(560, 560, operationMode, document.getElementById('board-anchor'), function() {
             PixiEngine.loadLevel(lvl, function() {
                 PixiEngine.setMoveCallback(handleMoves);
                 PixiEngine.render();
@@ -36,7 +44,7 @@ var nextLevelForward = function() {     // assumes ordered level_list of dbCall
                 window.location = '/';
             }, 3000);
         } else {
-            let link = '/' + window.location.href.split('/')[3].toUpperCase() + '/' + lvls[idx + 1]._id; // _/type/id
+            var link = '/' + window.location.href.split('/')[3].toUpperCase() + '/' + lvls[idx + 1]._id; // _/type/id
             if (lvl.type === 'mp')
                 link += '/' + window.location.href.split('/')[5];        // +/mode
             window.location = link;
@@ -77,8 +85,8 @@ var handleMessage = function(msg) {
 };
 
 $('document').ready(function() {
-    let split = window.location.href.split('/');
-    let type = split[3],
+    var split = window.location.href.split('/');
+    var type = split[3],
         levelId = split[4],
         mode = split[5] === undefined ? 'unbeatable' : split[5];
 

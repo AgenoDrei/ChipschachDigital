@@ -1,11 +1,11 @@
 var opMode = {
     SP: 0,
-    MP: 1,
-}
+    MP: 1
+};
 
 var PixiEngine = {
-    height: 800,
-    width: 800,
+    height: 800,    // defaults
+    width: 800,     // defaults
     sprSize: this.width / 8,
     sprList: [],
     stage: null,

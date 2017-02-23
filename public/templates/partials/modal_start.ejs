@@ -1,4 +1,4 @@
-<div id="finishModal" class="modal" role="dialog">
+<div id="startModal" class="modal show" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,11 +8,13 @@
             </div>
             <div class="modal-body" style="text-align: center">
                 <img src="/img/logoSm.png" height="150px" />
-                <h3>
-                    Level beendet!
+                <h3 id="lvlDescr">
+                    <%= descr %>
                 </h3>
-                <button type="button" class="btn btn-warning btn-lg" onclick="window.location ='/';">Zurück zum Menü</button>
-                <button type="button" class="btn btn-success btn-lg" onclick="nextLevelForward();">Nächstes Level</button>
+                <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
+            </div>
+            <div class="modal-footer">
+                <%= footer %>
             </div>
         </div>
     </div>
