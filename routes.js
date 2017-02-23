@@ -58,7 +58,8 @@ module.exports = function(app, dataAccess) {
         if (req.params.type === 'SP') {
             res.render('singleplayer', {
                 name: nameDict[req.params.levelId],
-                descr: descrDict[req.params.levelId]
+                descr: descrDict[req.params.levelId],
+                footer: "Löse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips schlägst!"
             });
         } else if (req.params.type === 'MINI') {
             //TODO
@@ -68,7 +69,8 @@ module.exports = function(app, dataAccess) {
     app.get('/MP/:levelId/:mode', function(req, res) {
         res.render('multiplayer', {
             name: nameDict[req.params.levelId],
-            descr: descrDict[req.params.levelId]
+            descr: descrDict[req.params.levelId],
+            footer: "Schlagen mehr Chips als dein Gegner!"
         });
     });
 };

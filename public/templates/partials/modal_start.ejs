@@ -1,0 +1,22 @@
+<div id="startModal" class="modal show" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    <%= name %>
+                </h4>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <img src="/img/logoSm.png" height="150px" />
+                <h3 id="lvlDescr">
+                    <%= descr %>
+                </h3>
+                <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
+            </div>
+            <div class="modal-footer">
+                <%= footer %>
+            </div>
+        </div>
+    </div>
+</div>

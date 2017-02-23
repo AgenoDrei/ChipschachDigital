@@ -93,10 +93,10 @@ a:active, a:focus{
     border-radius: 50%;
 }
 
-#board-anchor {
-    /*text-align: center;*/
+#board-layer-behind {
+    margin: auto;
 }
-
+#board-anchor {}
 
 /* error */
 #errorInfo {

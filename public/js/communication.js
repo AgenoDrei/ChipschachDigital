@@ -16,7 +16,7 @@ var comHandle = {
         	};
 
             ws.onerror = function(error) {
-                console.error('Connecition error occured!');
+                console.error('Connection error occured!');
                 if(!comHandle.connectionRetry) {
                     comHandle.connectionRetry = true;
                     console.error('Try to reconnect to localhost now!');
