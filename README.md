@@ -16,6 +16,7 @@ Entwickler: Simon Müller, Oliver Berg
 - _Frontend Views_: EJS
 - _Database_: mongoDB
 - _Tests_: unbestimmt
+- AutoDeply: unbestimmt
 
 ### Folder Structure:
 - _bin_: Binary files
