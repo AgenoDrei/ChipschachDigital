@@ -74,12 +74,6 @@ a:active, a:focus{
     height: 100%;
 }
 
-#close {
-    transform: scaleX(-1);
-    filter: FlipH;
-}
-
-
 /* content */
 #sidebar_toggle {
     width: 50px;
