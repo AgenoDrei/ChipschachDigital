@@ -1,6 +1,7 @@
 var gameId,
-    joinIds = [],
-    lvl;
+    joinIds = [];
+var lvl,
+    movesP1 = 0, movesP2 = 0;
 
 var host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
 var toggleSidebar = function() {
@@ -15,7 +16,7 @@ var startGame = function() {
         if (lvl.type === 'sp')
             operationMode = opMode.SP;
         if (lvl.type === 'mp' || lvl.type === 'mini')
-            operationMode = opMode.MP
+            operationMode = opMode.MP;
 
         PixiEngine.destroy();
         $('#board-layer-behind').css({
@@ -73,13 +74,26 @@ var handleMessage = function(msg) {
 
     switch(msgObj.type) {
         case "turn":
+            if (PixiEngine.turn === 0) {
+                movesP1++;
+                $('#moveCounterP1').val(movesP1);
+            } else if (PixiEngine.turn === 1) {
+                movesP2++;
+                $('#moveCounterP2').val(movesP2);
+            }
             PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
             break;
         case "win":
             $('#finishModal').show();
             break;
         case "error":
-            toastr.error('MEEP Error!');
+            switch(msgObj.message) {
+                case "INVALID_TURN":
+                    toastr.error('Dieser Zug ist nicht erlaubt.');
+                    break;
+                default:
+                    toastr.error('MEEP Error!');
+            }
             break;
     }
 };
@@ -89,6 +103,9 @@ $('document').ready(function() {
     var type = split[3],
         levelId = split[4],
         mode = split[5] === undefined ? 'unbeatable' : split[5];
+
+    $('#moveCounterP1').val(movesP1);
+    $('#moveCounterP2').val(movesP2);
 
     $.post('/api/v1/game', {type: type, level: levelId, mode: mode, local: true}, function(res) {
         gameId = res.gameId;
