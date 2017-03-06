@@ -1,7 +1,8 @@
 var gameId,
     joinIds = [];
 var lvl,
-    movesP1 = 0, movesP2 = 0;
+    movesP1 = 0, movesP2 = 0,
+    chipsP1 = 0, chipsP2 = 0;
 
 var host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
 var toggleSidebar = function() {
@@ -76,10 +77,16 @@ var handleMessage = function(msg) {
         case "turn":
             if (PixiEngine.turn === 0) {
                 movesP1++;
+                if (PixiEngine.getFigure(msgObj.destX, msgObj.destY) !== null)
+                    chipsP1++;
                 $('#moveCounterP1').val(movesP1);
+                $('#chipCounterP1').val(chipsP1);
             } else if (PixiEngine.turn === 1) {
                 movesP2++;
+                if (PixiEngine.getFigure(msgObj.destX, msgObj.destY) !== null)
+                    chipsP2++;
                 $('#moveCounterP2').val(movesP2);
+                $('#chipCounterP2').val(chipsP2);
             }
             PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
             break;
@@ -106,6 +113,8 @@ $('document').ready(function() {
 
     $('#moveCounterP1').val(movesP1);
     $('#moveCounterP2').val(movesP2);
+    $('#chipCounterP1').val(chipsP1);
+    $('#chipCounterP2').val(chipsP2);
 
     $.post('/api/v1/game', {type: type, level: levelId, mode: mode, local: true}, function(res) {
         gameId = res.gameId;
