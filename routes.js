@@ -21,11 +21,11 @@ module.exports = function(app, dataAccess) {
             ]
         ];
         var accTypes = [
-            {id: 'sp', name: 'Lokaler Einzelspieler', href: 'SP',
+            {id: 'sp', name: 'Lokaler Einzelspieler',
                 footer: 'Wähle ein Einzelspieler-Level und schlage alle Chips so schnell du kannst!'},
-            {id: 'mp', name: 'Lokaler Mehrspieler', href: 'MP',
+            {id: 'mp', name: 'Lokaler Mehrspieler',
                 footer: 'Wähle ein Mehrspieler-Level aus um gegen einen Freund am gleichen Rechner Problemstellungen zu lösen!'},
-            {id: 'mini', name: 'Minischach-Aufgaben', href: 'MINI',
+            {id: 'mini', name: 'Minischach-Aufgaben',
                 footer: 'Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!'}
         ];
         var availSubtypes = [
@@ -54,17 +54,19 @@ module.exports = function(app, dataAccess) {
         });
     });
 
-    app.get('/:type/:levelId', function(req, res) {
-        let footerText;
-        if (req.params.type === 'SP') {
+    app.get('/:type/:subtype/:levelId', function(req, res) {
+        let type = req.params.type.toUpperCase(),
+            footerText;
+        if (req.params.type === 'sp') {
             footerText = "Löse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips schlägst!";
-        } else if (req.params.type === 'MP') {
+        } else if (req.params.type === 'mp') {
             footerText = "Schlagen mehr Chips als dein Gegner!";
-        } else if (req.params.type === 'MINI') {
+        } else if (req.params.type === 'mini') {
             //TODO
         }
         res.render('playground', {
-            type: req.params.type,
+            type: req.params.type.toUpperCase(),    // toUpperCase is not the nicest way to go here, but nvmd
+            subtype: req.params.subtype,
             name: nameDict[req.params.levelId],
             descr: descrDict[req.params.levelId],
             footer: footerText

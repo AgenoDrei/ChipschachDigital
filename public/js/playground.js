@@ -12,8 +12,9 @@ var toggleSidebar = function() {
 
 var loadAndRegister = function(modeIdentifier, cb) {
     let split = window.location.href.split('/');
-    let type = split[3],
-        levelId = split[4],
+    let type = split[3].toUpperCase(),
+        // subtype = split[4],
+        levelId = split[5],
         mode;
     if ((modeIdentifier !== "beatable") && (modeIdentifier !== "unbeatable")) {
          let radioValue = $("input[name='gameMode']:checked").val();
@@ -142,11 +143,13 @@ var handleMessage = function(msg) {
 };
 
 $('document').ready(function() {
+    $('[data-toggle="tooltip"]').tooltip();     // enable Bootstrap tooltips
+
     $('#moveCounterP1').val(movesP1);
     $('#moveCounterP2').val(movesP2);
     $('#chipCounterP1').val(chipsP1);
     $('#chipCounterP2').val(chipsP2);
 
-    if (window.location.href.split('/')[3] === 'SP')
+    if (window.location.href.split('/')[3] === 'sp')
         loadAndRegister('unbeatable', undefined);
 });

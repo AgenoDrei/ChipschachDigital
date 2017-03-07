@@ -15,12 +15,27 @@
                     <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
                 <% } else { %>
                     <form>
-                        <div class="radio">
-                            <label><input type="radio" name="gameMode" value="unbeatable">Figuren nicht schlagbar</label>
-                        </div>
-                        <div class="radio">
-                            <label><input type="radio" name="gameMode" value="beatable">Figuren schlagbar</label>
-                        </div>
+                        <% if (subtype == 'king') { %>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gameMode" value="unbeatable" checked>Figuren nicht schlagbar
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label data-toggle="tooltip" title="Könige können sich nicht gegenseitig schlagen!">
+                                    <input type="radio" name="gameMode" value="beatable" disabled>Figuren schlagbar
+                                </label>
+                            </div>
+                        <% } else { %>
+                            <div class="radio">
+                                <label><input type="radio" name="gameMode" value="unbeatable">Figuren nicht schlagbar</label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="gameMode" value="beatable">Figuren schlagbar
+                                </label>
+                            </div>
+                        <% } %>
                         <button type="button" class="btn btn-success btn-lg" onclick="loadAndRegister('checkFromRadio', startGame);">Start!</button>
                     </form>
                 <% } %>

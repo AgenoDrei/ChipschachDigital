@@ -57,7 +57,7 @@
                                         <% availLvls.forEach(function(lvl) { %>
                                             <%if (lvl.type == type.id && lvl.subtype == subtype.id) { %>
                                                 <p>
-                                                    <a href="/<%= type.href%>/<%= lvl._id %>">
+                                                    <a href="/<%=type.id%>/<%=subtype.id%>/<%=lvl._id%>">
                                                         <%= lvl.name %>
                                                     </a>
                                                 </p>
