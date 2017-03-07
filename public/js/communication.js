@@ -19,8 +19,8 @@ var comHandle = {
                 console.error('Connection error occured!');
                 if(!comHandle.connectionRetry) {
                     comHandle.connectionRetry = true;
-                    console.error('Try to reconnect to localhost now!');
-                    comHandle.connect("localhost", "4001", messageCallback, gameId, joinId);
+                    console.error('Try to reconnect to global server now!');
+                    comHandle.connect("agenodrei.de", "4001", messageCallback, gameId, joinId);
                 }
             }
                     

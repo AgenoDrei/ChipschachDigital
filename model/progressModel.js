@@ -5,6 +5,7 @@ class ProgressModel {
 	constructor(p1, p2, p0) {
 		this.chips = [ p1, p2, p0 ];
 		this.score = [0, 0];
+		this.turnCount = 0;
 		console.log("ProgressModel created with these Chips: ", p1, p2, p0);
 	}
 
@@ -43,6 +44,10 @@ class ProgressModel {
 				this.score[currentPlayer]++;
 			break;
 		}
+	}
+
+	countUpTurn() {
+		this.turnCount++;
 	}
 }
 
