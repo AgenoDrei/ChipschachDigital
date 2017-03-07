@@ -10,6 +10,40 @@ var toggleSidebar = function() {
     wrapper.hasClass('toggled') ? wrapper.removeClass('toggled') : wrapper.addClass('toggled');
 };
 
+var loadAndRegister = function(modeIdentifier, cb) {
+    let split = window.location.href.split('/');
+    let type = split[3],
+        levelId = split[4],
+        mode;
+    if ((modeIdentifier !== "beatable") && (modeIdentifier !== "unbeatable")) {
+         let radioValue = $("input[name='gameMode']:checked").val();
+         if (radioValue !== undefined)
+            mode = radioValue;
+         else {
+             toastr.warning('Bitte einen Modus wählen.');
+             return;
+         }
+    } else {
+        mode = modeIdentifier;
+    }
+
+    $.post('/api/v1/game', {type: type, level: levelId, mode: mode, local: true}, function(res) {
+        gameId = res.gameId;
+        $.get('/api/v1/game/' + gameId, function(res) {
+            joinIds.push(res.joinId);       // append first joinId
+            $.get('/api/v1/game/' + gameId, function(res) {
+                joinIds.push(res.joinId);       // append second joinId
+                $.get('/api/v1/level/' + levelId, function (res) {
+                    lvl = res;
+                    comHandle.connect(host, "4001", handleMessage, gameId, joinIds[0]);
+                    if (cb !== undefined)
+                        cb();
+                });
+            });
+        });
+    });
+}
+
 var startGame = function() {
     if (lvl !== undefined) {
         $('#startModal').removeClass('show');
@@ -46,10 +80,7 @@ var nextLevelForward = function() {     // assumes ordered level_list of dbCall
                 window.location = '/';
             }, 3000);
         } else {
-            var link = '/' + window.location.href.split('/')[3].toUpperCase() + '/' + lvls[idx + 1]._id; // _/type/id
-            if (lvl.type === 'mp')
-                link += '/' + window.location.href.split('/')[5];        // +/mode
-            window.location = link;
+            window.location = '/' + window.location.href.split('/')[3].toUpperCase() + '/' + lvls[idx + 1]._id; // _/type/id
         }
     });
 };
@@ -106,27 +137,11 @@ var handleMessage = function(msg) {
 };
 
 $('document').ready(function() {
-    var split = window.location.href.split('/');
-    var type = split[3],
-        levelId = split[4],
-        mode = split[5] === undefined ? 'unbeatable' : split[5];
-
     $('#moveCounterP1').val(movesP1);
     $('#moveCounterP2').val(movesP2);
     $('#chipCounterP1').val(chipsP1);
     $('#chipCounterP2').val(chipsP2);
 
-    $.post('/api/v1/game', {type: type, level: levelId, mode: mode, local: true}, function(res) {
-        gameId = res.gameId;
-        $.get('/api/v1/game/' + gameId, function(res) {
-            joinIds.push(res.joinId);       // append first joinId
-            $.get('/api/v1/game/' + gameId, function(res) {
-                joinIds.push(res.joinId);       // append second joinId
-                $.get('/api/v1/level/' + levelId, function (res) {
-                    lvl = res;
-                    comHandle.connect(host, "4001", handleMessage, gameId, joinIds[0]);
-                });
-            });
-        });
-    });
+    if (window.location.href.split('/')[3] === 'SP')
+        loadAndRegister('unbeatable', undefined);
 });

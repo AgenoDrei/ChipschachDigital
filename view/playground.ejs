@@ -6,8 +6,16 @@
     <script src="/libs/pixi.js/dist/pixi.min.js"></script>
     <script src="/js/pixi-game-engine.js"></script>
     <script src="/js/communication.js"></script>
-    <script src="/js/sp_mp.js"></script>
-    <title>Lokaler Einzelspieler</title>
+    <script src="/js/playground.js"></script>
+    <title>
+        <% if (type == 'SP') { %>
+            Singleplayer
+        <% } else if (type == 'MP') { %>
+            Multiplayer
+        <% } else if (type == 'MINI') { %>
+            Minischach
+        <% } %>
+    </title>
     <link rel="stylesheet" type="text/css" href="/css/simple-sidebar.css">
     <link rel="stylesheet" type="text/css" href="/css/playground.css">
 </head>
@@ -47,19 +55,21 @@
             </a> -->
         </div>
 
-        <div class="nav-container" style="bottom: 0;">
-            <div class="counter-container">
-                <img src="/img/arrow.png" />
-                <input type="number" id="moveCounterP2" class="form-control" disabled style="cursor: default;">
+        <% if (type !== 'SP') { %>
+            <div class="nav-container" style="bottom: 0;">
+                <div class="counter-container">
+                    <img src="/img/arrow.png" />
+                    <input type="number" id="moveCounterP2" class="form-control" disabled style="cursor: default;">
+                </div>
+                <div class="counter-container">
+                    <img src="/img/ChipGreen.png">
+                    <input type="number" id="chipCounterP2" class="form-control" disabled style="cursor: default;">
+                </div>
+                <div class="profile-container">
+                    <img src="/img/profilPicErsatz.bmp">
+                </div>
             </div>
-            <div class="counter-container">
-                <img src="/img/ChipGreen.png">
-                <input type="number" id="chipCounterP2" class="form-control" disabled style="cursor: default;">
-            </div>
-            <div class="profile-container">
-                <img src="/img/profilPicErsatz.bmp">
-            </div>
-        </div>
+        <% } %>
 
     </div>
 

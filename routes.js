@@ -55,22 +55,19 @@ module.exports = function(app, dataAccess) {
     });
 
     app.get('/:type/:levelId', function(req, res) {
+        let footerText;
         if (req.params.type === 'SP') {
-            res.render('singleplayer', {
-                name: nameDict[req.params.levelId],
-                descr: descrDict[req.params.levelId],
-                footer: "Löse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips schlägst!"
-            });
+            footerText = "Löse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips schlägst!";
+        } else if (req.params.type === 'MP') {
+            footerText = "Schlagen mehr Chips als dein Gegner!";
         } else if (req.params.type === 'MINI') {
             //TODO
         }
-    });
-
-    app.get('/MP/:levelId/:mode', function(req, res) {
-        res.render('multiplayer', {
+        res.render('playground', {
+            type: req.params.type,
             name: nameDict[req.params.levelId],
             descr: descrDict[req.params.levelId],
-            footer: "Schlagen mehr Chips als dein Gegner!"
+            footer: footerText
         });
     });
 };

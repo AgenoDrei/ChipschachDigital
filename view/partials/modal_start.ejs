@@ -11,7 +11,19 @@
                 <h3 id="lvlDescr">
                     <%= descr %>
                 </h3>
-                <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
+                <% if (type == 'SP') { %>
+                    <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
+                <% } else { %>
+                    <form>
+                        <div class="radio">
+                            <label><input type="radio" name="gameMode" value="unbeatable">Figuren nicht schlagbar</label>
+                        </div>
+                        <div class="radio">
+                            <label><input type="radio" name="gameMode" value="beatable">Figuren schlagbar</label>
+                        </div>
+                        <button type="button" class="btn btn-success btn-lg" onclick="loadAndRegister('checkFromRadio', startGame);">Start!</button>
+                    </form>
+                <% } %>
             </div>
             <div class="modal-footer">
                 <%= footer %>

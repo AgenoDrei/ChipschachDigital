@@ -57,14 +57,9 @@
                                         <% availLvls.forEach(function(lvl) { %>
                                             <%if (lvl.type == type.id && lvl.subtype == subtype.id) { %>
                                                 <p>
-                                                    <%if (type.href == 'MP') { %>
-                                                        <a href="/MP/<%= lvl._id %>/unbeatable"> <%= lvl.name %> </a>(Figuren-Schlagen nicht erlaubt) <br>
-                                                        <a href="/MP/<%= lvl._id %>/beatable"> <%= lvl.name %> </a> (Figuren-Schlagen erlaubt)
-                                                    <% } else { %>
-                                                        <a href="/<%= type.href%>/<%= lvl._id %>">
-                                                            <%= lvl.name %>
-                                                        </a>
-                                                    <% };%>
+                                                    <a href="/<%= type.href%>/<%= lvl._id %>">
+                                                        <%= lvl.name %>
+                                                    </a>
                                                 </p>
                                             <% }; %>
                                         <% }); %>
