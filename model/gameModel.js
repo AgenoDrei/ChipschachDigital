@@ -85,6 +85,7 @@ class Game {
 
     //ToDo: Refactor
     sendToAll(message) {
+		console.log("Server> ", message);
     	try {
     		this.player1.connection.sendUTF(JSON.stringify(message));
     		this.player2.connection.sendUTF(JSON.stringify(message));
@@ -93,6 +94,7 @@ class Game {
     }
 
     endGame() {
+        console.log("Server> Game finished");
     	try {
     		this.player1.connection.sendUTF('{"type": "exit"}');
     		this.player2.connection.sendUTF('{"type": "exit"}');
