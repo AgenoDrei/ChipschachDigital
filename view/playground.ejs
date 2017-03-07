@@ -42,16 +42,16 @@
 
         <div class="nav-container iconBar">
             <a href="/">
-                <img src="/img/close.png" title="zum Hauptmenü" id="close">
+                <img src="/img/close.png" title="Zurück zum Hauptmenü" id="close">
+            </a>
+            <a onclick="yieldGame();">
+                <img src="/img/white_flag.png" title="Spiel aufgeben" id="yield">
             </a>
             <!--<a>
               <img src="../../img/help/help.png" title="Hilfe anzeigen" id="showHelp">
             </a> -->
             <!-- <a>
               <img src="../img/remis.png" title="Remis anbieten">
-            </a> -->
-            <!-- <a>
-              <img src="../../img/yield.png" title="Aufgeben" id="yield">
             </a> -->
         </div>
 
@@ -89,6 +89,7 @@
 
 <% include ./partials/modal_start %>
 <% include ./partials/modal_finish %>
+<% include ./partials/modal_yielded %>
 
 </body>
 </html>

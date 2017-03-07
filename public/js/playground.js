@@ -70,6 +70,11 @@ var startGame = function() {
         toastr.info('Level wird noch geladen, einen Moment Geduld noch ...');
 };
 
+var yieldGame = function() {
+    $('#yieldedModal').show();
+};
+
+
 var nextLevelForward = function() {     // assumes ordered level_list of dbCall
     $.get('/api/v1/level', function(lvls) {
         let idx = lvls.findIndex(x => x._id==lvl._id);
