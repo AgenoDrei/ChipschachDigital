@@ -1,4 +1,4 @@
-module.exports = function(app, dataAccess) {
+module.exports = function(app, dataAccess, gameHandler) {
     var availLvls = [],
         nameDict = {},
         descrDict = {};
@@ -15,17 +15,17 @@ module.exports = function(app, dataAccess) {
                 {id:'impressum', picId:'logoLg', name:''},
                 {id:'classic', picId:'classic', name:'Klassisches Schach'}
             ],[
-                {id:'', picId:'', name:''},
                 {id:'editor', picId:'editor', name:'Editor'},
-                {id:'exit', picId:'close', name:'Verlassen'}
+                {id:'', picId:'', name:''},
+                {id:'exit', picId:'close_.75opacity', name:'Verlassen'}
             ]
         ];
         var accTypes = [
-            {id: 'sp', name: 'Lokaler Einzelspieler', href: 'SP',
+            {id: 'sp', name: 'Lokaler Einzelspieler',
                 footer: 'Wähle ein Einzelspieler-Level und schlage alle Chips so schnell du kannst!'},
-            {id: 'mp', name: 'Lokaler Mehrspieler', href: 'MP',
+            {id: 'mp', name: 'Lokaler Mehrspieler',
                 footer: 'Wähle ein Mehrspieler-Level aus um gegen einen Freund am gleichen Rechner Problemstellungen zu lösen!'},
-            {id: 'mini', name: 'Minischach-Aufgaben', href: 'MINI',
+            {id: 'mini', name: 'Minischach-Aufgaben',
                 footer: 'Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!'}
         ];
         var availSubtypes = [
@@ -38,11 +38,18 @@ module.exports = function(app, dataAccess) {
         ];
 
         dataAccess.getAllLevelIds().then(function(obtainedLvls) {
+            // gameHandler.getGameList(function(filteredGames) {        // TODO: not the right way, but not working like this anyways ^^
+
             res.render('menu', {
                 iconRows: iconRows,
                 accTypes: accTypes,
                 availSubtypes: availSubtypes,
-                availLvls: obtainedLvls
+                availLvls: obtainedLvls,
+                openGames: [        // TODO: exchange for real available levels
+                    {id: 'dummyId1', name: 'Please Join Me!', level: 'dummyLvl1', player_count: 1},
+                    {id: 'dummyId2', name: 'My game is so nice', level: 'dummyLvl2', player_count: 2},
+                    {id: 'dummyId3', name: 'Test game', level: 'dummyLvl3', player_count: 1}
+                ]
             });
 
             //saved stuff for mitgeben von name and description when separate level called
@@ -51,26 +58,35 @@ module.exports = function(app, dataAccess) {
                 nameDict[lvl._id] = lvl.name;
                 descrDict[lvl._id] = lvl.description;
             });
+
+            // });
         });
     });
 
-    app.get('/:type/:levelId', function(req, res) {
-        if (req.params.type === 'SP') {
-            res.render('singleplayer', {
-                name: nameDict[req.params.levelId],
-                descr: descrDict[req.params.levelId],
-                footer: "Löse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips schlägst!"
-            });
-        } else if (req.params.type === 'MINI') {
+    app.get('/:type/:subtype/:levelId', function(req, res) {
+        let type = req.params.type.toUpperCase(),
+            footerText;
+        if (req.params.type === 'sp') {
+            footerText = "Löse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips schlägst!";
+        } else if (req.params.type === 'mp') {
+            footerText = "Schlagen mehr Chips als dein Gegner!";
+        } else if (req.params.type === 'mini') {
             //TODO
         }
-    });
-
-    app.get('/MP/:levelId/:mode', function(req, res) {
-        res.render('multiplayer', {
+        res.render('playground', {
+            type: req.params.type.toUpperCase(),    // toUpperCase is not the nicest way to go here, but nvmd
+            subtype: req.params.subtype,
             name: nameDict[req.params.levelId],
             descr: descrDict[req.params.levelId],
-            footer: "Schlagen mehr Chips als dein Gegner!"
+            footer: footerText
         });
     });
+
+    app.get('/global/:gameId', function(req, res) {
+        //TODO
+    });
+
+    app.get('/editor', function(req, res) {
+        res.render('editor');
+    })
 };

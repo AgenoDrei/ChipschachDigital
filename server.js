@@ -32,9 +32,9 @@ app.use('/api/v1', require('./controller/game')(dataAccess, gameHandler));
 
 //set ejs and general view stuff
 app.set('view engine', 'ejs');
-app.set('views',__dirname + '/public/templates');
-app.set('view options', { layout:false, root: __dirname + '/templates' } );
-require('./routes')(app, dataAccess);
+app.set('views',__dirname + '/view');
+app.set('view options', { layout:false, root: __dirname + '/' } );
+require('./routes')(app, dataAccess, gameHandler);
 
 //Websocket Controller
 var communicationSocket = require('./controller/socketController')(config, gameHandler);

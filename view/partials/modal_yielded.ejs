@@ -1,4 +1,4 @@
-<div id="startModal" class="modal show" role="dialog">
+<div id="yieldedModal" class="modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -8,13 +8,11 @@
             </div>
             <div class="modal-body" style="text-align: center">
                 <img src="/img/logoSm.png" height="150px" />
-                <h3 id="lvlDescr">
-                    <%= descr %>
+                <h3>
+                    Du hast das Level aufgegeben.
                 </h3>
-                <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
-            </div>
-            <div class="modal-footer">
-                <%= footer %>
+                <button type="button" class="btn btn-warning btn-lg" onclick="window.location ='/';">Zurück zum Menü</button>
+                <button type="button" class="btn btn-success btn-lg" onclick="window.location.reload();">Nochmal spielen</button>
             </div>
         </div>
     </div>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <% include ./partials/head %>
+
+    <script src="/libs/pixi.js/dist/pixi.min.js"></script>
+    <script src="/js/pixi-game-engine.js"></script>
+    <script src="/js/editor.js"></script>
+    <title>Editor</title>
+    <link rel="stylesheet" type="text/css" href="/css/simple-sidebar.css">
+    <link rel="stylesheet" type="text/css" href="/css/editor.css">
+</head>
+
+
+<body>
+<div id="wrapper" class="toggled">
+
+    <!-- Navigation -->
+    <div id="sidebar-wrapper">
+        <form class="propertiesForm">
+            <div class="form-group">
+                <label for="type">Kategorie</label>
+                <select class="form-control" id="type" name="type" onchange="checkToggleSubtype();">
+                    <option value="sp">Einzelspieler</option>
+                    <option value="mp">Mehrspieler</option>
+                    <option value="mini">Minischach</option>
+                </select>
+            </div>
+            <div id="subtypeFormGroup" class="form-group">
+                <label for="subtype">Unterkategorie</label>
+                <select class="form-control" id="subtype" name="subtype">
+                    <option value="pawn">Bauer</option>
+                    <option value="knight">Springer</option>
+                    <option value="bishop">Läufer</option>
+                    <option value="rook">Turm</option>
+                    <option value="queen">Dame</option>
+                    <option value="king">König</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Levelname">
+            </div>
+            <div class="form-group">
+                <label for="description">Beschreibung</label>
+                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+            </div>
+            <div id="minTurnsFormGroup" class="form-group">
+                <label for="minTurns">Minimale Zugzahl</label>
+                <input type="number" class="form-control" id="minTurns" name="minTurns">
+            </div>
+            <center><button class="btn btn-primary btn-lg">Speichern</button></center>
+        </form>
+    </div>
+
+    <!-- Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+
+            <div id="sidebar_toggle" onclick="toggleSidebar();"></div>
+            <div id="board-layer-behind">
+                <div id="board-anchor"></div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
