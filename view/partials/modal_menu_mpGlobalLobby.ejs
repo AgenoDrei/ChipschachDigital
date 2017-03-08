@@ -1,0 +1,52 @@
+<div id="mp_g" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Online Multiplayer Lobby</h4>
+            </div>
+            <div class="modal-body">
+                <div class="globalLobby openGameList">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Spielname</th>
+                                <th>Level</th>
+                                <th><center>Besetzung</center></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% openGames.forEach(function(openGame) { %>
+                            <tr>
+                                <td><%=openGame.name%></td>
+                                <td><%=openGame.level%></td>
+                                <td><center>
+                                    <%=openGame.player_count%>/2
+                                    <a href="/global/<%=openGame.id%>" class="btn btn-primary btn-sm">Beitreten</a>
+                                </center></td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="globalLobby createNewGame">
+                    <h4>
+                        ... oder ein eigenes Spiel erstellen?
+                    </h4>
+                    <form class="form-inline">
+                        <label class="sr-only" for="newName">Spielname</label>
+                        <input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="newName" placeholder="Name">
+                        <label class="sr-only" for="newLevel">Level</label>
+                        <select class="form-control" id="newLevel">
+                            <option>Default select</option>
+                        </select>
+                        <button class="btn btn-primary">Spiel erstellen</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                Hier kannst du ein neues Spiel erstellen oder bereits bestehenden Spielen beitreten.
+            </div>
+        </div>
+    </div>
+</div>

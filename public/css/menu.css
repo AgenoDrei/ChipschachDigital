@@ -6,7 +6,7 @@
     right: 0; left: 0;
     top: 0; bottom: 0;
 }
-.table {
+.menuLayoutTable {
     display: table;
     margin: 0px -80px 0;
     border-spacing: 20px 10px;
@@ -39,5 +39,24 @@
 
 .modal img {
     display: block;
+    margin: auto;
+}
+
+.modal .globalLobby {
+    width: 100%;
+    margin: auto;
+
+    border-radius: 11px;
+    opacity: .75;
+}
+.modal .openGameList {
+    background-color: orange;
+}
+.modal .createNewGame {
+    background-color: deepskyblue;
+    padding: 10px;
+    text-align: center;
+}
+.modal form {
     margin: auto;
 }
