@@ -91,15 +91,3 @@ a:active, a:focus{
     margin: auto;
 }
 #board-anchor {}
-
-/* error */
-#errorInfo {
-    position: absolute;
-    left: 0; right: 0;
-    margin: 150px auto;
-    width: 500px;
-    height: 500px;
-    text-align: center;
-
-    display: none;
-}

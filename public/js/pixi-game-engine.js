@@ -1,4 +1,5 @@
 var opMode = {
+    EDITOR: -1,
     SP: 0,
     MP: 1
 };

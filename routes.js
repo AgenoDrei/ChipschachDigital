@@ -85,4 +85,8 @@ module.exports = function(app, dataAccess, gameHandler) {
     app.get('/global/:gameId', function(req, res) {
         //TODO
     });
+
+    app.get('/editor', function(req, res) {
+        res.render('editor');
+    })
 };
