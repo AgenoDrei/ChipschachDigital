@@ -86,7 +86,8 @@ var nextLevelForward = function() {     // assumes ordered level_list of dbCall
                 window.location = '/';
             }, 3000);
         } else {
-            window.location = '/' + window.location.href.split('/')[3].toUpperCase() + '/' + lvls[idx + 1]._id; // _/type/id
+            let locHrefSplit = window.location.href.split('/');
+            window.location = '/' + locHrefSplit[3] + '/' + locHrefSplit[4] + '/' + lvls[idx + 1]._id; // _/type/id
         }
     });
 };
