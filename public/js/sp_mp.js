@@ -2,6 +2,8 @@ var gameId,
     joinIds = [],
     lvl;
 
+var PixiEngine = null;
+
 var host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
 var toggleSidebar = function() {
     var wrapper = $('#wrapper');
@@ -13,18 +15,19 @@ var startGame = function() {
         $('#startModal').removeClass('show');
         var operationMode;
         if (lvl.type === 'sp')
-            operationMode = opMode.SP;
+            operationMode = gameType.SP;
         if (lvl.type === 'mp' || lvl.type === 'mini')
-            operationMode = opMode.MP
+            operationMode = gameType.MP;
 
-        PixiEngine.destroy();
+        PixiEngine = new GameEngine(560, 560, operationMode, document.getElementById('board-anchor'));
+
         $('#board-layer-behind').css({
             'width': '640',
             'height': '640',
             'padding': '40',
             'background-image': 'url(/img/board_named.png)'
         });
-        PixiEngine.init(560, 560, operationMode, document.getElementById('board-anchor'), function() {
+        PixiEngine.init(function() {
             PixiEngine.loadLevel(lvl, function() {
                 PixiEngine.setMoveCallback(handleMoves);
                 PixiEngine.render();
