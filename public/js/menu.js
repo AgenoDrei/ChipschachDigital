@@ -20,7 +20,7 @@ var adjustCss= function() {
 
 window.onresize = function() {
     adjustCss();
-}
+};
 $('document').ready(function() {
     adjustCss();
 });

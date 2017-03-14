@@ -23,8 +23,6 @@
 
 <body>
 <div id="wrapper">
-
-    <!-- Navigation -->
     <div id="sidebar-wrapper">
 
         <div class="nav-container" style="top: 0;">
@@ -73,19 +71,18 @@
         <% } %>
 
     </div>
-
-    <!-- Content -->
     <div id="page-content-wrapper">
+        <div id="sidebar_toggle" onclick="toggleSidebar();"></div>
         <div class="container-fluid">
-
-            <div id="sidebar_toggle" onclick="toggleSidebar();"></div>
-            <div id="board-layer-behind">
-                <div id="board-anchor"></div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div id="board-layer-behind">
+                        <div id="board-anchor"></div>
+                    </div>
+                </div>
             </div>
-
         </div>
     </div>
-
 </div>
 
 <% include ./partials/modal_start %>
