@@ -51,7 +51,6 @@ module.exports = function(app, dataAccess, gameHandler) {
                     {id: 'dummyId3', name: 'Test game', level: 'dummyLvl3', player_count: 1}
                 ]
             });
-
             //saved stuff for mitgeben von name and description when separate level called
             this.availLvls = obtainedLvls;
             obtainedLvls.forEach(function(lvl) {
@@ -78,7 +77,7 @@ module.exports = function(app, dataAccess, gameHandler) {
             subtype: req.params.subtype,
             name: nameDict[req.params.levelId],
             descr: descrDict[req.params.levelId],
-            footer: footerText
+            footer: footerText,
         });
     });
 

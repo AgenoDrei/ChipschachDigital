@@ -132,6 +132,19 @@ var handleMessage = function(msg) {
             PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
             break;
         case "win":
+            if (lvl.type === "sp") {
+                if (movesP1 === lvl.minturns) {
+                    $('#winmsgMinturnsSuccess').show();
+                    $('#btnRepeat').hide();
+                }
+                else
+                    $('#winmsgMinturnsFailed').show();
+            } else {
+                if (msgObj.player === playerType.PLAYERONE)
+                    $('#winmsgGenericYellow').show();
+                else if (msgObj.player === playerType.PLAYERTWO)
+                    $('#winmsgGenericYellow').show();
+            }
             $('#finishModal').show();
             break;
         case "error":
@@ -149,6 +162,10 @@ var handleMessage = function(msg) {
 $('document').ready(function() {
     $('[data-toggle="tooltip"]').tooltip();     // enable Bootstrap tooltips
 
+    $('#winmsgGenericYellow').hide();
+    $('#winmsgGenericBlue').hide();
+    $('#winmsgMinturnsSuccess').hide();
+    $('#winmsgMinturnsFailed').hide();
     $('#moveCounterP1').val(movesP1);
     $('#moveCounterP2').val(movesP2);
     $('#chipCounterP1').val(chipsP1);
