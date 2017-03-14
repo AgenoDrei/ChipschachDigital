@@ -39,7 +39,6 @@ class Game {
 		return this.id;
 	}
 
-	//TODO: Test for win
 	turn(origX, origY, destX, destY, player) {
 		if(this.player1.state != conStates.CONNECTED || (this.player2.state != conStates.CONNECTED && !this.local)) {
 			return gameStates.PLAYER_DISCONNECTED;
@@ -56,7 +55,8 @@ class Game {
 		} else {
 			currentFigure.move(destX, destY);
 		}
-		var winner = this.win.checkProgress()
+		this.win.countUpTurn();
+		var winner = this.win.checkProgress();
 		if(winner != gameStates.VALID_TURN) {
 			return winner;
 		}
@@ -85,6 +85,7 @@ class Game {
 
     //ToDo: Refactor
     sendToAll(message) {
+		console.log("Server> ", message);
     	try {
     		this.player1.connection.sendUTF(JSON.stringify(message));
     		this.player2.connection.sendUTF(JSON.stringify(message));
@@ -93,6 +94,7 @@ class Game {
     }
 
     endGame() {
+        console.log("Server> Game finished");
     	try {
     		this.player1.connection.sendUTF('{"type": "exit"}');
     		this.player2.connection.sendUTF('{"type": "exit"}');
