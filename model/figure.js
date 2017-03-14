@@ -18,7 +18,7 @@ class Figure {
 	}		
 
 	beat(beater) {
-		if(this.board.parentGame.mode == 'unbeatable') 
+		if(this.board.parentGame.mode == 'unbeatable')
 			return false;
 
 		if(helper.enemy(beater.player, this.player)) {

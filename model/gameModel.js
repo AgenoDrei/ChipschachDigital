@@ -12,7 +12,6 @@ var ProgressModel = require('./progressModel');
 
 class Game {
 	constructor(type, mode, local, level) {
-		debugger;
 		this.toBeNext = playerType.PLAYERONE;
 		this.type = type;
 		this.mode = mode;

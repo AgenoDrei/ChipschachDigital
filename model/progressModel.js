@@ -46,6 +46,7 @@ class ProgressModel {
 	}
 
 	captureChip(player, type) {
+		debugger;
 		console.log("chip captured: ", player, type);
 		var currentPlayer = null;
 		if(player == playerType.PLAYERONE) {
@@ -57,7 +58,7 @@ class ProgressModel {
 		switch(type) {
 			case playerType.PLAYERONE:  				//Yellow Chip
 				this.chips[playerType.PLAYERONE]--;
-				this.score[playerType.PLAYERONE]++;
+				this.score[playerType.PLAYERTWO]++;
 			break;
 			case playerType.PLAYERTWO: 					//Blue Chip
 				this.chips[playerType.PLAYERTWO]--;
