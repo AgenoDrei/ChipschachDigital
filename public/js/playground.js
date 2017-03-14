@@ -3,6 +3,8 @@ var gameId,
 var lvl,
     movesP1 = 0, movesP2 = 0,
     chipsP1 = 0, chipsP2 = 0;
+var boardSize = 0;
+const BOARDLAYERPADDING = 40;
 
 var PixiEngine = null;
 
@@ -10,6 +12,12 @@ var host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploy
 var toggleSidebar = function() {
     var wrapper = $('#wrapper');
     wrapper.hasClass('toggled') ? wrapper.removeClass('toggled') : wrapper.addClass('toggled');
+};
+var adjustCss= function() {
+    var marginVal = (window.innerHeight - (boardSize + 2*BOARDLAYERPADDING) - 20) / 2;  // 20 = padding of content-wrapper
+    $('.container-fluid').css({
+        'margin-top':marginVal+'px'
+    });
 };
 
 var loadAndRegister = function(modeIdentifier, cb) {
@@ -56,12 +64,12 @@ var startGame = function() {
         if (lvl.type === 'mp' || lvl.type === 'mini')
             operationMode = gameType.MP;
 
-        PixiEngine = new GameEngine(560, 560, operationMode, document.getElementById('board-anchor'));
+        PixiEngine = new GameEngine(boardSize, boardSize, operationMode, document.getElementById('board-anchor'));
 
         $('#board-layer-behind').css({
-            'width': '640',
-            'height': '640',
-            'padding': '40',
+            'width': boardSize + 2*BOARDLAYERPADDING,
+            'height': boardSize + 2*BOARDLAYERPADDING,
+            'padding': BOARDLAYERPADDING,
             'background-image': 'url(/img/board_named.png)'
         });
         PixiEngine.init(function() {
@@ -167,8 +175,13 @@ var handleMessage = function(msg) {
     }
 };
 
+
+window.onresize = function() {
+    adjustCss();
+}
 $('document').ready(function() {
     $('[data-toggle="tooltip"]').tooltip();     // enable Bootstrap tooltips
+    boardSize = 560;
 
     $('#winmsgGenericYellow').hide();
     $('#winmsgGenericBlue').hide();
@@ -180,5 +193,5 @@ $('document').ready(function() {
     $('#chipCounterP2').val(chipsP2);
 
     if (window.location.href.split('/')[3] === 'sp')
-        loadAndRegister('unbeatable', undefined);
+        loadAndRegister('unbeatable', adjustCss);
 });
