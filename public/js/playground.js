@@ -116,15 +116,15 @@ var handleMessage = function(msg) {
 
     switch(msgObj.type) {
         case "turn":
-            if (PixiEngine.turn === 0) {
+            if (PixiEngine.turn === playerType.PLAYERONE) {
                 movesP1++;
-                if (PixiEngine.getFigure(msgObj.destX, msgObj.destY) !== null)
+                if (Helper.getFigure(msgObj.destX, msgObj.destY, PixiEngine.figures) !== null)
                     chipsP1++;
                 $('#moveCounterP1').val(movesP1);
                 $('#chipCounterP1').val(chipsP1);
-            } else if (PixiEngine.turn === 1) {
+            } else if (PixiEngine.turn === playerType.PLAYERTWO) {
                 movesP2++;
-                if (PixiEngine.getFigure(msgObj.destX, msgObj.destY) !== null)
+                if (Helper.getFigure(msgObj.destX, msgObj.destY, PixiEngine.figures) !== null)
                     chipsP2++;
                 $('#moveCounterP2').val(movesP2);
                 $('#chipCounterP2').val(chipsP2);
