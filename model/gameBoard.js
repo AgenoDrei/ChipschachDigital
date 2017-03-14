@@ -15,6 +15,7 @@ class Board {
 		this.height = 8;
 		this.fields = [];
 		this.chips = [0,0,0,0];
+		this.figures = [0,0];
 		this.parentGame = parent;
 		for(var x = 1; x <= this.height; x++) {
 			this.fields[x] = [];
@@ -54,26 +55,32 @@ class Board {
 				case 'ROOK': 
 					newFigure = new Rook(this, currentFigure.x, currentFigure.y, currentFigure.color);
 					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+					this.figures[currentFigure.color]++;
 					break;
 				case 'KNIGHT': 
 					newFigure = new Knight(this, currentFigure.x, currentFigure.y, currentFigure.color);
 					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+                    this.figures[currentFigure.color]++;
 					break;
 				case 'BISHOP': 
 					newFigure = new Bishop(this, currentFigure.x, currentFigure.y, currentFigure.color);
 					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+                    this.figures[currentFigure.color]++;
 					break;
 				case 'QUEEN': 
 					newFigure = new Queen(this, currentFigure.x, currentFigure.y, currentFigure.color);
 					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+                    this.figures[currentFigure.color]++;
 					break;
 				case 'KING': 
 					newFigure = new King(this, currentFigure.x, currentFigure.y, currentFigure.color);
 					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+                    this.figures[currentFigure.color]++;
 					break;
 				case 'PAWN': 
 					newFigure = new Pawn(this, currentFigure.x, currentFigure.y, currentFigure.color);
 					this.fields[currentFigure.x][currentFigure.y].setFigure(newFigure);
+                    this.figures[currentFigure.color]++;
 					break;
 				default:
 					console.log('Invalid Figure in Level Data!')

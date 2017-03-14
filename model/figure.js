@@ -20,6 +20,7 @@ class Figure {
 	beat(beater) {
 		if(helper.enemy(beater.player, this.player)) {
 			this.board.fields[this.x][this.y].setFigure(null);
+			this.board.parentGame.win.captureFigure(this.player, this.constructor.name);
 			return true;
 		}
 		return false;

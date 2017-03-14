@@ -30,7 +30,7 @@ class Game {
 		};
 		this.board = new Board(this);
 		this.board.loadLevel(this.level);
-		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2]);
+		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2], this.board.figures);
 		console.log('New Game created with ID: ', this.id);
 		console.log('Level used: ', this.level._id);
 	}
@@ -40,6 +40,7 @@ class Game {
 	}
 
 	turn(origX, origY, destX, destY, player) {
+		debugger;
 		if(this.player1.state != conStates.CONNECTED || (this.player2.state != conStates.CONNECTED && !this.local)) {
 			return gameStates.PLAYER_DISCONNECTED;
 		}
