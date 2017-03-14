@@ -38,7 +38,7 @@ var loadAndRegister = function(modeIdentifier, cb) {
         mode = modeIdentifier;
     }
 
-    $.post('/api/v1/game', {type: type, level: levelId, mode: mode, local: true}, function(res) {
+    $.post('/api/v1/game', {type: type, level: levelId, mode: mode, local: true, name: ""}, function(res) {
         gameId = res.gameId;
         $.get('/api/v1/game/' + gameId, function(res) {
             joinIds.push(res.joinId);       // append first joinId

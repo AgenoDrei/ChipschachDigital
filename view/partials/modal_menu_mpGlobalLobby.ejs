@@ -16,13 +16,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% openGames.forEach(function(openGame) { %>
+                            <% globalGames.forEach(function(game) { %>
                             <tr>
-                                <td><%=openGame.name%></td>
-                                <td><%=openGame.level%></td>
+                                <td><%=game.name%></td>
+                                <td><%=game.level%></td>
                                 <td><center>
-                                    <%=openGame.player_count%>/2
-                                    <a href="/global/<%=openGame.id%>" class="btn btn-primary btn-sm">Beitreten</a>
+                                    <%=game.filledSeats%>/2
+                                    <a href="/global/<%=game.id%>" class="btn btn-primary btn-sm">Beitreten</a>
                                 </center></td>
                             </tr>
                             <% }); %>

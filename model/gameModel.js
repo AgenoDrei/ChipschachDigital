@@ -11,7 +11,8 @@ var ProgressModel = require('./progressModel');
 
 
 class Game {
-	constructor(type, mode, local, level) {
+	constructor(type, mode, local, level, name) {
+		this.name = name;
 		this.toBeNext = playerType.PLAYERONE;
 		this.type = type;
 		this.mode = mode;
@@ -33,6 +34,7 @@ class Game {
 		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2], this.board.figures, this.type);
 		console.log('New Game created with ID: ', this.id);
 		console.log('Level used: ', this.level._id);
+        console.log('Level named: ', this.name);
 	}
 
 	getId() {
