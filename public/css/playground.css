@@ -72,6 +72,7 @@ a:active, a:focus{
 }
 .iconBar a, .iconBar img {
     height: 100%;
+    cursor: pointer;
 }
 
 /* content */

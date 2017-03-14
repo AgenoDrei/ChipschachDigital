@@ -2,7 +2,7 @@
  * Created by simon on 11.03.17.
  */
 
-var thiz = null;
+var thiz = null;        // only used in onClick() ... thank goodness
 
 class GameEngine {
     constructor(w, h, operationMode, anchor) {
