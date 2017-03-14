@@ -20,3 +20,5 @@ var playerType = {
     BOTH: 2,
     NONE: 3
 };
+
+var figureSize = null;

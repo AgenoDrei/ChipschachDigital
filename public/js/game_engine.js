@@ -10,13 +10,13 @@ class GameEngine {
         this.height = h;
         this.gameType = operationMode;
         this.parent = anchor;
-        this.figureSize = this.width / 8;
+        this.figureSize = figureSize =  this.width / 8;
         this.renderer = null;
         this.stage = null;
         this.background = null;
         this.turn = playerType.PLAYERONE;
         this.figures = [];
-        this.selectionHandler = new SelectionHandler(this.gameType);
+        this.selectionHandler = null;
         thiz = this;
     }
 
@@ -24,6 +24,7 @@ class GameEngine {
         this.renderer = new PIXI.CanvasRenderer(this.width, this.height);
         this.parent.appendChild(this.renderer.view);
         this.stage = new PIXI.Container();
+        this.selectionHandler = new SelectionHandler(this, this.gameType, this.stage);
         PIXI.loader
             .add("/img/board.png")
             .add("/img/BishopBlue.png")
@@ -152,10 +153,12 @@ class GameEngine {
         var other = Helper.getFigure(destX, destY, this.figures);
 
         if (other != null) {
+            this.selectionHandler.removeSelection(other.x, other.y);
             other.destroy();
         }
         figure.move(destX, destY);
-        if (this.operationMode != gameType.SP) {       // if not singleplayer
+        this.selectionHandler.move(destX, destY);
+        if (this.gameType != gameType.SP) {       // if not singleplayer
             this.switchTurn();
             // this.rotateBoard();
         }
@@ -163,12 +166,17 @@ class GameEngine {
     }
 
     onClick(rawX, rawY) {
-        let pos = Helper.getPos(rawX, rawY, this.figureSize);
-        console.log('Clicked: (' + pos.x + '|' + pos.y + ')');
+        let pos = Helper.getPos(rawX, rawY);
+        //console.log('Clicked: (' + pos.x + '|' + pos.y + ')');
 
         if(this.selectionHandler.select(pos.x, pos.y)) {
             let lastSelection = this.selectionHandler.getLastSelection();
-            this.moveFigure(lastSelection.x, lastSelection.y, pos.x, pos.y);
+
+            if(this.moveCallback != null) {
+                this.moveCallback(lastSelection.x, lastSelection.y, pos.x, pos.y);
+            } else {
+                this.moveFigure(lastSelection.x, lastSelection.y, pos.x, pos.y);
+            }
         }
     }
 
@@ -189,14 +197,14 @@ function onClick(e) {
 class Helper {
     constructor() {}
 
-    static getPixelPos(x, y, figureSize) {
+    static getPixelPos(x, y) {
         return {
             x: figureSize * (x - 1),
             y: figureSize * (y - 1)
         };
     }
 
-    static getPos(pixelX, pixelY, figureSize) {
+    static getPos(pixelX, pixelY) {
         return {
             x: Math.floor(pixelX / figureSize) + 1,
             y: Math.floor(pixelY / figureSize) + 1
@@ -213,26 +221,70 @@ class Helper {
 }
 
 class SelectionHandler {
-    constructor(gameType) {
+    constructor(parent, gameType, stage) {
+        this.parent = parent;
         this.gameType = gameType;
         this.turn = playerType.PLAYERONE;
         this.selections = [
             new Selection(0,0),
             new Selection(0,0)
         ];
+        this.stage = stage;
+        this.graphics = null;
     }
 
     select(x, y) {
         let select = this.selections[this.turn];
         if(!select.active) {
-            select.setSelection(x, y);
+            //console.log('New field selected: (' + x + '|' + y + ')' );
+            if(Helper.getFigure(x, y, this.parent.figures) != null) {
+                select.setSelection(x, y);
+                this.switchGraphic(false, x, y);
+            }
             return false;
         } else {
             if(x == select.x && y == select.y) {
-                select.active = false;
+                this.removeSelection(x, y);
                 return false;
             }
             return true;
+        }
+    }
+
+    move(x, y) {
+        this.selections[this.turn].x = x;
+        this.selections[this.turn].y = y;
+        this.switchGraphic(false, x, y);
+    }
+
+    switchGraphic(removeFlag, x, y) {
+        if(this.graphics != null) {
+            this.graphics.destroy();
+            this.graphics = null;
+        }
+        if(removeFlag) {
+            this.parent.render();
+            return;
+        }
+        this.graphics = new PIXI.Graphics();
+        let pos = Helper.getPixelPos(x, y);
+        this.graphics.beginFill(0x00FF00);
+        this.graphics.blendMode = PIXI.BLEND_MODES.MULTIPLY;
+        this.graphics.alpha = 0.5;
+        this.graphics.drawRect(pos.x, pos.y, figureSize, figureSize);
+        this.stage.addChild(this.graphics);
+        this.parent.render();
+    }
+
+    removeSelection(x, y) {
+        for(let i = 0; i < this.selections.length; i++) {
+            if(this.selections[i].x != x || this.selections[i].y != y) {
+                continue;
+            } else {
+                this.selections[i].x = this.selections[i].y = 0;
+                this.selections[i].active = false;
+                this.switchGraphic(true, 0, 0);
+            }
         }
     }
 
@@ -244,10 +296,8 @@ class SelectionHandler {
     }
 
     nextTurn(turn) {
-        this.selections[this.turn].disable();
         this.turn = turn;
-        this.selections[turn].enable();
-
+        this.switchGraphic(false, this.selections[turn].x, this.selections[turn].y);
     }
 }
 
@@ -278,22 +328,23 @@ class Figure {
         this.sprite = null;
     }
 
-    destroy() {
+    destroy() { //ToDo Remove from figures list
         this.x = -99;
         this.y = -99;
+        this.sprite.destroy();
     }
 
     move(x, y) {
         this.x = x;
         this.y = y;
-        let pos = Helper.getPixelPos(this.x, this.y, this.size);
+        let pos = Helper.getPixelPos(this.x, this.y);
         this.sprite.position.x = pos.x;
         this.sprite.position.y = pos.y;
     }
 
     setSprite(spr, stage) {
         this.sprite = spr;
-        let pos = Helper.getPixelPos(this.x, this.y, this.size);
+        let pos = Helper.getPixelPos(this.x, this.y);
         this.sprite.position.x = pos.x;
         this.sprite.position.y = pos.y;
         this.sprite.height = this.sprite.width = this.size;
