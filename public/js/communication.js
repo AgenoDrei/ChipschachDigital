@@ -3,7 +3,7 @@ var comHandle = {
     connectionRetry: false,
 	connect: function(url, port, messageCallback, gameId, joinId) {
     	if (window.WebSocket) {   
-            ws = new WebSocket('ws://' + url + ':' + port, 'kekse');
+            let ws = new WebSocket('ws://' + url + ':' + port, 'kekse');
         	
         	ws.onopen = function() {
             	var conObj = {
@@ -22,13 +22,15 @@ var comHandle = {
                     console.error('Try to reconnect to global server now!');
                     comHandle.connect("agenodrei.de", "4001", messageCallback, gameId, joinId);
                 }
-            }
+            };
                     
         	ws.onmessage = messageCallback;
 
             ws.onclose = function(e) {
                 console.log("WebSocket closed!", e.code);
-            }
+            };
+
+            comHandle.ws = ws;
 
             return ws;
         } else {
@@ -38,7 +40,8 @@ var comHandle = {
     },
 
     send: function(message) {
+        console.log("Client> ", message);
         var m = JSON.stringify(message);
-        ws.send(m);
+        comHandle.ws.send(m);
     }
 };

@@ -30,7 +30,7 @@ class Game {
 		};
 		this.board = new Board(this);
 		this.board.loadLevel(this.level);
-		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2], this.board.figures);
+		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2], this.board.figures, this.type);
 		console.log('New Game created with ID: ', this.id);
 		console.log('Level used: ', this.level._id);
 	}

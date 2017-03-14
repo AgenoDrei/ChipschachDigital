@@ -96,6 +96,15 @@ module.exports = function(configuration, gameHandler) {
             case "undo": //Not used, only debug
                 break;
             case 'yield':
+                gameHandler.yield(m.gameId, m.joinId).then(function (msg) {
+                    var response = {type: 'yield', player: (msg==1?0:1)};
+                    gameHandler.sendToAll(m.gameId, response);
+                },
+                function (err) {
+                    errorResponse.message = err;
+                    console.log('Server> ', errorResponse);
+                    connection.sendUTF(JSON.stringify(errorResponse));
+                });
                 break;
             case 'end':
                 gameHandler.endGame(m.gameId).then(function(msg) {

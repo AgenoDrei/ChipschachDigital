@@ -75,7 +75,14 @@ var startGame = function() {
 };
 
 var yieldGame = function() {
-    $('#yieldedModal').show();
+    if(comHandle.ws == null)
+        return;
+    var yieldObj = {
+        type: "yield",
+        gameId: gameId,
+        joinId: joinIds[PixiEngine.turn]
+    };
+    comHandle.send(yieldObj);
 };
 
 
@@ -96,7 +103,7 @@ var nextLevelForward = function() {     // assumes ordered level_list of dbCall
 };
 
 var handleMoves = function(origX, origY, x, y) {
-    console.log("Moved!!!");
+    //console.log("Moved!!!");
     var moveObj = {
         type: "turn",
         gameId: gameId,
@@ -106,7 +113,6 @@ var handleMoves = function(origX, origY, x, y) {
         destX: x,
         destY: y
     };
-    console.log("Client> ", moveObj);
     comHandle.send(moveObj);
 }
 
@@ -131,6 +137,8 @@ var handleMessage = function(msg) {
             }
             PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
             break;
+        case "yield":
+            $('#btnNext').hide();
         case "win":
             if (lvl.type === "sp") {
                 if (movesP1 === lvl.minturns) {
@@ -143,7 +151,7 @@ var handleMessage = function(msg) {
                 if (msgObj.player === playerType.PLAYERONE)
                     $('#winmsgGenericYellow').show();
                 else if (msgObj.player === playerType.PLAYERTWO)
-                    $('#winmsgGenericYellow').show();
+                    $('#winmsgGenericBlue').show();
             }
             $('#finishModal').show();
             break;

@@ -1,13 +1,15 @@
 var playerType = require('./playerType');
+var gameType = require('./gameTypes');
 var gameState = require('./gameStates');
 var helper = require('./helper');
 
 class ProgressModel {
-	constructor(p1, p2, p0, figures) {
+	constructor(p1, p2, p0, figures, type) {
 		this.chips = [ p1, p2, p0 ];
 		this.figures = figures;
 		this.score = [0, 0];
 		this.turnCount = 0;
+		this.type = type;
 		console.log("ProgressModel created with these Chips: ", p1, p2, p0);
 	}
 
@@ -16,7 +18,7 @@ class ProgressModel {
 		let chipWin = this.isChipWin();
 		if(chipWin != gameState.VALID_TURN)
 			return chipWin;
-		if(figureWin != gameState.VALID_TURN)
+		if(figureWin != gameState.VALID_TURN && this.type != gameType.SP)
 			return figureWin;
 		return gameState.VALID_TURN;
 	}

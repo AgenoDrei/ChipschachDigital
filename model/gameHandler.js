@@ -91,6 +91,20 @@ module.exports = function(dataAccess) {
 		});
 	};
 
+	this.yield = function(gameId, joinId) {
+		return new Promise(function(fulfill, reject) {
+			getGame(gameId).then(
+				function(game) {
+					debugger;
+                    var currentPlayer = helper.determinePlayer(null, joinId, game.player1, game.player2);
+					fulfill(currentPlayer);
+                },
+				function () {
+                    reject('gameId not found!');
+                });
+		});
+	};
+
 	this.sendToAll = function(gameId, message) {
 		getGame(gameId).then(function(game) {
 			game.sendToAll(message);
