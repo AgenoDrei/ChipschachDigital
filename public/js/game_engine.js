@@ -104,6 +104,7 @@ class GameEngine {
                     }
                     break;
                 case "CHIP":
+                    figure.chip = true;
                     if (cur.color == playerType.PLAYERONE) {
                         figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/ChipYellow.png"].texture), this.stage);
                     } else if (cur.color == playerType.PLAYERTWO) {
@@ -237,7 +238,8 @@ class SelectionHandler {
         let select = this.selections[this.turn];
         if(!select.active) {
             //console.log('New field selected: (' + x + '|' + y + ')' );
-            if(Helper.getFigure(x, y, this.parent.figures) != null) {
+            let figure = Helper.getFigure(x, y, this.parent.figures);
+            if(figure != null && !figure.chip && figure.color == this.turn) {
                 select.setSelection(x, y);
                 this.switchGraphic(false, x, y);
             }
