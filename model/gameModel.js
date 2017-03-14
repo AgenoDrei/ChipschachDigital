@@ -8,6 +8,7 @@ var Chip = require('./chip');
 var playerType = require('./playerType');
 var helper = require('./helper');
 var ProgressModel = require('./progressModel');
+var History = require('./history');
 
 
 class Game {
@@ -31,6 +32,7 @@ class Game {
 		this.board = new Board(this);
 		this.board.loadLevel(this.level);
 		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2], this.board.figures, this.type);
+		this.history = new History(this.board);
 		console.log('New Game created with ID: ', this.id);
 		console.log('Level used: ', this.level._id);
 	}
@@ -64,6 +66,10 @@ class Game {
 			this.toBeNext = helper.getEnemy(this.toBeNext);
 		}
 		return gameStates.VALID_TURN;
+	}
+
+	undo() {
+		return this.history.undo();
 	}
 
     connect(joinId, connection) {

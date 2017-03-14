@@ -93,8 +93,6 @@ module.exports = function(configuration, gameHandler) {
                     connection.sendUTF(JSON.stringify(errorResponse));
                	});
                 break;
-            case "undo": //Not used, only debug
-                break;
             case 'yield':
                 gameHandler.yield(m.gameId, m.joinId).then(function (msg) {
                     var response = {type: 'yield', player: (msg==1?0:1)};
@@ -105,6 +103,16 @@ module.exports = function(configuration, gameHandler) {
                     console.log('Server> ', errorResponse);
                     connection.sendUTF(JSON.stringify(errorResponse));
                 });
+                break;
+            case 'undo':
+                gameHandler.undo(m.gameId, m.joinId).then(function (undoResponses) {
+                        gameHandler.sendToAll(m.gameId, undoResponses[0]);
+                    },
+                    function (err) {
+                        errorResponse.message = err;
+                        console.log('Server> ', errorResponse);
+                        connection.sendUTF(JSON.stringify(errorResponse));
+                    });
                 break;
             case 'end':
                 gameHandler.endGame(m.gameId).then(function(msg) {
