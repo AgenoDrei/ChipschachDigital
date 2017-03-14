@@ -12,6 +12,7 @@ var ProgressModel = require('./progressModel');
 
 class Game {
 	constructor(type, mode, local, level) {
+		debugger;
 		this.toBeNext = playerType.PLAYERONE;
 		this.type = type;
 		this.mode = mode;
@@ -40,7 +41,6 @@ class Game {
 	}
 
 	turn(origX, origY, destX, destY, player) {
-		debugger;
 		if(this.player1.state != conStates.CONNECTED || (this.player2.state != conStates.CONNECTED && !this.local)) {
 			return gameStates.PLAYER_DISCONNECTED;
 		}

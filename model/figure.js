@@ -18,6 +18,9 @@ class Figure {
 	}		
 
 	beat(beater) {
+		if(this.board.parentGame.mode == 'unbeatable') 
+			return false;
+
 		if(helper.enemy(beater.player, this.player)) {
 			this.board.fields[this.x][this.y].setFigure(null);
 			this.board.parentGame.win.captureFigure(this.player, this.constructor.name);
