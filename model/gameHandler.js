@@ -13,7 +13,7 @@ module.exports = function(dataAccess) {
 		return new Promise(function(fulfill, reject) {
 			dataAccess.getLevelById(gameParameters.level).done(function(level) {
 				var type = gameTypes[gameParameters.type];
-				var newGame = new Game(type, gameParameters.mode, gameParameters.local, level);
+				var newGame = new Game(type, gameParameters.mode, gameParameters.local, level, gameParameters.name);
 
 				this.games.push(newGame);
 
@@ -25,11 +25,26 @@ module.exports = function(dataAccess) {
 		});
 	};
 
-	this.getGameList = function() {
+	this.getGameList = function() {		// gets all globalMP games with stats for lobby in menu
 		return new Promise(function(fulfill, reject) {
 			var filteredGames = [];
 			for(var i = 0; i < games.length; i++) {
-				filteredGames.push({ id: games[i].id, level: games[i].level._id });
+				if (games[i].local)
+					continue;
+
+				let filledSeats = 0;
+				if (games[i].player1.state !== conStates.EMPTY)
+                    filledSeats++;
+                if (games[i].player2.state !== conStates.EMPTY)
+                    filledSeats++;
+				filteredGames.push({
+					id: games[i].id,
+					level: games[i].level.name,
+					levelId: games[i].level._id,
+					mode: games[i].mode,
+					name: games[i].name,
+                    filledSeats: filledSeats
+				});
 			}
 			fulfill(filteredGames);
 		});

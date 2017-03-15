@@ -1,6 +1,5 @@
 module.exports = function(app, dataAccess, gameHandler) {
-    var availLvls = [],
-        nameDict = {},
+        var nameDict = {},
         descrDict = {};
 
     app.get('/', function(req, res) {
@@ -37,28 +36,22 @@ module.exports = function(app, dataAccess, gameHandler) {
             {id: 'king', name: 'König'}
         ];
 
-        dataAccess.getAllLevelIds().then(function(obtainedLvls) {
-            // gameHandler.getGameList(function(filteredGames) {        // TODO: not the right way, but not working like this anyways ^^
+        dataAccess.getAllLevelIds().done(function(obtainedLvls) {
+            gameHandler.getGameList().done(function(filteredGames) {        // TODO: not the right way, but not working like this anyways ^...^
+                res.render('menu', {
+                    iconRows: iconRows,
+                    accTypes: accTypes,
+                    availSubtypes: availSubtypes,
+                    availLvls: obtainedLvls,
+                    globalGames: filteredGames
+                });
+                //saved stuff for mitgeben von name and description when separate level called
+                obtainedLvls.forEach(function(lvl) {
+                    nameDict[lvl._id] = lvl.name;
+                    descrDict[lvl._id] = lvl.description;
+                });
 
-            res.render('menu', {
-                iconRows: iconRows,
-                accTypes: accTypes,
-                availSubtypes: availSubtypes,
-                availLvls: obtainedLvls,
-                openGames: [        // TODO: exchange for real available levels
-                    {id: 'dummyId1', name: 'Please Join Me!', level: 'dummyLvl1', player_count: 1},
-                    {id: 'dummyId2', name: 'My game is so nice', level: 'dummyLvl2', player_count: 2},
-                    {id: 'dummyId3', name: 'Test game', level: 'dummyLvl3', player_count: 1}
-                ]
             });
-            //saved stuff for mitgeben von name and description when separate level called
-            this.availLvls = obtainedLvls;
-            obtainedLvls.forEach(function(lvl) {
-                nameDict[lvl._id] = lvl.name;
-                descrDict[lvl._id] = lvl.description;
-            });
-
-            // });
         });
     });
 
@@ -77,12 +70,31 @@ module.exports = function(app, dataAccess, gameHandler) {
             subtype: req.params.subtype,
             name: nameDict[req.params.levelId],
             descr: descrDict[req.params.levelId],
-            footer: footerText,
+            footer: footerText
         });
     });
 
     app.get('/global/:gameId', function(req, res) {
-        //TODO
+        gameHandler.getGameList().done(function(filteredGames) {
+            filteredGames.forEach(function(game) {
+                if (game.id === req.params.gameId) {
+
+                    if (game.filledSeats === 2) {
+                        res.render('error', {error: 'Das globale Mehrspielerspiel ist bereits voll.'});
+                    } else {
+                        res.render('playground', {
+                            type: 'GLOBAL',
+                            subtype: 'NotDefined',
+                            name: game.name,
+                            descr: 'Ein globales Mehrspielerspiel.',
+                            footer: descrDict[game.levelId]
+                        });
+                    }
+
+                }
+            });
+        });
+
     });
 
     app.get('/editor', function(req, res) {

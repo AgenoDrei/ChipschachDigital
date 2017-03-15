@@ -12,7 +12,8 @@ var History = require('./history');
 
 
 class Game {
-	constructor(type, mode, local, level) {
+	constructor(type, mode, local, level, name) {
+		this.name = name;
 		this.toBeNext = playerType.PLAYERONE;
 		this.type = type;
 		this.mode = mode;
@@ -35,6 +36,7 @@ class Game {
 		this.history = new History(this.board);
 		console.log('New Game created with ID: ', this.id);
 		console.log('Level used: ', this.level._id);
+        console.log('Level named: ', this.name);
 	}
 
 	getId() {
@@ -77,11 +79,11 @@ class Game {
     	var player2 = this.player2;
         return new Promise(function(fulfill, reject) {
             if (joinId == player1.joinId && player1.state == conStates.JOINED) {
-                player1.connection = connection
+                player1.connection = connection;
                 player1.state = conStates.CONNECTED;
                 fulfill('Player 1');
             } else if (joinId == player2.joinId && player2.state == conStates.JOINED) {
-                player1.connection = connection
+                player2.connection = connection;
                 player2.state = conStates.CONNECTED;
                 fulfill('Player 2');
             }
@@ -96,6 +98,7 @@ class Game {
     		this.player1.connection.sendUTF(JSON.stringify(message));
     		this.player2.connection.sendUTF(JSON.stringify(message));
     	} catch(e) {
+    		console.log('Error on sending to all in game...');
     	}
     }
 

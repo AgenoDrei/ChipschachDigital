@@ -1,4 +1,4 @@
-<div id="startModal" class="modal show" role="dialog">
+<div id="startModal" class="modal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -9,10 +9,18 @@
             <div class="modal-body" style="text-align: center">
                 <img src="/img/logoSm.png" height="150px" />
                 <h3 id="lvlDescr">
-                    <%= descr %>
+                    <% if (type == 'GLOBAL') {%>
+                        Bitte warte auf deinen Gegner.
+                    <% } else  { %>
+                        <%= descr %>
+                    <% } %>
                 </h3>
                 <% if (type == 'SP') { %>
                     <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
+                <% } else if (type == 'GLOBAL') { %>
+                    <center>
+                        <div class="loader"></div>
+                    </center>
                 <% } else { %>
                     <form>
                         <% if (subtype == 'king') { %>
@@ -36,7 +44,7 @@
                                 </label>
                             </div>
                         <% } %>
-                        <button type="button" class="btn btn-success btn-lg" onclick="loadAndRegister('checkFromRadio', startGame);">Start!</button>
+                        <button type="button" class="btn btn-success btn-lg" onclick="loadAndRegisterLocal('checkFromRadio', startGame);">Start!</button>
                     </form>
                 <% } %>
             </div>
