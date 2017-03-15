@@ -1,6 +1,5 @@
 module.exports = function(app, dataAccess, gameHandler) {
-    var availLvls = [],
-        nameDict = {},
+        var nameDict = {},
         descrDict = {};
 
     app.get('/', function(req, res) {
@@ -47,7 +46,6 @@ module.exports = function(app, dataAccess, gameHandler) {
                     globalGames: filteredGames
                 });
                 //saved stuff for mitgeben von name and description when separate level called
-                this.availLvls = obtainedLvls;
                 obtainedLvls.forEach(function(lvl) {
                     nameDict[lvl._id] = lvl.name;
                     descrDict[lvl._id] = lvl.description;

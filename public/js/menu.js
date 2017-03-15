@@ -17,10 +17,43 @@ var adjustCss= function() {
     });
 };
 
+// $( "#createGame" ).submit(function(e) {
+//     alert( "Handler for .submit() called." );
+//     // e.preventDefault();
+//     return false;
+// });
+
 
 window.onresize = function() {
     adjustCss();
 };
 $('document').ready(function() {
     adjustCss();
+
+    $('#createGame').on('submit', function(e){
+        // TODO: formal html5 validating and form parameter picking...
+        let name = $('#newName').val(),
+            level = $('#newLevel').val(),
+            mode = $('input[name="gameMode"]:checked').val();
+
+        if (mode === undefined) {
+            toastr.warning('Bitte wähle einen Modus für das neue Spiel aus.');
+        } else if (name === "") {
+            toastr.warning('Bitte benenne deine neues Spiel.');
+        } else {
+            var newGame = {
+                type: 'MP',
+                local: 'false',
+                name: name,
+                level: level,
+                mode: mode
+            };
+
+            $.post('/api/v1/game', newGame, function(res) {
+                toastr.info('game created');
+            });
+        }
+
+        e.preventDefault();
+    });
 });

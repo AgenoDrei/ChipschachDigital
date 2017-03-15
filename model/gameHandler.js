@@ -32,8 +32,6 @@ module.exports = function(dataAccess) {
 				if (games[i].local)
 					continue;
 
-
-
 				let filledSeats = 0;
 				if (games[i].player1.state !== conStates.EMPTY)
                     filledSeats++;
@@ -42,6 +40,7 @@ module.exports = function(dataAccess) {
 				filteredGames.push({
 					id: games[i].id,
 					level: games[i].level.name,
+					mode: games[i].mode,
 					name: games[i].name,
                     filledSeats: filledSeats
 				});
