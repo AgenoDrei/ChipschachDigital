@@ -1,0 +1,24 @@
+<div id="finishModal" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    <%= name %>
+                </h4>
+            </div>
+            <div class="modal-body" style="text-align: center">
+                <img src="/img/logoSm.png" height="150px" />
+                <h3>
+                    <p id="winmsgYielded">Das Level wurde aufgegeben.</p>
+                    <p id="winmsgGenericYellow">Gelb hat das Spiel gewonnen!</p>
+                    <p id="winmsgGenericBlue">Blau hat das Spiel gewonnen!</p>
+                    <p id="winmsgMinturnsSuccess">Du hast das Level mit minimaler Zugzahl beendet, Glückwunsch!</p>
+                    <p id="winmsgMinturnsFailed">Du hast das Level beendet, aber du kannst das auch noch mit weniger Zügen.</p>
+                </h3>
+                <button id="btnBack" type="button" class="btn btn-warning btn-lg" onclick="window.location ='/';">Zurück zum Menü</button>
+                <button id="btnRepeat" type="button" class="btn btn-info btn-lg" onclick="window.location.reload();">Nochmal spielen</button>
+                <button id="btnNext" type="button" class="btn btn-success btn-lg" onclick="nextLevelForward();">Nächstes Level</button>
+            </div>
+        </div>
+    </div>
+</div>

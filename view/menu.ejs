@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <% include ./partials/head %>
+
+    <script src="/js/menu.js"></script>
+    <title>Chipschach Digital</title>
+    <link rel="stylesheet" type="text/css" href="/css/menu.css">
+</head>
+
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 col-xs-1"></div>
+        <div class="col-lg-8 col-xs-10">
+                <% iconRows.forEach(function(row) { %>
+                <div class="row innerrow">
+                    <% row.forEach(function(icon) { %>
+                    <div class="col-xs-4">
+                        <% if (icon.id == 'exit') { %>
+                        <a class="menuIcon" href="http://www.schach-fuer-kids.de/" style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+                            <p><%= icon.name %></p>
+                        </a>
+                        <% } else if (icon.id == 'editor') {%>
+                        <a class="menuIcon" href="/editor" style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+                            <p><%= icon.name %></p>
+                        </a>
+                        <% } else if (icon.id != '') {%>
+                        <a class="menuIcon" data-toggle="modal" data-target="#<%= icon.id %>"
+                           style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+                            <p><%= icon.name %></p>
+                        </a>
+                        <% } else { %>
+                        <a class="menuIcon" style="cursor:default;"></a>
+                        <% } %>
+                    </div>
+                    <% }); %>
+                </div>
+                <% }); %>
+        </div>
+        <div class="col-lg-2 col-xs-1"></div>
+    </div>
+</div>
+
+<% include partials/modal_menu_spMpMini %>
+<% include partials/modal_impressum %>
+<% include partials/modal_menu_mpGlobalLobby %>
+
+</body>
+</html>

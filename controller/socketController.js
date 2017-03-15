@@ -63,14 +63,21 @@ module.exports = function(configuration, gameHandler) {
         // Evaluation
         switch (m.type) { //see protocol
             case "hello":
-                gameHandler.getGame(m.gameId).then(function(game) {
-                    game.connect(m.joinId, connection).then(function(player) {
+                gameHandler.getGame(m.gameId).done(function(game) {
+                    game.connect(m.joinId, connection).done(function(player) {
                         var response = {
                             type: "hello",
                             message: "You entered game " + game.getId() + " as " + player
                         };
                         console.log('Server> ', response);
                         connection.sendUTF(JSON.stringify(response));
+                        if (player == "Player 2") {
+                            console.log('Server> Am going to start', m.gameId);
+                            gameHandler.sendToAll(m.gameId, {
+                                type: "start",
+                                message: "Auf die Plätze, fertig, los!"
+                            });
+                        }
                     },
                     function(err) {
                         errorResponse.message = err;
@@ -80,8 +87,7 @@ module.exports = function(configuration, gameHandler) {
                 });
                 break;
             case "turn": // Client sends a turn order
-               	gameHandler.turn(m.gameId, m.joinId, connection, m.origX, m.origY, m.destX, m.destY).then(function(msg) {
-               		console.log('Server> ', msg);
+               	gameHandler.turn(m.gameId, m.joinId, connection, m.origX, m.origY, m.destX, m.destY).done(function(msg) {
                     gameHandler.sendToAll(m.gameId, m);
                     if(msg > 0) {
                         var response = {type : "win", player: (msg==1?0:1)};
@@ -94,12 +100,31 @@ module.exports = function(configuration, gameHandler) {
                     connection.sendUTF(JSON.stringify(errorResponse));
                	});
                 break;
-            case "undo": //Not used, only debug
-                break;
             case 'yield':
+                gameHandler.yield(m.gameId, m.joinId).done(function (msg) {
+                    var response = {type: 'yield', player: (msg==1?0:1)};
+                    gameHandler.sendToAll(m.gameId, response);
+                },
+                function (err) {
+                    errorResponse.message = err;
+                    console.log('Server> ', errorResponse);
+                    connection.sendUTF(JSON.stringify(errorResponse));
+                });
+                break;
+            case 'undo':
+                gameHandler.undo(m.gameId, m.joinId).done(function (undoResponses) {
+                        gameHandler.sendToAll(m.gameId, undoResponses.move);
+                        if(undoResponses.recreate != null)
+                            gameHandler.sendToAll(m.gameId, undoResponses.recreate);
+                    },
+                    function (err) {
+                        errorResponse.message = err;
+                        console.log('Server> ', errorResponse);
+                        connection.sendUTF(JSON.stringify(errorResponse));
+                    });
                 break;
             case 'end':
-                gameHandler.endGame(m.gameId).then(function(msg) {
+                gameHandler.endGame(m.gameId).done(function(msg) {
                     var response = { type: 'exit', msg: msg };
                     connection.sendUTF(JSON.stringify(response));
                 }, function(err) {

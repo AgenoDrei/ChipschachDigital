@@ -8,10 +8,12 @@ var Chip = require('./chip');
 var playerType = require('./playerType');
 var helper = require('./helper');
 var ProgressModel = require('./progressModel');
+var History = require('./history');
 
 
 class Game {
-	constructor(type, mode, local, level) {
+	constructor(type, mode, local, level, name) {
+		this.name = name;
 		this.toBeNext = playerType.PLAYERONE;
 		this.type = type;
 		this.mode = mode;
@@ -30,16 +32,17 @@ class Game {
 		};
 		this.board = new Board(this);
 		this.board.loadLevel(this.level);
-		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2]);
+		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2], this.board.figures, this.type);
+		this.history = new History(this.board);
 		console.log('New Game created with ID: ', this.id);
 		console.log('Level used: ', this.level._id);
+        console.log('Level named: ', this.name);
 	}
 
 	getId() {
 		return this.id;
 	}
 
-	//TODO: Test for win
 	turn(origX, origY, destX, destY, player) {
 		if(this.player1.state != conStates.CONNECTED || (this.player2.state != conStates.CONNECTED && !this.local)) {
 			return gameStates.PLAYER_DISCONNECTED;
@@ -56,7 +59,8 @@ class Game {
 		} else {
 			currentFigure.move(destX, destY);
 		}
-		var winner = this.win.checkProgress()
+		this.win.countUpTurn();
+		var winner = this.win.checkProgress();
 		if(winner != gameStates.VALID_TURN) {
 			return winner;
 		}
@@ -66,16 +70,20 @@ class Game {
 		return gameStates.VALID_TURN;
 	}
 
+	undo() {
+		return this.history.undo();
+	}
+
     connect(joinId, connection) {
     	var player1 = this.player1;
     	var player2 = this.player2;
         return new Promise(function(fulfill, reject) {
             if (joinId == player1.joinId && player1.state == conStates.JOINED) {
-                player1.connection = connection
+                player1.connection = connection;
                 player1.state = conStates.CONNECTED;
                 fulfill('Player 1');
             } else if (joinId == player2.joinId && player2.state == conStates.JOINED) {
-                player1.connection = connection
+                player2.connection = connection;
                 player2.state = conStates.CONNECTED;
                 fulfill('Player 2');
             }
@@ -85,14 +93,17 @@ class Game {
 
     //ToDo: Refactor
     sendToAll(message) {
+		console.log("Server> ", message);
     	try {
     		this.player1.connection.sendUTF(JSON.stringify(message));
     		this.player2.connection.sendUTF(JSON.stringify(message));
     	} catch(e) {
+    		console.log('Error on sending to all in game...');
     	}
     }
 
     endGame() {
+        console.log("Server> Game finished");
     	try {
     		this.player1.connection.sendUTF('{"type": "exit"}');
     		this.player2.connection.sendUTF('{"type": "exit"}');

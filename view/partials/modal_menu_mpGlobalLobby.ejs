@@ -1,0 +1,73 @@
+<div id="mp_g" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Online Multiplayer Lobby</h4>
+            </div>
+            <div class="modal-body">
+                <div class="globalLobby openGameList">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Spielname</th>
+                                <th>Level</th>
+                                <th><center>Besetzung</center></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% globalGames.forEach(function(game) { %>
+                            <tr>
+                                <td><%=game.name%></td>
+                                <td>
+                                    <%=game.level%><br>(schlagen<% if (game.mode == 'unbeatable') {%>aus<%} else {%>an<%} %>)
+                                </td>
+                                <td><center>
+                                    <%=game.filledSeats%>/2
+                                </center></td>
+                                <td><center>
+                                    <% if (game.filledSeats < 2) {%>
+                                    <a onclick="redirectGlobal('<%=game.id%>');" class="btn btn-primary btn-sm">Beitreten</a>
+                                    <% } else { %>
+                                    <a class="btn btn-danger btn-sm disabled">Bereits voll</a>
+                                    <% } %>
+                                </center></td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="globalLobby createNewGame">
+                    <h4>
+                        ... oder ein eigenes Spiel erstellen?
+                    </h4>
+                    <form id="createGame">
+                        <label for="newName">Spielname</label>
+                        <input id="newName" class="form-control" type="text" placeholder="Name">
+                        <label for="newLevel">Level</label>
+                        <select id="newLevel" class="form-control">
+                            <% availLvls.forEach(function(lvl) { %>
+                                <%if (lvl.type == 'mp') { %>
+                                <option value="<%= lvl._id %>"><%= lvl.name %></option>
+                                <% }; %>
+                            <% }); %>
+                        </select>
+                        <div class="radio">
+                            <label><input type="radio" name="gameMode" value="unbeatable">Figuren nicht schlagbar</label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="gameMode" value="beatable">Figuren schlagbar
+                            </label>
+                        </div>
+                        <input class="btn btn-primary" type="submit" value="Spiel erstellen">
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                Hier kannst du ein neues Spiel erstellen oder bereits bestehenden Spielen beitreten.
+            </div>
+        </div>
+    </div>
+</div>
