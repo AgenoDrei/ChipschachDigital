@@ -88,10 +88,13 @@ class Game {
     //ToDo: Refactor
     sendToAll(message) {
 		console.log("Server> ", message);
+		console.log(this.player1);
+        console.log(this.player2);
     	try {
     		this.player1.connection.sendUTF(JSON.stringify(message));
     		this.player2.connection.sendUTF(JSON.stringify(message));
     	} catch(e) {
+    		console.log('Error on sending to all in game...');
     	}
     }
 

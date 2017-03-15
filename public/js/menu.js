@@ -17,6 +17,10 @@ var adjustCss= function() {
     });
 };
 
+var redirectGlobal = function(gameId) {
+    window.location = '/global/' + gameId;
+};
+
 window.onresize = function() {
     adjustCss();
 };
@@ -43,10 +47,7 @@ $('document').ready(function() {
             };
 
             $.post('/api/v1/game', newGame, function(res) {
-                let gameId = res.gameId;
-                $.get('/api/v1/game/' + gameId, function(res) {
-                    window.location = '/global/' + gameId;
-                });
+                redirectGlobal(res.gameId);
             });
         }
 

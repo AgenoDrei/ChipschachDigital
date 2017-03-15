@@ -20,7 +20,7 @@ var adjustCss= function() {
     });
 };
 
-var loadAndRegister = function(modeIdentifier, cb) {
+var loadAndRegisterLocal = function(modeIdentifier, cb) {    // loading & registering local levels
     let split = window.location.href.split('/');
     let type = split[3].toUpperCase(),
         // subtype = split[4],
@@ -53,7 +53,23 @@ var loadAndRegister = function(modeIdentifier, cb) {
             });
         });
     });
-}
+};
+
+var loadAndRegisterGlobal = function() {
+    $.get('/api/v1/game/' + gameId, function(res) {     // register yourself
+        joinIds.push(res.joinId);       // joinIDs will only have length ONE in this case
+        $.get('/api/v1/game', function(res) {
+            res.forEach(function(globalGame) {
+                if (globalGame.id === gameId) {
+                    $.get('/api/v1/level/' + globalGame.levelId, function (res) {
+                        lvl = res;
+                        comHandle.connect(host, "4001", handleMessage, gameId, joinIds[0]);
+                    });
+                }
+            })
+        });
+    });
+};
 
 var startGame = function() {
     if (lvl !== undefined) {
@@ -78,6 +94,8 @@ var startGame = function() {
                 PixiEngine.render();
             });
         });
+
+        adjustCss();
     } else      // if hitting start just fast enough lvl is not loaded already
         toastr.info('Level wird noch geladen, einen Moment Geduld noch ...');
 };
@@ -129,6 +147,10 @@ var handleMessage = function(msg) {
     console.log("Server> ", msgObj);
 
     switch(msgObj.type) {
+        case "start":
+            console.log('Game about to start..');
+            // startGame();
+            break;
         case "turn":
             if (PixiEngine.turn === playerType.PLAYERONE) {
                 movesP1++;
@@ -193,7 +215,11 @@ $('document').ready(function() {
     $('#chipCounterP2').val(chipsP2);
 
     $('#startModal').show();
-    if (window.location.href.split('/')[3] === 'sp') {
-        loadAndRegister('unbeatable', adjustCss);
+    let split = window.location.href.split('/');
+    if (split[3] === 'sp') {
+        loadAndRegisterLocal('unbeatable', undefined);
+    } else if (split[3] === 'global') {
+        gameId = split[4];
+        loadAndRegisterGlobal();
     }
 });

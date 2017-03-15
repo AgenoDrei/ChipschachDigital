@@ -77,7 +77,6 @@ module.exports = function(app, dataAccess, gameHandler) {
     app.get('/global/:gameId', function(req, res) {
         gameHandler.getGameList().done(function(filteredGames) {
             filteredGames.forEach(function(game) {
-                console.log(game);
                 if (game.id === req.params.gameId) {
 
                     if (game.filledSeats === 2) {

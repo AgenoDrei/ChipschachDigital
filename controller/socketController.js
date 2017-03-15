@@ -71,6 +71,13 @@ module.exports = function(configuration, gameHandler) {
                         };
                         console.log('Server> ', response);
                         connection.sendUTF(JSON.stringify(response));
+                        if (player == "Player 2") {
+                            console.log('Server> Am going to start', m.gameId);
+                            gameHandler.sendToAll(m.gameId, {
+                                type: "start",
+                                message: "Auf die Plätze, fertig, los!"
+                            });
+                        }
                     },
                     function(err) {
                         errorResponse.message = err;

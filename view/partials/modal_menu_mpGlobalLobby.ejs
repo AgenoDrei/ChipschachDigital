@@ -21,20 +21,14 @@
                             <tr>
                                 <td><%=game.name%></td>
                                 <td>
-                                    <%=game.level%><br>(schlagen
-                                    <% if (game.mode == 'unbeatable') { %>
-                                    aus
-                                    <% } else { %>
-                                    an
-                                    <% } %>
-                                    )
+                                    <%=game.level%><br>(schlagen<% if (game.mode == 'unbeatable') {%>aus<%} else {%>an<%} %>)
                                 </td>
                                 <td><center>
                                     <%=game.filledSeats%>/2
                                 </center></td>
                                 <td><center>
                                     <% if (game.filledSeats < 2) {%>
-                                    <a href="/global/<%=game.id%>" class="btn btn-primary btn-sm">Beitreten</a>
+                                    <a onclick="redirectGlobal('<%=game.id%>');" class="btn btn-primary btn-sm">Beitreten</a>
                                     <% } else { %>
                                     <a class="btn btn-danger btn-sm disabled">Bereits voll</a>
                                     <% } %>
