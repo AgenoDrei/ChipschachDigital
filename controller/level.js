@@ -26,7 +26,7 @@ module.exports = function(dataAccess) {
 			return res.status(500).json({ msg: 'You have to specify a level name'});
 		}
 
-		dataAccess.getLevelById(levelId).then(function(level) {
+		dataAccess.getLevelById(levelId).done(function(level) {
 			return res.json(level);
 		},
 		function(err) {
@@ -38,7 +38,7 @@ module.exports = function(dataAccess) {
 
 	router.get('/level', function(req, res, next) {
 		console.log('API /level/all called!');
-		dataAccess.getAllLevelIds().then(function(ids) {
+		dataAccess.getAllLevelIds().done(function(ids) {
 			return res.json(ids);
 		},
 
@@ -55,7 +55,7 @@ module.exports = function(dataAccess) {
 			return res.status(500).json(validLevel);
 		}
 		//console.log(dataAccess.createLevel);
-		dataAccess.createLevel(level).then(function() {
+		dataAccess.createLevel(level).done(function() {
 			return res.send({ msg: 'Created Level successfull' });
 		},
 		function(err) {

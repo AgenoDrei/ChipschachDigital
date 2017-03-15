@@ -46,6 +46,71 @@ class GameEngine {
             .load(callback);
     }
 
+    createFigure(x, y, size, color, type) {
+        let figure = new Figure(x, y, size, color);
+        switch (type) {
+            case "ROOK":
+                if (color == playerType.PLAYERTWO) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/RookBlue.png"].texture), this.stage);
+                } else if (color == playerType.PLAYERONE) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/RookYellow.png"].texture), this.stage);
+                }
+                break;
+            case "KNIGHT":
+                if (color == playerType.PLAYERTWO) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/KnightBlue.png"].texture), this.stage);
+                } else if (color == playerType.PLAYERONE) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/KnightYellow.png"].texture), this.stage);
+                }
+                break;
+            case "BISHOP":
+                if (color == playerType.PLAYERTWO) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/BishopBlue.png"].texture), this.stage);
+                } else if (color == playerType.PLAYERONE) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/BishopYellow.png"].texture), this.stage);
+                }
+                break;
+            case "QUEEN":
+                if (color == playerType.PLAYERTWO) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/QueenBlue.png"].texture), this.stage);
+                } else if (color == playerType.PLAYERONE) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/QueenYellow.png"].texture), this.stage);
+                }
+                break;
+            case "KING":
+                if (color == playerType.PLAYERTWO) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/KingBlue.png"].texture), this.stage);
+                } else if (color == playerType.PLAYERONE) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/KingYellow.png"].texture), this.stage);
+                }
+                break;
+            case "PAWN":
+                if (color == playerType.PLAYERTWO) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/PawnBlue.png"].texture), this.stage);
+                } else if (color == playerType.PLAYERONE) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/PawnYellow.png"].texture), this.stage);
+                }
+                break;
+            case "CHIP":
+                figure.chip = true;
+                if (color == playerType.PLAYERONE) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/ChipYellow.png"].texture), this.stage);
+                } else if (color == playerType.PLAYERTWO) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/ChipBlue.png"].texture), this.stage);
+                } else if (color == playerType.BOTH) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/ChipGreen.png"].texture), this.stage);
+                } else if (color == playerType.NONE) {
+                    figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/ChipRed.png"].texture), this.stage);
+                }
+                break;
+            default:
+                console.log('Invalid figure type!');
+                break;
+        }
+        this.figures.push(figure);
+        this.render();
+    }
+
     loadLevel(level, callback) {
         //Background
         this.background = new PIXI.Sprite(PIXI.loader.resources["/img/board.png"].texture);
@@ -59,66 +124,7 @@ class GameEngine {
         //level
         for (let i = 0; i < level.board.length; i++) {
             let cur = level.board[i];
-            let figure = new Figure(cur.x, cur.y, this.figureSize, cur.color);
-            switch (cur.type) {
-                case "ROOK":
-                    if (cur.color == playerType.PLAYERTWO) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/RookBlue.png"].texture), this.stage);
-                    } else if (cur.color == playerType.PLAYERONE) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/RookYellow.png"].texture), this.stage);
-                    }
-                    break;
-                case "KNIGHT":
-                    if (cur.color == playerType.PLAYERTWO) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/KnightBlue.png"].texture), this.stage);
-                    } else if (cur.color == playerType.PLAYERONE) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/KnightYellow.png"].texture), this.stage);
-                    }
-                    break;
-                case "BISHOP":
-                    if (cur.color == playerType.PLAYERTWO) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/BishopBlue.png"].texture), this.stage);
-                    } else if (cur.color == playerType.PLAYERONE) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/BishopYellow.png"].texture), this.stage);
-                    }
-                    break;
-                case "QUEEN":
-                    if (cur.color == playerType.PLAYERTWO) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/QueenBlue.png"].texture), this.stage);
-                    } else if (cur.color == playerType.PLAYERONE) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/QueenYellow.png"].texture), this.stage);
-                    }
-                    break;
-                case "KING":
-                    if (cur.color == playerType.PLAYERTWO) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/KingBlue.png"].texture), this.stage);
-                    } else if (cur.color == playerType.PLAYERONE) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/KingYellow.png"].texture), this.stage);
-                    }
-                    break;
-                case "PAWN":
-                    if (cur.color == playerType.PLAYERTWO) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/PawnBlue.png"].texture), this.stage);
-                    } else if (cur.color == playerType.PLAYERONE) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/PawnYellow.png"].texture), this.stage);
-                    }
-                    break;
-                case "CHIP":
-                    figure.chip = true;
-                    if (cur.color == playerType.PLAYERONE) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/ChipYellow.png"].texture), this.stage);
-                    } else if (cur.color == playerType.PLAYERTWO) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/ChipBlue.png"].texture), this.stage);
-                    } else if (cur.color == playerType.BOTH) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/ChipGreen.png"].texture), this.stage);
-                    } else if (cur.color == playerType.NONE) {
-                        figure.setSprite(new PIXI.Sprite(PIXI.loader.resources["/img/ChipRed.png"].texture), this.stage);
-                    }
-                    break;
-                default:
-                    break;
-            }
-            this.figures.push(figure);
+            this.createFigure(cur.x, cur.y, this.figureSize, cur.color, cur.type);
         }
         callback();
     }

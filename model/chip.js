@@ -14,7 +14,8 @@ class Chip extends Figure{
 
 	beat(beater) {
 		if(helper.enemy(beater.player, this.player)) {
-			this.board.fields[this.x][this.y].setFigure(null);
+            this.board.parentGame.history.setLastBeat(this.board.fields[this.x][this.y].getFigure());
+            this.board.fields[this.x][this.y].setFigure(null);
 			this.board.parentGame.win.captureChip(beater.player, this.player);
 			return true;
 		}

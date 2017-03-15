@@ -11,7 +11,7 @@ class Figure {
 	}
 
 	move(destX, destY) {
-		this.board.parentGame.history.setLastMove(this.x, this.y, this);
+		this.board.parentGame.history.setLastMove(destX, destY, this);
 		this.board.getField(this.x,this.y).setFigure(null);
 		this.x = destX;
 		this.y = destY;

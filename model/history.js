@@ -17,6 +17,8 @@ class History {
         this.lastPosition.newX = destX;
         this.lastPosition.newY = destY;
         this.movedFigure = movedFigure;
+
+        console.log('Saved last move: ', this.lastPosition);
     }
 
     setLastBeat(beatFigure) {
@@ -24,8 +26,13 @@ class History {
     }
 
     undo() {
+        if(this.lastPosition.x == -1)
+            return {move: {type: 'error', msg: 'Undo not possible'}};
+
         if(this.beatFigure != null)
             this.board.getField(this.movedFigure.x, this.movedFigure.y).setFigure(this.beatFigure);
+        else
+            this.board.getField(this.movedFigure.x, this.movedFigure.y).setFigure(null);
         this.board.getField(this.lastPosition.x, this.lastPosition.y).setFigure(this.movedFigure);
         this.movedFigure.x = this.lastPosition.x;
         this.movedFigure.y = this.lastPosition.y;
@@ -40,9 +47,10 @@ class History {
             recreateMessage = null;
 
         moveMessage = {
-            type: "turn",
-            origX: this.movedFigure.newX,
-            origY: this.movedFigure.newY,
+            type: "undo",
+            player: this.movedFigure.player,
+            origX: this.lastPosition.newX,
+            origY: this.lastPosition.newY,
             destX: this.lastPosition.x,
             destY: this.lastPosition.y
         };

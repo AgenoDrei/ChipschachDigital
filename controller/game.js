@@ -31,7 +31,7 @@ module.exports = function(dataAccess, gameHandler) {
 		if(validGame != undefined) {
 			return res.status(500).json(validGame);
 		}
-		gameHandler.createGame(game).then(function(gameId) {
+		gameHandler.createGame(game).done(function(gameId) {
 			return res.json({ gameId: gameId });
 		}, function(err) {
 			return res.status(500).json({ msg: err });
@@ -40,7 +40,7 @@ module.exports = function(dataAccess, gameHandler) {
 
 	router.get('/game', function(req, res, next) {
 		console.log('API GET /game called');
-		gameHandler.getGameList().then(function(games) {
+		gameHandler.getGameList().done(function(games) {
 			return res.json(games);
 		}, function(err) {
 			return res.status(500).json({ msg: err });
@@ -53,7 +53,7 @@ module.exports = function(dataAccess, gameHandler) {
 		if(gameId == undefined){
 			return res.status(500).json({ msg: 'No gameId defined!' });
 		}
-		gameHandler.joinGame(gameId).then(function(joinId) {
+		gameHandler.joinGame(gameId).done(function(joinId) {
 			return res.json({ joinId: joinId, msg: "You joined the game successfull" });
 		}, function(err){
 			return res.status(500).json({ msg: err });
