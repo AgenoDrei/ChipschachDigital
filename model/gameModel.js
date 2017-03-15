@@ -73,11 +73,11 @@ class Game {
     	var player2 = this.player2;
         return new Promise(function(fulfill, reject) {
             if (joinId == player1.joinId && player1.state == conStates.JOINED) {
-                player1.connection = connection
+                player1.connection = connection;
                 player1.state = conStates.CONNECTED;
                 fulfill('Player 1');
             } else if (joinId == player2.joinId && player2.state == conStates.JOINED) {
-                player1.connection = connection
+                player2.connection = connection;
                 player2.state = conStates.CONNECTED;
                 fulfill('Player 2');
             }
@@ -88,8 +88,6 @@ class Game {
     //ToDo: Refactor
     sendToAll(message) {
 		console.log("Server> ", message);
-		console.log(this.player1);
-        console.log(this.player2);
     	try {
     		this.player1.connection.sendUTF(JSON.stringify(message));
     		this.player2.connection.sendUTF(JSON.stringify(message));

@@ -148,8 +148,8 @@ var handleMessage = function(msg) {
 
     switch(msgObj.type) {
         case "start":
-            console.log('Game about to start..');
-            // startGame();
+            console.log('Game about to start!');
+            startGame();
             break;
         case "turn":
             if (PixiEngine.turn === playerType.PLAYERONE) {
