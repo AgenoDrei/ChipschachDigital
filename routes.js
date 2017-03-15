@@ -36,8 +36,8 @@ module.exports = function(app, dataAccess, gameHandler) {
             {id: 'king', name: 'König'}
         ];
 
-        dataAccess.getAllLevelIds().then(function(obtainedLvls) {
-            gameHandler.getGameList().then(function(filteredGames) {        // TODO: not the right way, but not working like this anyways ^...^
+        dataAccess.getAllLevelIds().done(function(obtainedLvls) {
+            gameHandler.getGameList().done(function(filteredGames) {        // TODO: not the right way, but not working like this anyways ^...^
                 res.render('menu', {
                     iconRows: iconRows,
                     accTypes: accTypes,
@@ -70,12 +70,32 @@ module.exports = function(app, dataAccess, gameHandler) {
             subtype: req.params.subtype,
             name: nameDict[req.params.levelId],
             descr: descrDict[req.params.levelId],
-            footer: footerText,
+            footer: footerText
         });
     });
 
     app.get('/global/:gameId', function(req, res) {
-        //TODO
+        gameHandler.getGameList().done(function(filteredGames) {
+            filteredGames.forEach(function(game) {
+                console.log(game);
+                if (game.id === req.params.gameId) {
+
+                    if (game.filledSeats === 2) {
+                        res.render('error', {error: 'Das globale Mehrspielerspiel ist bereits voll.'});
+                    } else {
+                        res.render('playground', {
+                            type: 'GLOBAL',
+                            subtype: 'NotDefined',
+                            name: game.name,
+                            descr: 'Ein globales Mehrspielerspiel.',
+                            footer: descrDict[game.levelId]
+                        });
+                    }
+
+                }
+            });
+        });
+
     });
 
     app.get('/editor', function(req, res) {

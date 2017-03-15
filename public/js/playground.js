@@ -57,7 +57,7 @@ var loadAndRegister = function(modeIdentifier, cb) {
 
 var startGame = function() {
     if (lvl !== undefined) {
-        $('#startModal').removeClass('show');
+        $('#startModal').hide();
         var operationMode;
         if (lvl.type === 'sp')
             operationMode = gameType.SP;
@@ -192,6 +192,8 @@ $('document').ready(function() {
     $('#chipCounterP1').val(chipsP1);
     $('#chipCounterP2').val(chipsP2);
 
-    if (window.location.href.split('/')[3] === 'sp')
+    $('#startModal').show();
+    if (window.location.href.split('/')[3] === 'sp') {
         loadAndRegister('unbeatable', adjustCss);
+    }
 });

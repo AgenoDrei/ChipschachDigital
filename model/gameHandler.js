@@ -40,6 +40,7 @@ module.exports = function(dataAccess) {
 				filteredGames.push({
 					id: games[i].id,
 					level: games[i].level.name,
+					levelId: games[i].level._id,
 					mode: games[i].mode,
 					name: games[i].name,
                     filledSeats: filledSeats

@@ -17,13 +17,6 @@ var adjustCss= function() {
     });
 };
 
-// $( "#createGame" ).submit(function(e) {
-//     alert( "Handler for .submit() called." );
-//     // e.preventDefault();
-//     return false;
-// });
-
-
 window.onresize = function() {
     adjustCss();
 };
@@ -33,7 +26,7 @@ $('document').ready(function() {
     $('#createGame').on('submit', function(e){
         // TODO: formal html5 validating and form parameter picking...
         let name = $('#newName').val(),
-            level = $('#newLevel').val(),
+            levelId = $('#newLevel').val(),
             mode = $('input[name="gameMode"]:checked').val();
 
         if (mode === undefined) {
@@ -45,12 +38,15 @@ $('document').ready(function() {
                 type: 'MP',
                 local: 'false',
                 name: name,
-                level: level,
+                level: levelId,
                 mode: mode
             };
 
             $.post('/api/v1/game', newGame, function(res) {
-                toastr.info('game created');
+                let gameId = res.gameId;
+                $.get('/api/v1/game/' + gameId, function(res) {
+                    window.location = '/global/' + gameId;
+                });
             });
         }
 
