@@ -143,6 +143,7 @@ var handleMoves = function(origX, origY, x, y) {
 }
 
 var handleMessage = function(msg) {
+    let yielded = false;
     var msgObj = JSON.parse(msg.data);
     console.log("Server> ", msgObj);
 
@@ -168,7 +169,10 @@ var handleMessage = function(msg) {
             PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
             break;
         case "yield":
+            $('#winmsgYielded').show();
             $('#btnNext').hide();
+            yielded = true;
+            //NOBREAK ^^
         case "win":
             if (lvl.type === "sp") {
                 if (movesP1 === lvl.minturns) {
@@ -176,7 +180,8 @@ var handleMessage = function(msg) {
                     $('#btnRepeat').hide();
                 }
                 else
-                    $('#winmsgMinturnsFailed').show();
+                    if (!yielded)
+                        $('#winmsgMinturnsFailed').show();
             } else {
                 if (msgObj.player === playerType.PLAYERONE)
                     $('#winmsgGenericYellow').show();
@@ -209,6 +214,7 @@ $('document').ready(function() {
     $('#winmsgGenericBlue').hide();
     $('#winmsgMinturnsSuccess').hide();
     $('#winmsgMinturnsFailed').hide();
+    $('#winmsgYielded').hide();
     $('#moveCounterP1').val(movesP1);
     $('#moveCounterP2').val(movesP2);
     $('#chipCounterP1').val(chipsP1);
