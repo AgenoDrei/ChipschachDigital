@@ -48,7 +48,6 @@ class ProgressModel {
 	}
 
 	captureChip(player, type) {
-		debugger;
 		console.log("chip captured: ", player, type);
 		var currentPlayer = null;
 		if(player == playerType.PLAYERONE) {

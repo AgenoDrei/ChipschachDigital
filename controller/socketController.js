@@ -106,7 +106,6 @@ module.exports = function(configuration, gameHandler) {
                 break;
             case 'undo':
                 gameHandler.undo(m.gameId, m.joinId).done(function (undoResponses) {
-                        debugger;
                         gameHandler.sendToAll(m.gameId, undoResponses.move);
                         if(undoResponses.recreate != null)
                             gameHandler.sendToAll(m.gameId, undoResponses.recreate);

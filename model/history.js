@@ -1,3 +1,5 @@
+const helper = require('./helper');
+
 class History {
     constructor(board) {
         this.board = board;
@@ -29,10 +31,16 @@ class History {
         if(this.lastPosition.x == -1)
             return {move: {type: 'error', msg: 'Undo not possible'}};
 
-        if(this.beatFigure != null)
+        if(this.beatFigure != null && this.beatFigure.x == this.lastPosition.newX && this.beatFigure.y == this.lastPosition.newY) {
             this.board.getField(this.movedFigure.x, this.movedFigure.y).setFigure(this.beatFigure);
-        else
+            debugger;
+            if(this.beatFigure.constructor.name.toUpperCase() == 'CHIP') {
+                this.board.parentGame.win.chips[this.beatFigure.player]++;
+                this.board.parentGame.win.score[this.movedFigure.player]--;
+            }
+        } else
             this.board.getField(this.movedFigure.x, this.movedFigure.y).setFigure(null);
+
         this.board.getField(this.lastPosition.x, this.lastPosition.y).setFigure(this.movedFigure);
         this.movedFigure.x = this.lastPosition.x;
         this.movedFigure.y = this.lastPosition.y;
@@ -55,7 +63,7 @@ class History {
             destY: this.lastPosition.y
         };
 
-        if(this.beatFigure != null) {
+        if(this.beatFigure != null && this.beatFigure.x == this.lastPosition.newX && this.beatFigure.y == this.lastPosition.newY) {
             recreateMessage = {
                 type: "figure",
                 x: this.beatFigure.x,

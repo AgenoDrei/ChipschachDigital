@@ -149,8 +149,13 @@ var handleMessage = function(msg) {
             PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
             break;
         case "undo":
+            let safeSelection = new Selection(msgObj.destX, msgObj.destY);
+            safeSelection.active = true;
+            PixiEngine.selectionHandler.nextTurn(msgObj.player);
             PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
-            PixiEngine.turn = msgObj.player;
+            PixiEngine.selectionHandler.nextTurn(msgObj.player);
+            PixiEngine.selectionHandler.selections[msgObj.player] = safeSelection;
+            PixiEngine.selectionHandler.switchGraphic(false, safeSelection.x, safeSelection.y);
             break;
         case "yield":
             $('#btnNext').hide();
