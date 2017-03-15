@@ -84,13 +84,24 @@ var startGame = function() {
 
 var yieldGame = function() {
     if(comHandle.ws == null)
-        return;
+        throw "Communication Handler not initialzied";
     var yieldObj = {
         type: "yield",
         gameId: gameId,
         joinId: joinIds[PixiEngine.turn]
     };
     comHandle.send(yieldObj);
+};
+
+var undo = function () {
+    if(comHandle.ws == null)
+        throw "Communication Handler not initialzied";
+    var undoObj = {
+        type: "undo",
+        gameId: gameId,
+        joinId: joinIds[PixiEngine.turn]
+    };
+    comHandle.send(undoObj);
 };
 
 
@@ -145,6 +156,15 @@ var handleMessage = function(msg) {
             }
             PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
             break;
+        case "undo":
+            let safeSelection = new Selection(msgObj.destX, msgObj.destY);
+            safeSelection.active = true;
+            PixiEngine.selectionHandler.nextTurn(msgObj.player);
+            PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
+            PixiEngine.selectionHandler.nextTurn(msgObj.player);
+            PixiEngine.selectionHandler.selections[msgObj.player] = safeSelection;
+            PixiEngine.selectionHandler.switchGraphic(false, safeSelection.x, safeSelection.y);
+            break;
         case "yield":
             $('#btnNext').hide();
         case "win":
@@ -163,13 +183,16 @@ var handleMessage = function(msg) {
             }
             $('#finishModal').show();
             break;
+        case "figure":
+            PixiEngine.createFigure(msgObj.x, msgObj.y, PixiEngine.figureSize, msgObj.color, msgObj.figureType);
+            break;
         case "error":
             switch(msgObj.message) {
                 case "INVALID_TURN":
                     toastr.error('Dieser Zug ist nicht erlaubt.');
                     break;
                 default:
-                    toastr.error('MEEP Error!');
+                    toastr.error('Server error!');
             }
             break;
     }

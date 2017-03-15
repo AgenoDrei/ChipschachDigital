@@ -11,7 +11,7 @@ module.exports = function(dataAccess) {
 
 	this.createGame = function(gameParameters) {
 		return new Promise(function(fulfill, reject) {
-			dataAccess.getLevelById(gameParameters.level).then(function(level) {
+			dataAccess.getLevelById(gameParameters.level).done(function(level) {
 				var type = gameTypes[gameParameters.type];
 				var newGame = new Game(type, gameParameters.mode, gameParameters.local, level);
 
@@ -71,7 +71,7 @@ module.exports = function(dataAccess) {
 	this.turn = function(gameId, joinId, connection, origX, origY, destX, destY) {
 		var resTurn = -99;
 		return new Promise(function(fulfill, reject) {
-			getGame(gameId).then(
+			getGame(gameId).done(
 				function(game) {
 					var currentPlayer = helper.determinePlayer(connection, joinId, game.player1, game.player2);
 					if(currentPlayer != playerType.NONE) {
@@ -93,9 +93,8 @@ module.exports = function(dataAccess) {
 
 	this.yield = function(gameId, joinId) {
 		return new Promise(function(fulfill, reject) {
-			getGame(gameId).then(
+			getGame(gameId).done(
 				function(game) {
-					debugger;
                     var currentPlayer = helper.determinePlayer(null, joinId, game.player1, game.player2);
 					fulfill(currentPlayer);
                 },
@@ -105,8 +104,20 @@ module.exports = function(dataAccess) {
 		});
 	};
 
+	this.undo = function (gameId, joinId) {
+        return new Promise(function(fulfill, reject) {
+            getGame(gameId).done(
+                function(game) {
+                    fulfill(game.undo());
+                },
+                function () {
+                    reject('gameId not found!');
+                });
+        });
+    };
+
 	this.sendToAll = function(gameId, message) {
-		getGame(gameId).then(function(game) {
+		getGame(gameId).done(function(game) {
 			game.sendToAll(message);
 		},
 		function(err) {
