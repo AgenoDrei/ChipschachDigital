@@ -9,35 +9,33 @@
 </head>
 
 <body>
-<div class="container">
-<!--     <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> -->
-                <% iconRows.forEach(function(row) { %>
-                <div class="row innerrow">
-                    <% row.forEach(function(icon) { %>
-                    <div class="col-xs-4">
-                        <% if (icon.id == 'exit') { %>
-                        <a class="menuIcon" href="http://www.schach-fuer-kids.de/" style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
-                            <p><%= icon.name %></p>
-                        </a>
-                        <% } else if (icon.id == 'editor') {%>
-                        <a class="menuIcon" href="/editor" style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
-                            <p><%= icon.name %></p>
-                        </a>
-                        <% } else if (icon.id != '') {%>
-                        <a class="menuIcon" data-toggle="modal" data-target="#<%= icon.id %>"
-                           style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
-                            <p><%= icon.name %></p>
-                        </a>
-                        <% } else { %>
-                        <a class="menuIcon" style="cursor:default;"></a>
-                        <% } %>
-                    </div>
-                    <% }); %>
-                </div>
-                <% }); %>
-<!--         </div>
-    </div> -->
+<div class="gridContainer">
+<div class="grid">
+    <% iconRows.forEach(function(row) { %>
+    <div class="gridRow">
+        <% row.forEach(function(icon) { %>
+        <div class="gridCol">
+            <% if (icon.id == 'exit') { %>
+            <a class="menuIcon" href="http://www.schach-fuer-kids.de/" style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+                <p><%= icon.name %></p>
+            </a>
+            <% } else if (icon.id == 'editor') {%>
+            <a class="menuIcon" href="/editor" style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+                <p><%= icon.name %></p>
+            </a>
+            <% } else if (icon.id != '') {%>
+            <a class="menuIcon" data-toggle="modal" data-target="#<%= icon.id %>"
+               style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+                <p><%= icon.name %></p>
+            </a>
+            <% } else { %>
+            <a class="menuIcon" style="cursor:default;"></a>
+            <% } %>
+        </div>
+        <% }); %>
+    </div>
+    <% }); %>
+</div>
 </div>
 
 <% include partials/modal_menu_spMpMini %>
