@@ -5,6 +5,7 @@ var lvl,
     chipsP1 = 0, chipsP2 = 0;
 var boardSize = 0;
 const BOARDLAYERPADDING = 40;
+const BOARDSIZERATIO = 0.5;
 
 var PixiEngine = null;
 
@@ -86,7 +87,9 @@ var startGame = function() {
             'width': boardSize + 2*BOARDLAYERPADDING,
             'height': boardSize + 2*BOARDLAYERPADDING,
             'padding': BOARDLAYERPADDING,
-            'background-image': 'url(/img/board_named.png)'
+            'background': 'url(/img/board_named.png)',
+            'background-size': '100% 100%',
+            'background-repeat': 'no-repeat'
         });
         PixiEngine.init(function() {
             PixiEngine.loadLevel(lvl, function() {
@@ -231,7 +234,8 @@ window.onresize = function() {
 }
 $('document').ready(function() {
     $('[data-toggle="tooltip"]').tooltip();     // enable Bootstrap tooltips
-    boardSize = 560;
+    boardSize = $(window).width() * BOARDSIZERATIO;
+    // boardSize = 560;
 
     $('#winmsgGenericYellow').hide();
     $('#winmsgGenericBlue').hide();
@@ -242,6 +246,10 @@ $('document').ready(function() {
     $('#moveCounterP2').val(movesP2);
     $('#chipCounterP1').val(chipsP1);
     $('#chipCounterP2').val(chipsP2);
+
+    if ($(window).width() < 800 || window.matchMedia("(orientation: portrait)").matches) {
+        toggleSidebar();
+    }
 
     $('#startModal').show();
     let split = window.location.href.split('/');
