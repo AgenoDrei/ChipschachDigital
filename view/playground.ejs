@@ -19,75 +19,61 @@
             Globaler Mehrspieler
         <% } %>
     </title>
-    <link rel="stylesheet" type="text/css" href="/css/simple-sidebar.css">
     <link rel="stylesheet" type="text/css" href="/css/playground.css">
 </head>
 
 <body>
-<div id="wrapper">
-    <div id="sidebar-wrapper">
+<div id="overlay"></div>
+<div id="nav">
+    <div id="btn_menu" onclick="toggleClick();"></div>
 
-        <div class="nav-container" style="top: 0;">
-            <div class="profile-container">
-                <img src="/img/profilPicErsatz.bmp">
-            </div>
-            <div class="counter-container">
-                <img src="/img/arrow.png" />
-                <input type="number" id="moveCounterP1" class="form-control" disabled style="cursor: default;">
-            </div>
-            <div class="counter-container">
-                <img src="/img/ChipGreen.png">
-                <input type="number" id="chipCounterP1" class="form-control" disabled style="cursor: default;">
-            </div>
+    <div class="nav-container" style="top: 0;">
+        <div class="profile-container">
+            <img src="/img/profilPicErsatz.bmp">
         </div>
-
-        <div class="nav-container iconBar">
-            <a href="/">
-                <img src="/img/close.png" title="Zurück zum Hauptmenü" id="close">
-            </a>
-            <a onclick="yieldGame();">
-                <img src="/img/white_flag.png" title="Spiel aufgeben" id="yield">
-            </a>
-            <a onclick="undo();">
-              <img src="../../img/undo.png" title="Zug rückgängig" id="showHelp">
-            </a>
-            <!--<a>
-              <img src="../../img/help/help.png" title="Hilfe anzeigen" id="showHelp">
-            </a> -->
-            <!-- <a>
-              <img src="../img/remis.png" title="Remis anbieten">
-            </a> -->
+        <div class="counter-container">
+            <img src="/img/arrow.png" />
+            <input type="number" id="moveCounterP1" class="form-control" disabled style="cursor: default;">
         </div>
-
-        <% if (type !== 'SP') { %>
-            <div class="nav-container" style="bottom: 0;">
-                <div class="counter-container">
-                    <img src="/img/arrow.png" />
-                    <input type="number" id="moveCounterP2" class="form-control" disabled style="cursor: default;">
-                </div>
-                <div class="counter-container">
-                    <img src="/img/ChipGreen.png">
-                    <input type="number" id="chipCounterP2" class="form-control" disabled style="cursor: default;">
-                </div>
-                <div class="profile-container">
-                    <img src="/img/profilPicErsatz.bmp">
-                </div>
-            </div>
-        <% } %>
-
-    </div>
-    <div id="page-content-wrapper">
-        <div id="sidebar_toggle" onclick="toggleSidebar();"></div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div id="board-layer-behind">
-                        <div id="board-anchor"></div>
-                    </div>
-                </div>
-            </div>
+        <div class="counter-container">
+            <img src="/img/ChipGreen.png">
+            <input type="number" id="chipCounterP1" class="form-control" disabled style="cursor: default;">
         </div>
     </div>
+
+    <div class="nav-container iconBar">
+        <a href="/">
+            <img src="/img/close.png" title="Zurück zum Hauptmenü" id="close">
+        </a>
+        <a onclick="yieldGame();">
+            <img src="/img/white_flag.png" title="Spiel aufgeben" id="yield">
+        </a>
+        <a onclick="undo();">
+            <img src="../../img/undo.png" title="Zug rückgängig" id="showHelp">
+        </a>
+    </div>
+
+    <% if (type !== 'SP') { %>
+    <div class="nav-container" style="bottom: 0;">
+        <div class="counter-container">
+            <img src="/img/arrow.png" />
+            <input type="number" id="moveCounterP2" class="form-control" disabled style="cursor: default;">
+        </div>
+        <div class="counter-container">
+            <img src="/img/ChipGreen.png">
+            <input type="number" id="chipCounterP2" class="form-control" disabled style="cursor: default;">
+        </div>
+        <div class="profile-container">
+            <img src="/img/profilPicErsatz.bmp">
+        </div>
+    </div>
+    <% } %>
+</div>
+
+<div id="board-container">
+    <!--<div id="turnYellow"></div>-->
+    <!--<div id="turnBlue"></div>-->
+    <div id="board-anchor"></div>
 </div>
 
 <% include ./partials/modal_start %>

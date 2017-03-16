@@ -1,28 +1,42 @@
 /*.container > .row {
     margin: 30px;
 }*/
-.innerrow {
-    margin: 30px;   /* adjusts for bootstrap margin-right 15px in between columns */
+.gridContainer {
+    position: relative;
 }
-.vcenter {
-    display: inline-block;
-    vertical-align: middle;
-    float: none;
+.grid {
+    position: absolute;
+    width: 90vmin;
+    height: 90vmin;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+.gridRow {
+    height: 30vmin;
+}
+.gridCol {
+    width: 30vmin;
+    height: 100%;
+    float: left;
+    padding: 2vmin;
 }
 .menuIcon {
-    display: table-cell;
-    /* width & height being set via js to match given width ... */
-    margin: 15px;
+    position: absolute;
+    width: 26vmin;
+    height: 26vmin;
     border-radius: 30%;
 
-    background-size: 63% 63%;
+    background-size: 66%;
     background-repeat: no-repeat;
     background-position: center;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    vertical-align: middle;
     font-weight: bold;
-    /*font-size: 27px;*/
+    font-size: 3.5vmin;
     line-height: 1.1;
     color: #333366;
 
