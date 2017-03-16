@@ -101,6 +101,7 @@ a:active, a:focus{
 }
 
 #board-layer-behind {
+    background-image: 'url(/img/board_named.png)';
     margin: auto;
 }
 #board-anchor {}

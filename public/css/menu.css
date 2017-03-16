@@ -1,11 +1,7 @@
-/*#body-container {*/
-    /*width: 50%;*/
-    /*margin: auto;*/
-    /*position: absolute;*/
-    /*right: 0; left: 0;*/
-    /*top: 0; bottom: 0;*/
-/*}*/
-.row {
+/*.container > .row {
+    margin: 30px;
+}*/
+.innerrow {
     margin: 30px;   /* adjusts for bootstrap margin-right 15px in between columns */
 }
 .vcenter {
