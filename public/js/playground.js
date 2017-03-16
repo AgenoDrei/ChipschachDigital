@@ -4,22 +4,12 @@ var lvl,
     movesP1 = 0, movesP2 = 0,
     chipsP1 = 0, chipsP2 = 0;
 var boardSize = 0;
-const BOARDLAYERPADDING = 40;
-const BOARDSIZERATIO = 0.5;
+// const BOARDLAYERPADDING = 40;
+// const BOARDSIZERATIO = 0.9;
 
 var PixiEngine = null;
-
 var host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
-var toggleSidebar = function() {
-    var wrapper = $('#wrapper');
-    wrapper.hasClass('toggled') ? wrapper.removeClass('toggled') : wrapper.addClass('toggled');
-};
-var adjustCss= function() {
-    var marginVal = (window.innerHeight - (boardSize + 2*BOARDLAYERPADDING) - 20) / 2;  // 20 = padding of content-wrapper
-    $('.container-fluid').css({
-        'margin-top':marginVal+'px'
-    });
-};
+
 
 var loadAndRegisterLocal = function(modeIdentifier, cb) {    // loading & registering local levels
     let split = window.location.href.split('/');
@@ -82,15 +72,6 @@ var startGame = function() {
             operationMode = gameType.MP;
 
         PixiEngine = new GameEngine(boardSize, boardSize, operationMode, document.getElementById('board-anchor'));
-
-        $('#board-layer-behind').css({
-            'width': boardSize + 2*BOARDLAYERPADDING,
-            'height': boardSize + 2*BOARDLAYERPADDING,
-            'padding': BOARDLAYERPADDING,
-            'background': 'url(/img/board_named.png)',
-            'background-size': '100% 100%',
-            'background-repeat': 'no-repeat'
-        });
         PixiEngine.init(function() {
             PixiEngine.loadLevel(lvl, function() {
                 PixiEngine.setMoveCallback(handleMoves);
@@ -98,7 +79,7 @@ var startGame = function() {
             });
         });
 
-        adjustCss();
+        // adjustCss();
     } else      // if hitting start just fast enough lvl is not loaded already
         toastr.info('Level wird noch geladen, einen Moment Geduld noch ...');
 };
@@ -195,7 +176,7 @@ var handleMessage = function(msg) {
             $('#winmsgYielded').show();
             $('#btnNext').hide();
             yielded = true;
-            //NOBREAK ^^
+            // NOBREAK ^^
         case "win":
             if (lvl.type === "sp") {
                 if (movesP1 === lvl.minturns) {
@@ -228,14 +209,36 @@ var handleMessage = function(msg) {
     }
 };
 
+/* Styling */
+var toggleClick = function(e) {
+    if($('#nav').css("left") == "-250px") {
+        $('#overlay').fadeIn(200);
+        $('#nav').animate({left: "0px"}, 200);
+        $('#btn_menu').css("background", "url('/img/close_menu.png') no-repeat scroll center center / 75% 75% #FFF");
+    } else {
+        $('#overlay').fadeOut(200);
+        $('#nav').animate({left: "-250px"}, 200);
+        $('#btn_menu').css("background", "url('/img/menu.png') no-repeat scroll center center / 80% 80% #FFF");
+    }
+};
+function adjustScreen(e) {
+    if (window.innerWidth > 900 && $('#nav').css("left") == "-250px") {
+        $('#nav').css("left", "0px");
+        $('#board-container').css("left", "250px");
+        $('#btn_menu').hide();
+    } else if(window.innerWidth <= 900 && $('#nav').css("left") == "0px"){
+        $('#nav').css("left", "-250px");
+        $('#board-container').css("left", "0px");
+        $('#btn_menu').show();
+    }
+}
 
 window.onresize = function() {
-    adjustCss();
+    adjustScreen();
 }
 $('document').ready(function() {
     $('[data-toggle="tooltip"]').tooltip();     // enable Bootstrap tooltips
-    boardSize = $(window).width() * BOARDSIZERATIO;
-    // boardSize = 560;
+    boardSize = $('#board-anchor').width();
 
     $('#winmsgGenericYellow').hide();
     $('#winmsgGenericBlue').hide();
@@ -246,10 +249,6 @@ $('document').ready(function() {
     $('#moveCounterP2').val(movesP2);
     $('#chipCounterP1').val(chipsP1);
     $('#chipCounterP2').val(chipsP2);
-
-    if ($(window).width() < 800 || window.matchMedia("(orientation: portrait)").matches) {
-        toggleSidebar();
-    }
 
     $('#startModal').show();
     let split = window.location.href.split('/');
