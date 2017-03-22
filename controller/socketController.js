@@ -90,7 +90,7 @@ module.exports = function(configuration, gameHandler) {
                	gameHandler.turn(m.gameId, m.joinId, connection, m.origX, m.origY, m.destX, m.destY).done(function(msg) {
                     gameHandler.sendToAll(m.gameId, m);
                     if(msg > 0) {
-                        var response = {type : "win", player: (msg==1?0:1)};
+                        var response = {type : "win", player: msg};
                         gameHandler.sendToAll(m.gameId, response)
                     }
                	},
@@ -102,7 +102,7 @@ module.exports = function(configuration, gameHandler) {
                 break;
             case 'yield':
                 gameHandler.yield(m.gameId, m.joinId).done(function (msg) {
-                    var response = {type: 'yield', player: (msg==1?0:1)};
+                    var response = {type: 'yield', player: msg};
                     gameHandler.sendToAll(m.gameId, response);
                 },
                 function (err) {

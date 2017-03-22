@@ -187,10 +187,13 @@ var handleMessage = function(msg) {
                     if (!yielded)
                         $('#winmsgMinturnsFailed').show();
             } else {
-                if (msgObj.player === playerType.PLAYERONE)
+                if (msgObj.player === gameState.WIN_PLAYER1)
                     $('#winmsgGenericYellow').show();
-                else if (msgObj.player === playerType.PLAYERTWO)
+                else if (msgObj.player === gameState.WIN_PLAYER2)
                     $('#winmsgGenericBlue').show();
+                else if (msgObj.player === gameState.WIN_DRAW)
+                    $('#winmsgGenericDraw').show();
+
             }
             $('#finishModal').show();
             break;
@@ -249,6 +252,7 @@ $('document').ready(function() {
 
     $('#winmsgGenericYellow').hide();
     $('#winmsgGenericBlue').hide();
+    $('#winmsgGenericDraw').hide();
     $('#winmsgMinturnsSuccess').hide();
     $('#winmsgMinturnsFailed').hide();
     $('#winmsgYielded').hide();
