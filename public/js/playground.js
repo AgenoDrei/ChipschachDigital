@@ -241,7 +241,9 @@ window.mobilecheck = function() {
 };
 window.onresize = function() {
     adjustScreen();
-}
+};
+
+
 $('document').ready(function() {
     $('[data-toggle="tooltip"]').tooltip();     // enable Bootstrap tooltips
     boardSize = $('#board-anchor').width();

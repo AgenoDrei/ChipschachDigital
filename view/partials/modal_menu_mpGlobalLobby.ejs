@@ -16,25 +16,8 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <% globalGames.forEach(function(game) { %>
-                            <tr>
-                                <td><%=game.name%></td>
-                                <td>
-                                    <%=game.level%><br>(schlagen<% if (game.mode == 'unbeatable') {%>aus<%} else {%>an<%} %>)
-                                </td>
-                                <td><center>
-                                    <%=game.filledSeats%>/2
-                                </center></td>
-                                <td><center>
-                                    <% if (game.filledSeats < 2) {%>
-                                    <a onclick="redirectGlobal('<%=game.id%>');" class="btn btn-primary btn-sm">Beitreten</a>
-                                    <% } else { %>
-                                    <a class="btn btn-danger btn-sm disabled">Bereits voll</a>
-                                    <% } %>
-                                </center></td>
-                            </tr>
-                            <% }); %>
+                        <tbody id="globalGames_tbody">
+
                         </tbody>
                     </table>
                 </div>
@@ -42,16 +25,12 @@
                     <h4>
                         ... oder ein eigenes Spiel erstellen?
                     </h4>
-                    <form id="createGame">
+                    <form>
                         <label for="newName">Spielname</label>
                         <input id="newName" class="form-control" type="text" placeholder="Name">
-                        <label for="newLevel">Level</label>
-                        <select id="newLevel" class="form-control">
-                            <% availLvls.forEach(function(lvl) { %>
-                                <%if (lvl.type == 'mp') { %>
-                                <option value="<%= lvl._id %>"><%= lvl.name %></option>
-                                <% }; %>
-                            <% }); %>
+                        <label for="newLevel-select">Level</label>
+                        <select id="newLevel-select" class="form-control">
+
                         </select>
                         <div class="radio">
                             <label><input type="radio" name="gameMode" value="unbeatable">Figuren nicht schlagbar</label>
@@ -61,8 +40,8 @@
                                 <input type="radio" name="gameMode" value="beatable">Figuren schlagbar
                             </label>
                         </div>
-                        <input class="btn btn-primary" type="submit" value="Spiel erstellen">
                     </form>
+                    <button class="btn btn-primary" onclick="createNewGame();">Spiel erstellen</button>
                 </div>
             </div>
             <div class="modal-footer">
