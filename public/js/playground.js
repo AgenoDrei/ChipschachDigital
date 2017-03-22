@@ -259,6 +259,28 @@ $('document').ready(function() {
     $('#chipCounterP1').val(chipsP1);
     $('#chipCounterP2').val(chipsP2);
 
+    let sTemp = window.location.pathname.split('/');
+    let lvlType = sTemp[1],
+        lvlSubtype = sTemp[2],
+        lvlId = sTemp[3];
+    if (lvlType !== 'global')
+        lvlId = lvlSubtype;     // ... url adjustment of num params and stuff
+    $.get('/api/v1/level', function (availLvls) {
+        availLvls.forEach(function (lvl) {
+            if (lvl._id === lvlId) {
+                console.log(lvl);
+                if (lvl.subtype === 'king') {
+                    $('#possibleDisableIfKingLvl_label')
+                        .attr('data-toggle', 'tooltip')
+                        .attr('title', 'Könige können sich nicht gegenseitig schlagen!');
+                    $('#possibleDisableIfKingLvl_input').attr('disabled', true);
+                }
+                $('.modal-title').html(lvl.name);
+                $('#lvlDescr').html(lvl.description);
+            }
+        });
+    });
+
     $('#startModal').show();
     let split = window.location.href.split('/');
     if (split[3] === 'sp') {

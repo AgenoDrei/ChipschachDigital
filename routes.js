@@ -1,4 +1,4 @@
-module.exports = function(app, dataAccess, gameHandler) {
+module.exports = function(app) {
 
     app.get('/', function(req, res) {
         res.render('menu', {
@@ -43,7 +43,7 @@ module.exports = function(app, dataAccess, gameHandler) {
 
     app.get('/:type/:subtype/:levelId', function(req, res) {
         let type = req.params.type.toUpperCase(),
-            footerText;
+            footerText = "";
         if (req.params.type === 'sp') {
             footerText = "Löse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips schlägst!";
         } else if (req.params.type === 'mp') {
@@ -64,7 +64,7 @@ module.exports = function(app, dataAccess, gameHandler) {
             type: 'GLOBAL',
             subtype: 'NotDefined',
             id: req.params.gameId,
-            footer: "Dummy Global Footer"
+            footer: "Ein globales Mehrspieler Spiel."
         });
     });
 
