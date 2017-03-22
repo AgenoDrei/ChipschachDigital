@@ -19,21 +19,26 @@ module.exports = function(app, dataAccess, gameHandler) {
                 {id:'exit', picId:'close_.75opacity', name:'Verlassen'}
             ]
         ];
-        var accTypes = [
-            {id: 'sp', name: 'Lokaler Einzelspieler',
-                footer: 'Wähle ein Einzelspieler-Level und schlage alle Chips so schnell du kannst!'},
-            {id: 'mp', name: 'Lokaler Mehrspieler',
-                footer: 'Wähle ein Mehrspieler-Level aus um gegen einen Freund am gleichen Rechner Problemstellungen zu lösen!'},
-            {id: 'mini', name: 'Minischach-Aufgaben',
-                footer: 'Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!'}
-        ];
+        var accTypes = [{
+            id: 'sp',
+            name: 'Lokaler Einzelspieler',
+            footer: 'Wähle ein Einzelspieler-Level und schlage alle Chips so schnell du kannst!'
+        }, {
+            id: 'mp',
+            name: 'Lokaler Mehrspieler',
+            footer: 'Wähle ein Mehrspieler-Level aus um gegen einen Freund am gleichen Rechner Problemstellungen zu lösen!'
+        },{
+            id: 'mini',
+            name: 'Minischach-Aufgaben',
+            footer: 'Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!'
+        }];
         var availSubtypes = [
-            {id: 'pawn', name: 'Bauer'},
-            {id: 'knight', name: 'Springer'},
-            {id: 'bishop', name: 'Läufer'},
             {id: 'rook', name: 'Turm'},
+            {id: 'bishop', name: 'Läufer'},
             {id: 'queen', name: 'Dame'},
-            {id: 'king', name: 'König'}
+            {id: 'king', name: 'König'},
+            {id: 'knight', name: 'Springer'},
+            {id: 'pawn', name: 'Bauer'}
         ];
 
         dataAccess.getAllLevelIds().done(function(obtainedLvls) {
