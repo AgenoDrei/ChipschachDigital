@@ -1,5 +1,7 @@
 var redirectGlobal = function(gameId) {
-    window.location = '/global/' + gameId;
+    $.get('/api/v1/game/' + gameId, function(res) {     // register yourself
+        window.location = '/global/' + gameId + '?joinId=' + res.joinId;
+    });
 };
 
 var createNewGame = function() {

@@ -22,3 +22,8 @@ var playerType = {
 };
 
 var figureSize = null;
+
+var players = {
+    PLAYERONE: 0,
+    PLAYERTWO: 1
+};
