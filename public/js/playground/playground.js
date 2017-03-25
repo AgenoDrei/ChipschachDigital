@@ -1,69 +1,11 @@
-// var gameId,
-//     joinIds = [];
-// var lvl;
-//     movesP1 = 0, movesP2 = 0,
-//     chipsP1 = 0, chipsP2 = 0;
-// var boardSize = 0;
-
-
 var PixiEngine = null,
     DisplayControl = null,
     GameControl = null;
 var host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
 
-
-// var loadAndRegisterLocal = function(modeIdentifier, cb) {    // loading & registering local levels
-//     let split = window.location.href.split('/');
-//     let type = split[3].toUpperCase(),
-//         // subtype = split[4],
-//         levelId = split[5],
-//         mode;
-//     if ((modeIdentifier !== "beatable") && (modeIdentifier !== "unbeatable")) {
-//          let radioValue = $("input[name='gameMode']:checked").val();
-//          if (radioValue !== undefined)
-//             mode = radioValue;
-//          else {
-//              toastr.warning('Bitte einen Modus wählen.');
-//              return;
-//          }
-//     } else {
-//         mode = modeIdentifier;
-//     }
-//
-//     $.post('/api/v1/game', {type: type, level: levelId, mode: mode, local: true, name: ""}, function(res) {
-//         gameId = res.gameId;
-//         $.get('/api/v1/game/' + gameId, function(res) {
-//             joinIds.push(res.joinId);       // append first joinId
-//             $.get('/api/v1/game/' + gameId, function(res) {
-//                 joinIds.push(res.joinId);       // append second joinId
-//                 $.get('/api/v1/level/' + levelId, function (res) {
-//                     lvl = res;
-//                     comHandle.connect(host, "4001", handleMessage, gameId, joinIds[0]);
-//                     if (cb !== undefined)
-//                         cb();
-//                 });
-//             });
-//         });
-//     });
-// };
-
-// var loadAndRegisterGlobal = function(gameId) {
-//     $.get('/api/v1/game/' + gameId, function(res) {     // register yourself
-//         joinIds.push(res.joinId);       // joinIDs will only have length ONE in this case
-//         $.get('/api/v1/game', function(res) {
-//             res.forEach(function(globalGame) {
-//                 if (globalGame.id === gameId) {
-//                     $.get('/api/v1/level/' + globalGame.levelId, function (res) {
-//                         lvl = res;
-//                         comHandle.connect(host, "4001", handleMessage, gameId, joinIds[0]);
-//                     });
-//                 }
-//             })
-//         });
-//     });
-// };
-
-
+let startGame = function() {
+    DisplayControl.startGame();
+}
 
 var yieldGame = function() {
     if(comHandle.ws == null)
@@ -84,7 +26,6 @@ var undo = function () {
         joinId: GameControl.joinIds[PixiEngine.turn]
     });
 };
-
 
 var nextLevelForward = function() {     // assumes ordered level_list of dbCall
     let nextLevelId = GameControl.getSubsequentLevel(function(nextLevelId) {

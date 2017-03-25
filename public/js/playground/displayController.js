@@ -8,11 +8,10 @@ class DisplayController {
 
         $('[data-toggle="tooltip"]').tooltip();     // enable Bootstrap tooltips
         $('#startModal').show();
-        this.adjustScreen();
-        this.updateCounters();
 
+        this.adjustScreen();
         window.onresize = function() {
-            DisplayController.adjustScreen();
+            this.adjustScreen();
         };
     }
 
@@ -54,6 +53,7 @@ class DisplayController {
     }
 
     startGame() {
+        this.updateCounters();
         $('#startModal').hide();
     }
 
