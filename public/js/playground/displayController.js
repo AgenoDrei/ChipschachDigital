@@ -11,8 +11,8 @@ class DisplayController {
 
         this.adjustScreen();
         window.onresize = function() {
-            adjustScreen();
-        };
+            this.adjustScreen();
+        }.bind(this);
     }
 
     adjustScreen() {

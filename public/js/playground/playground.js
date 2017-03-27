@@ -1,26 +1,28 @@
-var PixiEngine = null,
+let lvlType,
+    PixiEngine = null,
     DisplayControl = null,
     GameControl = null;
 var host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
 
 let startGame = function() {
-    if (GameControl.lvl === undefined) {
-        toastr.info('Level konnte noch nicht geladen werden.');
-        return;
-    }
-    if (GameControl.lvlType === 'mp') {
-        let mode = DisplayController.checkStartMpModeRadios();
-        if (mode === undefined) {
-            toastr.warning('Bitte einen Modus wählen.');
-            return;
-        } else {
-            GameControl.connectLocalGame(mode, GameControl.joinIds, comHandle, function(gameId) {
-                GameControl.gameId = gameId;
-            })
+    if (GameControl.level === undefined) {
+        toastr.info('Level muss noch geladen werden, noch einen kurzen Moment Geduld.');
+        setTimeout(startGame, 1000);
+    } else {
+        if (lvlType === 'mp') {
+            let mode = DisplayController.checkStartMpModeRadios();
+            if (mode === undefined) {
+                toastr.warning('Bitte einen Modus wählen.');
+                return;
+            } else {
+                GameControl.connectLocalGame(lvlType, window.location.pathname.split('/')[3], mode, GameControl.joinIds, function(gameId) {
+                    GameControl.gameId = gameId;
+                })
+            }
         }
+        DisplayControl.startPixi(GameControl.level);
+        DisplayControl.startGame();
     }
-    DisplayControl.startPixi(GameControl.lvl);
-    DisplayControl.startGame();
 }
 
 var yieldGame = function() {
@@ -52,7 +54,7 @@ var nextLevelForward = function() {     // assumes ordered level_list of dbCall
             }, 3000);
         } else {
             let locHrefSplit = window.location.href.split('/');
-            window.location = '/' + GameControl.lvlType + '/' + GameControl.lvlSubtype + '/' + nextLevelId;
+            window.location = '/' + GameControl.level.type+ '/' + GameControl.level.subtype + '/' + nextLevelId;
         }
     });
 };
@@ -79,7 +81,7 @@ var handleMessage = function(msg) {
     switch(msgObj.type) {
         case "start":
             console.log('Game about to start!');
-            GameControl.connectGlobalGame(window.location.href.split('=')[1], comHandle, startGame);
+            startGame();
             break;
         case "turn":
             if (PixiEngine.turn === playerType.PLAYERONE) {
@@ -110,8 +112,8 @@ var handleMessage = function(msg) {
             yielded = true;
             // NOBREAK ^^
         case "win":
-            if (GameControl.lvl.type === "sp") {
-                if (DisplayControl.movesP1 === GameControl.lvl.minturns) {
+            if (GameControl.level.type === "sp") {
+                if (DisplayControl.movesP1 === GameControl.level.minturns) {
                     $('#winmsgMinturnsSuccess').show();
                     $('#btnRepeat').hide();
                 }
@@ -143,8 +145,18 @@ var handleMessage = function(msg) {
 
 
 $('document').ready(function() {
+    let pathSplit = window.location.pathname.split('/');
+    lvlType = pathSplit[1];
+
+    if (lvlType !== 'global')
+        GameControl = new GameController(pathSplit[3], undefined);
+    else
+        GameControl = new GameController(undefined, pathSplit[2]);
     DisplayControl = new DisplayController();
-    GameControl = new GameController(window.location.pathname.split('/'));
-    //TODO: getting rid of thiz constructions?
-    //TODO: no lvlType/lvlSubtype in gameController (can be gotton from lvl anyway...)
+
+    if (lvlType === 'sp')
+        GameControl.connectLocalGame(lvlType, pathSplit[3], 'unbeatable', GameControl.joinIds);
+    // mp-local connecting upon choice of mode
+    else if (lvlType === 'global')
+        GameControl.connectGlobalGame(window.location.href.split('=')[1]);
 });
