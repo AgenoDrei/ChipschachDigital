@@ -7,19 +7,17 @@ class GameController {
         this.joinIds = [];
         this.lvl = undefined;
 
-        let thiz = this;
-
         if (this.lvlType === 'sp')
             this.connectLocalGame('unbeatable', this.joinIds, comHandle, function(gameId) {
-                thiz.gameId = gameId;
-            });
+                this.gameId = gameId;
+            }.bind(this));
         // mp-local is calling connectLocalGame after mode-radio-check from playground
         // mp-global is calling connectGlobalGame upon receiving start msg from server
 
         if (this.lvlType !== 'global')
             this.retrieveLevel(this.levelId, function(lvl) {
-                thiz.lvl = lvl;
-            });
+                this.lvl = lvl;
+            }.bind(this));
     }
 
     connectLocalGame(mode, joinIds, comHandle, handleGameIdCb) {
@@ -37,15 +35,14 @@ class GameController {
     }
 
     connectGlobalGame(joinId, comHandle, cb) {
-        let thiz = this;
         this.joinIds.push(joinId);       // already joined in menu
         $.get('/api/v1/game', function(globalGames) {
             globalGames.forEach(function(globalGame) {
-                if (globalGame.id === thiz.gameId) {
-                    thiz.retrieveLevel(globalGame.levelId, function(lvl) {
-                        thiz.lvl = lvl;
-                    });
-                    comHandle.connect(host, "4001", handleMessage, thiz.gameId, joinId);
+                if (globalGame.id === this.gameId) {
+                    this.retrieveLevel(globalGame.levelId, function(lvl) {
+                        this.lvl = lvl;
+                    }.bind(this));
+                    comHandle.connect(host, "4001", handleMessage, this.gameId, joinId);
                     cb();
                     // server sends start-msg, started via playground.js
                 }
