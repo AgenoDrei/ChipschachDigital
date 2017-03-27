@@ -4,10 +4,12 @@
     <% include ./partials/head %>
 
     <script src="/libs/pixi.js/dist/pixi.min.js"></script>
-    <script src="/js/constants.js"></script>
-    <script src="/js/game_engine.js"></script>
-    <script src="/js/communication.js"></script>
-    <script src="/js/playground.js"></script>
+    <script src="/js/playground/constants.js"></script>
+    <script src="/js/playground/game_engine.js"></script>
+    <script src="/js/playground/communication.js"></script>
+    <script src="/js/playground/playground.js"></script>
+    <script src="/js/playground/displayController.js"></script>
+    <script src="/js/playground/gameController.js"></script>
     <title>
         <% if (type == 'SP') { %>
             Singleplayer
@@ -25,7 +27,7 @@
 <body>
 <div id="overlay"></div>
 <div id="nav">
-    <div id="btn_menu" onclick="toggleClick();"></div>
+    <div id="btn_menu" onclick="DisplayController.toggleClick();"></div>
 
     <div class="nav-container" style="top: 0;">
         <div class="profile-container">
@@ -75,13 +77,13 @@
         <div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div><div>G</div><div>H</div>
     </div>
     <div class="board-labels bl-right" style="margin-left: 85vmin;">
-        <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
+        <div>8</div><div>7</div><div>6</div><div>5</div><div>4</div><div>3</div><div>2</div><div>1</div>
     </div>
     <div class="board-labels bl-bottom"  style="margin-top: 85vmin;">
         <div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div><div>G</div><div>H</div>
     </div>
     <div class="board-labels bl-left"  style="margin-left: -5vmin;">
-        <div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div><div>8</div>
+        <div>8</div><div>7</div><div>6</div><div>5</div><div>4</div><div>3</div><div>2</div><div>1</div>
     </div>
     <!--<div id="turnYellow" class="turnIndicator" style="box-shadow: 5px 5px 25px orange;"></div>-->
     <!--<div id="turnBlue" class="turnIndicator" style="box-shadow: 5px 5px 25px darkblue;"></div>-->

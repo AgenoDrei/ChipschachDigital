@@ -1,7 +1,3 @@
-/**
- * Created by simon on 11.03.17.
- */
-
 var thiz = null;        // only used in onClick() ... thank goodness
 
 class GameEngine {
@@ -10,7 +6,7 @@ class GameEngine {
         this.height = h;
         this.gameType = operationMode;
         this.parent = anchor;
-        this.figureSize = figureSize =  this.width / 8;
+        this.figureSize = figureSize = this.width / 8;
         this.renderer = null;
         this.stage = null;
         this.background = null;
