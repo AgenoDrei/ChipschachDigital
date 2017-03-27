@@ -4,6 +4,22 @@ var PixiEngine = null,
 var host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
 
 let startGame = function() {
+    if (GameControl.lvl === undefined) {
+        toastr.info('Level konnte noch nicht geladen werden.');
+        return;
+    }
+    if (GameControl.lvlType === 'mp') {
+        let mode = DisplayController.checkStartMpModeRadios();
+        if (mode === undefined) {
+            toastr.warning('Bitte einen Modus wählen.');
+            return;
+        } else {
+            GameControl.connectLocalGame(mode, GameControl.joinIds, comHandle, function(gameId) {
+                GameControl.gameId = gameId;
+            })
+        }
+    }
+    DisplayControl.startPixi(GameControl.lvl);
     DisplayControl.startGame();
 }
 
@@ -45,8 +61,8 @@ var handleMoves = function(origX, origY, x, y) {
     //console.log("Moved!!!");
     var moveObj = {
         type: "turn",
-        gameId: gameId,
-        joinId: joinIds[0],
+        gameId: GameControl.gameId,
+        joinId: GameControl.joinIds[0],
         origX: origX,
         origY: origY,
         destX: x,
@@ -63,8 +79,7 @@ var handleMessage = function(msg) {
     switch(msgObj.type) {
         case "start":
             console.log('Game about to start!');
-            DisplayControl.startPixi();
-            DisplayControl.startGame();
+            GameControl.connectGlobalGame(window.location.href.split('=')[1], comHandle, startGame);
             break;
         case "turn":
             if (PixiEngine.turn === playerType.PLAYERONE) {
@@ -95,8 +110,8 @@ var handleMessage = function(msg) {
             yielded = true;
             // NOBREAK ^^
         case "win":
-            if (lvl.type === "sp") {
-                if (DisplayControl.movesP1 === lvl.minturns) {
+            if (GameControl.lvl.type === "sp") {
+                if (DisplayControl.movesP1 === GameControl.lvl.minturns) {
                     $('#winmsgMinturnsSuccess').show();
                     $('#btnRepeat').hide();
                 }
@@ -130,4 +145,6 @@ var handleMessage = function(msg) {
 $('document').ready(function() {
     DisplayControl = new DisplayController();
     GameControl = new GameController(window.location.pathname.split('/'));
+    //TODO: getting rid of thiz constructions?
+    //TODO: no lvlType/lvlSubtype in gameController (can be gotton from lvl anyway...)
 });

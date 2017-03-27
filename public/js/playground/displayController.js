@@ -11,7 +11,7 @@ class DisplayController {
 
         this.adjustScreen();
         window.onresize = function() {
-            this.adjustScreen();
+            adjustScreen();
         };
     }
 
@@ -69,26 +69,16 @@ class DisplayController {
         $('#lvlDescr').html(lvlDescr);
     }
 
-    static checkMpGameStart() {
-        let radioValue = $("input[name='gameMode']:checked").val(),
-            mode = undefined;
-        if (radioValue !== undefined)
-            mode = radioValue;
-        else
-            toastr.warning('Bitte einen Modus wählen.');
-
-        if (mode !== undefined) {
-            GameController.connectLocalGame(mode, comHandle, this.startPixi);
-            this.startGame();
-        }
+    static checkStartMpModeRadios() {
+        return $("input[name='gameMode']:checked").val();
     }
 
-    startPixi() {
-        if (GameControl.lvl !== undefined) {
-            let operationMode = GameControl.lvl.type === 'sp' ? gameType.SP : gameType.MP;
+    startPixi(lvl) {
+        if (lvl !== undefined) {
+            let operationMode = lvl.type === 'sp' ? gameType.SP : gameType.MP;
             PixiEngine = new GameEngine(DisplayControl.boardSize, DisplayControl.boardSize, operationMode, document.getElementById('board-anchor'));
             PixiEngine.init(function () {
-                PixiEngine.loadLevel(GameControl.lvl, function () {
+                PixiEngine.loadLevel(lvl, function () {
                     PixiEngine.setMoveCallback(handleMoves);
                     PixiEngine.render();
                 });
