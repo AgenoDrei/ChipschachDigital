@@ -6,9 +6,9 @@ module.exports = function(app) {
                 [
                     {id:'sp', picId:'single', name:'Einzelspieler'},
                     {id:'mp', picId:'multiLocal', name:'Lokaler Mehrspieler'},
-                    {id:'mini', picId:'mini', name:'Minischach'}
+                    {id:'mp_g', picId:'multiGlobal', name:'Globaler Mehrspieler'}
                 ],[
-                    {id:'mp_g', picId:'multiGlobal', name:'Globaler Mehrspieler'},
+                    {id:'mini', picId:'mini', name:'Minischach'},
                     {id:'impressum', picId:'logoLg', name:''},
                     {id:'classic', picId:'classic', name:'Klassisches Schach'}
                 ],[
