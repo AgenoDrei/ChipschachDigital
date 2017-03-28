@@ -2,7 +2,7 @@ let lvlType,
     PixiEngine = null,
     DisplayControl = null,
     GameControl = null;
-var host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
+let host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
 
 let startGame = function() {
     if (GameControl.level === undefined) {
@@ -23,9 +23,9 @@ let startGame = function() {
         DisplayControl.startPixi(GameControl.level);
         DisplayControl.startGame();
     }
-}
+};
 
-var yieldGame = function() {
+let yieldGame = function() {
     if(comHandle.ws == null)
         throw "Communication Handler not initialzied";
     comHandle.send({
@@ -35,7 +35,7 @@ var yieldGame = function() {
     });
 };
 
-var undo = function () {
+let undo = function () {
     if(comHandle.ws == null)
         throw "Communication Handler not initialzied";
     comHandle.send(undoObj = {
@@ -45,7 +45,7 @@ var undo = function () {
     });
 };
 
-var nextLevelForward = function() {     // assumes ordered level_list of dbCall
+let nextLevelForward = function() {     // assumes ordered level_list of dbCall
     let nextLevelId = GameControl.getSubsequentLevel(function(nextLevelId) {
         if (nextLevelId === undefined) {
             toastr.success('Du hast alle Level dieser Kategorie erfolgreich absolviert!');
@@ -59,9 +59,8 @@ var nextLevelForward = function() {     // assumes ordered level_list of dbCall
     });
 };
 
-var handleMoves = function(origX, origY, x, y) {
-    //console.log("Moved!!!");
-    var moveObj = {
+let handleMoves = function(origX, origY, x, y) {
+    comHandle.send({
         type: "turn",
         gameId: GameControl.gameId,
         joinId: GameControl.joinIds[0],
@@ -69,13 +68,12 @@ var handleMoves = function(origX, origY, x, y) {
         origY: origY,
         destX: x,
         destY: y
-    };
-    comHandle.send(moveObj);
+    });
 };
 
-var handleMessage = function(msg) {
-    let yielded = false;
-    var msgObj = JSON.parse(msg.data);
+let handleMessage = function(msg) {
+    let yielded = false,
+        msgObj = JSON.parse(msg.data);
     console.log("Server> ", msgObj);
 
     switch(msgObj.type) {
