@@ -182,3 +182,7 @@ body {
 #winmsgGenericYellow, #winmsgGenericBlue, #winmsgMinturnsSuccess, #winmsgMinturnsFailed, #winmsgYielded {
     display: none;
 }
+
+.modal-backdrop {
+    opacity:0.5 !important;
+}
