@@ -55,6 +55,7 @@ class DisplayController {
     startGame() {
         this.updateCounters();
         $('#startModal').hide();
+        $('#board-container').show();
     }
 
     static disableBeatableWithKings() {
