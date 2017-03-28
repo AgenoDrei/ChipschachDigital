@@ -5,8 +5,8 @@ module.exports = function(app) {
             iconRows: [
                 [
                     {id:'sp', picId:'single', name:'Einzelspieler'},
-                    {id:'mp', picId:'multiLocal', name:'Lokaler Mehrspieler'},
-                    {id:'mp_g', picId:'multiGlobal', name:'Globaler Mehrspieler'}
+                    {id:'mp', picId:'multiLocal', name:'Mehrspieler Lokal'},
+                    {id:'mp_g', picId:'multiGlobal', name:'Mehrspieler Global'}
                 ],[
                     {id:'mini', picId:'mini', name:'Minischach'},
                     {id:'impressum', picId:'logoLg', name:''},
@@ -19,15 +19,15 @@ module.exports = function(app) {
             ],
             accTypes: [{
                 id: 'sp',
-                name: 'Lokaler Einzelspieler',
+                name: 'Einzelspieler',
                 footer: 'Wähle ein Einzelspieler-Level und schlage alle Chips so schnell du kannst!'
             }, {
                 id: 'mp',
-                name: 'Lokaler Mehrspieler',
+                name: 'Mehrspieler Lokal',
                 footer: 'Wähle ein Mehrspieler-Level aus um gegen einen Freund am gleichen Rechner Problemstellungen zu lösen!'
             },{
                 id: 'mini',
-                name: 'Minischach-Aufgaben',
+                name: 'Mehrspieler Lokal - Minischach',
                 footer: 'Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!'
             }],
             availSubtypes: [
