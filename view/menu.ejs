@@ -15,12 +15,19 @@
     <div class="gridRow">
         <% row.forEach(function(icon) { %>
         <div class="gridCol">
-            <% if (icon.id == 'exit') { %>
-            <a class="menuIcon" href="http://www.schach-fuer-kids.de/" style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+            <% if (icon.id == 'impressum') { %>
+            <a class="menuIcon" data-toggle="modal" data-target="#<%=icon.id%>"
+               style="background-image: url('img/<%= icon.picId %>.png'); background-size: 100%;">
                 <p><%= icon.name %></p>
             </a>
             <% } else if (icon.id == 'editor') {%>
-            <a class="menuIcon" href="/editor" style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+            <a class="menuIcon" href="/editor"
+               style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+                <p><%= icon.name %></p>
+            </a>
+            <% } else if (icon.id == 'exit') { %>
+            <a class="menuIcon" href="http://www.schach-fuer-kids.de/"
+               style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
                 <p><%= icon.name %></p>
             </a>
             <% } else if (icon.id != '') {%>
