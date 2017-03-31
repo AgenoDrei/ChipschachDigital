@@ -81,11 +81,11 @@ class Game {
             if (joinId == player1.joinId && player1.state == conStates.JOINED) {
                 player1.connection = connection;
                 player1.state = conStates.CONNECTED;
-                fulfill('Player 1');
+                fulfill(playerType.PLAYERONE);
             } else if (joinId == player2.joinId && player2.state == conStates.JOINED) {
                 player2.connection = connection;
                 player2.state = conStates.CONNECTED;
-                fulfill('Player 2');
+                fulfill(playerType.PLAYERTWO);
             }
             reject('Invalid joinId or already joined');
         });
