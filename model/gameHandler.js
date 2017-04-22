@@ -140,16 +140,20 @@ module.exports = function(dataAccess) {
 		});
 	};
 
-	this.endGame = function(gameId) {
+	this.endGame = function(connection) {
+
+
 		return new Promise(function(fulfill, reject) {
-			for(var i = 0; i < games.length; i++){
-				if(games[i].id == gameId) {
-					games[i].endGame();
-					games = games.splice(i, 1);
-					fulfill('Game ended successfull!');
-				}
-			}
-			reject('gameId not found');
+            for(let key in this.games) {
+            	let obj = this.games[key];
+                if(obj.player1.connection == connection || obj.player2.connection == connection) {
+                    obj.endGame();
+                    obj.player1.state = obj.player2.state = conStates.LEFT;
+                    this.games = this.games.splice(key, 1);
+                    fulfill('Game ended successfull!');
+                }
+            }
+            reject('game not found');
 		});
 	};
 	return this;

@@ -44,7 +44,7 @@ module.exports = function(configuration, gameHandler) {
         //When a client closes the connection
         connection.on("close", function(reasonCode, description) {
             console.log("Server> Connection " + connection.remoteAddress + " closed (reason: " + reasonCode + ").");
-            endGame(connection); //Close all connections
+            gameHandler.endGame(connection); //Close all connections
         });
     });
 
