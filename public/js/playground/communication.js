@@ -27,6 +27,9 @@ var comHandle = {
         	ws.onmessage = messageCallback;
 
             ws.onclose = function(e) {
+		if(e.code == 1006) {
+			ws.onerror("Safari connection refused");
+		}
                 console.log("WebSocket closed!", e.code);
             };
 

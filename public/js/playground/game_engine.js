@@ -1,7 +1,7 @@
 var thiz = null;        // only used in onClick() ... thank goodness
 
 class GameEngine {
-    constructor(w, h, operationMode, anchor) {
+    constructor(w, h, operationMode, anchor, global) {
         this.width = w;
         this.height = h;
         this.gameType = operationMode;
@@ -11,6 +11,8 @@ class GameEngine {
         this.stage = null;
         this.background = null;
         this.turn = playerType.PLAYERONE;
+        this.player = playerType.PLAYERONE;
+        this.global = global;
         this.figures = [];
         this.selectionHandler = null;
         thiz = this;
@@ -145,6 +147,11 @@ class GameEngine {
         this.moveCallback = callback;
     }
 
+    setPlayer(player) {
+        this.player = player;
+        //this.turn = player;
+    }
+
     render() {
         this.renderer.render(this.stage);
     }
@@ -152,8 +159,8 @@ class GameEngine {
     moveFigure(origX, origY, destX, destY) {
         if (origX == destX && origY == destY)
             return;
-        var figure = Helper.getFigure(origX, origY, this.figures);
-        var other = Helper.getFigure(destX, destY, this.figures);
+        let figure = Helper.getFigure(origX, origY, this.figures);
+        let other = Helper.getFigure(destX, destY, this.figures);
 
         if (other != null) {
             this.selectionHandler.removeSelection(other.x, other.y);
@@ -171,6 +178,9 @@ class GameEngine {
     onClick(rawX, rawY) {
         let pos = Helper.getPos(rawX, rawY);
         //console.log('Clicked: (' + pos.x + '|' + pos.y + ')');
+
+        if(this.global && this.turn != this.player)
+            return;
 
         if(this.selectionHandler.select(pos.x, pos.y)) {
             let lastSelection = this.selectionHandler.getLastSelection();
@@ -301,6 +311,8 @@ class SelectionHandler {
 
     nextTurn(turn) {
         this.turn = turn;
+        if(turn != this.parent.player && this.parent.global)
+            return;
         this.switchGraphic(false, this.selections[turn].x, this.selections[turn].y);
     }
 }

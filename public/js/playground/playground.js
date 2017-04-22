@@ -1,7 +1,8 @@
 let lvlType,
     PixiEngine = null,
     DisplayControl = null,
-    GameControl = null;
+    GameControl = null,
+    player = playerType.PLAYERONE;
 let host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
 
 let startGame = function() {
@@ -77,6 +78,9 @@ let handleMessage = function(msg) {
     console.log("Server> ", msgObj);
 
     switch(msgObj.type) {
+        case "hello":
+            player = msgObj.player;
+            break;
         case "start":
             console.log('Game about to start!');
             startGame();

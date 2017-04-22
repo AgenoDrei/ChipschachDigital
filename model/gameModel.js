@@ -81,22 +81,21 @@ class Game {
             if (joinId == player1.joinId && player1.state == conStates.JOINED) {
                 player1.connection = connection;
                 player1.state = conStates.CONNECTED;
-                fulfill('Player 1');
+                fulfill(playerType.PLAYERONE);
             } else if (joinId == player2.joinId && player2.state == conStates.JOINED) {
                 player2.connection = connection;
                 player2.state = conStates.CONNECTED;
-                fulfill('Player 2');
+                fulfill(playerType.PLAYERTWO);
             }
             reject('Invalid joinId or already joined');
         });
     }
 
-    //ToDo: Refactor
     sendToAll(message) {
 		console.log("Server> ", message);
     	try {
     		this.player1.connection.sendUTF(JSON.stringify(message));
-    		this.player2.connection.sendUTF(JSON.stringify(message));
+    		if(!this.local) this.player2.connection.sendUTF(JSON.stringify(message));
     	} catch(e) {
     		console.log('Error on sending to all in game...');
     	}
@@ -104,11 +103,7 @@ class Game {
 
     endGame() {
         console.log("Server> Game finished");
-    	try {
-    		this.player1.connection.sendUTF('{"type": "exit"}');
-    		this.player2.connection.sendUTF('{"type": "exit"}');
-    	} catch(e) {
-    	}
+        this.sendToAll({type: "exit"});
     }
 
 }

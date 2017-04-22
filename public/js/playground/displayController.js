@@ -77,7 +77,8 @@ class DisplayController {
     startPixi(lvl) {
         if (lvl !== undefined) {
             let operationMode = lvl.type === 'sp' ? gameType.SP : gameType.MP;
-            PixiEngine = new GameEngine(DisplayControl.boardSize, DisplayControl.boardSize, operationMode, document.getElementById('board-anchor'));
+            PixiEngine = new GameEngine(DisplayControl.boardSize, DisplayControl.boardSize, operationMode, document.getElementById('board-anchor'), (lvlType=='global'?true:false));
+            PixiEngine.setPlayer(player);
             PixiEngine.init(function () {
                 PixiEngine.loadLevel(lvl, function () {
                     PixiEngine.setMoveCallback(handleMoves);

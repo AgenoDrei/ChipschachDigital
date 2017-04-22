@@ -8,8 +8,9 @@ msg = {
 */
 
 //Requirements
-var WebSocketServer = require('websocket').server; //Websockets
-var http = require('http'); //HTTP-Server
+const WebSocketServer = require('websocket').server; //Websockets
+const http = require('http'); //HTTP-Server
+const playerType = require('../model/playerType');
 
 //Initalization
 module.exports = function(configuration, gameHandler) {
@@ -43,7 +44,7 @@ module.exports = function(configuration, gameHandler) {
         //When a client closes the connection
         connection.on("close", function(reasonCode, description) {
             console.log("Server> Connection " + connection.remoteAddress + " closed (reason: " + reasonCode + ").");
-            endGame(connection); //Close all connections
+            gameHandler.endGame(connection); //Close all connections
         });
     });
 
@@ -67,11 +68,13 @@ module.exports = function(configuration, gameHandler) {
                     game.connect(m.joinId, connection).done(function(player) {
                         var response = {
                             type: "hello",
-                            message: "You entered game " + game.getId() + " as " + player
+                            message: "You entered game " + game.getId() + " as " + player,
+                            gameId: game.getId(),
+                            player: player
                         };
                         console.log('Server> ', response);
                         connection.sendUTF(JSON.stringify(response));
-                        if (player == "Player 2") {
+                        if (player == playerType.PLAYERTWO) {
                             console.log('Server> Am going to start', m.gameId);
                             gameHandler.sendToAll(m.gameId, {
                                 type: "start",
