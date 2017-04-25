@@ -27,6 +27,11 @@ class DisplayController {
         }
     }
 
+    static startGame() {
+        $('#startModal').hide();
+        $('#board-container').show();
+    }
+
     static toggleClick() {
         if($('#nav').css("left") == "-250px") {
             $('#overlay').fadeIn(200);

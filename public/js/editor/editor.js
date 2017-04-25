@@ -11,7 +11,7 @@ let startEditor = function() {
         });
     });
 
-    $('#startModal').hide();
+    DisplayController.startGame();
 };
 
 $(document).ready(function() {
