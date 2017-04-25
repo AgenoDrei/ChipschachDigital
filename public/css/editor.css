@@ -1,23 +1,4 @@
-body {
-    height: 100%;
-    font-family: "Arial Rounded MT Bold", "HelveticaNeue-Light",
-    "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial,
-    "Lucida Grande", sans-serif;
-    min-width: 1460px;
-}
-
-a:active, a:focus{
-    ie-dummy: expression(this.hideFocus=true);
-    outline: none;
-}
-
-
 /* sidebar */
-
-#wrapper #sidebar-wrapper {
-    background: url('../img/muster.png');
-    background-size: 20px;
-}
 
 .propertiesForm {
     margin: 25px;
@@ -27,20 +8,3 @@ a:active, a:focus{
 }
 
 /* content */
-
-#sidebar_toggle {
-    width: 50px;
-    height: 50px;
-    opacity: 0.7;
-    background: url('../img/save_icon.png');
-    background-size: 60% 60%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: white;
-    border-radius: 50%;
-}
-
-#board-layer-behind {
-    margin: auto;
-}
-#board-anchor {}

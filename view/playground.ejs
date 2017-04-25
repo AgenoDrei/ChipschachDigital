@@ -4,8 +4,7 @@
     <% include ./partials/head %>
 
     <script src="/libs/pixi.js/dist/pixi.min.js"></script>
-    <script src="/js/playground/constants.js"></script>
-    <script src="/js/playground/game_engine.js"></script>
+    <script src="/js/gameEngine.js"></script>
     <script src="/js/playground/communication.js"></script>
     <script src="/js/playground/playground.js"></script>
     <script src="/js/playground/displayController.js"></script>
@@ -22,12 +21,14 @@
         <% } %>
     </title>
     <link rel="stylesheet" type="text/css" href="/css/playground.css">
+    <link rel="stylesheet" type="text/css" href="/css/board.css">
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
 </head>
 
 <body>
 <div id="overlay"></div>
 <div id="nav">
-    <div id="btn_menu" onclick="DisplayController.toggleClick();"></div>
+    <div id="btn_menu" style="background-image: url(../../img/menu.png);" onclick="DisplayController.toggleClick();"></div>
 
     <div class="nav-container" style="top: 0;">
         <div class="profile-container">

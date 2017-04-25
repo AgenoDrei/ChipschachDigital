@@ -4,23 +4,27 @@
     <% include ./partials/head %>
 
     <script src="/libs/pixi.js/dist/pixi.min.js"></script>
-    <script src="/js/pixi-game-engine.js"></script>
-    <script src="/js/editor.js"></script>
+    <script src="/js/gameEngine.js"></script>
+    <script src="/js/editor/displayController.js"></script>
+    <script src="/js/editor/editor.js"></script>
     <title>Editor</title>
-    <link rel="stylesheet" type="text/css" href="/css/simple-sidebar.css">
     <link rel="stylesheet" type="text/css" href="/css/editor.css">
+    <link rel="stylesheet" type="text/css" href="/css/board.css">
+    <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
+
 </head>
 
 
 <body>
-<div id="wrapper" class="toggled">
+<div id="overlay"></div>
+<div id="nav">
+    <div id="btn_menu" style="background-image: url(../../img/save_icon.png); background-size: 60%;" onclick="DisplayController.toggleClick();"></div>
 
-    <!-- Navigation -->
-    <div id="sidebar-wrapper">
+    <div class="nav-container" style="top: 0;">
         <form class="propertiesForm">
             <div class="form-group">
                 <label for="type">Kategorie</label>
-                <select class="form-control" id="type" name="type" onchange="checkToggleSubtype();">
+                <select class="form-control" id="type" name="type" onchange="DisplayController.checkToggleSubtype();">
                     <option value="sp">Einzelspieler</option>
                     <option value="mp">Mehrspieler</option>
                     <option value="mini">Minischach</option>
@@ -52,19 +56,45 @@
             <center><button class="btn btn-primary btn-lg">Speichern</button></center>
         </form>
     </div>
+</div>
 
-    <!-- Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
+<div id="board-container">
+    <div class="board-labels bl-top" style="margin-top: -5vmin;">
+        <div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div><div>G</div><div>H</div>
+    </div>
+    <div class="board-labels bl-right" style="margin-left: 85vmin;">
+        <div>8</div><div>7</div><div>6</div><div>5</div><div>4</div><div>3</div><div>2</div><div>1</div>
+    </div>
+    <div class="board-labels bl-bottom"  style="margin-top: 85vmin;">
+        <div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div><div>G</div><div>H</div>
+    </div>
+    <div class="board-labels bl-left"  style="margin-left: -5vmin;">
+        <div>8</div><div>7</div><div>6</div><div>5</div><div>4</div><div>3</div><div>2</div><div>1</div>
+    </div>
+    <div id="board-anchor"></div>
+</div>
 
-            <div id="sidebar_toggle" onclick="toggleSidebar();"></div>
-            <div id="board-layer-behind">
-                <div id="board-anchor"></div>
+<div id="startModal" class="modal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+                    Editor
+                </h4>
             </div>
-
+            <div class="modal-body" style="text-align: center">
+                <img src="/img/logoSm.png" height="150px" />
+                <h3>
+                    Hier kannst du Level erstellen
+                </h3>
+                <button type="button" class="btn btn-success btn-lg" onclick="startEditor();">Start!</button>
+            </div>
+            <div class="modal-footer">
+                Die Spiele werden automatisch eingepflegt!
+            </div>
         </div>
     </div>
-
 </div>
+
 </body>
 </html>

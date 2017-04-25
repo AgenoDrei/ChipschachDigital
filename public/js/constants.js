@@ -12,7 +12,8 @@ var gameState = {
 var gameType = {
     SP: 0,
     MP: 1,
-    MINI: 2
+    MINI: 2,
+    EDITOR: 3
 };
 
 var playerType = {
