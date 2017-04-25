@@ -1,6 +1,6 @@
 class DisplayController {
     constructor() {
-        this.boardSize = $('#board-container').width();
+        this.boardSize = $('#board-anchor').width();
         this.movesP1 = 0;
         this.movesP2 = 0;
         this.chipsP1 = 0;
