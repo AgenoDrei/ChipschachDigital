@@ -1,18 +1,17 @@
 module.exports = function(app) {
-
     app.get('/', function(req, res) {
         res.render('menu', {
             iconRows: [
                 [
-                    {id:'sp', picId:'single', name:'Einzelspieler'},
-                    {id:'mp', picId:'multiLocal', name:'Mehrspieler Lokal'},
-                    {id:'mp_g', picId:'multiGlobal', name:'Mehrspieler Global'}
+                    {id:'sp', picId:'single', name:'Einzelspieler', status: 'white'},
+                    {id:'mp', picId:'multiLocal', name:'Mehrspieler Lokal', status: 'white'},
+                    {id:'mp_g', picId:'multiGlobal', name:'Mehrspieler Global', status: 'orange'}
                 ],[
-                    {id:'mini', picId:'mini', name:'Minischach'},
+                    {id:'mini', picId:'mini', name:'Minischach', status: 'red'},
                     {id:'impressum', picId:'logoLg', name:''},
-                    {id:'classic', picId:'classic', name:'Klassisches Schach'}
+                    {id:'classic', picId:'classic', name:'Klassisches Schach', status: 'red'}
                 ],[
-                    {id:'editor', picId:'editor', name:'Editor'},
+                    {id:'editor', picId:'editor', name:'Editor', status: 'orange'},
                     {id:'', picId:'', name:''},
                     {id:'exit', picId:'close_.75opacity', name:'Verlassen'}
                 ]
@@ -69,6 +68,29 @@ module.exports = function(app) {
     });
 
     app.get('/editor', function(req, res) {
-        res.render('editor');
+        res.render('editor', {
+            figuresBlue: [
+                {type: 'ROOK', picSrc: 'RookBlue.png'},
+                {type: 'BISHOP', picSrc: 'BishopBlue.png'},
+                {type: 'QUEEN', picSrc: 'QueenBlue.png'},
+                {type: 'KING', picSrc: 'KingBlue.png'},
+                {type: 'KNIGHT', picSrc: 'KnightBlue.png'},
+                {type: 'PAWN', picSrc: 'PawnBlue.png'}
+            ],
+            figuresYellow: [
+                {type: 'ROOK', picSrc: 'RookYellow.png'},
+                {type: 'BISHOP', picSrc: 'BishopYellow.png'},
+                {type: 'QUEEN', picSrc: 'QueenYellow.png'},
+                {type: 'KING', picSrc: 'KingYellow.png'},
+                {type: 'KNIGHT', picSrc: 'KnightYellow.png'},
+                {type: 'PAWN', picSrc: 'PawnYellow.png'}
+            ],
+            chips: [
+                {type: 1, picSrc: 'ChipBlue.png'},
+                {type: 0, picSrc: 'ChipYellow.png'},
+                {type: 2, picSrc: 'ChipGreen.png'},
+                {type: 3, picSrc: 'ChipRed.png'}
+            ]
+        });
     })
 };
