@@ -1,12 +1,11 @@
 let DisplayControl = null,
-    PixiEngine = null,
-    level = null;
+    PixiEngine = null;
 
 let startEditor = function() {
     // start Pixi
-    PixiEngine = new GameEngine(DisplayControl.boardSize, DisplayControl.boardSize, gameType.SP, document.getElementById('board-anchor'), false);
+    PixiEngine = new EditorEngine(DisplayControl.boardSize, document.getElementById('board-anchor'));
     PixiEngine.init(function () {
-        PixiEngine.loadLevel(level, function () {
+        PixiEngine.loadLevel(function() {
             PixiEngine.render();
         });
     });
@@ -14,16 +13,18 @@ let startEditor = function() {
     DisplayController.startGame();
 };
 
+let select = function(color, type, picSrc) {
+    PixiEngine.selection = {
+        type: type,
+        color: color
+    };
+    DisplayController.setSelectionWindow(picSrc);
+};
+let clearSelection = function() {
+    PixiEngine.selection = null;
+    DisplayController.clearSelection();
+}
+
 $(document).ready(function() {
     DisplayControl = new DisplayController();
-
-    level = {
-        id: '',
-        name: '',
-        description: '',
-        board: [],
-        type: '',
-        subtype: '',
-        minturns: 0
-    };
 });

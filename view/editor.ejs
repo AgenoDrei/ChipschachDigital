@@ -27,7 +27,7 @@
                 <select class="form-control" id="type" name="type" onchange="DisplayController.checkToggleSubtype();">
                     <option value="sp">Einzelspieler</option>
                     <option value="mp">Mehrspieler</option>
-                    <option value="mini">Minischach</option>
+                    <!--<option value="mini">Minischach</option>-->
                 </select>
             </div>
             <div id="subtypeFormGroup" class="form-group">
@@ -77,23 +77,35 @@
     <div class="chipsAndFigures board-labels bl-top" style="margin-top: -15vmin;">
         <div></div>
     <% figuresBlue.forEach(function(fig) { %>
-        <div id="blue_<%=fig.id%>" class="selectable"><img src="/img/<%=fig.picSrc%>"></div>
+        <div id="blue_<%=fig.type%>" class="selectable" onclick="select(playerType.PLAYERTWO, '<%=fig.type%>', '<%=fig.picSrc%>');">
+            <img src="/img/<%=fig.picSrc%>">
+        </div>
     <% }); %>
         <div></div>
     </div>
     <div class="chipsAndFigures board-labels bl-right" style="margin-left: 70vmin;">
         <div></div><div></div>
         <% chips.forEach(function(chip) { %>
-        <div id="chip_<%=chip.id%>" class="selectable"><img src="/img/<%=chip.picSrc%>"></div>
+        <div id="chip_<%=chip.type%>" class="selectable" onclick="select('<%=chip.type%>', 'CHIP', '<%=chip.picSrc%>');">
+            <img src="/img/<%=chip.picSrc%>">
+        </div>
         <% }); %>
         <div></div><div></div>
     </div>
     <div class="chipsAndFigures board-labels bl-bottom"  style="margin-top: 70vmin;">
         <div></div>
         <% figuresYellow.forEach(function(fig) { %>
-        <div id="yellow_<%=fig.id%>" class="selectable"><img src="/img/<%=fig.picSrc%>"></div>
+        <div id="yellow_<%=fig.type%>" class="selectable" onclick="select(playerType.PLAYERONE, '<%=fig.type%>', '<%=fig.picSrc%>');">
+            <img src="/img/<%=fig.picSrc%>">
+        </div>
         <% }); %>
         <div></div>
+    </div>
+    <div id="selection">
+
+    </div>
+    <div id="clearSelection" onclick="clearSelection();">
+        <img src="/img/cancel.png">
     </div>
 </div>
 
@@ -107,13 +119,21 @@
             </div>
             <div class="modal-body" style="text-align: center">
                 <img src="/img/logoSm.png" height="150px" />
-                <h3>
-                    Hier kannst du Level erstellen
-                </h3>
+                <h4>
+                    Bedienungsanleitung
+                </h4>
+                <p style="text-align: left;">
+                    Figuren oder Chips um das Brett herum auswählen.<br>
+                    Deine aktuelle Auswahl wird im Fenster linksangezeigt.<br>
+                    Sobald eine Auswahl getroffen wurde kannst du auf dem Brett auf Felder klicken und dort wird die
+                    entsprechende Figur/Chip erstellt! <br>
+                    Du kannst bereits platzierte Figuren/Chips mit neu ausgewählten überschreiben.<br>
+                    Zum Löschen einfach die Auswahl leeren (rotes X-Symbol) und auf das zu leerende Feld klicken.
+                </p>
                 <button type="button" class="btn btn-success btn-lg" onclick="startEditor();">Start!</button>
             </div>
             <div class="modal-footer">
-                Die Spiele werden automatisch eingepflegt!
+                Hier kannst du eigene Level erstellen!
             </div>
         </div>
     </div>

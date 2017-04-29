@@ -1,5 +1,4 @@
 module.exports = function(app) {
-
     app.get('/', function(req, res) {
         res.render('menu', {
             iconRows: [
@@ -71,26 +70,26 @@ module.exports = function(app) {
     app.get('/editor', function(req, res) {
         res.render('editor', {
             figuresBlue: [
-                {id: 'rook', picSrc: 'RookBlue.png'},
-                {id: 'bishop', picSrc: 'BishopBlue.png'},
-                {id: 'queen', picSrc: 'QueenBlue.png'},
-                {id: 'king', picSrc: 'KingBlue.png'},
-                {id: 'knight', picSrc: 'KnightBlue.png'},
-                {id: 'pawn', picSrc: 'PawnBlue.png'}
+                {type: 'ROOK', picSrc: 'RookBlue.png'},
+                {type: 'BISHOP', picSrc: 'BishopBlue.png'},
+                {type: 'QUEEN', picSrc: 'QueenBlue.png'},
+                {type: 'KING', picSrc: 'KingBlue.png'},
+                {type: 'KNIGHT', picSrc: 'KnightBlue.png'},
+                {type: 'PAWN', picSrc: 'PawnBlue.png'}
             ],
             figuresYellow: [
-                {id: 'rook', picSrc: 'RookYellow.png'},
-                {id: 'bishop', picSrc: 'BishopYellow.png'},
-                {id: 'queen', picSrc: 'QueenYellow.png'},
-                {id: 'king', picSrc: 'KingYellow.png'},
-                {id: 'knight', picSrc: 'KnightYellow.png'},
-                {id: 'pawn', picSrc: 'PawnYellow.png'}
+                {type: 'ROOK', picSrc: 'RookYellow.png'},
+                {type: 'BISHOP', picSrc: 'BishopYellow.png'},
+                {type: 'QUEEN', picSrc: 'QueenYellow.png'},
+                {type: 'KING', picSrc: 'KingYellow.png'},
+                {type: 'KNIGHT', picSrc: 'KnightYellow.png'},
+                {type: 'PAWN', picSrc: 'PawnYellow.png'}
             ],
             chips: [
-                {id: 'blue', picSrc: 'ChipBlue.png'},
-                {id: 'yellow', picSrc: 'ChipYellow.png'},
-                {id: 'green', picSrc: 'ChipGreen.png'},
-                {id: 'red', picSrc: 'ChipRed.png'}
+                {type: 1, picSrc: 'ChipBlue.png'},
+                {type: 0, picSrc: 'ChipYellow.png'},
+                {type: 2, picSrc: 'ChipGreen.png'},
+                {type: 3, picSrc: 'ChipRed.png'}
             ]
         });
     })

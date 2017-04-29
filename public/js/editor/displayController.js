@@ -53,4 +53,14 @@ class DisplayController {
             $('#minTurnsFormGroup').show();
         }
     };
+
+    static setSelectionWindow(picSrc) {
+        $('#selection').html(`
+            <img src="/img/${picSrc}">
+        `);
+    };
+
+    static clearSelection() {
+        $('#selection').html("");
+    };
 }
