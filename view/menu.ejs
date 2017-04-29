@@ -22,7 +22,7 @@
             </a>
             <% } else if (icon.id == 'editor') {%>
             <a class="menuIcon" href="/editor"
-               style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+               style="background-image: url('img/<%= icon.picId %>.png'); background-color: white; border: 5px solid <%=icon.status%>;">
                 <p><%= icon.name %></p>
             </a>
             <% } else if (icon.id == 'exit') { %>
@@ -32,7 +32,7 @@
             </a>
             <% } else if (icon.id != '') {%>
             <a class="menuIcon" data-toggle="modal" data-target="#<%= icon.id %>"
-               style="background-image: url('img/<%= icon.picId %>.png'); background-color: white;">
+               style="background-image: url('img/<%= icon.picId %>.png'); background-color: white; border: 5px solid <%=icon.status%>;">
                 <p><%= icon.name %></p>
             </a>
             <% } else { %>

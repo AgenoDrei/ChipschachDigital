@@ -3,15 +3,15 @@ module.exports = function(app) {
         res.render('menu', {
             iconRows: [
                 [
-                    {id:'sp', picId:'single', name:'Einzelspieler'},
-                    {id:'mp', picId:'multiLocal', name:'Mehrspieler Lokal'},
-                    {id:'mp_g', picId:'multiGlobal', name:'Mehrspieler Global'}
+                    {id:'sp', picId:'single', name:'Einzelspieler', status: 'white'},
+                    {id:'mp', picId:'multiLocal', name:'Mehrspieler Lokal', status: 'white'},
+                    {id:'mp_g', picId:'multiGlobal', name:'Mehrspieler Global', status: 'orange'}
                 ],[
-                    {id:'mini', picId:'mini', name:'Minischach'},
+                    {id:'mini', picId:'mini', name:'Minischach', status: 'red'},
                     {id:'impressum', picId:'logoLg', name:''},
-                    {id:'classic', picId:'classic', name:'Klassisches Schach'}
+                    {id:'classic', picId:'classic', name:'Klassisches Schach', status: 'red'}
                 ],[
-                    {id:'editor', picId:'editor', name:'Editor'},
+                    {id:'editor', picId:'editor', name:'Editor', status: 'orange'},
                     {id:'', picId:'', name:''},
                     {id:'exit', picId:'close_.75opacity', name:'Verlassen'}
                 ]
