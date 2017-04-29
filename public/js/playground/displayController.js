@@ -8,6 +8,7 @@ class DisplayController {
 
         $('[data-toggle="tooltip"]').tooltip();     // enable Bootstrap tooltips
         $('#startModal').show();
+        $('#modalOverlay').show();
 
         this.adjustScreen();
         window.onresize = function() {
@@ -55,7 +56,26 @@ class DisplayController {
     startGame() {
         this.updateCounters();
         $('#startModal').hide();
+        $('#modalOverlay').hide();
         $('#board-container').show();
+    }
+    finishGame(GameControl) {
+        if (GameControl.level.type === "sp") {
+            if (this.movesP1 === GameControl.level.minturns) {
+                $('#winmsgMinturnsSuccess').show();
+                $('#btnRepeat').hide();
+            }
+            else
+            if (!yielded)
+                $('#winmsgMinturnsFailed').show();
+        } else {
+            if (msgObj.player === winner.PLAYERONE)
+                $('#winmsgGenericYellow').show();
+            else if (msgObj.player === winner.PLAYERTWO)
+                $('#winmsgGenericBlue').show();
+        }
+        $('#modalOverlay').show();
+        $('#finishModal').show();
     }
 
     static disableBeatableWithKings() {

@@ -16,7 +16,8 @@
 
 
 <body>
-<div id="overlay"></div>
+<div id="modalOverlay" class="overlay"></div>
+<div id="overlay" class="overlay"></div>
 <div id="nav">
     <div id="btn_menu" style="background-image: url(../../img/save_icon.png); background-size: 60%;" onclick="DisplayController.toggleClick();"></div>
 
@@ -55,6 +56,11 @@
             </div>
             <center><button class="btn btn-primary btn-lg" onclick="saveLvl();">Speichern</button></center>
         </form>
+    </div>
+    <div class="nav-container iconBar" style="top: 90% !important;">
+        <a href="/">
+            <img src="/img/close.png" title="Zurück zum Hauptmenü" id="close">
+        </a>
     </div>
 </div>
 

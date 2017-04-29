@@ -7,6 +7,10 @@
     border-radius: 15px;
 }
 
+#modalOverlay {
+    z-index: 420 !important;
+}
+
 /* content */
 
 #board-container {

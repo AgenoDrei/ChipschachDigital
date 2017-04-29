@@ -127,21 +127,7 @@ let handleMessage = function(msg) {
             yielded = true;
             // NOBREAK ^^
         case "win":
-            if (GameControl.level.type === "sp") {
-                if (DisplayControl.movesP1 === GameControl.level.minturns) {
-                    $('#winmsgMinturnsSuccess').show();
-                    $('#btnRepeat').hide();
-                }
-                else
-                    if (!yielded)
-                        $('#winmsgMinturnsFailed').show();
-            } else {
-                if (msgObj.player === winner.PLAYERONE)
-                    $('#winmsgGenericYellow').show();
-                else if (msgObj.player === winner.PLAYERTWO)
-                    $('#winmsgGenericBlue').show();
-            }
-            $('#finishModal').show();
+            DisplayControl.finishGame(GameControl);
             won = true;
             break;
         case "figure":
