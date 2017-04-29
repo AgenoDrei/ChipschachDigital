@@ -23,7 +23,11 @@ let select = function(color, type, picSrc) {
 let clearSelection = function() {
     PixiEngine.selection = null;
     DisplayController.clearSelection();
-}
+};
+
+let saveLvl = function() {
+    toastr.info('Automatisches Speichern und einpflegen von Leveln ist aufgrund von Diskusionsbedarf noch nicht implementiert.');
+};
 
 $(document).ready(function() {
     DisplayControl = new DisplayController();

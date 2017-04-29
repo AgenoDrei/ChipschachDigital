@@ -67,6 +67,7 @@
     width: 7.5vmin;
     height: 7.5vmin;
     padding: .5vmin;
+    text-align: center;
     background-color: white;
     border: 1px solid grey;
     z-index: 100;

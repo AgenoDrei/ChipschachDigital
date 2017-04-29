@@ -21,7 +21,7 @@
     <div id="btn_menu" style="background-image: url(../../img/save_icon.png); background-size: 60%;" onclick="DisplayController.toggleClick();"></div>
 
     <div class="nav-container" style="top: 0;">
-        <form class="propertiesForm">
+        <form class="propertiesForm" action="javascript:void(0);">
             <div class="form-group">
                 <label for="type">Kategorie</label>
                 <select class="form-control" id="type" name="type" onchange="DisplayController.checkToggleSubtype();">
@@ -53,7 +53,7 @@
                 <label for="minTurns">Minimale Zugzahl</label>
                 <input type="number" class="form-control" id="minTurns" name="minTurns">
             </div>
-            <center><button class="btn btn-primary btn-lg">Speichern</button></center>
+            <center><button class="btn btn-primary btn-lg" onclick="saveLvl();">Speichern</button></center>
         </form>
     </div>
 </div>
