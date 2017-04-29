@@ -147,7 +147,7 @@ module.exports = function(dataAccess) {
                 if(obj.player1.connection == connection || obj.player2.connection == connection) {
                     obj.endGame();
                     obj.player1.state = obj.player2.state = conStates.LEFT;
-                    this.games = this.games.splice(key, 1);
+                    this.games.splice(key, 1);
                     fulfill('Game ended successfull!');
                 }
             }
