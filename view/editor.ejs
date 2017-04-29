@@ -71,7 +71,30 @@
     <div class="board-labels bl-left"  style="margin-left: -5vmin;">
         <div>8</div><div>7</div><div>6</div><div>5</div><div>4</div><div>3</div><div>2</div><div>1</div>
     </div>
-    <div id="board-anchor"></div>
+    <div id="board-anchor">
+        
+    </div>
+    <div class="chipsAndFigures board-labels bl-top" style="margin-top: -15vmin;">
+        <div></div>
+    <% figuresBlue.forEach(function(fig) { %>
+        <div id="blue_<%=fig.id%>" class="selectable"><img src="/img/<%=fig.picSrc%>"></div>
+    <% }); %>
+        <div></div>
+    </div>
+    <div class="chipsAndFigures board-labels bl-right" style="margin-left: 70vmin;">
+        <div></div><div></div>
+        <% chips.forEach(function(chip) { %>
+        <div id="chip_<%=chip.id%>" class="selectable"><img src="/img/<%=chip.picSrc%>"></div>
+        <% }); %>
+        <div></div><div></div>
+    </div>
+    <div class="chipsAndFigures board-labels bl-bottom"  style="margin-top: 70vmin;">
+        <div></div>
+        <% figuresYellow.forEach(function(fig) { %>
+        <div id="yellow_<%=fig.id%>" class="selectable"><img src="/img/<%=fig.picSrc%>"></div>
+        <% }); %>
+        <div></div>
+    </div>
 </div>
 
 <div id="startModal" class="modal" role="dialog">

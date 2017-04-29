@@ -69,6 +69,29 @@ module.exports = function(app) {
     });
 
     app.get('/editor', function(req, res) {
-        res.render('editor');
+        res.render('editor', {
+            figuresBlue: [
+                {id: 'rook', picSrc: 'RookBlue.png'},
+                {id: 'bishop', picSrc: 'BishopBlue.png'},
+                {id: 'queen', picSrc: 'QueenBlue.png'},
+                {id: 'king', picSrc: 'KingBlue.png'},
+                {id: 'knight', picSrc: 'KnightBlue.png'},
+                {id: 'pawn', picSrc: 'PawnBlue.png'}
+            ],
+            figuresYellow: [
+                {id: 'rook', picSrc: 'RookYellow.png'},
+                {id: 'bishop', picSrc: 'BishopYellow.png'},
+                {id: 'queen', picSrc: 'QueenYellow.png'},
+                {id: 'king', picSrc: 'KingYellow.png'},
+                {id: 'knight', picSrc: 'KnightYellow.png'},
+                {id: 'pawn', picSrc: 'PawnYellow.png'}
+            ],
+            chips: [
+                {id: 'blue', picSrc: 'ChipBlue.png'},
+                {id: 'yellow', picSrc: 'ChipYellow.png'},
+                {id: 'green', picSrc: 'ChipGreen.png'},
+                {id: 'red', picSrc: 'ChipRed.png'}
+            ]
+        });
     })
 };

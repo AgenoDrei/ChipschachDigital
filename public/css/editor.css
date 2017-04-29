@@ -35,3 +35,27 @@
     height: 8.125vmin !important;
     line-height: 8.125vmin !important;
 }
+
+.chipsAndFigures.bl-top, .chipsAndFigures.bl-bottom {
+    width: 75vmin !important;
+    height: 5vmin;
+}
+.chipsAndFigures.bl-right, .chipsAndFigures.bl-left{
+    width: 5vmin;
+    height: 75vmin !important;
+}
+.chipsAndFigures.bl-top > div, .chipsAndFigures.bl-bottom > div {
+    width: 10.625vmin;
+    height: 10vmin;
+    line-height: 10vmin;
+}
+.chipsAndFigures.bl-right > div, .chipsAndFigures.bl-left > div {
+    width: 10vmin;
+    height: 10.625vmin;
+    line-height: 10.625vmin;
+}
+
+.selectable > img {
+    max-width:100%;
+    max-height:100%;
+}
