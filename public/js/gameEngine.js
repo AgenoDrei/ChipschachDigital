@@ -124,7 +124,8 @@ class GameEngine {
             let cur = level.board[i];
             this.createFigure(cur.x, cur.y, this.figureSize, cur.color, cur.type);
         }
-        callback();
+        if (callback != undefined)
+            callback();
     }
 
     clear() {
@@ -365,5 +366,60 @@ class Figure {
         this.sprite.position.y = pos.y;
         this.sprite.height = this.sprite.width = this.size;
         stage.addChild(this.sprite);
+    }
+}
+
+class EditorEngine extends GameEngine {
+    constructor(wh, anchor) {
+        super(wh, wh, gameType.SP, anchor, false);
+        this.selection= null;
+    }
+
+    init(cb) {
+        let emptyLevel = {
+            id: '',
+            name: '',
+            description: '',
+            board: [],
+            type: '',
+            subtype: '',
+            minturns: 0
+        };
+        super.init(function() {
+            cb();
+        });
+    }
+
+    loadLevel(cb) {
+        let emptyLevel = {
+            id: '',
+            name: '',
+            description: '',
+            board: [],
+            type: '',
+            subtype: '',
+            minturns: 0
+        };
+        super.loadLevel(emptyLevel, cb);
+    }
+
+    createFigure(x, y, color, type) {
+        super.createFigure(x, y, this.figureSize, color, type);
+    }
+
+    onClick(rawX, rawY) {
+        let pos = Helper.getPos(rawX, rawY);
+        console.log('Clicked: (' + pos.x + '|' + pos.y + ')');
+
+        let figure = Helper.getFigure(pos.x, pos.y, this.figures);
+        if(figure != null) {
+            figure.destroy();
+            super.render();
+        }
+
+        if (this.selection != null) {
+            this.createFigure(pos.x, pos.y, this.selection.color, this.selection.type);
+            console.log('Created '+this.selection.type+'_'+this.selection.color+' at ['+pos.x+','+pos.y+'].');
+        }
     }
 }

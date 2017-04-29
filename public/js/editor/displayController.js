@@ -1,12 +1,6 @@
 class DisplayController {
     constructor() {
         this.boardSize = $('#board-anchor').width();
-        this.movesP1 = 0;
-        this.movesP2 = 0;
-        this.chipsP1 = 0;
-        this.chipsP2 = 0;
-
-        $('[data-toggle="tooltip"]').tooltip();     // enable Bootstrap tooltips
         $('#startModal').show();
 
         this.adjustScreen();
@@ -33,6 +27,11 @@ class DisplayController {
         }
     }
 
+    static startGame() {
+        $('#startModal').hide();
+        $('#board-container').show();
+    }
+
     static toggleClick() {
         if($('#nav').css("left") == "-250px") {
             $('#overlay').fadeIn(200);
@@ -41,36 +40,27 @@ class DisplayController {
         } else {
             $('#overlay').fadeOut(200);
             $('#nav').animate({left: "-250px"}, 200);
-            $('#btn_menu').css("background", "url('/img/menu.png') no-repeat scroll center center / 80% 80% #FFF");
+            $('#btn_menu').css("background", "url('/img/save_icon.png') no-repeat scroll center center / 60% 60% #FFF");
         }
     };
 
-    updateCounters() {
-        $('#moveCounterP1').val(this.movesP1);
-        $('#chipCounterP1').val(this.chipsP1);
-        $('#moveCounterP2').val(this.movesP2);
-        $('#chipCounterP2').val(this.chipsP2);
-    }
+    static checkToggleSubtype() {
+        if ($('select[name="type"]').val() == 'mini') {
+            $('#subtypeFormGroup').hide();
+            $('#minTurnsFormGroup').hide();
+        } else {
+            $('#subtypeFormGroup').show();
+            $('#minTurnsFormGroup').show();
+        }
+    };
 
-    startGame() {
-        this.updateCounters();
-        $('#startModal').hide();
-        $('#board-container').show();
-    }
+    static setSelectionWindow(picSrc) {
+        $('#selection').html(`
+            <img src="/img/${picSrc}">
+        `);
+    };
 
-    static disableBeatableWithKings() {
-        $('#possibleDisableIfKingLvl_label')
-            .attr('data-toggle', 'tooltip')
-            .attr('title', 'Könige können sich nicht gegenseitig schlagen!');
-        $('#possibleDisableIfKingLvl_input').attr('disabled', true);
-    }
-
-    static updateModalTexts(lvlName, lvlDescr) {
-        $('.modal-title').html(lvlName);
-        $('#lvlDescr').html(lvlDescr);
-    }
-
-    static checkStartMpModeRadios() {
-        return $("input[name='gameMode']:checked").val();
-    }
+    static clearSelection() {
+        $('#selection').html("");
+    };
 }

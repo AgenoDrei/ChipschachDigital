@@ -1,23 +1,4 @@
-body {
-    height: 100%;
-    font-family: "Arial Rounded MT Bold", "HelveticaNeue-Light",
-    "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial,
-    "Lucida Grande", sans-serif;
-    min-width: 1460px;
-}
-
-a:active, a:focus{
-    ie-dummy: expression(this.hideFocus=true);
-    outline: none;
-}
-
-
 /* sidebar */
-
-#wrapper #sidebar-wrapper {
-    background: url('../img/muster.png');
-    background-size: 20px;
-}
 
 .propertiesForm {
     margin: 25px;
@@ -28,19 +9,77 @@ a:active, a:focus{
 
 /* content */
 
-#sidebar_toggle {
-    width: 50px;
-    height: 50px;
-    opacity: 0.7;
-    background: url('../img/save_icon.png');
-    background-size: 60% 60%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-color: white;
-    border-radius: 50%;
+#board-container {
+    width: 75vmin !important;
+    height: 75vmin !important;
+}
+#board-anchor {
+    width: 65vmin !important;
+    height: 65vmin !important;
+}
+.bl-top, .bl-bottom {
+    width: 65vmin !important;
+    height: 5vmin;
+}
+.bl-right, .bl-left{
+    width: 5vmin;
+    height: 65vmin !important;
+}
+.bl-top > div, .bl-bottom > div {
+    width: 8.125vmin !important;
+    height: 5vmin;
+    line-height: 5vmin;
+}
+.bl-right > div, .bl-left > div {
+    width: 5vmin;
+    height: 8.125vmin !important;
+    line-height: 8.125vmin !important;
 }
 
-#board-layer-behind {
-    margin: auto;
+.chipsAndFigures.bl-top, .chipsAndFigures.bl-bottom {
+    width: 75vmin !important;
+    height: 5vmin;
 }
-#board-anchor {}
+.chipsAndFigures.bl-right, .chipsAndFigures.bl-left{
+    width: 5vmin;
+    height: 75vmin !important;
+}
+.chipsAndFigures.bl-top > div, .chipsAndFigures.bl-bottom > div {
+    width: 10.625vmin;
+    height: 10vmin;
+    line-height: 10vmin;
+}
+.chipsAndFigures.bl-right > div, .chipsAndFigures.bl-left > div {
+    width: 10vmin;
+    height: 10.625vmin;
+    line-height: 10.625vmin;
+}
+
+.selectable > img, #selection > img, #clearSelection > img {
+    max-width:100%;
+    max-height:100%;
+}
+#selection {
+    position: absolute;
+    margin: auto;
+    left: -87.5vmin; right: 0;
+    top: 0; bottom: 0;
+    width: 7.5vmin;
+    height: 7.5vmin;
+    padding: .5vmin;
+    text-align: center;
+    background-color: white;
+    border: 1px solid grey;
+    z-index: 100;
+}
+#clearSelection {
+    position: absolute;
+    margin: auto;
+    left: -87.5vmin; right: 0;
+    top: 13vmin; bottom: 0;
+    width: 5vmin;
+    height: 5vmin;
+    padding: .25vmin;
+    background-color: white;
+    z-index: 100;
+}

@@ -21,7 +21,31 @@ let startGame = function() {
                 })
             }
         }
-        DisplayControl.startPixi(GameControl.level);
+
+        // start Pixi
+        if (GameControl.level !== undefined) {
+            let operationMode = GameControl.level.type === 'sp' ? gameType.SP : gameType.MP;
+            PixiEngine = new GameEngine(DisplayControl.boardSize, DisplayControl.boardSize, operationMode, document.getElementById('board-anchor'), (lvlType=='global'?true:false));
+            PixiEngine.setPlayer(player);
+            PixiEngine.init(function () {
+                PixiEngine.loadLevel(GameControl.level, function () {
+                    PixiEngine.setMoveCallback(function(origX, origY, x, y) {
+                        comHandle.send({
+                            type: "turn",
+                            gameId: GameControl.gameId,
+                            joinId: GameControl.joinIds[0],
+                            origX: origX,
+                            origY: origY,
+                            destX: x,
+                            destY: y
+                        });
+                    });
+                    PixiEngine.render();
+                });
+            });
+        } else
+            toastr.info('Level wird noch geladen, einen Moment Geduld noch ...');
+
         DisplayControl.startGame();
     }
 };
@@ -57,18 +81,6 @@ let nextLevelForward = function() {     // assumes ordered level_list of dbCall
             let locHrefSplit = window.location.href.split('/');
             window.location = '/' + GameControl.level.type+ '/' + GameControl.level.subtype + '/' + nextLevelId;
         }
-    });
-};
-
-let handleMoves = function(origX, origY, x, y) {
-    comHandle.send({
-        type: "turn",
-        gameId: GameControl.gameId,
-        joinId: GameControl.joinIds[0],
-        origX: origX,
-        origY: origY,
-        destX: x,
-        destY: y
     });
 };
 

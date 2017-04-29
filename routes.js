@@ -1,5 +1,4 @@
 module.exports = function(app) {
-
     app.get('/', function(req, res) {
         res.render('menu', {
             iconRows: [
@@ -69,6 +68,29 @@ module.exports = function(app) {
     });
 
     app.get('/editor', function(req, res) {
-        res.render('editor');
+        res.render('editor', {
+            figuresBlue: [
+                {type: 'ROOK', picSrc: 'RookBlue.png'},
+                {type: 'BISHOP', picSrc: 'BishopBlue.png'},
+                {type: 'QUEEN', picSrc: 'QueenBlue.png'},
+                {type: 'KING', picSrc: 'KingBlue.png'},
+                {type: 'KNIGHT', picSrc: 'KnightBlue.png'},
+                {type: 'PAWN', picSrc: 'PawnBlue.png'}
+            ],
+            figuresYellow: [
+                {type: 'ROOK', picSrc: 'RookYellow.png'},
+                {type: 'BISHOP', picSrc: 'BishopYellow.png'},
+                {type: 'QUEEN', picSrc: 'QueenYellow.png'},
+                {type: 'KING', picSrc: 'KingYellow.png'},
+                {type: 'KNIGHT', picSrc: 'KnightYellow.png'},
+                {type: 'PAWN', picSrc: 'PawnYellow.png'}
+            ],
+            chips: [
+                {type: 1, picSrc: 'ChipBlue.png'},
+                {type: 0, picSrc: 'ChipYellow.png'},
+                {type: 2, picSrc: 'ChipGreen.png'},
+                {type: 3, picSrc: 'ChipRed.png'}
+            ]
+        });
     })
 };
