@@ -73,4 +73,9 @@ class DisplayController {
     static checkStartMpModeRadios() {
         return $("input[name='gameMode']:checked").val();
     }
+
+    static hideLvlOption() {
+        $('#btnRepeat').hide();
+        $('#btnNext').hide();
+    }
 }

@@ -141,8 +141,6 @@ module.exports = function(dataAccess) {
 	};
 
 	this.endGame = function(connection) {
-
-
 		return new Promise(function(fulfill, reject) {
             for(let key in this.games) {
             	let obj = this.games[key];

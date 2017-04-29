@@ -86,6 +86,7 @@ let nextLevelForward = function() {     // assumes ordered level_list of dbCall
 
 let handleMessage = function(msg) {
     let yielded = false,
+        won = false,
         msgObj = JSON.parse(msg.data);
     console.log("Server> ", msgObj);
 
@@ -135,12 +136,13 @@ let handleMessage = function(msg) {
                     if (!yielded)
                         $('#winmsgMinturnsFailed').show();
             } else {
-                if (msgObj.player === playerType.PLAYERONE)
+                if (msgObj.player === winner.PLAYERONE)
                     $('#winmsgGenericYellow').show();
-                else if (msgObj.player === playerType.PLAYERTWO)
+                else if (msgObj.player === winner.PLAYERTWO)
                     $('#winmsgGenericBlue').show();
             }
             $('#finishModal').show();
+            won = true;
             break;
         case "figure":
             PixiEngine.createFigure(msgObj.x, msgObj.y, PixiEngine.figureSize, msgObj.color, msgObj.figureType);
@@ -154,6 +156,13 @@ let handleMessage = function(msg) {
                     toastr.error('Server error!');
             }
             break;
+        case "exit":
+            if (!won) {
+                toastr.info("Dein Gegner hat das Spiel scheinbar verlassen ...");
+                window.setTimeout(function() {
+                    window.location = '/';
+                }, 3000);
+            }
     }
 };
 
@@ -162,15 +171,17 @@ $('document').ready(function() {
     let pathSplit = window.location.pathname.split('/');
     lvlType = pathSplit[1];
 
+    DisplayControl = new DisplayController();
     if (lvlType !== 'global')
         GameControl = new GameController(pathSplit[3], undefined);
     else
         GameControl = new GameController(undefined, pathSplit[2]);
-    DisplayControl = new DisplayController();
 
     if (lvlType === 'sp')
         GameControl.connectLocalGame(lvlType, pathSplit[3], 'unbeatable', GameControl.joinIds);
     // mp-local connecting upon choice of mode
-    else if (lvlType === 'global')
+    else if (lvlType === 'global') {
         GameControl.connectGlobalGame(window.location.href.split('=')[1]);
+        DisplayController.hideLvlOption();
+    }
 });

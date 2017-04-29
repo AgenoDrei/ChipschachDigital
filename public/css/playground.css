@@ -16,6 +16,6 @@
 
 /* modals */
 
-#winmsgGenericYellow, #winmsgGenericBlue, #winmsgMinturnsSuccess, #winmsgMinturnsFailed, #winmsgYielded {
+.modal-body > h3 > p {
     display: none;
 }
