@@ -26,15 +26,16 @@ class DisplayController {
     }
 
     adjustScreen() {
-        if(this.mobilecheck() || (window.innerWidth <= 900 && $('#nav').css("left") == "0px")){
+        if ((this.mobilecheck() || (window.innerWidth <= 900 && $('#nav').css("left") == "0px"))
+            || (($('#nav').css("left") == "0px") && Math.abs(window.innerWidth - window.innerHeight) < 250)){
             $('#nav').css("left", "-250px");
             $('#board-container').css("left", "0px");
             $('#btn_menu').show();
-        } else if (window.innerWidth > 900 && $('#nav').css("left") == "-250px") {
+        } else if (window.innerWidth > 900 && $('#nav').css("left") == "-250px" && Math.abs(window.innerWidth - window.innerHeight) >= 250) {
             $('#nav').css("left", "0px");
             $('#board-container').css("left", "250px");
             $('#btn_menu').hide();
-        }
+        }   // later if condition: adjust for if sidebar is opened, vmin on width of board-container is not accurate anymore
     }
 
     static toggleClick() {
