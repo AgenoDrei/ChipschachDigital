@@ -12,8 +12,7 @@ var gameState = {
 var gameType = {
     SP: 0,
     MP: 1,
-    MINI: 2,
-    EDITOR: 3
+    MINI: 2
 };
 
 var playerType = {
@@ -25,7 +24,7 @@ var playerType = {
 
 var figureSize = null;
 
-var players = {
-    PLAYERONE: 0,
-    PLAYERTWO: 1
+var winner = {  // dirty solution kinda because of: missmatch between gameState.WIN_PLAYER1 (1) and playerType.PLAYERONE (0) ...
+    PLAYERONE: 1,
+    PLAYERTWO: 2
 };

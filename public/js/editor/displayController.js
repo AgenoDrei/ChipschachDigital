@@ -2,6 +2,7 @@ class DisplayController {
     constructor() {
         this.boardSize = $('#board-anchor').width();
         $('#startModal').show();
+        $('#modalOverlay').show();
 
         this.adjustScreen();
         window.onresize = function() {
@@ -29,6 +30,7 @@ class DisplayController {
 
     static startGame() {
         $('#startModal').hide();
+        $('#modalOverlay').hide();
         $('#board-container').show();
     }
 
