@@ -31,50 +31,50 @@
 <div id="nav">
     <div id="btn_menu" style="background-image: url(../../img/menu.png);" onclick="DisplayController.toggleClick();"></div>
 
-    <div class="nav-container" style="top: 0;">
-        <div class="profile-container">
-            <img src="/img/profilPicErsatz.bmp">
-        </div>
+    <div class="nav-container player-data" style="top: 0;">
+        <img class="profile-pic" src="/img/profilPicErsatz.bmp">
         <div class="counter-container">
+            <input type="number" id="moveCounterP1" class="counterInput form-control" disabled style="cursor: default;">
             <img src="/img/arrow.png" />
-            <input type="number" id="moveCounterP1" class="form-control" disabled style="cursor: default;">
         </div>
         <div class="counter-container">
+            <input type="number" id="chipCounterP1" class="counterInput form-control" disabled style="cursor: default;">
             <img src="/img/ChipGreen.png">
-            <input type="number" id="chipCounterP1" class="form-control" disabled style="cursor: default;">
         </div>
     </div>
 
     <div class="nav-container iconBar">
-        <a href="/">
-            <img src="/img/close.png" title="Zurück zum Hauptmenü" id="close">
-        </a>
-        <a onclick="yieldGame();">
-            <img src="/img/white_flag.png" title="Spiel aufgeben" id="yield">
-        </a>
-        <a onclick="undo();">
-            <img src="../../img/undo.png" title="Zug rückgängig" id="showHelp">
-        </a>
+        <div>
+            <a href="/">
+                <img src="/img/close.png" title="Zurück zum Hauptmenü" id="close">
+            </a>
+            <a onclick="yieldGame();">
+                <img src="/img/white_flag.png" title="Spiel aufgeben" id="yield">
+            </a>
+            <a onclick="undo();">
+                <img src="../../img/undo.png" title="Zug rückgängig" id="showHelp">
+            </a>
+        </div>
     </div>
 
     <% if (type !== 'SP') { %>
-    <div class="nav-container" style="bottom: 0;">
+    <div class="nav-container player-data" style="bottom: 0;">
         <div class="counter-container">
+            <input type="number" id="moveCounterP2" class="counterInput form-control" disabled style="cursor: default;">
             <img src="/img/arrow.png" />
-            <input type="number" id="moveCounterP2" class="form-control" disabled style="cursor: default;">
         </div>
         <div class="counter-container">
+            <input type="number" id="chipCounterP2" class="counterInput form-control" disabled style="cursor: default;">
             <img src="/img/ChipGreen.png">
-            <input type="number" id="chipCounterP2" class="form-control" disabled style="cursor: default;">
         </div>
-        <div class="profile-container">
-            <img src="/img/profilPicErsatz.bmp">
-        </div>
+        <img class="profile-pic" src="/img/profilPicErsatz.bmp">
     </div>
     <% } %>
 </div>
 
 <div id="board-container">
+    <div id="turnYellow" class="turnIndicator" style="box-shadow: 5px 5px 25px orange;"></div>
+    <div id="turnBlue" class="turnIndicator" style="box-shadow: 5px 5px 25px darkblue;"></div>
     <div class="board-labels bl-top" style="margin-top: -5vmin;">
         <div>A</div><div>B</div><div>C</div><div>D</div><div>E</div><div>F</div><div>G</div><div>H</div>
     </div>
@@ -87,8 +87,6 @@
     <div class="board-labels bl-left"  style="margin-left: -5vmin;">
         <div>8</div><div>7</div><div>6</div><div>5</div><div>4</div><div>3</div><div>2</div><div>1</div>
     </div>
-    <!--<div id="turnYellow" class="turnIndicator" style="box-shadow: 5px 5px 25px orange;"></div>-->
-    <!--<div id="turnBlue" class="turnIndicator" style="box-shadow: 5px 5px 25px darkblue;"></div>-->
     <div id="board-anchor"></div>
 </div>
 
