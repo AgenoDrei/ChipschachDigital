@@ -249,17 +249,24 @@ class SelectionHandler {
 
     select(x, y) {
         let select = this.selections[this.turn];
+        let figure = Helper.getFigure(x, y, this.parent.figures);
         if(!select.active) {
             //console.log('New field selected: (' + x + '|' + y + ')' );
-            let figure = Helper.getFigure(x, y, this.parent.figures);
             if(figure != null && !figure.chip && figure.color == this.turn) {
                 select.setSelection(x, y);
                 this.switchGraphic(false, x, y);
             }
             return false;
         } else {
+            // reset selection by clicking onto itself
             if(x == select.x && y == select.y) {
                 this.removeSelection(x, y);
+                return false;
+            }
+            // click on other own figure -> switch selection
+            if (figure != null && !figure.chip && figure.color == this.turn) {
+                select.setSelection(x, y);
+                this.switchGraphic(false, x, y);
                 return false;
             }
             return true;
