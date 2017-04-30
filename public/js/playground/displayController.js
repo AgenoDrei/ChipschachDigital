@@ -26,12 +26,12 @@ class DisplayController {
     }
 
     adjustScreen() {
-        if ((this.mobilecheck() || (window.innerWidth <= 900 && $('#nav').css("left") == "0px"))
-            || (($('#nav').css("left") == "0px") && Math.abs(window.innerWidth - window.innerHeight) < 250)){
+        if (this.mobilecheck() 
+            || ($('#nav').css("left") == "0px" && (window.innerWidth <= 900 || Math.abs(window.innerWidth - window.innerHeight) < 250))) {
             $('#nav').css("left", "-250px");
             $('#board-container').css("left", "0px");
             $('#btn_menu').show();
-        } else if (window.innerWidth > 900 && $('#nav').css("left") == "-250px" && Math.abs(window.innerWidth - window.innerHeight) >= 250) {
+        } else if ($('#nav').css("left") == "-250px" && window.innerWidth > 900 && (window.innerWidth - window.innerHeight) >= 250) {
             $('#nav').css("left", "0px");
             $('#board-container').css("left", "250px");
             $('#btn_menu').hide();
