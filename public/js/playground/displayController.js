@@ -61,8 +61,10 @@ class DisplayController {
         this.updateCounters();
         $('#startModal').hide();
         $('#modalOverlay').hide();
+        $('#turnYellow').show();
         $('#board-container').show();
     }
+
     finishGame(GameControl, msgObj, yielded) {
         if (GameControl.level.type === "sp") {
             if (this.movesP1 === GameControl.level.minturns) {
@@ -80,6 +82,16 @@ class DisplayController {
         }
         $('#modalOverlay').show();
         $('#finishModal').show();
+    }
+
+    static switchTurnIndication() {
+        if($('#turnYellow').is(':visible')) {
+            $('#turnYellow').hide();
+            $('#turnBlue').show();
+        } else {
+            $('#turnBlue').hide();
+            $('#turnYellow').show();
+        }
     }
 
     static disableBeatableWithKings() {

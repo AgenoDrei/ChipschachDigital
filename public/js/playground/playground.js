@@ -111,6 +111,8 @@ let handleMessage = function(msg) {
                 DisplayControl.updateCounters();
             }
             PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
+            if (lvlType !== 'sp')
+            DisplayController.switchTurnIndication();
             break;
         case "undo":
             let safeSelection = new Selection(msgObj.destX, msgObj.destY);
