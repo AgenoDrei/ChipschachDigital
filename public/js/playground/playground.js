@@ -127,7 +127,7 @@ let handleMessage = function(msg) {
             yielded = true;
             // NOBREAK ^^
         case "win":
-            DisplayControl.finishGame(GameControl, msgObj);
+            DisplayControl.finishGame(GameControl, msgObj, yielded);
             won = true;
             break;
         case "figure":

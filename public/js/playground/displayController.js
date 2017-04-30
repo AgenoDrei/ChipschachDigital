@@ -63,7 +63,7 @@ class DisplayController {
         $('#modalOverlay').hide();
         $('#board-container').show();
     }
-    finishGame(GameControl, msgObj) {
+    finishGame(GameControl, msgObj, yielded) {
         if (GameControl.level.type === "sp") {
             if (this.movesP1 === GameControl.level.minturns) {
                 $('#winmsgMinturnsSuccess').show();
