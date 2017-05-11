@@ -124,8 +124,6 @@ let handleMessage = function(msg) {
             PixiEngine.selectionHandler.switchGraphic(false, safeSelection.x, safeSelection.y);
             break;
         case "yield":
-            $('#winmsgYielded').show();
-            $('#btnNext').hide();
             yielded = true;
             // NOBREAK ^^
         case "win":

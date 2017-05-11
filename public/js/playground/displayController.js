@@ -67,13 +67,15 @@ class DisplayController {
 
     finishGame(GameControl, msgObj, yielded) {
         if (GameControl.level.type === "sp") {
-            if (this.movesP1 === GameControl.level.minturns) {
+            if (this.movesP1 === GameControl.level.minturns)
                 $('#winmsgMinturnsSuccess').show();
-                $('#btnRepeat').hide();
-            }
-            else
-            if (!yielded)
+            else if (!yielded)
                 $('#winmsgMinturnsFailed').show();
+            else {
+                $('#winmsgYielded').show();
+                $('#btnNext').hide();
+            }
+
         } else {
             if (msgObj.player === winner.PLAYERONE)
                 $('#winmsgGenericYellow').show();
