@@ -26,5 +26,6 @@ var figureSize = null;
 
 var winner = {  // dirty solution kinda because of: missmatch between gameState.WIN_PLAYER1 (1) and playerType.PLAYERONE (0) ...
     PLAYERONE: 1,
-    PLAYERTWO: 2
+    PLAYERTWO: 2,
+    DRAW: 3
 };

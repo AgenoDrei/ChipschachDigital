@@ -44,7 +44,7 @@ module.exports = function(app) {
         let type = req.params.type.toUpperCase(),
             footerText = "";
         if (req.params.type === 'sp') {
-            footerText = "Löse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips schlägst!";
+            footerText = "Löse das Level in möglichst wenig Zügen in dem du alle schlagbaren Chips schlägst!";
         } else if (req.params.type === 'mp') {
             footerText = "Schlagen mehr Chips als dein Gegner!";
         } else if (req.params.type === 'mini') {
