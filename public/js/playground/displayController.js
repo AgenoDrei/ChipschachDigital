@@ -81,6 +81,8 @@ class DisplayController {
                 $('#winmsgGenericYellow').show();
             else if (msgObj.player === winner.PLAYERTWO)
                 $('#winmsgGenericBlue').show();
+            else if (msgObj.player === winner.DRAW)
+                $('#winmsgGenericDraw').show(); 
         }
         $('#modalOverlay').show();
         $('#finishModal').show();

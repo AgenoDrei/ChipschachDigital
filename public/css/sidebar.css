@@ -52,14 +52,14 @@
     position: relative;
     margin: 2% auto;
     display: block;
-    width: 50%;
+    width: 40%;
     height: 10%
 }
 .counter-container > img {
     max-width: 40%;
     height: 100%;
     text-align: center;
-    float: right;
+    left: 0;
 }
 .counter-container > input {
     width: 60%;
@@ -68,10 +68,10 @@
     float: right;
     background-color: white;
     border-radius: 15px;
-    font-size: 40px;
+    font-size: 150%;
     line-height: 1;
     text-align: center;
-    float: right;
+    right: 0;
 }
 
 .iconBar {
