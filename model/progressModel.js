@@ -33,6 +33,12 @@ class ProgressModel {
 			case winCondition.PAWN_VS_BISHOP:
 				miniWin = this.isPawnLastRowWin();
 				break;
+            case winCondition.PAWN_CONTEST:
+                miniWin = this.isPawnLastRowWin();
+                break;
+            case winCondition.PAWN_SKILLFULL:
+                miniWin = this.isPawnLastRowWin();
+                break;
 		}
 
         if(figureWin != gameState.VALID_TURN)
