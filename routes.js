@@ -24,10 +24,6 @@ module.exports = function(app) {
                 id: 'mp',
                 name: 'Mehrspieler Lokal',
                 footer: 'Wähle ein Mehrspieler-Level aus um gegen einen Freund am gleichen Rechner Problemstellungen zu lösen!'
-            },{
-                id: 'mini',
-                name: 'Mehrspieler Lokal - Minischach',
-                footer: 'Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!'
             }],
             availSubtypes: [
                 {id: 'rook', name: 'Turm'},

@@ -32,7 +32,7 @@ class Game {
 		};
 		this.board = new Board(this);
 		this.board.loadLevel(this.level);
-		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2], this.board.figures, this.type);
+		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2], this.board.figures, this.board, this.type);
 		this.history = new History(this.board);
 		console.log('New Game created with ID: ', this.id);
 		console.log('Level used: ', this.level._id);
@@ -60,7 +60,12 @@ class Game {
 			currentFigure.move(destX, destY);
 		}
 		this.win.countUpTurn();
-		var winner = this.win.checkProgress();
+		let winner = gameStates.VALID_TURN;
+		if(this.type != gameTypes.MINI)
+			winner = this.win.checkProgress();
+		else
+			winner = this.win.checkProgressMinichess(this.level.win);
+
 		if(winner != gameStates.VALID_TURN) {
 			return winner;
 		}

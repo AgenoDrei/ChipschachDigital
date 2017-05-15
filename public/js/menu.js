@@ -55,7 +55,6 @@ $('document').ready(function() {
                     </td>
                 </tr>
             `);
-            console.log('tets');
         });
     });
     $.get('/api/v1/level', function(availLvls) {
@@ -66,10 +65,18 @@ $('document').ready(function() {
                         ${lvl.name}
                     </option>
                 `);
-            if (lvl.type === 'sp' || lvl.type === 'mp' || lvl.type === 'mini')
+            if (lvl.type === 'sp' || lvl.type === 'mp')
                 $('#' + lvl.type + lvl.subtype + '_panel-body').append(`
                     <p>
                         <a href="/${lvl.type}/${lvl.subtype}/${lvl._id}">
+                            ${lvl.name}
+                        </a>
+                    </p>
+                `);
+            if (lvl.type === 'minischach')
+                $('#modalBodyMini').append(`
+                    <p>
+                        <a href="/mini/${lvl._id}">
                             ${lvl.name}
                         </a>
                     </p>
