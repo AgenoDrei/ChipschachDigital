@@ -47,8 +47,6 @@ module.exports = function(app) {
             footerText = "Löse das Level in möglichst wenig Zügen in dem du alle schlagbaren Chips schlägst!";
         } else if (req.params.type === 'mp') {
             footerText = "Schlagen mehr Chips als dein Gegner!";
-        } else if (req.params.type === 'mini') {
-            //TODO
         }
         res.render('playground', {
             type: req.params.type.toUpperCase(),    // toUpperCase is not the nicest way to go here, but nvmd
@@ -63,8 +61,17 @@ module.exports = function(app) {
             type: 'GLOBAL',
             subtype: 'NotDefined',
             id: req.params.gameId,
-            footer: "Ein globales Mehrspieler Spiel."
+            footer: 'Ein globales Mehrspieler Spiel.'
         });
+    });
+
+    app.get('/mini/:levelId', function(req, res) {
+        res.render('playground', {
+            type: 'MINI',
+            subtype: 'NotDefined',
+            id: req.params.levelId,
+            footer: 'Ein kniffliges Schach-Rätsel!'
+        })
     });
 
     app.get('/editor', function(req, res) {

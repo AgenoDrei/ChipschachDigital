@@ -8,7 +8,7 @@ let host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploy
 let startGame = function() {
     if (GameControl.level === undefined) {
         toastr.info('Level muss noch geladen werden, noch einen kurzen Moment Geduld.');
-        setTimeout(startGame, 1000);
+        setTimeout(startGame, 1500);
     } else {
         if (lvlType === 'mp') {
             let mode = DisplayController.checkStartMpModeRadios();
@@ -158,14 +158,18 @@ $('document').ready(function() {
     lvlType = pathSplit[1];
 
     DisplayControl = new DisplayController();
-    if (lvlType !== 'global')
+    if (lvlType === 'sp' || lvlType === 'mp')
         GameControl = new GameController(pathSplit[3], undefined);
-    else
+    else if (lvlType === 'mini')
+        GameControl = new GameController(pathSplit[2], undefined);
+    else if (lvlType === 'global')
         GameControl = new GameController(undefined, pathSplit[2]);
 
     if (lvlType === 'sp')
         GameControl.connectLocalGame(lvlType, pathSplit[3], 'unbeatable', GameControl.joinIds);
     // mp-local connecting upon choice of mode
+    else if (lvlType === 'mini')
+        GameControl.connectLocalGame(lvlType, pathSplit[2], 'beatable', GameControl.joinIds);
     else if (lvlType === 'global') {
         GameControl.connectGlobalGame(window.location.href.split('=')[1]);
         DisplayController.hideLvlOption();

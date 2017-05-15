@@ -31,7 +31,7 @@
 <div id="nav">
     <div id="btn_menu" style="background-image: url(../../img/menu.png);" onclick="DisplayController.toggleClick();"></div>
 
-    <% if (type !== 'SP') { %>
+    <% if (type === 'MP' || type === 'GLOBAL') { %>
     <div class="nav-container player-data" style="top: 0;">
         <img class="profile-pic" src="/img/profilPicErsatz.bmp">
         <div class="counter-container">

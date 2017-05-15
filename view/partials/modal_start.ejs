@@ -11,9 +11,9 @@
                 <h3 id="lvlDescr">
                     <!-- Filled with js -->
                 </h3>
-                <% if (type == 'SP') { %>
+                <% if (type === 'SP' || type === 'MINI') { %>
                 <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
-                <% } else if (type == 'GLOBAL') { %>
+                <% } else if (type === 'GLOBAL') { %>
                 <center>
                     <div class="loader"></div>
                     <a href="/">Suche abrechen</a>
