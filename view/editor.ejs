@@ -25,15 +25,15 @@
         <form class="propertiesForm" action="javascript:void(0);">
             <div class="form-group">
                 <label for="type">Kategorie</label>
-                <select class="form-control" id="type" name="type" onchange="DisplayController.checkToggleSubtype();">
+                <select id="type" class="form-control" name="type" onchange="DisplayController.checkToggleOptionsOnType();">
                     <option value="sp">Einzelspieler</option>
                     <option value="mp">Mehrspieler</option>
-                    <!--<option value="mini">Minischach</option>-->
+                    <option value="minischach">Minischach</option>
                 </select>
             </div>
             <div id="subtypeFormGroup" class="form-group">
                 <label for="subtype">Unterkategorie</label>
-                <select class="form-control" id="subtype" name="subtype">
+                <select id="subtype" class="form-control" name="subtype">
                     <option value="pawn">Bauer</option>
                     <option value="knight">Springer</option>
                     <option value="bishop">Läufer</option>
@@ -44,15 +44,15 @@
             </div>
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Levelname">
+                <input id="name" class="form-control" type="text" name="name" placeholder="Levelname" required="true">
             </div>
             <div class="form-group">
                 <label for="description">Beschreibung</label>
-                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                <textarea id="description" class="form-control" name="description" rows="3" required="true"></textarea>
             </div>
             <div id="minTurnsFormGroup" class="form-group">
-                <label for="minTurns">Minimale Zugzahl</label>
-                <input type="number" class="form-control" id="minTurns" name="minTurns">
+                <label for="minturns">Minimale Zugzahl</label>
+                <input id="minturns" type="number" class="form-control" name="minturns" required="true">
             </div>
             <center><button class="btn btn-primary btn-lg" onclick="saveLvl();">Speichern</button></center>
         </form>
@@ -117,35 +117,7 @@
     </div>
 </div>
 
-<div id="startModal" class="modal" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">
-                    Editor
-                </h4>
-            </div>
-            <div class="modal-body" style="text-align: center">
-                <img src="/img/logoSm.png" height="150px" />
-                <h4>
-                    Bedienungsanleitung
-                </h4>
-                <p style="text-align: left;">
-                    Figuren oder Chips um das Brett herum auswählen.<br>
-                    Deine aktuelle Auswahl wird im Fenster linksangezeigt.<br>
-                    Sobald eine Auswahl getroffen wurde kannst du auf dem Brett auf Felder klicken und dort wird die
-                    entsprechende Figur/Chip erstellt! <br>
-                    Du kannst bereits platzierte Figuren/Chips mit neu ausgewählten überschreiben.<br>
-                    Zum Löschen einfach die Auswahl leeren (rotes X-Symbol) und auf das zu leerende Feld klicken.
-                </p>
-                <button type="button" class="btn btn-success btn-lg" onclick="startEditor();">Start!</button>
-            </div>
-            <div class="modal-footer">
-                Hier kannst du eigene Level erstellen!
-            </div>
-        </div>
-    </div>
-</div>
+<% include ./partials/modal_editorStart %>
 
 </body>
 </html>

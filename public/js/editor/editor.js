@@ -26,7 +26,10 @@ let clearSelection = function() {
 };
 
 let saveLvl = function() {
-    toastr.info('Automatisches Speichern und einpflegen von Leveln ist aufgrund von Diskusionsbedarf noch nicht implementiert.');
+    // toastr.info('Automatisches Speichern und einpflegen von Leveln ist aufgrund von Diskusionsbedarf noch nicht implementiert.');
+    let level = DisplayController.getLevelAttributes();
+    level.board = PixiEngine.board;
+    console.log(level);
 };
 
 $(document).ready(function() {
