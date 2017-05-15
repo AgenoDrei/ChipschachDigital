@@ -1,26 +1,57 @@
-var playerType = require('./playerType');
-var gameType = require('./gameTypes');
-var gameState = require('./gameStates');
-var helper = require('./helper');
+const playerType = require('./playerType');
+const gameType = require('./gameTypes');
+const gameState = require('./gameStates');
+const helper = require('./helper');
+const winCondition = require('./winConditions');
 
 class ProgressModel {
-	constructor(p1, p2, p0, figures, type) {
+	constructor(p1, p2, p0, figures, board, type) {
 		this.chips = [ p1, p2, p0 ];
 		this.figures = figures;
 		this.score = [0, 0];
 		this.turnCount = 0;
 		this.type = type;
+		this.board = board;
 		console.log("ProgressModel created with these Chips: ", p1, p2, p0);
 	}
 
 	checkProgress() {
-		debugger;
 		let figureWin = this.isFigureWin();
 		let chipWin = this.isChipWin();
 		if(chipWin != gameState.VALID_TURN)
 			return chipWin;
 		if(figureWin != gameState.VALID_TURN && this.type != gameType.SP)
 			return figureWin;
+		return gameState.VALID_TURN;
+	}
+
+	checkProgressMinichess(condition) {
+		debugger;
+		let figureWin = this.isFigureWin();
+		let miniWin = gameState.VALID_TURN;
+		switch (condition) {
+			case winCondition.PAWN_VS_BISHOP:
+				miniWin = this.isPawnLastRowWin();
+				break;
+		}
+
+        if(figureWin != gameState.VALID_TURN)
+            return figureWin;
+		if(miniWin != gameState.VALID_TURN)
+			return miniWin;
+        return gameState.VALID_TURN;
+	}
+
+	isPawnLastRowWin() {
+		let y = 1;
+		for(let x = 1; x <= 8; x++) {
+			let curFigure = this.board.getField(x,y).getFigure();
+			if(curFigure == null)
+				continue;
+			if(curFigure.player != playerType.PLAYERONE)
+				continue;
+			return gameState.WIN_PLAYER1;
+		}
 		return gameState.VALID_TURN;
 	}
 
