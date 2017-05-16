@@ -29,3 +29,9 @@ var winner = {  // dirty solution kinda because of: missmatch between gameState.
     PLAYERTWO: 2,
     DRAW: 3
 };
+
+var reviewStatus = {
+    FRESH: 0,
+    REVIEWED: 1,
+    OFFICIAL: 2
+}

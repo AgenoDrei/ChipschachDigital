@@ -135,6 +135,7 @@ class GameEngine {
             this.renderer.destroy();
         if (this.moveCallback != null)
             this.moveCallback = null;
+        this.figures = this.board = [];
         this.turn = 0;
         PIXI.loader.reset();
     }
@@ -380,6 +381,7 @@ class EditorEngine extends GameEngine {
     constructor(wh, anchor) {
         super(wh, wh, gameType.SP, anchor, false);
         this.selection= null;
+        this.board = [];
     }
 
     init(cb) {
@@ -411,15 +413,17 @@ class EditorEngine extends GameEngine {
     }
 
     createFigure(x, y, color, type) {
+        this.board.push({type: type, color: color, x: x, y: y});
         super.createFigure(x, y, this.figureSize, color, type);
     }
 
     onClick(rawX, rawY) {
+        // console.log('Clicked: (' + pos.x + '|' + pos.y + ')');
         let pos = Helper.getPos(rawX, rawY);
-        console.log('Clicked: (' + pos.x + '|' + pos.y + ')');
 
         let figure = Helper.getFigure(pos.x, pos.y, this.figures);
         if(figure != null) {
+            this.board = this.board.filter(function(val){return val.x !== figure.x || val.y !== figure.y});
             figure.destroy();
             super.render();
         }

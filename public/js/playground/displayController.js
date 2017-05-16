@@ -66,7 +66,7 @@ class DisplayController {
     }
 
     finishGame(GameControl, msgObj, yielded) {
-        if (GameControl.level.type === "sp") {
+        if (GameControl.level.type === 'sp') {
             if (this.movesP1 === GameControl.level.minturns)
                 $('#winmsgMinturnsSuccess').show();
             else if (!yielded)
@@ -77,6 +77,9 @@ class DisplayController {
             }
 
         } else {
+            if (GameControl.level.type === 'minischach')
+                $('#btnNext').hide();
+                
             if (msgObj.player === winner.PLAYERONE)
                 $('#winmsgGenericYellow').show();
             else if (msgObj.player === winner.PLAYERTWO)

@@ -47,14 +47,19 @@ class DisplayController {
         }
     };
 
-    static checkToggleSubtype() {
-        if ($('select[name="type"]').val() == 'mini') {
+    static checkToggleOptionsOnType() {
+        let type = $('select[name="type"]').val();
+        if (type == 'minischach') {
             $('#subtypeFormGroup').hide();
+            $('#minTurnsFormGroup').hide();
+        } else if (type == 'mp') {
+            $('#subtypeFormGroup').show();
             $('#minTurnsFormGroup').hide();
         } else {
             $('#subtypeFormGroup').show();
-            $('#minTurnsFormGroup').show();
+            $('#minTurnsFormGroup').show().attr('');
         }
+        // $('#minTurns').prop('disabled', !$.attr(this, ':visible'));
     };
 
     static setSelectionWindow(picSrc) {
@@ -66,4 +71,20 @@ class DisplayController {
     static clearSelection() {
         $('#selection').html("");
     };
+
+    static getLevelAttributes() {
+        let type = $('#type').val();
+        let attrs = {
+            _id: type +"-"+ new Date().toLocaleString().replace(/\/| |:/g, "_").replace(/,/g, "").slice(0,-3),
+            type: type,
+            name: $('#name').val(),
+            description: $('#description').val(),
+            reviewStatus: reviewStatus.FRESH
+        };
+        if (type === 'sp' || type === 'mp')
+            attrs.subtype = $('#subtype').val();
+        if (type === 'sp')
+            attrs.minturns = parseInt($('#minturns').val());
+        return attrs;
+    }
 }
