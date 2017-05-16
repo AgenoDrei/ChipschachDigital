@@ -5,9 +5,9 @@ module.exports = function(app, dataAccess) {
                 [
                     {id:'sp', picId:'single', name:'Einzelspieler', status: 'white'},
                     {id:'mp', picId:'multiLocal', name:'Mehrspieler Lokal', status: 'white'},
-                    {id:'mp_g', picId:'multiGlobal', name:'Mehrspieler Global', status: 'orange'}
+                    {id:'mp_g', picId:'multiGlobal', name:'Mehrspieler Global', status: 'white'}
                 ],[
-                    {id:'mini', picId:'mini', name:'Minischach', status: 'red'},
+                    {id:'mini', picId:'mini', name:'Minischach', status: 'white'},
                     {id:'impressum', picId:'logoLg', name:''},
                     {id:'classic', picId:'classic', name:'Klassisches Schach', status: 'red'}
                 ],[

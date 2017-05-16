@@ -84,7 +84,7 @@ $('document').ready(function() {
                     `);
             if (lvl.type === 'minischach')
                 if (lvl.reviewStatus !== reviewStatus.FRESH)
-                    $('#modalBodyMini').append(`
+                    $('#miniLevels').append(`
                         <p>
                             <a href="/mini/${lvl._id}">
                                 ${lvl.name}
