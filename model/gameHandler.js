@@ -141,15 +141,13 @@ module.exports = function(dataAccess) {
 	};
 
 	this.endGame = function(connection) {
-
-
 		return new Promise(function(fulfill, reject) {
             for(let key in this.games) {
             	let obj = this.games[key];
                 if(obj.player1.connection == connection || obj.player2.connection == connection) {
                     obj.endGame();
                     obj.player1.state = obj.player2.state = conStates.LEFT;
-                    this.games = this.games.splice(key, 1);
+                    this.games.splice(key, 1);
                     fulfill('Game ended successfull!');
                 }
             }

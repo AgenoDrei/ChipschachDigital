@@ -54,7 +54,7 @@ module.exports = function(configuration, mongoClient) {
 
 	this.getAllLevelIds = function() {
 		return new Promise(function(fulfill, reject) {
-			db.collection('levels').find({}, { 'name': 1, 'type': 1 , 'subtype': 1, 'description': 1}).sort({ _id: 1}).toArray(function(err, doc) {
+			db.collection('levels').find({}, {'name':1, 'type':1 , 'subtype':1, 'description':1, 'reviewStatus':1}).sort({ _id: 1}).toArray(function(err, doc) {
 				if(err) {
 					reject(err);
 				}

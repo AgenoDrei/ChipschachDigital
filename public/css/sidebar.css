@@ -28,61 +28,65 @@
     left: 0px;
     right: 0px;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.profile-container {
+.player-data {
+    height: 40%;
+}
+.profile-pic {
     position: relative;
-    margin: 10px auto;
+    margin: 5% auto;
     display: block;
 
-    width: 150px;
-    height: 160px;
-    padding: 20px;
-
-    background-color: white;
-    text-align: center;
+    height: 40%;
+    padding: 5%;
 }
 .profile-container img {
-    width: 110px;
-    height: 120px;
+    width: 80%;
+    height: 80%;
 }
-
 .counter-container {
     position: relative;
-    margin: 10px auto;
+    margin: 2% auto;
     display: block;
-    width: 125px;
+    width: 40%;
+    height: 10%
 }
 .counter-container > img {
-    width: 50px;
-    height: 50px;
+    max-width: 40%;
+    height: 100%;
+    text-align: center;
+    left: 0;
 }
 .counter-container > input {
-    width: 75px;
-    height: 50px;
+    width: 60%;
+    height: 100%;
     padding: 5px;
     float: right;
     background-color: white;
     border-radius: 15px;
-
-    font-size: 40px;
+    font-size: 150%;
     line-height: 1;
     text-align: center;
+    right: 0;
 }
 
 .iconBar {
-    top: 50%;
-    height: 75px;
-    margin-top: -50px;
+    top: 40%;
+    height: 20%;
     text-align: center;
 }
 .iconBar a, .iconBar img {
-    height: 100%;
+    height: 50px;
+    width: 50px;
     cursor: pointer;
 }
 
 
-#overlay {
+.overlay {
     position: fixed;
     top: 0;
     left: 0;

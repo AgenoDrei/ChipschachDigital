@@ -8,7 +8,7 @@ let host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploy
 let startGame = function() {
     if (GameControl.level === undefined) {
         toastr.info('Level muss noch geladen werden, noch einen kurzen Moment Geduld.');
-        setTimeout(startGame, 1000);
+        setTimeout(startGame, 1500);
     } else {
         if (lvlType === 'mp') {
             let mode = DisplayController.checkStartMpModeRadios();
@@ -86,6 +86,7 @@ let nextLevelForward = function() {     // assumes ordered level_list of dbCall
 
 let handleMessage = function(msg) {
     let yielded = false,
+        won = false,
         msgObj = JSON.parse(msg.data);
     console.log("Server> ", msgObj);
 
@@ -110,6 +111,8 @@ let handleMessage = function(msg) {
                 DisplayControl.updateCounters();
             }
             PixiEngine.moveFigure(msgObj.origX, msgObj.origY, msgObj.destX, msgObj.destY);
+            if (lvlType !== 'sp')
+            DisplayController.switchTurnIndication();
             break;
         case "undo":
             let safeSelection = new Selection(msgObj.destX, msgObj.destY);
@@ -121,26 +124,11 @@ let handleMessage = function(msg) {
             PixiEngine.selectionHandler.switchGraphic(false, safeSelection.x, safeSelection.y);
             break;
         case "yield":
-            $('#winmsgYielded').show();
-            $('#btnNext').hide();
             yielded = true;
             // NOBREAK ^^
         case "win":
-            if (GameControl.level.type === "sp") {
-                if (DisplayControl.movesP1 === GameControl.level.minturns) {
-                    $('#winmsgMinturnsSuccess').show();
-                    $('#btnRepeat').hide();
-                }
-                else
-                    if (!yielded)
-                        $('#winmsgMinturnsFailed').show();
-            } else {
-                if (msgObj.player === playerType.PLAYERONE)
-                    $('#winmsgGenericYellow').show();
-                else if (msgObj.player === playerType.PLAYERTWO)
-                    $('#winmsgGenericBlue').show();
-            }
-            $('#finishModal').show();
+            DisplayControl.finishGame(GameControl, msgObj, yielded);
+            won = true;
             break;
         case "figure":
             PixiEngine.createFigure(msgObj.x, msgObj.y, PixiEngine.figureSize, msgObj.color, msgObj.figureType);
@@ -154,6 +142,13 @@ let handleMessage = function(msg) {
                     toastr.error('Server error!');
             }
             break;
+        case "exit":
+            if (!won) {
+                toastr.info("Dein Gegner hat das Spiel scheinbar verlassen ...");
+                window.setTimeout(function() {
+                    window.location = '/';
+                }, 3000);
+            }
     }
 };
 
@@ -162,15 +157,21 @@ $('document').ready(function() {
     let pathSplit = window.location.pathname.split('/');
     lvlType = pathSplit[1];
 
-    if (lvlType !== 'global')
-        GameControl = new GameController(pathSplit[3], undefined);
-    else
-        GameControl = new GameController(undefined, pathSplit[2]);
     DisplayControl = new DisplayController();
+    if (lvlType === 'sp' || lvlType === 'mp')
+        GameControl = new GameController(pathSplit[3], undefined);
+    else if (lvlType === 'mini')
+        GameControl = new GameController(pathSplit[2], undefined);
+    else if (lvlType === 'global')
+        GameControl = new GameController(undefined, pathSplit[2]);
 
     if (lvlType === 'sp')
         GameControl.connectLocalGame(lvlType, pathSplit[3], 'unbeatable', GameControl.joinIds);
     // mp-local connecting upon choice of mode
-    else if (lvlType === 'global')
+    else if (lvlType === 'mini')
+        GameControl.connectLocalGame(lvlType, pathSplit[2], 'beatable', GameControl.joinIds);
+    else if (lvlType === 'global') {
         GameControl.connectGlobalGame(window.location.href.split('=')[1]);
+        DisplayController.hideLvlOption();
+    }
 });

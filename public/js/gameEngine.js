@@ -135,6 +135,7 @@ class GameEngine {
             this.renderer.destroy();
         if (this.moveCallback != null)
             this.moveCallback = null;
+        this.figures = this.board = [];
         this.turn = 0;
         PIXI.loader.reset();
     }
@@ -249,17 +250,24 @@ class SelectionHandler {
 
     select(x, y) {
         let select = this.selections[this.turn];
+        let figure = Helper.getFigure(x, y, this.parent.figures);
         if(!select.active) {
             //console.log('New field selected: (' + x + '|' + y + ')' );
-            let figure = Helper.getFigure(x, y, this.parent.figures);
             if(figure != null && !figure.chip && figure.color == this.turn) {
                 select.setSelection(x, y);
                 this.switchGraphic(false, x, y);
             }
             return false;
         } else {
+            // reset selection by clicking onto itself
             if(x == select.x && y == select.y) {
                 this.removeSelection(x, y);
+                return false;
+            }
+            // click on other own figure -> switch selection
+            if (figure != null && !figure.chip && figure.color == this.turn) {
+                select.setSelection(x, y);
+                this.switchGraphic(false, x, y);
                 return false;
             }
             return true;
@@ -373,6 +381,7 @@ class EditorEngine extends GameEngine {
     constructor(wh, anchor) {
         super(wh, wh, gameType.SP, anchor, false);
         this.selection= null;
+        this.board = [];
     }
 
     init(cb) {
@@ -404,15 +413,17 @@ class EditorEngine extends GameEngine {
     }
 
     createFigure(x, y, color, type) {
+        this.board.push({type: type, color: color, x: x, y: y});
         super.createFigure(x, y, this.figureSize, color, type);
     }
 
     onClick(rawX, rawY) {
+        // console.log('Clicked: (' + pos.x + '|' + pos.y + ')');
         let pos = Helper.getPos(rawX, rawY);
-        console.log('Clicked: (' + pos.x + '|' + pos.y + ')');
 
         let figure = Helper.getFigure(pos.x, pos.y, this.figures);
         if(figure != null) {
+            this.board = this.board.filter(function(val){return val.x !== figure.x || val.y !== figure.y});
             figure.destroy();
             super.render();
         }

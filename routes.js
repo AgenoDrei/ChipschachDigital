@@ -1,13 +1,13 @@
-module.exports = function(app) {
+module.exports = function(app, dataAccess) {
     app.get('/', function(req, res) {
         res.render('menu', {
             iconRows: [
                 [
                     {id:'sp', picId:'single', name:'Einzelspieler', status: 'white'},
                     {id:'mp', picId:'multiLocal', name:'Mehrspieler Lokal', status: 'white'},
-                    {id:'mp_g', picId:'multiGlobal', name:'Mehrspieler Global', status: 'orange'}
+                    {id:'mp_g', picId:'multiGlobal', name:'Mehrspieler Global', status: 'white'}
                 ],[
-                    {id:'mini', picId:'mini', name:'Minischach', status: 'red'},
+                    {id:'mini', picId:'mini', name:'Minischach', status: 'white'},
                     {id:'impressum', picId:'logoLg', name:''},
                     {id:'classic', picId:'classic', name:'Klassisches Schach', status: 'red'}
                 ],[
@@ -24,10 +24,6 @@ module.exports = function(app) {
                 id: 'mp',
                 name: 'Mehrspieler Lokal',
                 footer: 'Wähle ein Mehrspieler-Level aus um gegen einen Freund am gleichen Rechner Problemstellungen zu lösen!'
-            },{
-                id: 'mini',
-                name: 'Mehrspieler Lokal - Minischach',
-                footer: 'Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!'
             }],
             availSubtypes: [
                 {id: 'rook', name: 'Turm'},
@@ -44,11 +40,9 @@ module.exports = function(app) {
         let type = req.params.type.toUpperCase(),
             footerText = "";
         if (req.params.type === 'sp') {
-            footerText = "Löse das Level in möglichst wenig Zügen indem du alle schlagbaren Chips schlägst!";
+            footerText = "Löse das Level in möglichst wenig Zügen in dem du alle schlagbaren Chips schlägst!";
         } else if (req.params.type === 'mp') {
             footerText = "Schlagen mehr Chips als dein Gegner!";
-        } else if (req.params.type === 'mini') {
-            //TODO
         }
         res.render('playground', {
             type: req.params.type.toUpperCase(),    // toUpperCase is not the nicest way to go here, but nvmd
@@ -63,8 +57,17 @@ module.exports = function(app) {
             type: 'GLOBAL',
             subtype: 'NotDefined',
             id: req.params.gameId,
-            footer: "Ein globales Mehrspieler Spiel."
+            footer: 'Ein globales Mehrspieler Spiel.'
         });
+    });
+
+    app.get('/mini/:levelId', function(req, res) {
+        res.render('playground', {
+            type: 'MINI',
+            subtype: 'NotDefined',
+            id: req.params.levelId,
+            footer: 'Ein kniffliges Schach-Rätsel!'
+        })
     });
 
     app.get('/editor', function(req, res) {
@@ -92,5 +95,12 @@ module.exports = function(app) {
                 {type: 3, picSrc: 'ChipRed.png'}
             ]
         });
-    })
+    });
+    app.post('/editor', function(req, res) {
+        let level = JSON.parse(req.body.level);
+        console.log('Retrieved EditorLvl: ', level);
+        dataAccess.createLevel(level).done(function(doc) {
+            console.log('Received doc from dataAccess: ', doc);
+        });
+    });
 };
