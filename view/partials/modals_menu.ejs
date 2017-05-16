@@ -25,6 +25,21 @@
                                 </div>
                             </div>
                         <% }); %>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#acc_<%= type.id %>" 
+                                        href="#<%= type.id %>__fresh">
+                                        Brandneue Level aus dem Editor
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="<%= type.id %>__fresh" class="panel-collapse collapse">
+                                <div id="<%= type.id %>__fresh_panel-body" class="panel-body">
+                                    <!-- Filled with js -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -96,6 +111,23 @@
                 <h4 class="modal-title">Mehrspieler Lokal - Minischach</h4>
             </div>
             <div id="modalBodyMini" class="modal-body">
+                <div id="acc_mini" class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#acc_mini" 
+                                    href="#mini__fresh">
+                                    Brandneue Level aus dem Editor
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="mini__fresh" class="panel-collapse collapse">
+                            <div id="mini__fresh_panel-body" class="panel-body">
+                                <!-- Filled with js -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <!-- Filled with js -->
             </div>
             <div class="modal-footer">

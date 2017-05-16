@@ -69,3 +69,8 @@
 .modal form {
     margin: auto;
 }
+
+
+#modalBodyMini {
+    text-align: center;
+}

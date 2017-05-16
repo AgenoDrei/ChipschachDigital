@@ -73,14 +73,17 @@ class DisplayController {
     };
 
     static getLevelAttributes() {
+        let type = $('#type').val();
         let attrs = {
-            type: $('#type').val(),
+            _id: type +"-"+ new Date().toLocaleString().replace(/\/| |:/g, "_").replace(/,/g, "").slice(0,-3),
+            type: type,
             name: $('#name').val(),
-            description: $('#description').val() 
+            description: $('#description').val(),
+            reviewStatus: reviewStatus.FRESH
         };
-        if (attrs.type === 'sp' || attrs.type === 'mp')
+        if (type === 'sp' || type === 'mp')
             attrs.subtype = $('#subtype').val();
-        if (attrs.type === 'sp')
+        if (type === 'sp')
             attrs.minturns = parseInt($('#minturns').val());
         return attrs;
     }

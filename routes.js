@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function(app, dataAccess) {
     app.get('/', function(req, res) {
         res.render('menu', {
             iconRows: [
@@ -95,5 +95,12 @@ module.exports = function(app) {
                 {type: 3, picSrc: 'ChipRed.png'}
             ]
         });
-    })
+    });
+    app.post('/editor', function(req, res) {
+        let level = JSON.parse(req.body.level);
+        console.log('Retrieved EditorLvl: ', level);
+        dataAccess.createLevel(level).done(function(doc) {
+            console.log('Received doc from dataAccess: ', doc);
+        });
+    });
 };

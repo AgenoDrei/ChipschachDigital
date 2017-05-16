@@ -59,28 +59,46 @@ $('document').ready(function() {
     });
     $.get('/api/v1/level', function(availLvls) {
         availLvls.forEach(function(lvl) {
-            if (lvl.type === 'mp')
+            if (lvl.type === 'mp' && lvl.reviewStatus !== reviewStatus.FRESH)
                 $('#newLevel-select').append(`
                     <option value="${lvl._id}">
                         ${lvl.name}
                     </option>
                 `);
             if (lvl.type === 'sp' || lvl.type === 'mp')
-                $('#' + lvl.type + lvl.subtype + '_panel-body').append(`
-                    <p>
-                        <a href="/${lvl.type}/${lvl.subtype}/${lvl._id}">
-                            ${lvl.name}
-                        </a>
-                    </p>
-                `);
+                if (lvl.reviewStatus !== reviewStatus.FRESH)
+                    $('#' + lvl.type + lvl.subtype + '_panel-body').append(`
+                        <p>
+                            <a href="/${lvl.type}/${lvl.subtype}/${lvl._id}">
+                                ${lvl.name}
+                            </a>
+                        </p>
+                    `);
+                else
+                    $('#' + lvl.type + '__fresh_panel-body').append(`
+                        <p>
+                            <a href="/${lvl.type}/${lvl.subtype}/${lvl._id}">
+                                ${lvl.name}
+                            </a>
+                        </p>
+                    `);
             if (lvl.type === 'minischach')
-                $('#modalBodyMini').append(`
-                    <p>
-                        <a href="/mini/${lvl._id}">
-                            ${lvl.name}
-                        </a>
-                    </p>
-                `);
+                if (lvl.reviewStatus !== reviewStatus.FRESH)
+                    $('#modalBodyMini').append(`
+                        <p>
+                            <a href="/mini/${lvl._id}">
+                                ${lvl.name}
+                            </a>
+                        </p>
+                    `);
+                else 
+                    $('#mini__fresh_panel-body').append(`
+                        <p>
+                            <a href="/mini/${lvl._id}">
+                                ${lvl.name}
+                            </a>
+                        </p>
+                    `);                    
         });
     });
 });

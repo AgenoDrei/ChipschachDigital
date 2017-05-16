@@ -34,12 +34,12 @@
             <div id="subtypeFormGroup" class="form-group">
                 <label for="subtype">Unterkategorie</label>
                 <select id="subtype" class="form-control" name="subtype">
-                    <option value="pawn">Bauer</option>
-                    <option value="knight">Springer</option>
-                    <option value="bishop">Läufer</option>
                     <option value="rook">Turm</option>
+                    <option value="bishop">Läufer</option>
                     <option value="queen">Dame</option>
                     <option value="king">König</option>
+                    <option value="knight">Springer</option>
+                    <option value="pawn">Bauer</option>
                 </select>
             </div>
             <div class="form-group">
@@ -60,7 +60,10 @@
     <div class="nav-container iconBar" style="top: 80% !important;">
         <div>
             <a href="/">
-                <img src="/img/close.png" title="Zurück zum Hauptmenü" id="close">
+                <img id="close" src="/img/close.png" title="Zurück zum Hauptmenü">
+            </a>
+            <a href="/editor">
+                <img id="reset" src="/img/clear.jpg" title="Editor reset">
             </a>
         </div>
     </div>
