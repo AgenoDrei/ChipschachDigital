@@ -1,3 +1,8 @@
+.modal {
+    overflow-y: auto;
+    max-height: 100%;
+}
+
 /* sidebar */
 
 .propertiesForm {

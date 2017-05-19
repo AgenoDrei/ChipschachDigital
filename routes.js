@@ -11,7 +11,7 @@ module.exports = function(app, dataAccess) {
                     {id:'impressum', picId:'logoLg', name:''},
                     {id:'classic', picId:'classic', name:'Klassisches Schach', status: 'red'}
                 ],[
-                    {id:'editor', picId:'editor', name:'Editor', status: 'orange'},
+                    {id:'editor', picId:'editor', name:'Editor', status: 'white'},
                     {id:'', picId:'', name:''},
                     {id:'exit', picId:'close_.75opacity', name:'Verlassen'}
                 ]

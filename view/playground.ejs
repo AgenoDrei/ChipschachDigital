@@ -31,9 +31,9 @@
 <div id="nav">
     <div id="btn_menu" style="background-image: url(../../img/menu.png);" onclick="DisplayController.toggleClick();"></div>
 
-    <% if (type === 'MP' || type === 'GLOBAL') { %>
+    <% if (type !== 'SP') { %>
     <div class="nav-container player-data" style="top: 0;">
-        <img class="profile-pic" src="/img/profilPicErsatz.bmp">
+        <img class="profile-pic" src="/img/profilPicErsatz_bak.bmp">
         <div class="counter-container">
             <input type="number" id="moveCounterP2" class="counterInput form-control" disabled style="cursor: default;">
             <img src="/img/arrow_blue.png" />
@@ -68,7 +68,7 @@
             <input type="number" id="moveCounterP1" class="counterInput form-control" disabled style="cursor: default;">
             <img src="/img/arrow_yellow.png" />
         </div>
-        <img class="profile-pic" src="/img/profilPicErsatz.bmp">
+        <img class="profile-pic" src="/img/profilPicErsatz_bak.bmp">
     </div>
 </div>
 
