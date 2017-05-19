@@ -109,7 +109,7 @@ class DisplayController {
     }
 
     static updateModalTexts(lvlName, lvlDescr) {
-        $('.modal-title').html(lvlName);
+        $('.titleToModify').html(lvlName);
         $('#lvlDescr').html(lvlDescr);
     }
 
@@ -120,5 +120,19 @@ class DisplayController {
     static hideLvlOption() {
         $('#btnRepeat').hide();
         $('#btnNext').hide();
+    }
+
+    static inspectBoardAfterFinish() {
+        $('#finishModal').hide();
+        $('#modalOverlay').hide();
+        toastr.info('Menü wird gleich wieder erscheinen.');
+        setTimeout(function() {
+            $('#finishModal').show();
+            $('#modalOverlay').show();
+        }, 5000);
+    }
+
+    static showHelp() {
+        $('#rulesModal').show();
     }
 }

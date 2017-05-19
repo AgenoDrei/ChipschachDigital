@@ -11,8 +11,6 @@
 
 #btn_menu {
     position: absolute;
-    right: -65px;
-    top: 10px;
     width: 50px;
     height: 50px;
     opacity: 0.7;
@@ -21,6 +19,9 @@
     background-position: center;
     background-color: white;
     border-radius: 50%;
+    right: -65px;
+    top: 10px;
+    background-image: url(../../img/menu.png);
 }
 
 .nav-container {

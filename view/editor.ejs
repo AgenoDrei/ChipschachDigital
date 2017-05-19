@@ -8,6 +8,7 @@
     <script src="/js/editor/displayController.js"></script>
     <script src="/js/editor/editor.js"></script>
     <title>Editor</title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/editor.css">
     <link rel="stylesheet" type="text/css" href="/css/board.css">
     <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
@@ -28,7 +29,7 @@
                 <select id="type" class="form-control" name="type" onchange="DisplayController.checkToggleOptionsOnType();">
                     <option value="sp">Einzelspieler</option>
                     <option value="mp">Mehrspieler</option>
-                    <option value="minischach">Minischach</option>
+                    <!-- <option value="minischach">Minischach</option> -->
                 </select>
             </div>
             <div id="subtypeFormGroup" class="form-group">
@@ -120,7 +121,7 @@
     </div>
 </div>
 
-<% include ./partials/modal_editorStart %>
+<% include partials/modal_editorStart %>
 
 </body>
 </html>

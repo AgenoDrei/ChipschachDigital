@@ -20,6 +20,7 @@
             Globaler Mehrspieler
         <% } %>
     </title>
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/playground.css">
     <link rel="stylesheet" type="text/css" href="/css/board.css">
     <link rel="stylesheet" type="text/css" href="/css/sidebar.css">
@@ -28,12 +29,13 @@
 <body>
 <div id="modalOverlay" class="overlay"></div>
 <div id="overlay" class="overlay"></div>
-<div id="nav">
-    <div id="btn_menu" style="background-image: url(../../img/menu.png);" onclick="DisplayController.toggleClick();"></div>
 
-    <% if (type === 'MP' || type === 'GLOBAL') { %>
+<div id="nav">
+    <div id="btn_menu" class="btnTogglingOverlaying" onclick="DisplayController.toggleClick();"></div>
+
+    <% if (type !== 'SP') { %>
     <div class="nav-container player-data" style="top: 0;">
-        <img class="profile-pic" src="/img/profilPicErsatz.bmp">
+        <img class="profile-pic" src="/img/profilPicErsatz_bak.bmp">
         <div class="counter-container">
             <input type="number" id="moveCounterP2" class="counterInput form-control" disabled style="cursor: default;">
             <img src="/img/arrow_blue.png" />
@@ -47,14 +49,17 @@
 
     <div class="nav-container iconBar">
         <div>
+            <a data-toggle="modal" data-target="#rulesModal">
+                <img src="/img/help.png" title="Hilfe öffnen">
+            </a>
             <a href="/">
-                <img src="/img/close.png" title="Zurück zum Hauptmenü" id="close">
+                <img src="/img/close.png" title="Zurück zum Hauptmenü">
             </a>
             <a onclick="yieldGame();">
-                <img src="/img/white_flag.png" title="Spiel aufgeben" id="yield">
+                <img src="/img/white_flag.png" title="Spiel aufgeben">
             </a>
             <a onclick="undo();">
-                <img src="../../img/undo.png" title="Zug rückgängig" id="showHelp">
+                <img src="../../img/undo.png" title="Zug rückgängig">
             </a>
         </div>
     </div>
@@ -68,7 +73,7 @@
             <input type="number" id="moveCounterP1" class="counterInput form-control" disabled style="cursor: default;">
             <img src="/img/arrow_yellow.png" />
         </div>
-        <img class="profile-pic" src="/img/profilPicErsatz.bmp">
+        <img class="profile-pic" src="/img/profilPicErsatz_bak.bmp">
     </div>
 </div>
 
@@ -90,8 +95,9 @@
     <div id="board-anchor"></div>
 </div>
 
-<% include ./partials/modal_start %>
-<% include ./partials/modal_finish %>
+<% include partials/modal_start %>
+<% include partials/modal_finish %>
+<% include partials/modal_rules %>
 
 </body>
 </html>
