@@ -1,0 +1,13 @@
+/* Implemented by all pages */
+
+.modal {
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.modal-body > h3 > p {
+    display: none;
+}
+.modal-body > ul > li {
+    text-align: left;
+}

@@ -1,27 +1,39 @@
-<div id="rulesModal" class="modal" role="dialog">
+<div id="rulesModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">
-                    Spielregeln für Chipschach
+                    Was ist Chipschach und wie funktioniert es?
                 </h4>
             </div>
             <div class="modal-body" style="text-align: center">
                 <img src="/img/logoSm.png" height="150px" />
-                <h4>
-                    <ul>
-                        <li>Gelbe Chips können vom blauen Spieler geschlagen werden aber nicht vom gelben, gleiches gilt für blaue Chips nur umgekehrt</li>
-                        <li>Grüne Chips können von beiden Spielern geschlagen werden, rote Chips können von niemandem geschlagen werden<li>
-                        <li>zum Schlagen muss man eine eigene Figur auf das Feld eines schlagbaren Chips bewegen</li>
-                        <li>Chips und Figuren dürfen nicht übersprungen werden, die "stehen im Weg"</li>
-                        <li>das Spiel endet sobald ein Spieler keine Chips mehr zum schlagen hat oder alle seine Figuren geschlagen wurden</li>
-                        <li>es gewinnt derjenige der zum Ende des Levels mehr Chips gesammelt hat (Außnahme: wenn man alle gegnerischen Figuren geschlagen hat gewinnt man immer)</li>
-                    </ul>
-                </h4>
-                <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Ok</button>
+                <h3>Regeln für das Spielen von Leveln:</h3>
+                <ul>
+                    <li><u>Gelbe Chips</u> können nur vom <i>Blauen Spieler</i> geschlagen werden, <u>Blaue Chips</u> nur vom <i>Gelben Spieler</i></li>
+                    <li><u>Grüne Chips</u> können von beiden Spielern geschlagen werden, <u>Rote Chips</u> können von niemandem geschlagen werden</li>
+                    <li>Zum Schlagen muss man eine eigene Figur auf das Feld eines schlagbaren Chips bewegen</li>
+                    <li>Chips und Figuren dürfen nicht übersprungen werden, sie "stehen im Weg"</li>
+                    <li>Das Spiel endet sobald ein Spieler keine Chips mehr zum schlagen hat oder (falls erlaubt) alle seine Figuren geschlagen wurden. Es gewinnt derjenige, der zum Ende des Levels mehr Chips gesammelt hat (Außnahme: wenn man alle gegnerischen Figuren geschlagen hat gewinnt man immer)</li>
+                </ul>
+                <h3>Verschiedene Spielmodi:</h3>
+                <ul>
+                    <li><u>Einzelspieler</u>: Es werden alleine Chipschachaufgaben gelöst</li>
+                    <li><u>Mehrspieler (lokal)</u>: Es wird gegeneinander Chipschach gespielt, auf dem gleichen Gerät</li>
+                    <li><u>Mehrspieler (gloal)</u>L Es wird gegeneinander Chipschach gespielt, über das Internet</li>
+                    <li><u>Minischach</u>: Es werden knifflige Schachpuzzel mit besonderen Herausforderungen gelöst. Es gibt neue Siegesbedingungen!</li>
+                    <li><u>Editor</u>: Erstelle deine eigenen Level</li>
+                </ul>
+                <p>
+                    <b>Allgemein</b>: Die Zusatz-Regeln von Chipschach sollen so ähnlich wie möglich zum Original-Schachspiel sein. Chips sind "neutrale" Figuren die von keinem Spieler bewegt werden dürfen. Wer erfolgreicher die Chips einsammelt, gewinnt am ende!
+                </p>
+                <button type="button" class="btn btn-success btn-lg" data-dismiss="modal">Ok</button>
             </div>
-            <div class="modal-footer">
-                Die Zusatz-Regeln von Chipschach sollen so ähnlich wie möglich zum Original-Schachspiel sein. Chips sind "neutrale" Figuren die von keinem Spieler bewegt werden dürfen. Wer erfolgreicher die Chips einsammelt, gewinnt am ende! 
+            <div class="modal-footer"> 
+                <center>Hinweis:</center>
+                <p>
+                    Chipschach - wie es hier online gespielt wird - baut auf der Brettspiel-variante von Ralf Schreiber (Schach für Kids e.V.) auf. Die Software ist nicht darauf ausgelegt ohne Kenntnis der Methodik "Chipschach" wie sie in Brettform gelehrt wird umgesetzt zu werden. 
+                </p>
             </div>
         </div>
     </div>

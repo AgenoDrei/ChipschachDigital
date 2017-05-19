@@ -109,7 +109,7 @@ class DisplayController {
     }
 
     static updateModalTexts(lvlName, lvlDescr) {
-        $('.modal-title').html(lvlName);
+        $('.titleToModify').html(lvlName);
         $('#lvlDescr').html(lvlDescr);
     }
 
@@ -130,5 +130,9 @@ class DisplayController {
             $('#finishModal').show();
             $('#modalOverlay').show();
         }, 5000);
+    }
+
+    static showHelp() {
+        $('#rulesModal').show();
     }
 }
