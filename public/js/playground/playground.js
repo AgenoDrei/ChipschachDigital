@@ -127,6 +127,7 @@ let handleMessage = function(msg) {
             yielded = true;
             // NOBREAK ^^
         case "win":
+            PixiEngine.clear();
             DisplayControl.finishGame(GameControl, msgObj, yielded);
             won = true;
             break;
