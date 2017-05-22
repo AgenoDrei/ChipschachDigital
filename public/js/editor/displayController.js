@@ -49,14 +49,15 @@ class DisplayController {
 
     static checkToggleOptionsOnType() {
         let type = $('select[name="type"]').val();
-        if (type == 'minischach') {
-            $('#subtypeFormGroup').hide();
-            $('#minTurnsFormGroup').hide();
-        } else if (type == 'mp') {
-            $('#subtypeFormGroup').show();
+        // if (type == 'minischach') {
+        //     $('#subtypeFormGroup').hide();
+        //     $('#minTurnsFormGroup').hide();
+        // } else {
+        //     $('#subtypeFormGroup').show();
+        if (type == 'mp') {
+            // $('#subtypeFormGroup').show();
             $('#minTurnsFormGroup').hide();
         } else {
-            $('#subtypeFormGroup').show();
             $('#minTurnsFormGroup').show().attr('');
         }
         // $('#minTurns').prop('disabled', !$.attr(this, ':visible'));
