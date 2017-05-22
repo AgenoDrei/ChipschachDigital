@@ -11,3 +11,7 @@
 .modal-body > ul > li {
     text-align: left;
 }
+
+.panel-heading {
+	text-align: center;
+}
