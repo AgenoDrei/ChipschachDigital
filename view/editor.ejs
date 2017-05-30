@@ -29,7 +29,7 @@
                 <select id="type" class="form-control" name="type" onchange="DisplayController.checkToggleOptionsOnType();">
                     <option value="sp">Einzelspieler</option>
                     <option value="mp">Mehrspieler</option>
-                    <!-- <option value="minischach">Minischach</option> -->
+                    <option value="minischach">Minischach</option>
                 </select>
             </div>
             <div id="subtypeFormGroup" class="form-group">
@@ -54,6 +54,12 @@
             <div id="minTurnsFormGroup" class="form-group">
                 <label for="minturns">Minimale Zugzahl</label>
                 <input id="minturns" type="number" class="form-control" name="minturns" required="true">
+            </div>
+            <div id="miniWinFormGroup" class="form-group">
+                <label for="miniWin">Unterkategorie</label>
+                <select id="miniWin" class="form-control" name="miniWin">
+                    <option value="2">Bauer auf Grundreihe bringen</option>
+                </select>
             </div>
             <center><button class="btn btn-primary btn-lg" onclick="saveLvl();">Speichern</button></center>
         </form>

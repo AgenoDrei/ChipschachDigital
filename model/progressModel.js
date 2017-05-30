@@ -30,15 +30,16 @@ class ProgressModel {
 		let figureWin = this.isFigureWin();
 		let miniWin = gameState.VALID_TURN;
 		switch (condition) {
-			case winCondition.PAWN_VS_BISHOP:
+			case winCondition.PAWN_TO_LAST_ROW:
 				miniWin = this.isPawnLastRowWin();
 				break;
-            case winCondition.PAWN_CONTEST:
-                miniWin = this.isPawnLastRowWin();
-                break;
-            case winCondition.PAWN_SKILLFULL:
-                miniWin = this.isPawnLastRowWin();
-                break;
+			// case winCondition.FIG_TO_CENTER: 
+			// 	miniWin = this.isFigOnFields([
+			// 		{x:4,y:4},
+			// 		{x:4,y:5},
+			// 		{x:5,y:4},
+			// 		{x:5,y:5}
+			// 	]);
 		}
 
         if(figureWin != gameState.VALID_TURN)
@@ -49,17 +50,25 @@ class ProgressModel {
 	}
 
 	isPawnLastRowWin() {
-		let y = 1;
-		for(let x = 1; x <= 8; x++) {
-			let curFigure = this.board.getField(x,y).getFigure();
-			if(curFigure == null)
-				continue;
-			if(curFigure.player != playerType.PLAYERONE)
-				continue;
-			return gameState.WIN_PLAYER1;
+		for(let y = 1; y <= 8; y+=7) {
+			for(let x = 1; x <= 8; x++) {
+				let curFigure = this.board.getField(x,y).getFigure();
+				if(curFigure == null)
+					continue;
+				if(curFigure.constructor.name == 'Pawn') {
+					if(y == 1 && curFigure.player == playerType.PLAYERONE)
+						return gameState.WIN_PLAYER1;
+					if(y == 8 && curFigure.player == playerType.PLAYERTWO)
+						return gameState.WIN_PLAYER2;
+				}
+			}
 		}
 		return gameState.VALID_TURN;
 	}
+
+	// isFigOnFields(fields) {
+		
+	// }
 
 	isChipWin() {
         if(this.chips[playerType.PLAYERTWO] == 0 && this.chips[playerType.BOTH] == 0

@@ -91,14 +91,14 @@ $('document').ready(function() {
                             </a>
                         </p>
                     `);
-                // else 
-                //     $('#mini__fresh_panel-body').append(`
-                //         <p>
-                //             <a href="/mini/${lvl._id}">
-                //                 ${lvl.name}
-                //             </a>
-                //         </p>
-                //     `);                    
+                else 
+                    $('#mini__fresh_panel-body').append(`
+                        <p>
+                            <a href="/mini/${lvl._id}">
+                                ${lvl.name}
+                            </a>
+                        </p>
+                    `);                    
         });
     });
 });
