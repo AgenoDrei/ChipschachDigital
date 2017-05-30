@@ -1,4 +1,4 @@
-var playerType = require('./playerType');
+var playerType = require('./constants').playerType;
 
 module.exports.enemy = function(attacker, defender) {
 	if(attacker == defender) {

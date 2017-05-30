@@ -10,7 +10,7 @@ msg = {
 //Requirements
 const WebSocketServer = require('websocket').server; //Websockets
 const http = require('http'); //HTTP-Server
-const playerType = require('../model/playerType');
+const playerType = require('../model/constants').playerType;
 
 //Initalization
 module.exports = function(configuration, gameHandler) {

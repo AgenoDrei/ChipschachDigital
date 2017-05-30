@@ -11,6 +11,7 @@ module.exports = {
 		port: 4000
 	},
 	socket: {
+		url: "localhost",
 		port: 4001
 	}
 }

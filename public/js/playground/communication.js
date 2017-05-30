@@ -1,9 +1,9 @@
 var comHandle = {
     ws: null,
     connectionRetry: false,
-	connect: function(url, port, messageCallback, gameId, joinId) {
+	connect: function(messageCallback, gameId, joinId) {
     	if (window.WebSocket) {   
-            let ws = new WebSocket('ws://' + url + ':' + port, 'kekse');
+            let ws = new WebSocket('ws://localhost:4001', 'kekse');
         	
         	ws.onopen = function() {
             	var conObj = {
@@ -19,8 +19,8 @@ var comHandle = {
                 console.error('Connection error occured!');
                 if(!comHandle.connectionRetry) {
                     comHandle.connectionRetry = true;
-                    console.error('Try to reconnect to global server now!');
-                    comHandle.connect("agenodrei.de", "4001", messageCallback, gameId, joinId);
+                    console.log('Try to reconnect to global server now!');
+                    comHandle.connect(config.socket.host, config.socket.port, messageCallback, gameId, joinId);
                 }
             };
                     
