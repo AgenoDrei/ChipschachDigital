@@ -1,0 +1,189 @@
+{
+	"de": {
+		"name": "Deutsch",
+		"strings": {
+			"editor": {
+				"title": "Editor",
+				"prop_form": {
+					"type_select": "Kategorie",
+					"type_options": [
+						"Einzelspieler", 
+						"Mehrspieler"
+					],
+					"subtype_select": "Unterkategorie",
+					"subtype_options": [
+						"Turm", 
+						"Läufer", 
+						"Dame", 
+						"König", 
+						"Springer", 
+						"Bauer"
+					],
+					"name_input": "Name",
+					"description_input": "Beschreibung",
+					"minturns_input": "Minimale Zugzahl",
+					"save_button": "Speichern"
+				}
+			},
+			"menu": {
+				"title": "Chipschach Digital",
+				"iconRows_names": [
+	                [
+	                	"Einzelspieler", 
+	                	"Mehrspieler Lokal", 
+	                	"Mehrspieler Global"],
+	                [
+	                	"Minischach", 
+	                	"", 
+	                	"Klassisches Schach"],
+	                [
+	                	"Editor", 
+	                	"", 
+	                	""
+	                ]
+	            ],
+	            "accTypes": [{
+	                "name": "Einzelspieler",
+	                "footer": "Wähle ein Einzelspieler-Level und schlage alle Chips so schnell du kannst!"
+	            }, {
+	                "name": "Mehrspieler Lokal",
+	                "footer": "Wähle ein Mehrspieler-Level aus um gegen einen Freund am gleichen Rechner Problemstellungen zu lösen!"
+	            }],
+	            "availSubtypes_names": [
+	                "Turm",
+	                "Läufer",
+	                "Dame",
+	                "König",
+	                "Springer",
+	                "Bauer"
+	            ]
+			},
+			"playground": {
+				"titles": {
+					"sp": "Einzelspieler",
+					"mp": "Mehrspieler",
+					"mini": "Minischach",
+					"global": "Globaler Mehrspieler"
+				},
+				"icon_bar": {
+					"titles": {
+						"help": "Hilfe öffnen",
+						"close": "Zurück zum Hauptmenü",
+						"yield": "Spiel aufgeben",
+						"undo": "Zug rückgängig"
+					}
+				},
+				"footers": {
+					"sp": "Löse das Level in möglichst wenig Zügen in dem du alle schlagbaren Chips schlägst!",
+					"mp": "Schlagen mehr Chips als dein Gegner!",
+					"mp_g": "Ein globales Mehrspieler Spiel.",
+					"mini": "Ein kniffliges Schach-Rätsel!"
+				}
+			},
+			"modals": {
+				"editorStart": {
+					"title": "Editor",
+					"body_title": "Bedienungsanleitung",
+					"rules": [
+						"Figuren oder Chips um das Brett herum auswählen",
+	                	"Deine aktuelle Auswahl wird im Fenster links angezeigt",
+	                	"Sobald eine Auswahl getroffen wurde kannst du auf dem Brett auf Felder klicken und dort wird die entsprechende Figur/Chip erstellt!",
+	                	"Du kannst bereits platzierte Figuren/Chips mit neu ausgewählten überschreiben",
+	                	"Zum Löschen einfach die Auswahl leeren (rotes X-Symbol unter der Auswahl) und auf das zu leerende Feld klicken",
+	                	"Wenn dir das Level gefällt, einfach links in der Seitenleiste Name, Beschreibung etc. eintragen und auf Speichern klicken!"
+					],
+					"footer": "Hier kannst du eigene Level erstellen!"
+				},
+				"finish": {
+					"winmsgYielded": "Das Level wurde aufgegeben.",
+					"winmsgGenericYellow": "Gelb hat das Spiel gewonnen!",
+					"winmsgGenericBlue": "Blau hat das Spiel gewonnen!",
+					"winmsgGenericDraw": "Unentschieden, keiner hat gewonnen.",
+					"winmsgMinturnsSuccess": "Du hast das Level mit minimaler Zugzahl beendet, Glückwunsch!",
+					"winmsgMinturnsFailed": "Du hast das Level beendet, aber du kannst das auch noch mit weniger Zügen.",
+					"btnBack": "Zurück zum Menü",
+					"btnRepeat": "Nochmal spielen",
+					"btnNext": "Nächstes Level",
+					"btnInspectBoard": "Stellung inspizieren"
+				},
+				"impressum": {
+					"title": "Impressum",
+					"disclaim": "Chipschach© ist eine Software der pädagogischen Initiative Schach für Kids e.V. (SfK), erstellt in Kooperation mit der IBM Deutschland GmbH",
+					"txt": "Beteiligte",
+					"contributors": [
+	                	"Ralf Schreiber, SfK (Initiator)",
+	                	"Peter Kusterer, IBM (Leitung)",
+	                	"Simon Müller, IBM (Programmierung)"
+	                	"Oliver Berg, IBM (Programmierung)"
+	                ],
+	                "footer": {
+	                	"txts": [
+	                		"Weitere Informationen unter", 
+	                		"Kontakt"
+	                	],
+	                	"info_link": "schach-fuer-kids.de",
+	                	"email": "chipschach@schach-fuer-kids.de" 
+	                }
+				},
+				"rules": {
+					"title": "Was ist Chipschach und wie funktioniert es?",
+					"body_title_rules": "Regeln für das Spielen von Leveln:",
+					"rules": [
+						"Die <u>Figuren</u> ziehen wie beim Schach: Türme gerade, Läufer diagonal, Springer in L-Form, Bauern vorwärts ziehen und schräg schlagen, Dame wie Turm und Läufer, König 1 Feld in alle Richtungen",
+						"<u>Gelbe Chips</u> können nur vom <i>Blauen Spieler</i> geschlagen werden, <u>Blaue Chips</u> nur vom <i>Gelben Spieler</i>",
+						"<u>Grüne Chips</u> können von beiden Spielern geschlagen werden, <u>Rote Chips</u> können von niemandem geschlagen werden",
+						"Zum Schlagen muss man eine eigene Figur auf das Feld eines schlagbaren Chips bewegen",
+						"Chips und Figuren dürfen nicht übersprungen werden, sie \"stehen im Weg\" (Außnahme: Der \"Springer\" darf überspringen)",
+						"Das Spiel endet sobald ein Spieler keine Chips mehr zum schlagen hat oder (falls erlaubt) alle seine Figuren geschlagen wurden. Es gewinnt derjenige, der zum Ende des Levels mehr Chips gesammelt hat (Außnahme: wenn man alle gegnerischen Figuren geschlagen hat gewinnt man immer)",
+					],
+					"body_title_modes": "Verschiedene Spielmodi:",
+					"modes": [
+						"<u>Einzelspieler</u>: Es werden alleine Chipschachaufgaben gelöst",
+						"<u>Mehrspieler (lokal)</u>: Es wird gegeneinander Chipschach gespielt, auf dem gleichen Gerät",
+						"<u>Mehrspieler (gloal)</u>L Es wird gegeneinander Chipschach gespielt, über das Internet",
+						"<u>Minischach</u>: Es werden knifflige Schachpuzzel mit besonderen Herausforderungen gelöst. Es gibt neue Siegesbedingungen!",
+						"<u>Editor</u>: Erstelle deine eigenen Level"
+					],
+					"general": "<b>Allgemein</b>: Die Zusatz-Regeln von Chipschach sollen so ähnlich wie möglich zum Original-Schachspiel sein. Chips sind \"neutrale\" Figuren die von keinem Spieler bewegt werden dürfen. Wer erfolgreicher die Chips einsammelt, gewinnt am Ende!",
+					"footer_title": "Hinweis:",
+					"footer_disclaimer": "Chipschach - wie es hier online gespielt wird - baut auf der Brettspiel-Variante von Ralf Schreiber (Schach für Kids e.V.) auf. Die Software ist nicht darauf ausgelegt ohne Kenntnis der Methodik "Chipschach" wie sie in Brettform gelehrt wird umgesetzt zu werden. "
+				},
+				"start": {
+					"button": "Start",
+					"cancelSearch": "Suche abrechen",
+					"unbeatable": "Figuren nicht schlagbar",
+					"beatable": "Figuren schlagbar"
+				},
+				"menu": {	
+					"sp_mp": {
+						"acc_editor_title": "Brandneue Level aus dem Editor (Achtung: Nicht geprüft / getestet)"
+					},
+					"mp_global": {
+						"title": "Mehrspieler Global - Lobby",
+						"game_list": {
+							"th1": "Spielname",
+							"th2": "Level",
+							"th3": "Besetzung"
+						},
+						"create_title": "... oder ein eigenes Spiel erstellen?",
+						"new_game_form": {
+							"name_input": "Spielname",
+							"new_level_select": "Level",
+							"game_mode_0": "Figuren nicht schlagbar",
+							"game_mode_1": "Figuren schlagbar",
+							"create_new_game": "Spiel erstellen"
+						},
+						"footer": "Hier kannst du ein neues Spiel erstellen oder bereits bestehenden Spielen beitreten."
+					},
+					"mini": {
+						"title": "Mehrspieler Lokal - Minischach",
+						"footer": "Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!"
+					}
+				}
+			}
+		}
+	},
+	"en": {
+		
+	}
+}
