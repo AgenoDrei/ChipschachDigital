@@ -79,9 +79,6 @@ class ProgressModel {
         } else if(this.chips[playerType.PLAYERTWO] == 0 && this.chips[playerType.PLAYERONE] == 0 && this.chips[playerType.BOTH] == 0
             && this.score[playerType.PLAYERONE] == this.score[playerType.PLAYERTWO]) {
             return gameState.WIN_DRAW;
-        } else if(this.chips[playerType.PLAYERTWO] == this.chips[playerType.PLAYERONE] == this.chips[playerType.BOTH] == 0 
-        	&& this.score[playerType.PLAYERONE] > 0) {
-        	return gameState.WIN_PLAYER1;
         }
         return gameState.VALID_TURN;
 	}
@@ -100,7 +97,6 @@ class ProgressModel {
 	}
 
 	captureChip(player, type) {
-		debugger;
 		console.log("chip captured: ", player, type);
 		var currentPlayer = null;
 		if(player == playerType.PLAYERONE) {
