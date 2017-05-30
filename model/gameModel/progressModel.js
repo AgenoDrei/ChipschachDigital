@@ -1,8 +1,8 @@
-var playerType = require('./constants').playerType;
-const gameType = require('./constants').gameType;
-const gameState = require('./constants').gameState;
-const helper = require('./helper');
-const winCondition = require('./constants').winCondition;
+var playerType = require('../constants').playerType;
+const gameType = require('../constants').gameType;
+const gameState = require('../constants').gameState;
+const winCondition = require('../constants').winCondition;
+const helper = require('../helper');
 
 class ProgressModel {
 	constructor(p1, p2, p0, figures, board, type) {

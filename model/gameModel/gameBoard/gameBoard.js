@@ -1,3 +1,4 @@
+var playerType = require('../../constants').playerType;
 var Field = require('./field');
 var Figure = require('./figure');
 var Rook = require('./rook');
@@ -7,7 +8,6 @@ var Queen = require('./queen');
 var King = require('./king');
 var Pawn = require('./pawn');
 var Chip = require('./chip');
-var playerType = require('./constants').playerType;
 
 class Board {
 	constructor(parent) {

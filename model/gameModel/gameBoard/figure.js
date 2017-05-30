@@ -1,5 +1,5 @@
-var playerType = require('./constants').playerType;
-var helper = require('./helper');
+var playerType = require('../../constants').playerType;
+var helper = require('../../helper');
 
 class Figure {
 	constructor(parentBoard, x, y, player) {

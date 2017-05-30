@@ -1,9 +1,9 @@
 var Promise = require('promise');
-var Game = require('./gameModel');
 var gameTypes = require('./constants').gameType;
 var conStates = require('./constants').connectionState;
 var playerType = require('./constants').playerType;
 var gameState = require('./constants').gameState;
+var Game = require('./gameModel/gameModel');
 var helper = require('./helper');
 
 module.exports = function(dataAccess) {

@@ -1,6 +1,6 @@
-var playerType = require('./constants').playerType;
+var playerType = require('../../constants').playerType;
+var helper = require('../../helper');
 var Figure = require('./figure');
-var helper = require('./helper');
 
 class Chip extends Figure{
 	constructor(parentBoard, x, y, chipType) {
