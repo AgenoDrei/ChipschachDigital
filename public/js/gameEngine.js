@@ -413,7 +413,7 @@ class EditorEngine extends GameEngine {
     }
 
     createFigure(x, y, color, type) {
-        this.board.push({type: type, color: color, x: x, y: y});
+        this.board.push({type: type, color: parseInt(color), x: x, y: y});
         super.createFigure(x, y, this.figureSize, color, type);
     }
 

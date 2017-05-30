@@ -22,7 +22,6 @@ class Figure {
 		if(this.board.parentGame.mode == 'unbeatable')
 			return false;
 
-		debugger;
 		if(helper.enemy(beater.player, this.player)) {
             this.board.parentGame.history.setLastBeat(this.board.fields[this.x][this.y].getFigure());
 			this.board.fields[this.x][this.y].setFigure(null);

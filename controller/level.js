@@ -21,7 +21,6 @@ module.exports = function(dataAccess) {
 
 	router.get('/level/:levelId', function(req, res, next) {
 		console.log('API GET /level/:levedId called!');
-		debugger;
 		var levelId = req.params.levelId;
 		if(levelId == undefined) {
 			return res.status(500).json({ msg: 'You have to specify a level name'});
