@@ -1,3 +1,4 @@
+var Promise = require('promise');
 var shortid = require('shortid');
 var gameTypes = require('../constants').gameType;
 var conStates = require('../constants').connectionState;

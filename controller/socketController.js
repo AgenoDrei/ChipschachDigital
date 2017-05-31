@@ -8,6 +8,7 @@ msg = {
 */
 
 //Requirements
+const Promise = require('promise');
 const WebSocketServer = require('websocket').server; //Websockets
 const http = require('http'); //HTTP-Server
 const playerType = require('../model/constants').playerType;
@@ -65,6 +66,7 @@ module.exports = function(configuration, gameHandler) {
         switch (m.type) { //see protocol
             case "hello":
                 gameHandler.getGame(m.gameId).done(function(game) {
+                    debugger;
                     game.connect(m.joinId, connection).done(function(player) {
                         var response = {
                             type: "hello",
