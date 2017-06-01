@@ -1,9 +1,11 @@
 var comHandle = {
     ws: null,
     connectionRetry: false,
-	connect: function(messageCallback, gameId, joinId) {
-    	if (window.WebSocket) {   
-            let ws = new WebSocket('ws://localhost:4001', 'kekse');
+	connect: function(url, port, messageCallback, gameId, joinId) {
+		let ws = null; 
+    		if (window.WebSocket) {
+		if(url) ws = new WebSocket('ws://'+url+':'+port, 'kekse');
+		else ws = new WebSocket('ws://localhost:4001', 'kekse');
         	
         	ws.onopen = function() {
             	var conObj = {

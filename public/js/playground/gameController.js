@@ -17,7 +17,7 @@ class GameController {
                 joinIds.push(res.joinId);
                 $.get('/api/v1/game/' + this.gameId, function(res) {
                     joinIds.push(res.joinId);
-                    comHandle.connect(handleMessage, this.gameId, joinIds[0]);
+                    comHandle.connect(null, null, handleMessage, this.gameId, joinIds[0]);
                 }.bind(this));
             }.bind(this));
         }.bind(this));
@@ -30,7 +30,7 @@ class GameController {
             globalGames.forEach(function(globalGame) {
                 if (globalGame.id === thiz.gameId) {
                     thiz.retrieveLevel(globalGame.levelId);
-                    comHandle.connect(handleMessage, thiz.gameId, joinId);
+                    comHandle.connect(null, null, handleMessage, thiz.gameId, joinId);
                 }
             }.bind(this));
         });
