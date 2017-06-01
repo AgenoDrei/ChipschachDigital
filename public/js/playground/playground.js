@@ -2,8 +2,7 @@ let lvlType,
     PixiEngine = null,
     DisplayControl = null,
     GameControl = null,
-    player = playerType.PLAYERONE;
-let host = "localhost";     //TODO: make flag-settable s.t. e.g. --deploy deploys t agenodrei or such without losing localhost
+    player = 0; 
 
 let startGame = function() {
     if (GameControl.level === undefined) {

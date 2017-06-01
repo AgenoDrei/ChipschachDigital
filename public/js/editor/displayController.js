@@ -3,6 +3,7 @@ class DisplayController {
         this.boardSize = $('#board-anchor').width();
         $('#startModal').show();
         $('#modalOverlay').show();
+        $('#miniWinFormGroup').hide();
 
         this.adjustScreen();
         window.onresize = function() {
@@ -49,18 +50,19 @@ class DisplayController {
 
     static checkToggleOptionsOnType() {
         let type = $('select[name="type"]').val();
-        // if (type == 'minischach') {
-        //     $('#subtypeFormGroup').hide();
-        //     $('#minTurnsFormGroup').hide();
-        // } else {
-        //     $('#subtypeFormGroup').show();
-        if (type == 'mp') {
-            // $('#subtypeFormGroup').show();
+        if (type == 'minischach') {
+            $('#subtypeFormGroup').hide();
             $('#minTurnsFormGroup').hide();
+            $('#miniWinFormGroup').show();
         } else {
-            $('#minTurnsFormGroup').show().attr('');
+            $('#subtypeFormGroup').show();
+            if (type == 'mp')
+                $('#minTurnsFormGroup').hide();
+            else
+                $('#minTurnsFormGroup').show().attr('');
+            $('#miniWinFormGroup').hide();
         }
-        // $('#minTurns').prop('disabled', !$.attr(this, ':visible'));
+        // $('#minTurns').prop('disabled', !$.attr(this, ':visible'));  // does not work though ...
     };
 
     static setSelectionWindow(picSrc) {
@@ -86,6 +88,8 @@ class DisplayController {
             attrs.subtype = $('#subtype').val();
         if (type === 'sp')
             attrs.minturns = parseInt($('#minturns').val());
+        if (type === 'minischach')
+            attrs.win = parseInt($('#miniWin').val());
         return attrs;
     }
 }

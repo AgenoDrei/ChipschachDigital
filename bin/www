@@ -9,6 +9,17 @@ var debug = require('debug')('ChipschachDigital:server');
 var http = require('http');
 var config = require('../config/config');
 
+var program = require('commander'); //cmd line arguments
+
+let changeHost  = (directory,options) => {
+  console.log("Changing default client host url from " + config.socket.url + " to: " + options.args[0]);
+  config.socket.url = options.args[0];
+}
+
+program.version('2.3.0').option('-h, --host', 'Change host to connect to').action(changeHost);
+program.parse(process.argv);
+
+
 /**
  * Get port from environment and store in Express.
  */

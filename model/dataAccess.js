@@ -1,5 +1,5 @@
-var f = require('util').format;
 var Promise = require('promise');
+var f = require('util').format;
 
 module.exports = function(configuration, mongoClient) {
 	var baseUrl = configuration.database.url + ':' + configuration.database.port + '/' + configuration.database.db;
