@@ -20,7 +20,7 @@ var comHandle = {
                 if(!comHandle.connectionRetry) {
                     comHandle.connectionRetry = true;
                     console.log('Try to reconnect to global server now!');
-                    comHandle.connect(config.socket.host, config.socket.port, messageCallback, gameId, joinId);
+                    comHandle.connect(config.socket.url, config.socket.port, messageCallback, gameId, joinId);
                 }
             };
                     
