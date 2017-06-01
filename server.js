@@ -26,6 +26,7 @@ var dataAccess = require('./model/dataAccess')(config, mongoClient);
 var gameHandler = require('./model/gameHandler')(dataAccess);
 
 //Route Definitions (REST Controller) - CONTROLLER
+app.use('/config', require('./controller/configExposer')(config));
 app.use('/api/v1', require('./controller/index'));
 app.use('/api/v1', require('./controller/level')(dataAccess));
 app.use('/api/v1', require('./controller/game')(dataAccess, gameHandler));

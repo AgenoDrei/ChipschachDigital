@@ -80,11 +80,11 @@ class DisplayController {
             if (GameControl.level.type === 'minischach')
                 $('#btnNext').hide();
                 
-            if (msgObj.player === winner.PLAYERONE)
+            if (msgObj.player === gameState.WIN_PLAYER1)
                 $('#winmsgGenericYellow').show();
-            else if (msgObj.player === winner.PLAYERTWO)
+            else if (msgObj.player === gameState.WIN_PLAYER2)
                 $('#winmsgGenericBlue').show();
-            else if (msgObj.player === winner.DRAW)
+            else if (msgObj.player === gameState.WIN_DRAW)
                 $('#winmsgGenericDraw').show(); 
         }
         $('#modalOverlay').show();

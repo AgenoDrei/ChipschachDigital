@@ -1,5 +1,5 @@
-var playerType = require('./playerType');
-var helper = require('./helper');
+var playerType = require('../../constants').playerType;
+var helper = require('../../helper');
 
 class Figure {
 	constructor(parentBoard, x, y, player) {
@@ -22,7 +22,6 @@ class Figure {
 		if(this.board.parentGame.mode == 'unbeatable')
 			return false;
 
-		debugger;
 		if(helper.enemy(beater.player, this.player)) {
             this.board.parentGame.history.setLastBeat(this.board.fields[this.x][this.y].getFigure());
 			this.board.fields[this.x][this.y].setFigure(null);

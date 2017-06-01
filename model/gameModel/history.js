@@ -1,4 +1,4 @@
-const helper = require('./helper');
+const helper = require('../helper');
 
 class History {
     constructor(board) {
