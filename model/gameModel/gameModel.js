@@ -8,6 +8,8 @@ var helper = require('../helper');
 var Board = require('./gameBoard/gameBoard');
 var Chip = require('./gameBoard/chip');
 var ProgressModel = require('./progressModel');
+var GameEnd = require('./gameEnds/gameEnd');
+
 var History = require('./history');
 
 
