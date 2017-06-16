@@ -1,4 +1,8 @@
 const GameEnd = require('./gameEnd');
+const playerType = require('../../constants').playerType;
+const gameType = require('../../constants').gameType;
+const gameState = require('../../constants').gameState;
+const winCondition = require('../../constants').winCondition;
 
 class LastRowGameEnd extends GameEnd {
 	constructor(board) {

@@ -7,8 +7,14 @@ var playerType = require('../constants').playerType;
 var helper = require('../helper');
 var Board = require('./gameBoard/gameBoard');
 var Chip = require('./gameBoard/chip');
-var ProgressModel = require('./progressModel');
+//var ProgressModel = require('./progressModel');
 var GameEnd = require('./gameEnds/gameEnd');
+var ChipGameEnd = require('./gameEnds/chipGameEnd');
+var FigureGameEnd = require('./gameEnds/figureGameEnd');
+var LastRowGameEnd = require('./gameEnds/lastRowGameEnd');
+var GameEndManager = require('./gameEnds/gameEndManager');
+
+
 
 var History = require('./history');
 
@@ -34,7 +40,20 @@ class Game {
 		};
 		this.board = new Board(this);
 		this.board.loadLevel(this.level);
-		this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2], this.board.figures, this.board, this.type);
+		//this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2], this.board.figures, this.board, this.type);
+		this.win = new GameEndManager();
+
+		if(this.type == gameTypes.SP) {
+			this.win.addGameEnd(new ChipGameEnd(this.board));
+		} else if(this.type == gameTypes.MP) {
+			this.win.addGameEnd(new ChipGameEnd(this.board));
+			this.win.addGameEnd(new FigureGameEnd(this.board));
+		} else if(this.type == gameTypes.MINI) {
+			this.win.addGameEnd(new FigureGameEnd(this.board));
+			this.win.addGameEnd(new LastRowGameEnd(this.board));
+		}
+
+
 		this.history = new History(this.board);
 		console.log('New Game created with ID: ', this.id);
 		console.log('Level used: ', this.level._id);
@@ -62,12 +81,8 @@ class Game {
 			currentFigure.move(destX, destY);
 		}
 		this.win.countUpTurn();
-		let winner = gameStates.VALID_TURN;
-		if(this.type != gameTypes.MINI)
-			winner = this.win.checkProgress();
-		else
-			winner = this.win.checkProgressMinichess(this.level.win);
-
+		debugger;
+		let winner = this.win.checkGameEnd();
 		if(winner != gameStates.VALID_TURN) {
 			return winner;
 		}

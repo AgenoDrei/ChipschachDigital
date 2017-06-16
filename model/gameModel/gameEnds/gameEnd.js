@@ -2,7 +2,7 @@ var playerType = require('../../constants').playerType;
 const gameType = require('../../constants').gameType;
 const gameState = require('../../constants').gameState;
 const winCondition = require('../../constants').winCondition;
-const helper = require('../helper');
+const helper = require('../../helper');
 
 class GameEnd {
 	constructor(board) {
@@ -10,6 +10,7 @@ class GameEnd {
 		this.chips = [this.board.chips[0], this.board.chips[1], this.board.chips[2]];
 		this.figures = this.board.figures;
 		this.turnCount = 0;
+		this.score = [0, 0];
 		console.log("WinCondition created!");
 	}
 
