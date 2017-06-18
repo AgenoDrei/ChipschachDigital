@@ -26,6 +26,10 @@
 					"Bauer auf Grundreihe bringen"
 				],
 				"save_button": "Speichern"
+			},
+			"icon_bar": {
+				"close": "Zurück zum Hauptmenü",
+				"reset": "Editor zurücksetzen"
 			}
 		},
 		"menu": {
