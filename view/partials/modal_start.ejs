@@ -11,26 +11,26 @@
                 <h3 id="lvlDescr">
                     <!-- Filled with js -->
                 </h3>
-                <% if (type === 'SP' || type === 'MINI') { %>
-                <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
-                <% } else if (type === 'GLOBAL') { %>
+                <% if (type === 'sp' || type === 'mini') { %>
+                <button type="button" class="btn btn-success btn-lg" onclick="startGame();"><%=strings.modals.start.button%></button>
+                <% } else if (type === 'global') { %>
                 <center>
                     <div class="loader"></div>
-                    <a href="/">Suche abrechen</a>
+                    <a href="/"><%=strings.modals.start.cancle_search%></a>
                 </center>
                 <% } else { %>
                 <form>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="gameMode" value="unbeatable" checked>Figuren nicht schlagbar
+                            <input type="radio" name="gameMode" value="unbeatable" checked><%=strings.modals.start.unbeatable%>
                         </label>
                     </div>
                     <div class="radio">
                         <label id="possibleDisableIfKingLvl_label">
-                            <input id="possibleDisableIfKingLvl_input" type="radio" name="gameMode" value="beatable">Figuren schlagbar
+                            <input id="possibleDisableIfKingLvl_input" type="radio" name="gameMode" value="beatable"><%=strings.modals.start.beatable%>
                         </label>
                     </div>
-                    <button type="button" class="btn btn-success btn-lg" onclick="startGame();">Start!</button>
+                    <button type="button" class="btn btn-success btn-lg" onclick="startGame();"><%=strings.modals.start.button%></button>
                 </form>
                 <% } %>
             </div>

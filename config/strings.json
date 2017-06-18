@@ -6,7 +6,8 @@
 				"type_select": "Kategorie",
 				"type_options": [
 					"Einzelspieler", 
-					"Mehrspieler"
+					"Mehrspieler",
+					"Minischach"
 				],
 				"subtype_select": "Unterkategorie",
 				"subtype_options": [
@@ -20,6 +21,10 @@
 				"name_input": "Name",
 				"description_input": "Beschreibung",
 				"minturns_input": "Minimale Zugzahl",
+				"wincondition_select": "Siegesbedingung",
+				"wincondition_options": [
+					"Bauer auf Grundreihe bringen"
+				],
 				"save_button": "Speichern"
 			}
 		},
@@ -60,8 +65,14 @@
 			"titles": {
 				"sp": "Einzelspieler",
 				"mp": "Mehrspieler",
-				"mini": "Minischach",
-				"global": "Globaler Mehrspieler"
+				"global": "Globaler Mehrspieler",
+				"mini": "Minischach"
+			},
+			"footers": {
+				"sp": "Löse das Level in möglichst wenig Zügen in dem du alle schlagbaren Chips schlägst!",
+				"mp": "Schlagen mehr Chips als dein Gegner!",
+				"global": "Ein globales Mehrspieler Spiel.",
+				"mini": "Ein kniffliges Schach-Rätsel!"
 			},
 			"icon_bar": {
 				"titles": {
@@ -70,12 +81,6 @@
 					"yield": "Spiel aufgeben",
 					"undo": "Zug rückgängig"
 				}
-			},
-			"footers": {
-				"sp": "Löse das Level in möglichst wenig Zügen in dem du alle schlagbaren Chips schlägst!",
-				"mp": "Schlagen mehr Chips als dein Gegner!",
-				"mp_g": "Ein globales Mehrspieler Spiel.",
-				"mini": "Ein kniffliges Schach-Rätsel!"
 			}
 		},
 		"modals": {
@@ -90,6 +95,7 @@
                 	"Zum Löschen einfach die Auswahl leeren (rotes X-Symbol unter der Auswahl) und auf das zu leerende Feld klicken",
                 	"Wenn dir das Level gefällt, einfach links in der Seitenleiste Name, Beschreibung etc. eintragen und auf Speichern klicken!"
 				],
+				"button": "Start!",
 				"footer": "Hier kannst du eigene Level erstellen!"
 			},
 			"finish": {
@@ -147,8 +153,8 @@
 				"footer_disclaimer": "Chipschach - wie es hier online gespielt wird - baut auf der Brettspiel-Variante von Ralf Schreiber (Schach für Kids e.V.) auf. Die Software ist nicht darauf ausgelegt ohne Kenntnis der Methodik \"Chipschach\" wie sie in Brettform gelehrt wird umgesetzt zu werden."
 			},
 			"start": {
-				"button": "Start",
-				"cancelSearch": "Suche abrechen",
+				"button": "Start!",
+				"cancel_search": "Suche abrechen",
 				"unbeatable": "Figuren nicht schlagbar",
 				"beatable": "Figuren schlagbar"
 			},

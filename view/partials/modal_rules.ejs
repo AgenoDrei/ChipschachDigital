@@ -3,37 +3,32 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title">
-                    Was ist Chipschach und wie funktioniert es?
+                    <%=strings.modals.rules.title%>
                 </h4>
             </div>
             <div class="modal-body" style="text-align: center">
-                <img src="/img/logoSm.png" height="150px" />
-                <h3>Regeln für das Spielen von Leveln:</h3>
+                <img src="/img/logoSm.png" height="150px"/>
+                <h3><%=strings.modals.rules.body_title_rules%></h3>
                 <ul>
-                    <li>Die <u>Figuren</u> ziehen wie beim Schach: Türme gerade, Läufer diagonal, Springer in L-Form, Bauern vorwärts ziehen und schräg schlagen, Dame wie Turm und Läufer, König 1 Feld in alle Richtungen</li> 
-                    <li><u>Gelbe Chips</u> können nur vom <i>Blauen Spieler</i> geschlagen werden, <u>Blaue Chips</u> nur vom <i>Gelben Spieler</i></li>
-                    <li><u>Grüne Chips</u> können von beiden Spielern geschlagen werden, <u>Rote Chips</u> können von niemandem geschlagen werden</li>
-                    <li>Zum Schlagen muss man eine eigene Figur auf das Feld eines schlagbaren Chips bewegen</li>
-                    <li>Chips und Figuren dürfen nicht übersprungen werden, sie "stehen im Weg" (Außnahme: Der "Springer" darf überspringen)</li>
-                    <li>Das Spiel endet sobald ein Spieler keine Chips mehr zum schlagen hat oder (falls erlaubt) alle seine Figuren geschlagen wurden. Es gewinnt derjenige, der zum Ende des Levels mehr Chips gesammelt hat (Außnahme: wenn man alle gegnerischen Figuren geschlagen hat gewinnt man immer)</li>
+                    <% strings.modals.rules.rules.forEach(function(rule) { %>
+                    <li><%-rule%></li>
+                    <% }); %>
                 </ul>
-                <h3>Verschiedene Spielmodi:</h3>
+                <h3><%=strings.modals.rules.body_title_modes%></h3>
                 <ul>
-                    <li><u>Einzelspieler</u>: Es werden alleine Chipschachaufgaben gelöst</li>
-                    <li><u>Mehrspieler (lokal)</u>: Es wird gegeneinander Chipschach gespielt, auf dem gleichen Gerät</li>
-                    <li><u>Mehrspieler (gloal)</u>L Es wird gegeneinander Chipschach gespielt, über das Internet</li>
-                    <li><u>Minischach</u>: Es werden knifflige Schachpuzzel mit besonderen Herausforderungen gelöst. Es gibt neue Siegesbedingungen!</li>
-                    <li><u>Editor</u>: Erstelle deine eigenen Level</li>
+                    <% strings.modals.rules.modes.forEach(function(mode) { %>
+                    <li><%-mode%></li>
+                    <% }); %>
                 </ul>
                 <p>
-                    <b>Allgemein</b>: Die Zusatz-Regeln von Chipschach sollen so ähnlich wie möglich zum Original-Schachspiel sein. Chips sind "neutrale" Figuren die von keinem Spieler bewegt werden dürfen. Wer erfolgreicher die Chips einsammelt, gewinnt am Ende!
+                    <%-strings.modals.rules.general%>
                 </p>
                 <button type="button" class="btn btn-success btn-lg" data-dismiss="modal">Ok</button>
             </div>
             <div class="modal-footer"> 
-                <center>Hinweis:</center>
+                <center><%=strings.modals.rules.footer_title%></center>
                 <p>
-                    Chipschach - wie es hier online gespielt wird - baut auf der Brettspiel-Variante von Ralf Schreiber (Schach für Kids e.V.) auf. Die Software ist nicht darauf ausgelegt ohne Kenntnis der Methodik "Chipschach" wie sie in Brettform gelehrt wird umgesetzt zu werden. 
+                    <%=strings.modals.rules.footer_disclaimer%>
                 </p>
             </div>
         </div>

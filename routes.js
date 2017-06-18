@@ -8,8 +8,9 @@ module.exports = function(app, dataAccess) {
     });
 
     app.get('/:lang', function(req, res) {
-        var lang = req.params.lang;
+        let lang = req.params.lang;
         res.render('menu', {
+            lang: lang,
             strings: strings[lang],
             iconRows: [
                 [
@@ -37,46 +38,54 @@ module.exports = function(app, dataAccess) {
                 {id: 'king', name: strings[lang].menu.availSubtypes_names[3]},
                 {id: 'knight', name: strings[lang].menu.availSubtypes_names[4]},
                 {id: 'pawn', name: strings[lang].menu.availSubtypes_names[5]}
-            ]
+            ],
+            strings: strings[lang]
         });
     });
 
-    app.get('/:type/:subtype/:levelId', function(req, res) {
-        let type = req.params.type.toUpperCase(),
-            footerText = "";
-        if (req.params.type === 'sp') {
-            footerText = "Löse das Level in möglichst wenig Zügen in dem du alle schlagbaren Chips schlägst!";
-        } else if (req.params.type === 'mp') {
-            footerText = "Schlagen mehr Chips als dein Gegner!";
-        }
+    app.get('/:lang/:type/:subtype/:levelId', function(req, res) {      // 'sp' OR 'mp'
+        let lang = req.params.lang;
         res.render('playground', {
-            type: req.params.type.toUpperCase(),    // toUpperCase is not the nicest way to go here, but nvmd
+            lang: lang,
+            type: req.params.type,
             subtype: req.params.subtype,
             id: req.params.levelId,
-            footer: footerText
+            title: strings[lang].playground.titles[req.params.type],
+            footer: strings[lang].playground.footers[req.params.type],
+            strings: strings[lang]
         });
     });
 
-    app.get('/global/:gameId', function(req, res) {
+    app.get('/:lang/global/:gameId', function(req, res) {
+        let lang = req.params.lang;
         res.render('playground', {
-            type: 'GLOBAL',
+            lang: lang,
+            type: 'global',
             subtype: 'NotDefined',
             id: req.params.gameId,
-            footer: 'Ein globales Mehrspieler Spiel.'
+            title: strings[lang].playground.titles[req.params.type],
+            footer: 'Ein globales Mehrspieler Spiel.',
+            strings: strings[lang]
         });
     });
 
-    app.get('/mini/:levelId', function(req, res) {
+    app.get('/:lang/mini/:levelId', function(req, res) {
+        let lang = req.params.lang;
         res.render('playground', {
-            type: 'MINI',
+            lang: lang,
+            type: 'mini',
             subtype: 'NotDefined',
             id: req.params.levelId,
-            footer: 'Ein kniffliges Schach-Rätsel!'
+            title: strings[lang].playground.titles[req.params.type],
+            footer: strings[lang].playground.footers[req.params.type],
+            strings: strings[lang]
         })
     });
 
-    app.get('/editor', function(req, res) {
+    app.get('/:lang/editor', function(req, res) {
+        let lang = req.params.lang;
         res.render('editor', {
+            lang: lang,
             figuresBlue: [
                 {type: 'ROOK', picSrc: 'RookBlue.png'},
                 {type: 'BISHOP', picSrc: 'BishopBlue.png'},
@@ -98,7 +107,24 @@ module.exports = function(app, dataAccess) {
                 {type: 0, picSrc: 'ChipYellow.png'},
                 {type: 2, picSrc: 'ChipGreen.png'},
                 {type: 3, picSrc: 'ChipRed.png'}
-            ]
+            ],
+            type_options: [
+                {value: 'sp', name: strings[lang].editor.prop_form.type_options[0]},
+                {value: 'mp', name: strings[lang].editor.prop_form.type_options[1]},
+                {value: 'minischach', name: strings[lang].editor.prop_form.type_options[2]}
+            ],
+            subtype_options: [
+                {value: 'rook', name: strings[lang].editor.prop_form.subtype_options[0]},
+                {value: 'bishop', name: strings[lang].editor.prop_form.subtype_options[1]},
+                {value: 'queen', name: strings[lang].editor.prop_form.subtype_options[2]},
+                {value: 'king', name: strings[lang].editor.prop_form.subtype_options[3]},
+                {value: 'knight', name: strings[lang].editor.prop_form.subtype_options[4]},
+                {value: 'pawn', name: strings[lang].editor.prop_form.subtype_options[5]}
+            ],
+            wincondition_options: [
+                {value: '2', name: strings[lang].editor.prop_form.wincondition_options[0]}
+            ],
+            strings: strings[lang]
         });
     });
     app.post('/editor', function(req, res) {

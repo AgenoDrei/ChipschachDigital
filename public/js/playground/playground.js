@@ -1,4 +1,5 @@
-let lvlType,
+let lang,
+    lvlType,
     PixiEngine = null,
     DisplayControl = null,
     GameControl = null,
@@ -15,7 +16,7 @@ let startGame = function() {
                 toastr.warning('Bitte einen Modus wählen.');
                 return;
             } else {
-                GameControl.connectLocalGame(lvlType, window.location.pathname.split('/')[3], mode, GameControl.joinIds, function(gameId) {
+                GameControl.connectLocalGame(lvlType, window.location.pathname.split('/')[4], mode, GameControl.joinIds, function(gameId) {
                     GameControl.gameId = gameId;
                 })
             }
@@ -74,11 +75,10 @@ let nextLevelForward = function() {     // assumes ordered level_list of dbCall
         if (nextLevelId === undefined) {
             toastr.success('Du hast alle Level dieser Kategorie erfolgreich absolviert!');
             window.setTimeout(function() {
-                window.location = '/';
+                window.location = '/' + lang;
             }, 3000);
         } else {
-            let locHrefSplit = window.location.href.split('/');
-            window.location = '/' + GameControl.level.type+ '/' + GameControl.level.subtype + '/' + nextLevelId;
+            window.location = '/' + lang + '/' + GameControl.level.type + '/' + GameControl.level.subtype + '/' + nextLevelId;
         }
     });
 };
@@ -155,21 +155,22 @@ let handleMessage = function(msg) {
 
 $('document').ready(function() {
     let pathSplit = window.location.pathname.split('/');
-    lvlType = pathSplit[1];
+    lang = pathSplit[1]
+    lvlType = pathSplit[2];
 
     DisplayControl = new DisplayController();
     if (lvlType === 'sp' || lvlType === 'mp')
-        GameControl = new GameController(pathSplit[3], undefined);
+        GameControl = new GameController(pathSplit[4], undefined);
     else if (lvlType === 'mini')
-        GameControl = new GameController(pathSplit[2], undefined);
+        GameControl = new GameController(pathSplit[3], undefined);
     else if (lvlType === 'global')
-        GameControl = new GameController(undefined, pathSplit[2]);
+        GameControl = new GameController(undefined, pathSplit[3]);
 
     if (lvlType === 'sp')
-        GameControl.connectLocalGame(lvlType, pathSplit[3], 'unbeatable', GameControl.joinIds);
+        GameControl.connectLocalGame(lvlType, pathSplit[4], 'unbeatable', GameControl.joinIds);
     // mp-local connecting upon choice of mode
     else if (lvlType === 'mini')
-        GameControl.connectLocalGame(lvlType, pathSplit[2], 'beatable', GameControl.joinIds);
+        GameControl.connectLocalGame(lvlType, pathSplit[3], 'beatable', GameControl.joinIds);
     else if (lvlType === 'global') {
         GameControl.connectGlobalGame(window.location.href.split('=')[1]);
         DisplayController.hideLvlOption();
