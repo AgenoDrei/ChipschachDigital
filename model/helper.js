@@ -39,3 +39,8 @@ module.exports.enumToString = function(enumObj, value)  {
   for (var k in enumObj) if (enumObj[k] == value) return k;
   return null;
 };
+
+module.exports.enumToCamelcaseString = function(enumObj, value)  {
+  for (var k in enumObj) if (enumObj[k] == value) return (k[0] + lowercase(k.substring(1)));
+  return null;
+};
