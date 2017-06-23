@@ -3,6 +3,7 @@
 <head>
     <% include ./partials/head %>
 
+    <script src="main.js"></script>
     <script src="/js/menu.js"></script>
     <title><%=strings.menu.title%></title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
@@ -10,6 +11,12 @@
 </head>
 
 <body>
+<div class="langs">
+    <ul>
+        <li onclick="window.location='/'+'de'+window.location.pathname.slice(3)"><a>DE</a></li>
+        <li onclick="window.location='/'+'en'+window.location.pathname.slice(3)"><a>EN</a></li>
+    </ul>
+</div>
 <div class="gridContainer">
 <div class="grid">
     <% iconRows.forEach(function(row) { %>

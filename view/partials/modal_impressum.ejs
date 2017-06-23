@@ -3,27 +3,24 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Impressum</h4>
+                <h4 class="modal-title"><%=strings.modals.impressum.title%></h4>
             </div>
             <div class="modal-body">
                 <a href="http://www.schach-fuer-kids.de/">
                     <img src="../img/logoSm.png" height="150px">
                 </a>
-                <h3>
-                    Chipschach© ist eine Software der pädagogischen Initiative Schach für Kids e.V. (SfK), erstellt in Kooperation mit der IBM Deutschland GmbH
-                </h3>
-		        Beteiligte:
+                <h3><%=strings.modals.impressum.disclaim%></h3>
+		        <%=strings.modals.impressum.txt%>
                 <ul>
-                    <li>Ralf Schreiber, SfK (Initiator)</li>
-                    <li>Peter Kusterer, IBM (Leitung)</li>
-                    <li>Simon Müller, IBM (Programmierung)</li>
-                    <li>Oliver Berg, IBM (Programmierung)</li>
+                    <% strings.modals.impressum.contributors.forEach(function(contributor) { %>
+                    <li><%=contributor%></li>
+                    <% }); %>
                 </ul>
             </div>
             <div class="modal-footer">
-                Weitere Informationen unter <a href="http://www.schach-fuer-kids.de">schach-fuer-kids.de</a> <br>
-                Kontakt: <a href="mailto:chipschach@schach-fuer-kids.de?Subject=Anfrage" target="_top">chipschach@schach-fuer-kids.de</a> <br>
-		        Version: 2.3.2
+                <%=strings.modals.impressum.footer.txts[0]%>: <a href="http://www.schach-fuer-kids.de"><%=strings.modals.impressum.footer.info_link%></a> <br>
+                <%=strings.modals.impressum.footer.txts[1]%>: <a href="mailto:chipschach@schach-fuer-kids.de?Subject=Anfrage" target="_top">strings.modals.impressum.footer.email</a> <br>
+		        <%=strings.modals.impressum.footer.version%>: 2.3.3
             </div>
         </div>
     </div>

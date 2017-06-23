@@ -130,7 +130,8 @@
                 		"Kontakt"
                 	],
                 	"info_link": "schach-fuer-kids.de",
-                	"email": "chipschach@schach-fuer-kids.de" 
+                	"email": "chipschach@schach-fuer-kids.de",
+                	"version": "Version" 
                 }
 			},
 			"rules": {
@@ -148,7 +149,7 @@
 				"modes": [
 					"<u>Einzelspieler</u>: Es werden alleine Chipschachaufgaben gelöst",
 					"<u>Mehrspieler (lokal)</u>: Es wird gegeneinander Chipschach gespielt, auf dem gleichen Gerät",
-					"<u>Mehrspieler (gloal)</u>L Es wird gegeneinander Chipschach gespielt, über das Internet",
+					"<u>Mehrspieler (global)</u>: Es wird gegeneinander Chipschach gespielt, über das Internet",
 					"<u>Minischach</u>: Es werden knifflige Schachpuzzel mit besonderen Herausforderungen gelöst. Es gibt neue Siegesbedingungen!",
 					"<u>Editor</u>: Erstelle deine eigenen Level"
 				],
@@ -192,6 +193,196 @@
 		}
 	},
 	"en": {
-
+		"editor": {
+			"title": "Editor",
+			"prop_form": {
+				"type_select": "Category",
+				"type_options": [
+					"Singleplayer", 
+					"Multiplayer",
+					"Minichess"
+				],
+				"subtype_select": "Subcategory",
+				"subtype_options": [
+					"Rook", 
+					"Bishop", 
+					"Queen", 
+					"King", 
+					"Knight", 
+					"Pawn"
+				],
+				"name_input": "Name",
+				"description_input": "Description",
+				"minturns_input": "Minimal turns",
+				"wincondition_select": "Wincondition",
+				"wincondition_options": [
+					"Pawn to back-rank"
+				],
+				"save_button": "Save"
+			},
+			"icon_bar": {
+				"close": "back to menu",
+				"reset": "reset editor"
+			}
+		},
+		"menu": {
+			"title": "Chipschach Digital",
+			"iconRows_names": [
+                [
+                	"Singleplayer", 
+                	"Multiplayer local", 
+                	"Multiplayer global"],
+                [
+                	"Minichess", 
+                	"", 
+                	"Classical Chess"],
+                [
+                	"Editor", 
+                	"", 
+                	""
+                ]
+            ],
+            "accTypes": [{
+                "name": "Singleplayer",
+                "footer": "Choose a Singleplayer-level and capture all the chips as fast as possible!"
+            }, {
+                "name": "Multiplayer local",
+                "footer": "Choose a Multiplayer-level to play a friend on the same machine, solving tricky chess puzzles"
+            }],
+            "availSubtypes_names": [
+				"Rook", 
+				"Bishop", 
+				"Queen", 
+				"King", 
+				"Knight", 
+				"Pawn"
+            ]
+		},
+		"playground": {
+			"titles": {
+				"sp": "Singleplayer",
+				"mp": "Multiplayer",
+				"global": "Global Multiplayer",
+				"mini": "Minichess"
+			},
+			"footers": {
+				"sp": "Beat the level in as few moves as possible by capturing all available chips!",
+				"mp": "Capture more chips than your opponent!",
+				"global": "A global Multiplayer level.",
+				"mini": "A tricky chess puzzle!"
+			},
+			"icon_bar": {
+				"titles": {
+					"help": "open help",
+					"close": "back to menu",
+					"yield": "surrender game",
+					"undo": "undo move"
+				}
+			}
+		},
+		"modals": {
+			"editorStart": {
+				"title": "Editor",
+				"body_title": "Manual",
+				"rules": [
+					"Select pieces or chips around the board",
+                	"Your current selection will be displayed in the box positioned in the upper left corner",
+                	"With a piece/chip selected, click anywhere on the board to create said piece/chip on that square",
+                	"You may overwrite already created pieces/chips by clicking on them with a different piece/chip selected",
+                	"To erase a square, click on the red 'X'-symbol below the selection window to clear your selection and click anywhere on the board to erase that square",
+                	"If you like what you've created, enter 'Name', 'Description' etc. and click on save to store your created level!"
+				],
+				"button": "Start!",
+				"footer": "Here you may create your own levels!"
+			},
+			"finish": {
+				"winmsgYielded": "You;ve surrendered the level.",
+				"winmsgGenericYellow": "Yellow has won the game!",
+				"winmsgGenericBlue": "Blue has won the game`!",
+				"winmsgGenericDraw": "Draw, nobody won, but nobody lost either.",
+				"winmsgMinturnsSuccess": "You've finished the level with as few moves as was possible! Congratulations!",
+				"winmsgMinturnsFailed": "You;ve finished the level! Maybe you can do even better with fewer moves.",
+				"btnBack": "Back to menu",
+				"btnRepeat": "Play again",
+				"btnNext": "Next level",
+				"btnInspectBoard": "Inspect board"
+			},
+			"impressum": {
+				"title": "Notice",
+				"disclaim": "Chipschach© is a software by the pedagogical initiative 'Schach für Kids e.V.' (SfK), implemented in cooperation with IBM Deutschland GmbH",
+				"txt": "Participants",
+				"contributors": [
+                	"Ralf Schreiber, SfK (Initiator)",
+                	"Peter Kusterer, IBM (Administration)",
+                	"Simon Müller, IBM (Development)",
+                	"Oliver Berg, IBM (Development)"
+                ],
+                "footer": {
+                	"txts": [
+                		"Additional information", 
+                		"Contact"
+                	],
+                	"info_link": "schach-fuer-kids.de",
+                	"email": "chipschach@schach-fuer-kids.de",
+                	"version": "Version" 
+                }
+			},
+			"rules": {
+				"title": "What is 'Chipschach' and how does it work?",
+				"body_title_rules": "Rules to play levels:",
+				"rules": [
+					"The <u>Pieces</u> move like in regular chess: rooks straight, bishops diagonal, knights in L-shape, pawns move straight and capture diagnoally, queen combines rook and bishop, king moves a single square in any direction",
+					"<u>Yellow Chips</u> may be captured by the <i>Blue Player</i>only, <u>Blue Chips</u> by the <i>Yellow Spieler</i> only",
+					"<u>Green Chips</u> may be captured by both players, <u>Red Chips</u> may not be captured",
+					"In order to capture a chip, one must move a piece to the same square as the chip",
+					"Chips and Pieces may not be moves over, they \"stand in the way\" (except for knights, as they may jump over)",
+					"The game ends as soon as a player does not have any chips left to capture or (if enabled) all his pieces got captured in return. Whoever captured more chips wins the game. (Except for if one captures all of his opponent's pieces. Nobody can win without pieces!)"
+				],
+				"body_title_modes": "Different modes to play:",
+				"modes": [
+					"<u>Singleplayer</u>: Chipschach-level are solved on your own",
+					"<u>Multiplayer (local)</u>: You play against a friend on the same computer",
+					"<u>Multiplayer (global)</u>: You play against a friend over the internet",
+					"<u>Minichess</u>: You solve tricky chess-puzzles with special challenges, there are new ways to win the game",
+					"<u>Editor</u>: Create your own levels!"
+				],
+				"general": "<b>General</b>: Chipschach rule-base closely resembles that of chess. Chips are meant to be \"neutral\" pieces, not belonging to any player. Whoever is more efficient in capturing chips wins!",
+				"footer_title": "Disclaimer:",
+				"footer_disclaimer": "Chipschach - as it is being played online - builds on top of the board-game version by Ralf Schreiber (Schach für Kids e.V.). The Software merely an extention of the established methodology and does not necessarily allow for beign played without proper background information."
+			},
+			"start": {
+				"button": "Start!",
+				"cancel_search": "Cancel search",
+				"unbeatable": "Pieces not beatable",
+				"beatable": "Pieces beatable"
+			},
+			"menu": {	
+				"sp_mp": {
+					"acc_editor_title": "New editor-levels (Caution: not veryfied / tested)"
+				},
+				"mp_g": {
+					"title": "Multiplayer global - Lobby",
+					"game_list": {
+						"th1": "Name",
+						"th2": "Level",
+						"th3": "Players"
+					},
+					"create_title": "... or create an own game?",
+					"new_game_form": {
+						"name_input": "Name",
+						"new_level_select": "Level",
+						"game_mode_0": "Pieces not beatable",
+						"game_mode_1": "Peaces beatable",
+						"create_new_game": "Create game"
+					},
+					"footer": "Here you may create a new game or join others."
+				},
+				"mini": {
+					"title": "Multiplayer local - Minichess",
+					"acc_editor_title": "New editor-levels (Caution: not veryfied / tested)",
+					"footer": "Choose a Minichess-level and solve tricky chess puzzles!!"
+				}
+			}
+		}
 	}
 }

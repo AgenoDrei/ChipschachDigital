@@ -17,6 +17,12 @@
 
 
 <body>
+<div class="langs">
+    <ul>
+        <li onclick="window.location='/'+'de'+window.location.pathname.slice(3)"><a>DE</a></li>
+        <li onclick="window.location='/'+'en'+window.location.pathname.slice(3)"><a>EN</a></li>
+    </ul>
+</div>
 <div id="modalOverlay" class="overlay"></div>
 <div id="overlay" class="overlay"></div>
 <div id="nav">
@@ -42,7 +48,7 @@
             </div>
             <div class="form-group">
                 <label for="name"><%=strings.editor.prop_form.name_input%></label>
-                <input id="name" class="form-control" type="text" name="name" placeholder="Levelname" required="true">
+                <input id="name" class="form-control" type="text" name="name" required="true">
             </div>
             <div class="form-group">
                 <label for="description"><%=strings.editor.prop_form.description_input%></label>
