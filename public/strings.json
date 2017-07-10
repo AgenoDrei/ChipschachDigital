@@ -190,6 +190,18 @@
 					"footer": "Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!"
 				}
 			}
+		},
+		"toasts": {
+			"error": "Ein Fehler ist aufgetreten...",
+			"lvl_still_loading": "Level muss noch geladen werden, noch einen kurzen Moment Geduld.",
+			"no_mode_selected": "Bitte einen Modus wählen.",
+			"no_name_provided": "Bitte benenne deine neues Spiel.",
+			"category_completed": "Du hast alle Level dieser Kategorie erfolgreich absolviert!",
+			"invalid_turn": "Dieser Zug ist nicht erlaubt.",
+			"opponent_quit": "Dein Gegner hat das Spiel scheinbar verlassen.",
+			"inspecting_board": "Menü wird gleich wieder erscheinen.",
+			"editor_no_valid_config": "Einige Attribute des Levels wurden nicht korrekt ausgefüllt oder das Level ist leer.",
+			"editor_valid_lvl": "Level wird erstellt!"
 		}
 	},
 	"en": {
@@ -296,12 +308,12 @@
 				"footer": "Here you may create your own levels!"
 			},
 			"finish": {
-				"winmsgYielded": "You;ve surrendered the level.",
+				"winmsgYielded": "You've surrendered the level.",
 				"winmsgGenericYellow": "Yellow has won the game!",
 				"winmsgGenericBlue": "Blue has won the game`!",
 				"winmsgGenericDraw": "Draw, nobody won, but nobody lost either.",
 				"winmsgMinturnsSuccess": "You've finished the level with as few moves as was possible! Congratulations!",
-				"winmsgMinturnsFailed": "You;ve finished the level! Maybe you can do even better with fewer moves.",
+				"winmsgMinturnsFailed": "You've finished the level! Maybe you can do even better with fewer moves.",
 				"btnBack": "Back to menu",
 				"btnRepeat": "Play again",
 				"btnNext": "Next level",
@@ -383,6 +395,18 @@
 					"footer": "Choose a Minichess-level and solve tricky chess puzzles!!"
 				}
 			}
+		},
+		"toasts": {
+			"error": "An error occured...",
+			"lvl_still_loading": "Level is still loading, please hold the line.",
+			"no_mode_selected": "Please select a mode.",
+			"no_name_provided": "Please provide a name for your level.",
+			"category_completed": "You've completed all levels for this category!",
+			"invalid_turn": "Invalid turn.",
+			"opponent_quit": "You opponent has left the game.",
+			"inspecting_board": "Menu will be displayed again soon.",
+			"editor_no_valid_config": "Some attributes may not be filled out correctly or the level is empty.",
+			"editor_valid_lvl": "Level created!"
 		}
 	}
 }

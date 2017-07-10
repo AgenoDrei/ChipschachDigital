@@ -19,12 +19,9 @@
 </head>
 
 <body>
-<div class="langs">
-    <ul>
-        <li onclick="window.location='/'+'de'+window.location.pathname.slice(3)"><a>DE</a></li>
-        <li onclick="window.location='/'+'en'+window.location.pathname.slice(3)"><a>EN</a></li>
-    </ul>
-</div>
+
+<% include partials/language_selection %>
+
 <div id="modalOverlay" class="overlay"></div>
 <div id="overlay" class="overlay"></div>
 

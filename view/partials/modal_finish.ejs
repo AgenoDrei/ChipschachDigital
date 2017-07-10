@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title titleToModify">
+                <h4 class="modal-title lvlName">
                     <!-- Filled with js -->
                 </h4>
             </div>
@@ -16,7 +16,7 @@
                     <p id="winmsgMinturnsSuccess"><%=strings.modals.finish.winmsgMinturnsSuccess%></p>
                     <p id="winmsgMinturnsFailed"><%=strings.modals.finish.winmsgMinturnsFailed%></p>
                 </h3>
-                <button id="btnBack" type="button" class="btn btn-warning btn-lg" onclick="window.location ='/';"><%=strings.modals.finish.btnBack%></button>
+                <button id="btnBack" type="button" class="btn btn-warning btn-lg" onclick="window.location ='/<%=lang%>/';"><%=strings.modals.finish.btnBack%></button>
                 <button id="btnRepeat" type="button" class="btn btn-info btn-lg" onclick="window.location.reload();"><%=strings.modals.finish.btnRepeat%></button>
                 <button id="btnNext" type="button" class="btn btn-success btn-lg" onclick="nextLevelForward();"><%=strings.modals.finish.btnNext%></button>
                 <button id="btnInspectBoard" type="button" class="btn btn-info btn-lg" onclick="DisplayController.inspectBoardAfterFinish();"><%=strings.modals.finish.btnInspectBoard%></button>
