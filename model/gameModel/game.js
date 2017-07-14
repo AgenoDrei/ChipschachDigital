@@ -37,56 +37,20 @@ class Game {
 		};
 		this.board = new Board(this);
 		this.board.loadLevel(this.level);
-		//this.win = new ProgressModel(this.board.chips[0], this.board.chips[1], this.board.chips[2], this.board.figures, this.board, this.type);
 		this.win = new GameEndManager();
 
-		if(this.type == gameTypes.SP) {
-			this.win.addGameEnd(new ChipGameEnd(this.board));
-		} else if(this.type == gameTypes.MP) {
-			this.win.addGameEnd(new ChipGameEnd(this.board));
-			this.win.addGameEnd(new FigureGameEnd(this.board));
-		} else if(this.type == gameTypes.MINI) {
-			this.win.addGameEnd(new FigureGameEnd(this.board));
-			this.win.addGameEnd(new LastRowGameEnd(this.board));
-		}
-
-
 		this.history = new History(this.board);
-		console.log('New Game created with ID: ', this.id);
-		console.log('Level used: ', this.level._id);
-        console.log('Level named: ', this.name);
+		console.log('New Game created with ID ' + this.id + ' and name ' + this.name + ', using level ' + this.level._id);
 	}
 
 	getId() {
 		return this.id;
 	}
 
+	/*
+	* Overwrite
+	*/
 	turn(origX, origY, destX, destY, player) {
-		if(this.player1.state != conStates.CONNECTED || (this.player2.state != conStates.CONNECTED && !this.local)) {
-			return gameStates.PLAYER_DISCONNECTED;
-		}
-		if(this.board.getField(origX, origY).getFigure() == null || this.board.getField(origX, origY).getFigure() instanceof Chip) {
-			return gameStates.INVALID_TURN;
-		}
-		if(this.toBeNext != player && !this.local) {
-			return gameStates.INVALID_TURN;
-		}
-		var currentFigure = this.board.getField(origX, origY).getFigure();
-		if(!currentFigure.checkRules(destX, destY)) {
-			return gameStates.INVALID_TURN;
-		} else {
-			currentFigure.move(destX, destY);
-		}
-		this.win.countUpTurn();
-		debugger;
-		let winner = this.win.checkGameEnd();
-		if(winner != gameStates.VALID_TURN) {
-			return winner;
-		}
-		if(this.type != gameTypes.SP) {
-			this.toBeNext = helper.getEnemy(this.toBeNext);
-		}
-		return gameStates.VALID_TURN;
 	}
 
 	undo() {

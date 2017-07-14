@@ -1,10 +1,12 @@
-var Promise = require('promise');
-var gameTypes = require('./constants').gameType;
-var conStates = require('./constants').connectionState;
-var playerType = require('./constants').playerType;
-var gameState = require('./constants').gameState;
-var Game = require('./gameModel/gameModel');
-var helper = require('./helper');
+const Promise = require('promise');
+const gameType = require('./constants').gameType;
+const conStates = require('./constants').connectionState;
+const playerType = require('./constants').playerType;
+const gameState = require('./constants').gameState;
+const SingleplayerGame = require('./gameModel/singleplayerGame');
+const MultiplayerGame = require('./gameModel/multiplayerGame');
+const MinichessGame = require('./gameModel/minichessGame');
+const helper = require('./helper');
 
 module.exports = function(dataAccess) {
 	this.games = [];
@@ -12,8 +14,23 @@ module.exports = function(dataAccess) {
 	this.createGame = function(gameParameters) {
 		return new Promise(function(fulfill, reject) {
 			dataAccess.getLevelById(gameParameters.level).done(function(level) {
-				var type = gameTypes[gameParameters.type];
-				var newGame = new Game(type, gameParameters.mode, gameParameters.local, level, gameParameters.name);
+				var type = gameType[gameParameters.type];
+				let newGame = null;
+				switch(type) {
+					case gameType.SP:
+						newGame = new SingleplayerGame(type, gameParameters.mode, gameParameters.local, level, gameParameters.name);
+					break;
+					case gameType.MP:
+						newGame = new MultiplayerGame(type, gameParameters.mode, gameParameters.local, level, gameParameters.name);
+					break;
+					case gameType.MINI:
+						newGame = new MinichessGame(type, gameParameters.mode, gameParameters.local, level, gameParameters.name);
+
+					break;
+					default:
+					reject('Invalid game type')
+				}
+				//var newGame = new Game(type, gameParameters.mode, gameParameters.local, level, gameParameters.name);
 
 				this.games.push(newGame);
 

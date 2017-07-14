@@ -66,7 +66,6 @@ module.exports = function(configuration, gameHandler) {
         switch (m.type) { //see protocol
             case "hello":
                 gameHandler.getGame(m.gameId).done(function(game) {
-                    debugger;
                     game.connect(m.joinId, connection).done(function(player) {
                         var response = {
                             type: "hello",

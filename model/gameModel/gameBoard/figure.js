@@ -25,6 +25,7 @@ class Figure {
 		if(helper.enemy(beater.player, this.player)) {
             this.board.parentGame.history.setLastBeat(this.board.fields[this.x][this.y].getFigure());
 			this.board.fields[this.x][this.y].setFigure(null);
+			debugger;
 			this.board.parentGame.win.captureFigure(this.player, this.constructor.name);
 			return true;
 		}
