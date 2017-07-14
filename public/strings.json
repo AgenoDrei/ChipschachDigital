@@ -201,7 +201,8 @@
 			"opponent_quit": "Dein Gegner hat das Spiel scheinbar verlassen.",
 			"inspecting_board": "Menü wird gleich wieder erscheinen.",
 			"editor_no_valid_config": "Einige Attribute des Levels wurden nicht korrekt ausgefüllt oder das Level ist leer.",
-			"editor_valid_lvl": "Level wird erstellt!"
+			"editor_valid_lvl": "Level wird erstellt!",
+			"not_available_yet": "Noch nicht verfügbar"
 		}
 	},
 	"en": {
@@ -406,7 +407,8 @@
 			"opponent_quit": "You opponent has left the game.",
 			"inspecting_board": "Menu will be displayed again soon.",
 			"editor_no_valid_config": "Some attributes may not be filled out correctly or the level is empty.",
-			"editor_valid_lvl": "Level created!"
+			"editor_valid_lvl": "Level created!",
+			"not_available_yet": "Not available yet"
 		}
 	}
 }
