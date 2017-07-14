@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><%= type.name %></h4>
+                    <h4 class="modal-title"><%=type.name%></h4>
                 </div>
                 <div class="modal-body">
                     <div id="acc_<%= type.id %>" class="panel-group">
@@ -14,7 +14,7 @@
                                     <h4 class="panel-title">
                                         <a class="accordion-toggle" data-toggle="collapse" data-parent="#acc_<%= type.id %>"
                                             href="#<%= type.id %><%= subtype.id %>">
-                                            <%= subtype.name %>
+                                            <%=subtype.name%>
                                         </a>
                                     </h4>
                                 </div>
@@ -30,7 +30,7 @@
                                 <h4 class="panel-title">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#acc_<%= type.id %>" 
                                         href="#<%= type.id %>__fresh">
-                                        Brandneue Level aus dem Editor (Achtung: Nicht geprüft / getestet)
+                                        <%=strings.modals.menu.sp_mp.acc_editor_title%>
                                     </a>
                                 </h4>
                             </div>
@@ -43,7 +43,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <%= type.footer %>
+                    <%=type.footer%>
                 </div>
             </div>
         </div>
@@ -55,16 +55,16 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Mehrspieler Global - Lobby</h4>
+                <h4 class="modal-title"><%=strings.modals.menu.mp_g.title%></h4>
             </div>
             <div class="modal-body">
                 <div class="globalLobby openGameList">
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Spielname</th>
-                                <th>Level</th>
-                                <th><center>Besetzung</center></th>
+                                <th><%=strings.modals.menu.mp_g.game_list.th1%></th>
+                                <th><%=strings.modals.menu.mp_g.game_list.th2%></th>
+                                <th><center><%=strings.modals.menu.mp_g.game_list.th3%></center></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -74,30 +74,28 @@
                     </table>
                 </div>
                 <div class="globalLobby createNewGame">
-                    <h4>
-                        ... oder ein eigenes Spiel erstellen?
-                    </h4>
+                    <h4><%=strings.modals.menu.mp_g.create_title%></h4>
                     <form>
-                        <label for="newName">Spielname</label>
-                        <input id="newName" class="form-control" type="text" placeholder="Name">
-                        <label for="newLevel-select">Level</label>
+                        <label for="newName"><%=strings.modals.menu.mp_g.new_game_form.name_input%></label>
+                        <input id="newName" class="form-control" type="text" placeholder="<%=strings.modals.menu.mp_g.new_game_form.name_input%>">
+                        <label for="newLevel-select"><%=strings.modals.menu.mp_g.new_game_form.new_level_select%></label>
                         <select id="newLevel-select" class="form-control">
                             <!-- Filled with js -->
                         </select>
                         <div class="radio">
-                            <label><input type="radio" name="gameMode" value="unbeatable" checked>Figuren nicht schlagbar</label>
+                            <label><input type="radio" name="gameMode" value="unbeatable" checked><%=strings.modals.menu.mp_g.new_game_form.game_mode_0%></label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="gameMode" value="beatable">Figuren schlagbar
+                                <input type="radio" name="gameMode" value="beatable"><%=strings.modals.menu.mp_g.new_game_form.game_mode_1%>
                             </label>
                         </div>
                     </form>
-                    <button class="btn btn-primary" onclick="createNewGame();">Spiel erstellen</button>
+                    <button class="btn btn-primary" onclick="createNewGame();"><%=strings.modals.menu.mp_g.new_game_form.create_new_game%></button>
                 </div>
             </div>
             <div class="modal-footer">
-                Hier kannst du ein neues Spiel erstellen oder bereits bestehenden Spielen beitreten.
+                <%=strings.modals.menu.mp_g.footer%>
             </div>
         </div>
     </div>
@@ -108,7 +106,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Mehrspieler Lokal - Minischach</h4>
+                <h4 class="modal-title"><%=strings.modals.menu.mini.title%></h4>
             </div>
             <div id="modalBodyMini" class="modal-body">
                 <div id="miniLevels">
@@ -120,7 +118,7 @@
                             <h4 class="panel-title">
                                 <a class="accordion-toggle" data-toggle="collapse" data-parent="#acc_mini" 
                                     href="#mini__fresh">
-                                    Brandneue Level aus dem Editor (Achtung: Nicht geprüft / getestet)
+                                    <%=strings.modals.menu.mini.acc_editor_title%>
                                 </a>
                             </h4>
                         </div>
@@ -133,7 +131,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!
+                <%=strings.modals.menu.mini.footer%>
             </div>
         </div>
     </div>

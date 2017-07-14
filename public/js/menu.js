@@ -1,6 +1,8 @@
+var lang = "";
+
 var redirectGlobal = function(gameId) {
     $.get('/api/v1/game/' + gameId, function(res) {     // register yourself
-        window.location = '/global/' + gameId + '?joinId=' + res.joinId;
+        window.location = '/' + lang + '/global/' + gameId + '?joinId=' + res.joinId;
     });
 };
 
@@ -11,9 +13,9 @@ var createNewGame = function() {
     console.log(name, level, mode);
 
     if (mode === undefined) {
-        toastr.warning('Bitte wähle einen Modus für das neue Spiel aus.');
+        toastr.warning(strings[lang].toasts.no_mode_selected);
     } else if (name === "") {
-        toastr.warning('Bitte benenne deine neues Spiel.');
+        toastr.warning(strings[lang].toasts.no_name_provided);
     } else {
         let newGame = {
             type: 'MP',
@@ -31,6 +33,7 @@ var createNewGame = function() {
 };
 
 $('document').ready(function() {
+    lang = window.location.pathname.split('/')[1];
     $.get('/api/v1/game', function(globalGames) {
         globalGames.forEach(function(game) {
             let levelSuffix = game.mode === 'unbeatable' ? "(schlagen aus)" : "(schlagen an)";
@@ -62,23 +65,23 @@ $('document').ready(function() {
             if (lvl.type === 'mp' && lvl.reviewStatus !== reviewStatus.FRESH)
                 $('#newLevel-select').append(`
                     <option value="${lvl._id}">
-                        ${lvl.name}
+                        ${lvl.name[lang]}
                     </option>
                 `);
             if (lvl.type === 'sp' || lvl.type === 'mp')
                 if (lvl.reviewStatus !== reviewStatus.FRESH)
                     $('#' + lvl.type + lvl.subtype + '_panel-body').append(`
                         <p>
-                            <a href="/${lvl.type}/${lvl.subtype}/${lvl._id}">
-                                ${lvl.name}
+                            <a href="/${lang}/${lvl.type}/${lvl.subtype}/${lvl._id}">
+                                ${lvl.name[lang]}
                             </a>
                         </p>
                     `);
                 else
                     $('#' + lvl.type + '__fresh_panel-body').append(`
                         <p>
-                            <a href="/${lvl.type}/${lvl.subtype}/${lvl._id}">
-                                ${lvl.name}
+                            <a href="/${lang}/${lvl.type}/${lvl.subtype}/${lvl._id}">
+                                ${lvl.name[lang]}
                             </a>
                         </p>
                     `);
@@ -86,16 +89,16 @@ $('document').ready(function() {
                 if (lvl.reviewStatus !== reviewStatus.FRESH)
                     $('#miniLevels').append(`
                         <p>
-                            <a href="/mini/${lvl._id}">
-                                ${lvl.name}
+                            <a href="/${lang}/mini/${lvl._id}">
+                                ${lvl.name[lang]}
                             </a>
                         </p>
                     `);
                 else 
                     $('#mini__fresh_panel-body').append(`
                         <p>
-                            <a href="/mini/${lvl._id}">
-                                ${lvl.name}
+                            <a href="/${lang}/mini/${lvl._id}">
+                                ${lvl.name[lang]}
                             </a>
                         </p>
                     `);                    

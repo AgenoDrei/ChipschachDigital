@@ -2,24 +2,24 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title titleToModify">
+                <h4 class="modal-title lvlName">
                     <!-- Filled with js -->
                 </h4>
             </div>
             <div class="modal-body" style="text-align: center">
                 <img src="/img/logoSm.png" height="150px" />
                 <h3>
-                    <p id="winmsgYielded">Das Level wurde aufgegeben.</p>
-                    <p id="winmsgGenericYellow">Gelb hat das Spiel gewonnen!</p>
-                    <p id="winmsgGenericBlue">Blau hat das Spiel gewonnen!</p>
-                    <p id="winmsgGenericDraw">Unentschieden, keiner hat gewonnen.</p>
-                    <p id="winmsgMinturnsSuccess">Du hast das Level mit minimaler Zugzahl beendet, Glückwunsch!</p>
-                    <p id="winmsgMinturnsFailed">Du hast das Level beendet, aber du kannst das auch noch mit weniger Zügen.</p>
+                    <p id="winmsgYielded"><%=strings.modals.finish.winmsgYielded%></p>
+                    <p id="winmsgGenericYellow"><%=strings.modals.finish.winmsgGenericYellow%></p>
+                    <p id="winmsgGenericBlue"><%=strings.modals.finish.winmsgGenericBlue%></p>
+                    <p id="winmsgGenericDraw"><%=strings.modals.finish.winmsgGenericDraw%></p>
+                    <p id="winmsgMinturnsSuccess"><%=strings.modals.finish.winmsgMinturnsSuccess%></p>
+                    <p id="winmsgMinturnsFailed"><%=strings.modals.finish.winmsgMinturnsFailed%></p>
                 </h3>
-                <button id="btnBack" type="button" class="btn btn-warning btn-lg" onclick="window.location ='/';">Zurück zum Menü</button>
-                <button id="btnRepeat" type="button" class="btn btn-info btn-lg" onclick="window.location.reload();">Nochmal spielen</button>
-                <button id="btnNext" type="button" class="btn btn-success btn-lg" onclick="nextLevelForward();">Nächstes Level</button>
-                <button id="inspectBoard" type="button" class="btn btn-info btn-lg" onclick="DisplayController.inspectBoardAfterFinish();">Stellung inspizieren</button>
+                <button id="btnBack" type="button" class="btn btn-warning btn-lg" onclick="window.location ='/<%=lang%>/';"><%=strings.modals.finish.btnBack%></button>
+                <button id="btnRepeat" type="button" class="btn btn-info btn-lg" onclick="window.location.reload();"><%=strings.modals.finish.btnRepeat%></button>
+                <button id="btnNext" type="button" class="btn btn-success btn-lg" onclick="nextLevelForward();"><%=strings.modals.finish.btnNext%></button>
+                <button id="btnInspectBoard" type="button" class="btn btn-info btn-lg" onclick="DisplayController.inspectBoardAfterFinish();"><%=strings.modals.finish.btnInspectBoard%></button>
             </div>
         </div>
     </div>

@@ -6,6 +6,10 @@
 <script src="/libs/toastr/build/toastr.min.js"></script>
 <script src="/js/loadConfig.js"></script>
 <!--<script src="/config/constants"></script>-->
+<script type="text/javascript">
+	var strings;
+	jQuery.getJSON("/strings.json", function(data) {strings = data});
+</script>
 
 <link rel="stylesheet" type="text/css" href="/libs/bootstrap/dist/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="/libs/toastr/build/toastr.min.css">

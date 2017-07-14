@@ -109,7 +109,7 @@ class DisplayController {
     }
 
     static updateModalTexts(lvlName, lvlDescr) {
-        $('.titleToModify').html(lvlName);
+        $('.lvlName').html(lvlName);
         $('#lvlDescr').html(lvlDescr);
     }
 
@@ -125,7 +125,7 @@ class DisplayController {
     static inspectBoardAfterFinish() {
         $('#finishModal').hide();
         $('#modalOverlay').hide();
-        toastr.info('Menü wird gleich wieder erscheinen.');
+        toastr.info(strings[lang].toasts.inspecting_board);
         setTimeout(function() {
             $('#finishModal').show();
             $('#modalOverlay').show();
