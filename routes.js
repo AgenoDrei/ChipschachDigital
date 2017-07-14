@@ -1,7 +1,8 @@
-var fs = require('fs');
+const fs = require('fs');
+const path = require('path');
 
 module.exports = function(app, dataAccess) {
-    var strings = JSON.parse(fs.readFileSync('./public/strings.json', 'utf8'));
+    let strings = JSON.parse(fs.readFileSync(path.resolve(__dirname, 'public/strings.json'), 'utf8'));
 
     app.get('/', function(req, res) {
         res.redirect('/de');    // default: German
