@@ -41,7 +41,7 @@
             </a>
             <% } else if (icon.id == 'classic') { %>
             <a class="menuIcon" onclick="toastr.info('<%=strings.toasts.not_available_yet%>');"
-               style="background-image: url('/img/<%= icon.picId %>.png'); background-size: 50%; background-color: white;">
+               style="background-image: url('/img/<%= icon.picId %>.png'); background-size: 50%; background-color: white; border: 5px solid <%=icon.status%>;">
                 <p><%= icon.name %></p>
             </a>
             <% } else {%>

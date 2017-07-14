@@ -1,4 +1,5 @@
-let DisplayControl = null,
+let lang = "",
+    DisplayControl = null,
     PixiEngine = null;
 
 let startEditor = function() {
@@ -40,5 +41,6 @@ let saveLvl = function() {
 };
 
 $(document).ready(function() {
+    lang = window.location.pathname.split('/')[1];
     DisplayControl = new DisplayController();
 });

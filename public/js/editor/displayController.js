@@ -80,10 +80,20 @@ class DisplayController {
         let attrs = {
             _id: type +"-"+ new Date().toLocaleString().replace(/\/| |:/g, "_").replace(/,/g, "").slice(0,-3),
             type: type,
-            name: $('#name').val(),
-            description: $('#description').val(),
+            name: {},,
+            description: {},
             reviewStatus: reviewStatus.FRESH
         };
+        Object.keys(strings).forEach(function(l){
+            if (l !== lang) {
+                attrs.name[l] = "???";
+                attrs.description[l] = "???";
+            } else {
+                attrs.name[l] = $('#name').val();
+                attrs.description[l] = $('#description').val();
+            }
+        });
+
         if (type === 'sp' || type === 'mp')
             attrs.subtype = $('#subtype').val();
         if (type === 'sp')
