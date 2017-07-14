@@ -34,16 +34,16 @@ module.exports = {
 	figureType: {
 		CHIP: 0,
 		PAWN: 1,
-		ROOK: 2,
-		KNIGHT: 3,
-		BISHOP: 4,
+		KNIGHT: 2,
+		BISHOP: 3,
+		ROOK: 4,
 		QUEEN: 5,
 		KING: 6
 	},
 
 	winCondition: {
-	    PAWN_TO_LAST_ROW: 2
-	    // FIG_TO_CENTER: 3
+	    PAWN_TO_LAST_ROW: 2,
+	    FIG_REACHES_FIELD: 3
 	},
 
 	reviewStatus: {

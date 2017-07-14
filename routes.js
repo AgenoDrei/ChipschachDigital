@@ -123,7 +123,20 @@ module.exports = function(app, dataAccess) {
                 {value: 'pawn', name: strings[lang].editor.prop_form.subtype_options[5]}
             ],
             wincondition_options: [
-                {value: '2', name: strings[lang].editor.prop_form.wincondition_options[0]}
+                {value: 2, name: strings[lang].editor.prop_form.wincondition_options[0]},
+                {value: 3, name: strings[lang].editor.prop_form.wincondition_options[1]}
+            ],
+            wincondition_specs_figure: [
+                {value: 1, name: strings[lang].general.figures[0]},
+                {value: 2, name: strings[lang].general.figures[1]},
+                {value: 3, name: strings[lang].general.figures[2]},
+                {value: 4, name: strings[lang].general.figures[3]},
+                {value: 5, name: strings[lang].general.figures[4]},
+                {value: 6, name: strings[lang].general.figures[5]}
+            ],
+            wincondition_specs_player: [
+                {value: 0, name: strings[lang].general.players[0]},
+                {value: 1, name: strings[lang].general.players[1]}
             ],
             strings: strings[lang]
         });

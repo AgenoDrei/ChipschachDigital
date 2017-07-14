@@ -57,9 +57,35 @@
             </div>
             <div id="miniWinFormGroup" class="form-group">
                 <label for="miniWin"><%=strings.editor.prop_form.wincondition_select%></label>
-                <select id="miniWin" class="form-control" name="miniWin">
+                <select id="miniWin" class="form-control" name="miniWin" onchange="DisplayController.checkToggleOptionsOnType();">
                     <% wincondition_options.forEach(function(opt) { %>
                     <option value=<%=opt.value%>><%=opt.name%></option>
+                    <% }); %>
+                </select>
+            </div>
+            <div id="miniWinSpecsFormGroup" class="form-group">
+                <label for="miniWinFigure"><%=strings.editor.prop_form.wincondition_specs.figure%></label>
+                <select id="miniWinFigure" class="form-control" name="miniWinSpecsFigure">
+                    <% wincondition_specs_figure.forEach(function(fig) { %>
+                    <option value=<%=fig.value%>><%=fig.name%></option>
+                    <% }); %>
+                </select>
+                <label for="miniWinFieldX"><%=strings.editor.prop_form.wincondition_specs.fieldX%></label>
+                <select id="miniWinFieldX" class="form-control" name="miniWinSpecsFieldX">
+                    <% [[1,"A"],[2,"B"],[3,"C"],[4,"D"],[5,"E"],[6,"F"],[7,"G"],[8,"H"]].forEach(function(file) { %>
+                    <option value=<%=file[0]%>><%=file[1]%></option>
+                    <% }); %>
+                </select>
+                <label for="miniWinFieldY"><%=strings.editor.prop_form.wincondition_specs.fieldY%></label>
+                <select id="miniWinFieldY" class="form-control" name="miniWinSpecsFieldY">
+                    <% [[8,1],[7,2],[6,3],[5,4],[4,5],[3,6],[2,7],[1,8]].forEach(function(row) { %>
+                    <option value=<%=row[0]%>><%=row[1]%></option>
+                    <% }); %>
+                </select>
+                <label for="miniWinPlayer"><%=strings.editor.prop_form.wincondition_specs.player%></label>
+                <select id="miniWinPlayer" class="form-control" name="miniWinSpecsPlayer">
+                    <% wincondition_specs_player.forEach(function(p) { %>
+                    <option value=<%=p.value%>><%=p.name%></option>
                     <% }); %>
                 </select>
             </div>

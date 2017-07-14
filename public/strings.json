@@ -1,5 +1,19 @@
 {
 	"de": {
+		"general": {
+			"figures": [
+				"Bauer",
+				"Springer",
+				"Läufer",
+				"Turm",
+				"Dame",
+				"König"
+			],
+			"players": [
+				"Gelb",
+				"Blau"
+			]
+		},
 		"editor": {
 			"title": "Editor",
 			"prop_form": {
@@ -22,8 +36,15 @@
 				"description_input": "Beschreibung",
 				"minturns_input": "Minimale Zugzahl",
 				"wincondition_select": "Siegesbedingung",
+				"wincondition_specs": {
+					"figure": "Figur",
+					"fieldX": "Linie",
+					"fieldY": "Reihe",
+					"player": "Spieler"
+				},
 				"wincondition_options": [
-					"Bauer auf Grundreihe bringen"
+					"Bauer auf Grundreihe bringen",
+					"Figur auf Feld"
 				],
 				"save_button": "Speichern"
 			},
@@ -206,6 +227,20 @@
 		}
 	},
 	"en": {
+		"general": {
+			"figures": [
+				"Pawn",
+				"Bishop",
+				"Knight",
+				"Rook",
+				"Queen",
+				"King"
+			],
+			"players": [
+				"Yellow",
+				"Blue"
+			]
+		},
 		"editor": {
 			"title": "Editor",
 			"prop_form": {
@@ -228,8 +263,15 @@
 				"description_input": "Description",
 				"minturns_input": "Minimal turns",
 				"wincondition_select": "Wincondition",
+				"wincondition_specs": {
+					"figure": "Figure",
+					"fieldX": "File",
+					"fieldY": "Row",
+					"player": "Player"
+				},
 				"wincondition_options": [
-					"Pawn to back-rank"
+					"Pawn to back-rank",
+					"Piece reaches field"
 				],
 				"save_button": "Save"
 			},

@@ -19,10 +19,10 @@ class FigureReachFieldGameEnd extends GameEnd {
 		let curFigure = this.board.getField(this.winField.x,this.winField.y).getFigure();
 		if(curFigure == null)
 			return gameState.VALID_TURN;
-		debugger;
-		if(curFigure == helper.enumToCamelcaseString(this.winFigure, figureType)) {
+		// console.log(curFigure.constructor.name);
+		if(figureType[curFigure.constructor.name.toUpperCase()] == this.winFigure) {
 			if(curFigure.player == this.winPlayer)
-				return (ẃinPlayer + 1);
+				return (this.winPlayer + 1);	// +1 such that transition from constants.playerType to constants.gameState !
 		}
 		return gameState.VALID_TURN;
 	}

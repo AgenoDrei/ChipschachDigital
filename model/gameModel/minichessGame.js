@@ -2,6 +2,7 @@ const Game = require('./game');
 const GameEnd = require('./gameEnds/gameEnd');
 const FigureGameEnd = require('./gameEnds/figureGameEnd');
 const LastRowGameEnd = require('./gameEnds/lastRowGameEnd');
+const FigureReachFieldGameEnd = require('./gameEnds/figureReachFieldGameEnd');
 const gameTypes = require('../constants').gameType;
 const conStates = require('../constants').connectionState;
 const gameStates = require('../constants').gameState;
@@ -18,7 +19,9 @@ class MinichessGame extends Game {
 		switch(level.win) {
 			case winCondition.PAWN_TO_LAST_ROW:
 				this.win.addGameEnd(new LastRowGameEnd(this.board));
-			break;
+				break;
+			case winCondition.FIG_REACHES_FIELD:
+				this.win.addGameEnd(new FigureReachFieldGameEnd(this.board, level.winSpecs.figure, level.winSpecs.field, level.winSpecs.player))
 			default:
 		}
 	}
