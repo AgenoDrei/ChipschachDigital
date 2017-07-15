@@ -1,4 +1,5 @@
-let DisplayControl = null,
+let lang = "",
+    DisplayControl = null,
     PixiEngine = null;
 
 let startEditor = function() {
@@ -30,15 +31,16 @@ let saveLvl = function() {
     lvl.board = PixiEngine.board;
     
     if (lvl.name === '' || lvl.description === '' || lvl.board.length === 0 || (lvl.type === 'sp' && isNaN(lvl.minturns))) {
-        toastr.info('Einige Attribute des Levels wurden nicht korrekt ausgefüllt oder das Level ist leer.');
+        toastr.info(strings[lang].toasts.editor_no_valid_config);
         console.log('Rejected Lvl:', lvl);
     } else {
-        toastr.success('Level wird erstellt!');
+        toastr.success(strings[lang].toasts.editor_valid_lvl);
         console.log('Posting lvl:', lvl);
         $.post('/editor', {level: JSON.stringify(lvl)});
     }
 };
 
 $(document).ready(function() {
+    lang = window.location.pathname.split('/')[1];
     DisplayControl = new DisplayController();
 });

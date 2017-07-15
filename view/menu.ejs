@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="<%lang%>">
 <head>
     <% include ./partials/head %>
 
     <script src="/js/menu.js"></script>
-    <title>Chipschach Digital</title>
+    <title><%=strings.menu.title%></title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/menu.css">
 </head>
 
 <body>
+
+<% include partials/language_selection %>
+
 <div class="gridContainer">
 <div class="grid">
     <% iconRows.forEach(function(row) { %>
@@ -18,27 +21,32 @@
         <div class="gridCol">
             <% if (icon.id == 'impressum') { %>
             <a class="menuIcon" data-toggle="modal" data-target="#<%=icon.id%>"
-               style="background-image: url('img/<%= icon.picId %>.png'); background-size: 100%;">
+               style="background-image: url('/img/<%= icon.picId %>.png'); background-size: 100%;">
                 <p><%= icon.name %></p>
             </a>
             <% } else if (icon.id == 'editor') {%>
-            <a class="menuIcon" href="/editor"
-               style="background-image: url('img/<%= icon.picId %>.png'); background-color: white; border: 5px solid <%=icon.status%>;">
+            <a class="menuIcon" href="/<%=lang%>/editor"
+               style="background-image: url('/img/<%= icon.picId %>.png'); background-color: white; border: 5px solid <%=icon.status%>;">
                 <p><%= icon.name %></p>
             </a>
             <% } else if (icon.id == 'exit') { %>
             <a class="menuIcon" href="http://www.schach-fuer-kids.de/"
-               style="background-image: url('img/<%= icon.picId %>.png'); background-size: 50%; background-color: white;">
+               style="background-image: url('/img/<%= icon.picId %>.png'); background-size: 50%; background-color: white;">
                 <p><%= icon.name %></p>
             </a>
             <% } else if (icon.id == 'help') { %>
             <a class="menuIcon" data-toggle="modal" data-target="#rulesModal"
-               style="background-image: url('img/<%= icon.picId %>.png'); background-size: 50%; background-color: white;">
+               style="background-image: url('/img/<%= icon.picId %>.png'); background-size: 50%; background-color: white;">
+                <p><%= icon.name %></p>
+            </a>
+            <% } else if (icon.id == 'classic') { %>
+            <a class="menuIcon" onclick="toastr.info('<%=strings.toasts.not_available_yet%>');"
+               style="background-image: url('/img/<%= icon.picId %>.png'); background-size: 50%; background-color: white; border: 5px solid <%=icon.status%>;">
                 <p><%= icon.name %></p>
             </a>
             <% } else {%>
             <a class="menuIcon" data-toggle="modal" data-target="#<%= icon.id %>"
-               style="background-image: url('img/<%= icon.picId %>.png'); background-color: white; border: 5px solid <%=icon.status%>;">
+               style="background-image: url('/img/<%= icon.picId %>.png'); background-color: white; border: 5px solid <%=icon.status%>;">
                 <p><%= icon.name %></p>
             </a>
             <% } %>
@@ -49,8 +57,8 @@
 </div>
 </div>
 
-<% include partials/modals_menu.ejs %>
-<% include partials/modal_impressum.ejs %>
+<% include partials/modals_menu %>
+<% include partials/modal_impressum %>
 <% include partials/modal_rules %>
 
 </body>

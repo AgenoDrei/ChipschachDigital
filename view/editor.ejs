@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="<%=lang%>">
 <head>
     <% include ./partials/head %>
 
@@ -7,7 +7,7 @@
     <script src="/js/gameEngine.js"></script>
     <script src="/js/editor/displayController.js"></script>
     <script src="/js/editor/editor.js"></script>
-    <title>Editor</title>
+    <title><%=strings.editor.title%></title>
     <link rel="stylesheet" type="text/css" href="/css/main.css">
     <link rel="stylesheet" type="text/css" href="/css/editor.css">
     <link rel="stylesheet" type="text/css" href="/css/board.css">
@@ -17,6 +17,9 @@
 
 
 <body>
+
+<% include partials/language_selection %>
+
 <div id="modalOverlay" class="overlay"></div>
 <div id="overlay" class="overlay"></div>
 <div id="nav">
@@ -25,52 +28,77 @@
     <div class="nav-container" style="top: 0;">
         <form class="propertiesForm" action="javascript:void(0);">
             <div class="form-group">
-                <label for="type">Kategorie</label>
+                <label for="type"><%=strings.editor.prop_form.type_select%></label>
                 <select id="type" class="form-control" name="type" onchange="DisplayController.checkToggleOptionsOnType();">
-                    <option value="sp">Einzelspieler</option>
-                    <option value="mp">Mehrspieler</option>
-                    <option value="minischach">Minischach</option>
+                    <% type_options.forEach(function(opt) { %>
+                    <option value=<%=opt.value%>><%=opt.name%></option>
+                    <% }); %>
                 </select>
             </div>
             <div id="subtypeFormGroup" class="form-group">
-                <label for="subtype">Unterkategorie</label>
+                <label for="subtype"><%=strings.editor.prop_form.subtype_select%></label>
                 <select id="subtype" class="form-control" name="subtype">
-                    <option value="rook">Turm</option>
-                    <option value="bishop">Läufer</option>
-                    <option value="queen">Dame</option>
-                    <option value="king">König</option>
-                    <option value="knight">Springer</option>
-                    <option value="pawn">Bauer</option>
+                    <% subtype_options.forEach(function(opt) { %>
+                    <option value=<%=opt.value%>><%=opt.name%></option>
+                    <% }); %>
                 </select>
             </div>
             <div class="form-group">
-                <label for="name">Name</label>
-                <input id="name" class="form-control" type="text" name="name" placeholder="Levelname" required="true">
+                <label for="name"><%=strings.editor.prop_form.name_input%></label>
+                <input id="name" class="form-control" type="text" name="name" required="true">
             </div>
             <div class="form-group">
-                <label for="description">Beschreibung</label>
+                <label for="description"><%=strings.editor.prop_form.description_input%></label>
                 <textarea id="description" class="form-control" name="description" rows="3" required="true"></textarea>
             </div>
             <div id="minTurnsFormGroup" class="form-group">
-                <label for="minturns">Minimale Zugzahl</label>
+                <label for="minturns"><%=strings.editor.prop_form.minturns_input%></label>
                 <input id="minturns" type="number" class="form-control" name="minturns" required="true">
             </div>
             <div id="miniWinFormGroup" class="form-group">
-                <label for="miniWin">Unterkategorie</label>
-                <select id="miniWin" class="form-control" name="miniWin">
-                    <option value="2">Bauer auf Grundreihe bringen</option>
+                <label for="miniWin"><%=strings.editor.prop_form.wincondition_select%></label>
+                <select id="miniWin" class="form-control" name="miniWin" onchange="DisplayController.checkToggleOptionsOnType();">
+                    <% wincondition_options.forEach(function(opt) { %>
+                    <option value=<%=opt.value%>><%=opt.name%></option>
+                    <% }); %>
                 </select>
             </div>
-            <center><button class="btn btn-primary btn-lg" onclick="saveLvl();">Speichern</button></center>
+            <div id="miniWinSpecsFormGroup" class="form-group">
+                <label for="miniWinFigure"><%=strings.editor.prop_form.wincondition_specs.figure%></label>
+                <select id="miniWinFigure" class="form-control" name="miniWinSpecsFigure">
+                    <% wincondition_specs_figure.forEach(function(fig) { %>
+                    <option value=<%=fig.value%>><%=fig.name%></option>
+                    <% }); %>
+                </select>
+                <label for="miniWinFieldX"><%=strings.editor.prop_form.wincondition_specs.fieldX%></label>
+                <select id="miniWinFieldX" class="form-control" name="miniWinSpecsFieldX">
+                    <% [[1,"A"],[2,"B"],[3,"C"],[4,"D"],[5,"E"],[6,"F"],[7,"G"],[8,"H"]].forEach(function(file) { %>
+                    <option value=<%=file[0]%>><%=file[1]%></option>
+                    <% }); %>
+                </select>
+                <label for="miniWinFieldY"><%=strings.editor.prop_form.wincondition_specs.fieldY%></label>
+                <select id="miniWinFieldY" class="form-control" name="miniWinSpecsFieldY">
+                    <% [[8,1],[7,2],[6,3],[5,4],[4,5],[3,6],[2,7],[1,8]].forEach(function(row) { %>
+                    <option value=<%=row[0]%>><%=row[1]%></option>
+                    <% }); %>
+                </select>
+                <label for="miniWinPlayer"><%=strings.editor.prop_form.wincondition_specs.player%></label>
+                <select id="miniWinPlayer" class="form-control" name="miniWinSpecsPlayer">
+                    <% wincondition_specs_player.forEach(function(p) { %>
+                    <option value=<%=p.value%>><%=p.name%></option>
+                    <% }); %>
+                </select>
+            </div>
+            <center><button class="btn btn-primary btn-lg" onclick="saveLvl();"><%=strings.editor.prop_form.save_button%></button></center>
         </form>
     </div>
     <div class="nav-container iconBar" style="top: 80% !important;">
         <div>
-            <a href="/">
-                <img id="close" src="/img/close.png" title="Zurück zum Hauptmenü">
+            <a href="/<%=lang%>/">
+                <img id="close" src="/img/close.png" title="<%=strings.editor.icon_bar.close%>">
             </a>
-            <a href="/editor">
-                <img id="reset" src="/img/clear.jpg" title="Editor reset">
+            <a href="/<%=lang%>/editor">
+                <img id="reset" src="/img/clear.jpg" title="<%=strings.editor.icon_bar.reset%>">
             </a>
         </div>
     </div>

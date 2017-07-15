@@ -4,6 +4,7 @@ class DisplayController {
         $('#startModal').show();
         $('#modalOverlay').show();
         $('#miniWinFormGroup').hide();
+        $('#miniWinSpecsFormGroup').hide();
 
         this.adjustScreen();
         window.onresize = function() {
@@ -54,6 +55,11 @@ class DisplayController {
             $('#subtypeFormGroup').hide();
             $('#minTurnsFormGroup').hide();
             $('#miniWinFormGroup').show();
+            let wincondition = parseInt($('select[name="miniWin"]').val());
+            if (wincondition === constants.winCondition.FIG_REACHES_FIELD)
+                $('#miniWinSpecsFormGroup').show();
+            else
+                $('#miniWinSpecsFormGroup').hide();
         } else {
             $('#subtypeFormGroup').show();
             if (type == 'mp')
@@ -61,6 +67,7 @@ class DisplayController {
             else
                 $('#minTurnsFormGroup').show().attr('');
             $('#miniWinFormGroup').hide();
+            $('#miniWinSpecsFormGroup').hide();
         }
         // $('#minTurns').prop('disabled', !$.attr(this, ':visible'));  // does not work though ...
     };
@@ -80,16 +87,38 @@ class DisplayController {
         let attrs = {
             _id: type +"-"+ new Date().toLocaleString().replace(/\/| |:/g, "_").replace(/,/g, "").slice(0,-3),
             type: type,
-            name: $('#name').val(),
-            description: $('#description').val(),
+            name: {},
+            description: {},
             reviewStatus: reviewStatus.FRESH
         };
+        Object.keys(strings).forEach(function(l){
+            if (l !== lang) {
+                attrs.name[l] = "???";
+                attrs.description[l] = "???";
+            } else {
+                attrs.name[l] = $('#name').val();
+                attrs.description[l] = $('#description').val();
+            }
+        });
+
         if (type === 'sp' || type === 'mp')
             attrs.subtype = $('#subtype').val();
         if (type === 'sp')
             attrs.minturns = parseInt($('#minturns').val());
-        if (type === 'minischach')
-            attrs.win = parseInt($('#miniWin').val());
+        if (type === 'minischach') {
+            let miniWin = parseInt($('#miniWin').val());
+            if (miniWin === constants.winCondition.FIG_REACHES_FIELD) {
+                attrs.winSpecs = {
+                    "figure": parseInt($('#miniWinFigure').val()),
+                    "field": {
+                        "x": parseInt($('#miniWinFieldX').val()),
+                        "y": parseInt($('#miniWinFieldY').val())
+                    },
+                    "player": parseInt($('#miniWinPlayer').val())
+                }
+            }
+            attrs.win = miniWin;
+        }
         return attrs;
     }
 }
