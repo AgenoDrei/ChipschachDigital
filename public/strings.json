@@ -12,6 +12,12 @@
 			"players": [
 				"Gelb",
 				"Blau"
+			],
+			"modes": [
+				"Einzelspieler",
+				"Mehrspieler",
+				"Minischach",
+				"Klassisches Schach"
 			]
 		},
 		"editor": {
@@ -235,8 +241,8 @@
 		"general": {
 			"figures": [
 				"Pawn",
-				"Bishop",
 				"Knight",
+				"Bishop",
 				"Rook",
 				"Queen",
 				"King"
@@ -244,6 +250,12 @@
 			"players": [
 				"Yellow",
 				"Blue"
+			],
+			"modes": [
+				"Singleplayer",
+				"Multiplayer",
+				"Minichess",
+				"Classic Chess"
 			]
 		},
 		"editor": {

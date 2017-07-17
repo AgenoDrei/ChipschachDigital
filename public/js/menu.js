@@ -6,6 +6,21 @@ var redirectGlobal = function(gameId) {
     });
 };
 
+let filterForCheckedCategory = function() {
+    let selected = $('#newLevel-select');
+    let category = selected[0].options[selected[0].selectedIndex].getAttribute('category');
+
+    let checkboxes = $('.categoryFilter');
+    for (key in checkboxes) {
+        let opts = $('option[category="' + checkboxes[key].value + '"]');
+        if (!checkboxes[key].checked)
+            opts.hide();
+        else
+            opts.show();
+    }
+
+}
+
 let globalCheckForMini = function() {
     let selected = $('#newLevel-select');
     let category = selected[0].options[selected[0].selectedIndex].getAttribute('category');
