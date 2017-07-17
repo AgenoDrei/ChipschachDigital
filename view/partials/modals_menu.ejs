@@ -79,15 +79,15 @@
                         <label for="newName"><%=strings.modals.menu.mp_g.new_game_form.name_input%></label>
                         <input id="newName" class="form-control" type="text" placeholder="<%=strings.modals.menu.mp_g.new_game_form.name_input%>">
                         <label for="newLevel-select"><%=strings.modals.menu.mp_g.new_game_form.new_level_select%></label>
-                        <select id="newLevel-select" class="form-control">
+                        <select id="newLevel-select" class="form-control" onchange="globalCheckForMini();">
                             <!-- Filled with js -->
                         </select>
                         <div class="radio">
-                            <label><input type="radio" name="gameMode" value="unbeatable" checked><%=strings.modals.menu.mp_g.new_game_form.game_mode_0%></label>
+                            <label><input type="radio" id="newGameRadioUnbeatable" name="gameMode" value="unbeatable" checked><%=strings.modals.menu.mp_g.new_game_form.game_mode_0%></label>
                         </div>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="gameMode" value="beatable"><%=strings.modals.menu.mp_g.new_game_form.game_mode_1%>
+                                <input type="radio" id="newGameRadioBeatable" name="gameMode" value="beatable"><%=strings.modals.menu.mp_g.new_game_form.game_mode_1%>
                             </label>
                         </div>
                     </form>

@@ -104,7 +104,7 @@ class DisplayController {
     static disableBeatableWithKings() {
         $('#possibleDisableIfKingLvl_label')
             .attr('data-toggle', 'tooltip')
-            .attr('title', 'Könige können sich nicht gegenseitig schlagen!');
+            .attr('title', strings[lang].modals.start.disables_kings);
         $('#possibleDisableIfKingLvl_input').attr('disabled', true);
     }
 

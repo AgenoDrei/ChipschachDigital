@@ -182,7 +182,8 @@
 				"button": "Start!",
 				"cancel_search": "Suche abrechen",
 				"unbeatable": "Figuren nicht schlagbar",
-				"beatable": "Figuren schlagbar"
+				"beatable": "Figuren schlagbar",
+				"disables_kings": "Könige können sich nicht gegenseitig schlagen!"
 			},
 			"menu": {	
 				"sp_mp": {
@@ -201,7 +202,8 @@
 						"new_level_select": "Level",
 						"game_mode_0": "Figuren nicht schlagbar",
 						"game_mode_1": "Figuren schlagbar",
-						"create_new_game": "Spiel erstellen"
+						"create_new_game": "Spiel erstellen",
+						"disables_mini": "Minischach Level erlauben das Schlagen von Figuren"
 					},
 					"footer": "Hier kannst du ein neues Spiel erstellen oder bereits bestehenden Spielen beitreten."
 				},
@@ -409,7 +411,8 @@
 				"button": "Start!",
 				"cancel_search": "Cancel search",
 				"unbeatable": "Pieces not beatable",
-				"beatable": "Pieces beatable"
+				"beatable": "Pieces beatable",
+				"disables_kings": "Kings may not beat each other!"
 			},
 			"menu": {	
 				"sp_mp": {
@@ -428,7 +431,8 @@
 						"new_level_select": "Level",
 						"game_mode_0": "Pieces not beatable",
 						"game_mode_1": "Peaces beatable",
-						"create_new_game": "Create game"
+						"create_new_game": "Create game",
+						"disables_mini": "Minichess does not allow for non-beatable mode"
 					},
 					"footer": "Here you may create a new game or join others."
 				},

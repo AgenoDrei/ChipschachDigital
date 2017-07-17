@@ -6,6 +6,20 @@ var redirectGlobal = function(gameId) {
     });
 };
 
+let globalCheckForMini = function() {
+    let selected = $('#newLevel-select');
+    let category = selected[0].options[selected[0].selectedIndex].getAttribute('category');
+    if (category === 'mini') {
+        $('#newGameRadioUnbeatable')
+            .attr('data-toggle', 'tooltip')
+            .attr('title', strings[lang].modals.menu.mp_g.disables_mini)
+            .attr('disabled', true);
+        document.getElementById("newGameRadioBeatable").checked = true
+    } else {
+        $('#newGameRadioUnbeatable').attr('disabled', false);
+    }
+}
+
 var createNewGame = function() {
     let selected = $('#newLevel-select')
     let name = $('#newName').val(),
@@ -71,12 +85,14 @@ $('document').ready(function() {
                         ${lvl.name[lang]}
                     </option>
                 `);
-            if (lvl.type === 'minischach' && lvl.reviewStatus !== reviewStatus.FRESH)
+            if (lvl.type === 'minischach' && lvl.reviewStatus !== reviewStatus.FRESH) {
                 $('#newLevel-select').append(`
                     <option category="mini" value="${lvl._id}">
                         ${lvl.name[lang]}
                     </option>
                 `);
+                globalCheckForMini();
+            }
 
             if (lvl.type === 'sp' || lvl.type === 'mp')
                 if (lvl.reviewStatus !== reviewStatus.FRESH)
