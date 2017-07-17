@@ -17,6 +17,8 @@ class DisplayController {
 
         if (this.mobilecheck())
             $('.counterInput').css("font-size", "21px");
+        
+        $('#btn_menu').css("background", "url('/img/menu.png') no-repeat scroll center center / 80% 80% #FFF");
     }
 
     mobilecheck() {
