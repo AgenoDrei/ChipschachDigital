@@ -58,22 +58,6 @@
                 <h4 class="modal-title"><%=strings.modals.menu.mp_g.title%></h4>
             </div>
             <div class="modal-body">
-                <div class="globalLobby openGameList">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th><%=strings.modals.menu.mp_g.game_list.th1%></th>
-                                <th><%=strings.modals.menu.mp_g.game_list.th2%></th>
-                                <th><center><%=strings.modals.menu.mp_g.game_list.th3%></center></th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="globalGames_tbody">
-                            <td id="openGamesPlaceholder" colspan="4" style="text-align: center;"><%=strings.modals.menu.mp_g.no_levels_yet%></td>
-                            <!-- Filled with js -->
-                        </tbody>
-                    </table>
-                </div>
                 <div class="globalLobby createNewGame">
                     <h4><%=strings.modals.menu.mp_g.create_title%></h4>
                     <form>
@@ -100,6 +84,24 @@
                         </div>
                     </form>
                     <button class="btn btn-primary" onclick="createNewGame();"><%=strings.modals.menu.mp_g.new_game_form.create_new_game%></button>
+                </div>
+                <div class="globalLobby openGameList">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th><%=strings.modals.menu.mp_g.game_list.th1%></th>
+                                <th><%=strings.modals.menu.mp_g.game_list.th2%></th>
+                                <th><center><%=strings.modals.menu.mp_g.game_list.th3%></center></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="globalGames_tbody">
+                            <tr id="openGamesPlaceholder">
+                                <td colspan="4" style="text-align: center;"><%=strings.modals.menu.mp_g.no_levels_yet%></td>
+                            <tr>
+                            <!-- Filled with js -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="modal-footer">

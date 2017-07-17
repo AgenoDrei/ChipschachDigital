@@ -1,8 +1,41 @@
-var lang = "";
+let lang = "",
+    LOAD_OPEN_GAMES_INTERVAL = 2500;
 
 var redirectGlobal = function(gameId) {
     $.get('/api/v1/game/' + gameId, function(res) {     // register yourself
         window.location = '/' + lang + '/global/' + gameId + '?joinId=' + res.joinId;
+    });
+};
+
+let loadOpenGames = function() {
+    $('.openGame').remove();
+    $('#openGamesPlaceholder').show();
+    $.get('/api/v1/game', function(globalGames) {
+        globalGames.forEach(function(game) {
+            let levelSuffix = game.mode === 'unbeatable' ? "("+strings[lang].modals.menu.mp_g.new_game_form.unbeatable+")" : "("+strings[lang].modals.menu.mp_g.new_game_form.beatable+")";
+            let joinable = game.filledSeats < 2;
+            $('#globalGames_tbody').append(`
+                <tr class="openGame">
+                    <td>${game.name}</td>
+                    <td>
+                        ${game.level[lang]}<br>
+                        ${levelSuffix}
+                    </td>
+                    <td style="text-align: center;">
+                        ${game.filledSeats}/2
+                    </td>
+                    <td style="text-align: center;">
+                        <a onclick="redirectGlobal('${game.id}');" class="btn btn-primary btn-sm" ${!joinable?"style='display: none;'":""}>
+                            Beitreten
+                        </a>
+                        <a class="btn btn-danger btn-sm disabled" ${joinable?"style='display: none;'":""}>
+                            Bereits voll
+                        </a>
+                    </td>
+                </tr>
+            `);
+            $('#openGamesPlaceholder').hide();
+        });
     });
 };
 
@@ -65,33 +98,9 @@ var createNewGame = function() {
 
 $('document').ready(function() {
     lang = window.location.pathname.split('/')[1];
-    $.get('/api/v1/game', function(globalGames) {
-        globalGames.forEach(function(game) {
-            let levelSuffix = game.mode === 'unbeatable' ? "("+strings[lang].modals.menu.mp_g.new_game_form.unbeatable+")" : "("+strings[lang].modals.menu.mp_g.new_game_form.beatable+")";
-            let joinable = game.filledSeats < 2;
-            $('#globalGames_tbody').append(`
-                <tr>
-                    <td>${game.name}</td>
-                    <td>
-                        ${game.level[lang]}<br>
-                        ${levelSuffix}
-                    </td>
-                    <td style="text-align: center;">
-                        ${game.filledSeats}/2
-                    </td>
-                    <td style="text-align: center;">
-                        <a onclick="redirectGlobal('${game.id}');" class="btn btn-primary btn-sm" ${!joinable?"style='display: none;'":""}>
-                            Beitreten
-                        </a>
-                        <a class="btn btn-danger btn-sm disabled" ${joinable?"style='display: none;'":""}>
-                            Bereits voll
-                        </a>
-                    </td>
-                </tr>
-            `);
-            $('#openGamesPlaceholder').hide();
-        });
-    });
+
+    loadOpenGames();
+    setInterval(loadOpenGames, LOAD_OPEN_GAMES_INTERVAL);
 
     $.get('/api/v1/level', function(availLvls) {
         availLvls.forEach(function(lvl) {
