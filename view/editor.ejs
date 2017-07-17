@@ -23,10 +23,12 @@
 <div id="modalOverlay" class="overlay"></div>
 <div id="overlay" class="overlay"></div>
 <div id="nav">
-    <div id="btn_menu" style="background-image: url(../../img/save_icon.png); background-size: 60%;" onclick="DisplayController.toggleClick();"></div>
+    <div id="btn_menu" class="sideIcon" onclick="DisplayController.toggleClick();" style="background-image: url(/img/save_icon.png);"></div>
+    <div class="sideIcon" style="background-image: url(/img/close.png); bottom: 10px;" onclick="window.location = '/<%=lang%>';"></div>
+    <div class="sideIcon" style="background-image: url(/img/clear.jpg); bottom: 10px; right: -115px;" onclick="window.location = '/<%=lang%>/editor'"></div>
 
-    <div class="nav-container" style="top: 0;">
-        <form class="propertiesForm" action="javascript:void(0);">
+    <div class="nav-container" style="top: 0; height: 100%;">
+        <form class="propertiesForm" action="javascript:void(0);" style="overflow-y: auto;">
             <div class="form-group">
                 <label for="type"><%=strings.editor.prop_form.type_select%></label>
                 <select id="type" class="form-control" name="type" onchange="DisplayController.checkToggleOptionsOnType();">
@@ -92,16 +94,15 @@
             <center><button class="btn btn-primary btn-lg" onclick="saveLvl();"><%=strings.editor.prop_form.save_button%></button></center>
         </form>
     </div>
-    <div class="nav-container iconBar" style="top: 80% !important;">
+<!--     <div class="nav-container iconBar" style="top: 80% !important;">
         <div>
             <a href="/<%=lang%>/">
-                <img id="close" src="/img/close.png" title="<%=strings.editor.icon_bar.close%>">
             </a>
             <a href="/<%=lang%>/editor">
                 <img id="reset" src="/img/clear.jpg" title="<%=strings.editor.icon_bar.reset%>">
             </a>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <div id="board-container">

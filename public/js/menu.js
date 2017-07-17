@@ -1,4 +1,5 @@
-var lang = "";
+let lang = "",
+    LOAD_OPEN_GAMES_INTERVAL = 2500;
 
 var redirectGlobal = function(gameId) {
     $.get('/api/v1/game/' + gameId, function(res) {     // register yourself
@@ -6,43 +7,18 @@ var redirectGlobal = function(gameId) {
     });
 };
 
-var createNewGame = function() {
-    let name = $('#newName').val(),
-        level = $('#newLevel-select').val(),
-        mode = $('input[name="gameMode"]:checked').val();
-    console.log(name, level, mode);
-
-    if (mode === undefined) {
-        toastr.warning(strings[lang].toasts.no_mode_selected);
-    } else if (name === "") {
-        toastr.warning(strings[lang].toasts.no_name_provided);
-    } else {
-        let newGame = {
-            type: 'MP',
-            local: 'false',
-            name: name,
-            level: level,
-            mode: mode
-        };
-
-        $.post('/api/v1/game', newGame, function(res) {
-            console.log(res);
-            redirectGlobal(res.gameId);
-        });
-    }
-};
-
-$('document').ready(function() {
-    lang = window.location.pathname.split('/')[1];
+let loadOpenGames = function() {
+    $('.openGame').remove();
+    $('#openGamesPlaceholder').show();
     $.get('/api/v1/game', function(globalGames) {
         globalGames.forEach(function(game) {
-            let levelSuffix = game.mode === 'unbeatable' ? "(schlagen aus)" : "(schlagen an)";
+            let levelSuffix = game.mode === 'unbeatable' ? "("+strings[lang].modals.menu.mp_g.new_game_form.unbeatable+")" : "("+strings[lang].modals.menu.mp_g.new_game_form.beatable+")";
             let joinable = game.filledSeats < 2;
             $('#globalGames_tbody').append(`
-                <tr>
+                <tr class="openGame">
                     <td>${game.name}</td>
                     <td>
-                        ${game.level}<br>
+                        ${game.level[lang]}<br>
                         ${levelSuffix}
                     </td>
                     <td style="text-align: center;">
@@ -58,16 +34,91 @@ $('document').ready(function() {
                     </td>
                 </tr>
             `);
+            $('#openGamesPlaceholder').hide();
         });
     });
+};
+
+let filterForCheckedCategory = function() {
+    let selected = $('#newLevel-select');
+    let category = selected[0].options[selected[0].selectedIndex].getAttribute('category');
+
+    let checkboxes = $('.categoryFilter');
+    for (key in checkboxes) {
+        let opts = $('option[category="' + checkboxes[key].value + '"]');
+        if (!checkboxes[key].checked)
+            opts.hide();
+        else
+            opts.show();
+    }
+
+}
+
+let globalCheckForMini = function() {
+    let selected = $('#newLevel-select');
+    let category = selected[0].options[selected[0].selectedIndex].getAttribute('category');
+    if (category === 'mini') {
+        $('#newGameRadioUnbeatable')
+            .attr('data-toggle', 'tooltip')
+            .attr('title', strings[lang].modals.menu.mp_g.disables_mini)
+            .attr('disabled', true);
+        document.getElementById("newGameRadioBeatable").checked = true
+    } else {
+        $('#newGameRadioUnbeatable').attr('disabled', false);
+    }
+}
+
+var createNewGame = function() {
+    let selected = $('#newLevel-select')
+    let name = $('#newName').val(),
+        level = selected.val(),
+        category = selected[0].options[selected[0].selectedIndex].getAttribute('category'),
+        mode = $('input[name="gameMode"]:checked').val();
+    console.log(name, level, category, mode);
+
+    if (mode === undefined) {
+        toastr.warning(strings[lang].toasts.no_mode_selected);
+    } else if (name === "") {
+        toastr.warning(strings[lang].toasts.no_name_provided);
+    } else {
+        let newGame = {
+            local: 'false',
+            name: name,
+            level: level,
+            mode: mode
+        };
+        newGame.type = category !== 'mini' ? 'MP' : 'MINI';
+
+        $.post('/api/v1/game', newGame, function(res) {
+            console.log(res);
+            redirectGlobal(res.gameId);
+        });
+    }
+};
+
+$('document').ready(function() {
+    lang = window.location.pathname.split('/')[1];
+
+    loadOpenGames();
+    setInterval(loadOpenGames, LOAD_OPEN_GAMES_INTERVAL);
+
     $.get('/api/v1/level', function(availLvls) {
         availLvls.forEach(function(lvl) {
             if (lvl.type === 'mp' && lvl.reviewStatus !== reviewStatus.FRESH)
                 $('#newLevel-select').append(`
-                    <option value="${lvl._id}">
+                    <option category="${lvl.subtype}" value="${lvl._id}">
                         ${lvl.name[lang]}
                     </option>
                 `);
+            if (lvl.type === 'minischach' && lvl.reviewStatus !== reviewStatus.FRESH) {
+                $('#newLevel-select').append(`
+                    <option category="mini" value="${lvl._id}">
+                        ${lvl.name[lang]}
+                    </option>
+                `);
+                globalCheckForMini();       // checked for each lvl inserted in case it is the latest one; not the best way to handle this
+            }
+
             if (lvl.type === 'sp' || lvl.type === 'mp')
                 if (lvl.reviewStatus !== reviewStatus.FRESH)
                     $('#' + lvl.type + lvl.subtype + '_panel-body').append(`
@@ -85,6 +136,7 @@ $('document').ready(function() {
                             </a>
                         </p>
                     `);
+
             if (lvl.type === 'minischach')
                 if (lvl.reviewStatus !== reviewStatus.FRESH)
                     $('#miniLevels').append(`
