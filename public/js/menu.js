@@ -7,10 +7,12 @@ var redirectGlobal = function(gameId) {
 };
 
 var createNewGame = function() {
+    let selected = $('#newLevel-select')
     let name = $('#newName').val(),
-        level = $('#newLevel-select').val(),
+        level = selected.val(),
+        category = selected[0].options[selected[0].selectedIndex].getAttribute('category'),
         mode = $('input[name="gameMode"]:checked').val();
-    console.log(name, level, mode);
+    console.log(name, level, category, mode);
 
     if (mode === undefined) {
         toastr.warning(strings[lang].toasts.no_mode_selected);
@@ -18,12 +20,12 @@ var createNewGame = function() {
         toastr.warning(strings[lang].toasts.no_name_provided);
     } else {
         let newGame = {
-            type: 'MP',
             local: 'false',
             name: name,
             level: level,
             mode: mode
         };
+        newGame.type = category !== 'mini' ? 'MP' : 'MINI';
 
         $.post('/api/v1/game', newGame, function(res) {
             console.log(res);
@@ -60,14 +62,22 @@ $('document').ready(function() {
             `);
         });
     });
+
     $.get('/api/v1/level', function(availLvls) {
         availLvls.forEach(function(lvl) {
             if (lvl.type === 'mp' && lvl.reviewStatus !== reviewStatus.FRESH)
                 $('#newLevel-select').append(`
-                    <option value="${lvl._id}">
+                    <option category="${lvl.subtype}" value="${lvl._id}">
                         ${lvl.name[lang]}
                     </option>
                 `);
+            if (lvl.type === 'minischach' && lvl.reviewStatus !== reviewStatus.FRESH)
+                $('#newLevel-select').append(`
+                    <option category="mini" value="${lvl._id}">
+                        ${lvl.name[lang]}
+                    </option>
+                `);
+
             if (lvl.type === 'sp' || lvl.type === 'mp')
                 if (lvl.reviewStatus !== reviewStatus.FRESH)
                     $('#' + lvl.type + lvl.subtype + '_panel-body').append(`
@@ -85,6 +95,7 @@ $('document').ready(function() {
                             </a>
                         </p>
                     `);
+
             if (lvl.type === 'minischach')
                 if (lvl.reviewStatus !== reviewStatus.FRESH)
                     $('#miniLevels').append(`

@@ -353,7 +353,7 @@
 			"finish": {
 				"winmsgYielded": "You've surrendered the level.",
 				"winmsgGenericYellow": "Yellow has won the game!",
-				"winmsgGenericBlue": "Blue has won the game`!",
+				"winmsgGenericBlue": "Blue has won the game!",
 				"winmsgGenericDraw": "Draw, nobody won, but nobody lost either.",
 				"winmsgMinturnsSuccess": "You've finished the level with as few moves as was possible! Congratulations!",
 				"winmsgMinturnsFailed": "You've finished the level! Maybe you can do even better with fewer moves.",
