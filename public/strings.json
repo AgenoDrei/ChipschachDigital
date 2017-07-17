@@ -196,13 +196,16 @@
 						"th2": "Level",
 						"th3": "Besetzung"
 					},
-					"create_title": "... oder ein eigenes Spiel erstellen?",
+					"no_levels_yet": "Noch keine Spiele offen",
+					"create_title": "Ein eigenes Spiel erstellen?",
 					"new_game_form": {
 						"name_input": "Spielname",
 						"new_level_select": "Level",
 						"game_mode_0": "Figuren nicht schlagbar",
 						"game_mode_1": "Figuren schlagbar",
 						"create_new_game": "Spiel erstellen",
+						"beatable": "schlagen an",
+						"unbeatable": "schlagen aus",
 						"disables_mini": "Minischach Level erlauben das Schlagen von Figuren"
 					},
 					"footer": "Hier kannst du ein neues Spiel erstellen oder bereits bestehenden Spielen beitreten."
@@ -425,13 +428,16 @@
 						"th2": "Level",
 						"th3": "Players"
 					},
-					"create_title": "... or create an own game?",
+					"no_levels_yet": "No open games yet",
+					"create_title": "Open your own game?",
 					"new_game_form": {
 						"name_input": "Name",
 						"new_level_select": "Level",
 						"game_mode_0": "Pieces not beatable",
 						"game_mode_1": "Peaces beatable",
 						"create_new_game": "Create game",
+						"beatable": "capturing allowed",
+						"unbeatable": "no capturing",
 						"disables_mini": "Minichess does not allow for non-beatable mode"
 					},
 					"footer": "Here you may create a new game or join others."

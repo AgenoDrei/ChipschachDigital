@@ -52,13 +52,13 @@ $('document').ready(function() {
     lang = window.location.pathname.split('/')[1];
     $.get('/api/v1/game', function(globalGames) {
         globalGames.forEach(function(game) {
-            let levelSuffix = game.mode === 'unbeatable' ? "(schlagen aus)" : "(schlagen an)";
+            let levelSuffix = game.mode === 'unbeatable' ? "("+strings[lang].modals.menu.mp_g.new_game_form.unbeatable+")" : "("+strings[lang].modals.menu.mp_g.new_game_form.beatable+")";
             let joinable = game.filledSeats < 2;
             $('#globalGames_tbody').append(`
                 <tr>
                     <td>${game.name}</td>
                     <td>
-                        ${game.level}<br>
+                        ${game.level[lang]}<br>
                         ${levelSuffix}
                     </td>
                     <td style="text-align: center;">
@@ -74,6 +74,7 @@ $('document').ready(function() {
                     </td>
                 </tr>
             `);
+            $('#openGamesPlaceholder').hide();
         });
     });
 
@@ -91,7 +92,7 @@ $('document').ready(function() {
                         ${lvl.name[lang]}
                     </option>
                 `);
-                globalCheckForMini();
+                globalCheckForMini();       // checked for each lvl inserted in case it is the latest one; not the best way to handle this
             }
 
             if (lvl.type === 'sp' || lvl.type === 'mp')
