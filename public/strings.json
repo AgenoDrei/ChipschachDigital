@@ -52,6 +52,12 @@
 					"Bauer auf Grundreihe bringen",
 					"Figur auf Feld"
 				],
+				"contact": {
+					"doI": "Kontakt Möglichkeit",
+					"wanna": "Ich will kontaktiert werden (und vielleicht Preise gewinnen!)",
+					"name": "Dein Name",
+					"email": "Deine Email-Adresse"
+				},
 				"save_button": "Speichern"
 			},
 			"icon_bar": {
@@ -98,6 +104,9 @@
 				"mp": "Mehrspieler",
 				"global": "Globaler Mehrspieler",
 				"mini": "Minischach"
+			},
+			"description": {
+				"creator": "Ersteller"
 			},
 			"footers": {
 				"sp": "Löse das Level in möglichst wenig Zügen in dem du alle schlagbaren Chips schlägst!",
@@ -290,6 +299,12 @@
 					"Pawn to back-rank",
 					"Piece reaches field"
 				],
+				"contact": {
+					"doI": "Contact possibilities",
+					"wanna": "I want to keep in touch (and maybe win prizes!)",
+					"name": "Your name",
+					"email": "Your email adresse"
+				},
 				"save_button": "Save"
 			},
 			"icon_bar": {
@@ -336,6 +351,9 @@
 				"mp": "Multiplayer",
 				"global": "Global Multiplayer",
 				"mini": "Minichess"
+			},
+			"description": {
+				"creator": "Creator"
 			},
 			"footers": {
 				"sp": "Beat the level in as few moves as possible by capturing all available chips!",

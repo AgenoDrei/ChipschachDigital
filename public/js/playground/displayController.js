@@ -110,9 +110,12 @@ class DisplayController {
         $('#possibleDisableIfKingLvl_input').attr('disabled', true);
     }
 
-    static updateModalTexts(lvlName, lvlDescr) {
+    static updateModalTexts(lvlName, lvlDescr, lvlCreator) {
         $('.lvlName').html(lvlName);
-        $('#lvlDescr').html(lvlDescr);
+        if (lvlCreator !== null && lvlCreator !== undefined) 
+            $('#lvlDescr').html(lvlDescr + `<br>(${strings[lang].playground.description.creator}: ${lvlCreator.name})`);
+        else
+            $('#lvlDescr').html(lvlDescr);
     }
 
     static checkStartMpModeRadios() {

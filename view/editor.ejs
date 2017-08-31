@@ -91,7 +91,19 @@
                     <% }); %>
                 </select>
             </div>
-            <center><button class="btn btn-primary btn-lg" onclick="saveLvl();"><%=strings.editor.prop_form.save_button%></button></center>
+            <center>
+                <button class="btn btn-primary btn-lg" onclick="saveLvl();"><%=strings.editor.prop_form.save_button%></button><br><br>
+                <div id="wannaContactFormGroup" class="form-group">
+                    <label for="wannaContact"><%=strings.editor.prop_form.contact.doI%></label>
+                    <input id="wannaContact" class="form-control" name="wannaContact" type="checkbox" value="iWanna" onclick="DisplayController.toggleWannaContact();"><%=strings.editor.prop_form.contact.wanna%>
+                </div>
+                <div id="contactFormGroup" class="form-group">
+                    <label for="contactName"><%=strings.editor.prop_form.contact.name%></label>
+                    <input id="contactName" class="form-control" type="text" name="contactName" required="true">
+                    <label for="contactEmail"><%=strings.editor.prop_form.contact.email%></label>
+                    <input id="contactEmail" class="form-control" type="text" name="contactEmail" required="true">
+                </div>
+            </center>
         </form>
     </div>
 <!--     <div class="nav-container iconBar" style="top: 80% !important;">

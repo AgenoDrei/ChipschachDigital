@@ -5,6 +5,7 @@ class DisplayController {
         $('#modalOverlay').show();
         $('#miniWinFormGroup').hide();
         $('#miniWinSpecsFormGroup').hide();
+        $('#contactFormGroup').hide();
 
         this.adjustScreen();
         window.onresize = function() {
@@ -69,7 +70,11 @@ class DisplayController {
             $('#miniWinFormGroup').hide();
             $('#miniWinSpecsFormGroup').hide();
         }
-        // $('#minTurns').prop('disabled', !$.attr(this, ':visible'));  // does not work though ...
+    };
+
+    static toggleWannaContact() {
+        $('#wannaContactFormGroup').hide();
+        $('#contactFormGroup').show();
     };
 
     static setSelectionWindow(picSrc) {
@@ -84,6 +89,8 @@ class DisplayController {
 
     static getLevelAttributes() {
         let type = $('#type').val();
+        let contactName = $('#contactName').val();
+        let contactEmail = $('#contactEmail').val();
         let attrs = {
             _id: type +"-"+ new Date().toLocaleString().replace(/\/| |:/g, "_").replace(/,/g, "").slice(0,-3),
             type: type,
@@ -118,6 +125,12 @@ class DisplayController {
                 }
             }
             attrs.win = miniWin;
+        }
+        if (contactName !== "" || contactEmail !== "") {
+            attrs.contact = {
+                "name": contactName,
+                "email": contactEmail
+            };
         }
         return attrs;
     }
