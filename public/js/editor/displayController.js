@@ -91,6 +91,7 @@ class DisplayController {
         let type = $('#type').val();
         let contactName = $('#contactName').val();
         let contactEmail = $('#contactEmail').val();
+        let contactAddress = $('#contactAddress').val();
         let attrs = {
             _id: type +"-"+ new Date().toLocaleString().replace(/\/| |:/g, "_").replace(/,/g, "").slice(0,-3),
             type: type,
@@ -126,12 +127,13 @@ class DisplayController {
             }
             attrs.win = miniWin;
         }
-        if (contactName !== "" || contactEmail !== "") {
+        if (contactName !== "" || contactEmail !== "" || contactAddress !== "") {
             attrs.contact = {
                 "name": contactName,
-                "email": contactEmail
+                "email": contactEmail,
+                "address": contactAddress
             };
         }
         return attrs;
-    }
+    };
 }

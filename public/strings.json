@@ -56,7 +56,9 @@
 					"doI": "Kontakt Möglichkeit",
 					"wanna": "Ich will kontaktiert werden (und vielleicht Preise gewinnen!)",
 					"name": "Dein Name",
-					"email": "Deine Email-Adresse"
+					"email": "Deine Email-Adresse",
+					"address": "Adresse",
+					"18plus": "Ich bin mindestens 18 Jahre alt"
 				},
 				"save_button": "Speichern"
 			},
@@ -242,6 +244,7 @@
 			"opponent_quit": "Dein Gegner hat das Spiel scheinbar verlassen.",
 			"inspecting_board": "Menü wird gleich wieder erscheinen.",
 			"editor_no_valid_config": "Einige Attribute des Levels wurden nicht korrekt ausgefüllt oder das Level ist leer.",
+			"editor_no_18": "Du musst bestätigen, dass du mindestens 18 Jahre alt bist",
 			"editor_valid_lvl": "Level wird erstellt!",
 			"not_available_yet": "Noch nicht verfügbar"
 		}
@@ -303,7 +306,9 @@
 					"doI": "Contact possibilities",
 					"wanna": "I want to keep in touch (and maybe win prizes!)",
 					"name": "Your name",
-					"email": "Your email adresse"
+					"email": "Your email adresse",
+					"address": "Your regular address",
+					"18plus": "I am at least 18 y.o."
 				},
 				"save_button": "Save"
 			},
@@ -489,6 +494,7 @@
 			"opponent_quit": "You opponent has left the game.",
 			"inspecting_board": "Menu will be displayed again soon.",
 			"editor_no_valid_config": "Some attributes may not be filled out correctly or the level is empty.",
+			"editor_no_18": "You must be at least 18 years old to participate",
 			"editor_valid_lvl": "Level created!",
 			"not_available_yet": "Not available yet"
 		}
