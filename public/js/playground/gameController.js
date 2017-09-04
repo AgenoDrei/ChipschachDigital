@@ -41,7 +41,7 @@ class GameController {
             console.log('Retrieved Level:', lvl);
             if (lvl.subtype === 'king')
                 DisplayController.disableBeatableWithKings();
-            DisplayController.updateModalTexts(lvl.name[lang], lvl.description[lang]);
+            DisplayController.updateModalTexts(lvl.name[lang], lvl.description[lang], lvl.contact);
             this.level = lvl;
         }.bind(this));
     }

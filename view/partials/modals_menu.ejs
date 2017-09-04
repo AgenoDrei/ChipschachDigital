@@ -58,6 +58,33 @@
                 <h4 class="modal-title"><%=strings.modals.menu.mp_g.title%></h4>
             </div>
             <div class="modal-body">
+                <div class="globalLobby createNewGame">
+                    <h4><%=strings.modals.menu.mp_g.create_title%></h4>
+                    <form>
+                        <label for="newName"><%=strings.modals.menu.mp_g.new_game_form.name_input%></label>
+                        <input id="newName" class="form-control" type="text" placeholder="<%=strings.modals.menu.mp_g.new_game_form.name_input%>">
+                        <label for="newLevel-select"><%=strings.modals.menu.mp_g.new_game_form.new_level_select%></label><br>
+                        <input class="categoryFilter" type="checkbox" value="rook" onchange="filterForCheckedCategory();" checked><%=strings.general.figures[3]%>
+                        <input class="categoryFilter" type="checkbox" value="bishop" onchange="filterForCheckedCategory();" checked><%=strings.general.figures[2]%>
+                        <input class="categoryFilter" type="checkbox" value="queen" onchange="filterForCheckedCategory();" checked><%=strings.general.figures[4]%>
+                        <input class="categoryFilter" type="checkbox" value="king" onchange="filterForCheckedCategory();" checked><%=strings.general.figures[5]%>
+                        <input class="categoryFilter" type="checkbox" value="knight" onchange="filterForCheckedCategory();" checked><%=strings.general.figures[1]%>
+                        <input class="categoryFilter" type="checkbox" value="pawn" onchange="filterForCheckedCategory();" checked><%=strings.general.figures[0]%>
+                        <input class="categoryFilter" type="checkbox" value="mini" onchange="filterForCheckedCategory();" checked><%=strings.general.modes[2]%>
+                        <select id="newLevel-select" class="form-control" onchange="globalCheckForMini();">
+                            <!-- Filled with js -->
+                        </select>
+                        <div class="radio">
+                            <label><input type="radio" id="newGameRadioUnbeatable" name="gameMode" value="unbeatable" checked><%=strings.modals.menu.mp_g.new_game_form.game_mode_0%></label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" id="newGameRadioBeatable" name="gameMode" value="beatable"><%=strings.modals.menu.mp_g.new_game_form.game_mode_1%>
+                            </label>
+                        </div>
+                    </form>
+                    <button class="btn btn-primary" onclick="createNewGame();"><%=strings.modals.menu.mp_g.new_game_form.create_new_game%></button>
+                </div>
                 <div class="globalLobby openGameList">
                     <table class="table table-striped">
                         <thead>
@@ -69,29 +96,12 @@
                             </tr>
                         </thead>
                         <tbody id="globalGames_tbody">
+                            <tr id="openGamesPlaceholder">
+                                <td colspan="4" style="text-align: center;"><%=strings.modals.menu.mp_g.no_levels_yet%></td>
+                            <tr>
                             <!-- Filled with js -->
                         </tbody>
                     </table>
-                </div>
-                <div class="globalLobby createNewGame">
-                    <h4><%=strings.modals.menu.mp_g.create_title%></h4>
-                    <form>
-                        <label for="newName"><%=strings.modals.menu.mp_g.new_game_form.name_input%></label>
-                        <input id="newName" class="form-control" type="text" placeholder="<%=strings.modals.menu.mp_g.new_game_form.name_input%>">
-                        <label for="newLevel-select"><%=strings.modals.menu.mp_g.new_game_form.new_level_select%></label>
-                        <select id="newLevel-select" class="form-control">
-                            <!-- Filled with js -->
-                        </select>
-                        <div class="radio">
-                            <label><input type="radio" name="gameMode" value="unbeatable" checked><%=strings.modals.menu.mp_g.new_game_form.game_mode_0%></label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="gameMode" value="beatable"><%=strings.modals.menu.mp_g.new_game_form.game_mode_1%>
-                            </label>
-                        </div>
-                    </form>
-                    <button class="btn btn-primary" onclick="createNewGame();"><%=strings.modals.menu.mp_g.new_game_form.create_new_game%></button>
                 </div>
             </div>
             <div class="modal-footer">

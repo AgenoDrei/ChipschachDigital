@@ -30,13 +30,18 @@ let saveLvl = function() {
     let lvl = DisplayController.getLevelAttributes();
     lvl.board = PixiEngine.board;
     
-    if (lvl.name === '' || lvl.description === '' || lvl.board.length === 0 || (lvl.type === 'sp' && isNaN(lvl.minturns))) {
+    if (lvl.name === '' 
+        || lvl.description === '' 
+        || lvl.board.length === 0 
+        || (lvl.type === 'sp' && isNaN(lvl.minturns))) {
         toastr.info(strings[lang].toasts.editor_no_valid_config);
         console.log('Rejected Lvl:', lvl);
+    } else if ((lvl.contact !== undefined) && !document.getElementById('contact18').checked) { 
+        toastr.info(strings[lang].toasts.editor_no_18);
     } else {
         toastr.success(strings[lang].toasts.editor_valid_lvl);
         console.log('Posting lvl:', lvl);
-        $.post('/editor', {level: JSON.stringify(lvl)});
+        // $.post('/editor', {level: JSON.stringify(lvl)});
     }
 };
 

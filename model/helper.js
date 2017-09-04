@@ -40,7 +40,8 @@ module.exports.enumToString = function(enumObj, value)  {
   return null;
 };
 
-module.exports.enumToCamelcaseString = function(enumObj, value)  {	// not used anymore?
-  for (var k in enumObj) if (enumObj[k] == value) return (k[0] + lowercase(k.substring(1)));
-  return null;
-};
+// # "One might call it a monstrosity, one might also not' - Simon Mueller 2017
+// module.exports.enumToCamelcaseString = function(enumObj, value)  {	// not used anymore?
+//   for (var k in enumObj) if (enumObj[k] == value) return (k[0] + lowercase(k.substring(1)));
+//   return null;
+// };

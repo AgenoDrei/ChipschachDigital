@@ -12,6 +12,12 @@
 			"players": [
 				"Gelb",
 				"Blau"
+			],
+			"modes": [
+				"Einzelspieler",
+				"Mehrspieler",
+				"Minischach",
+				"Klassisches Schach"
 			]
 		},
 		"editor": {
@@ -46,6 +52,14 @@
 					"Bauer auf Grundreihe bringen",
 					"Figur auf Feld"
 				],
+				"contact": {
+					"doI": "Kontakt Möglichkeit",
+					"wanna": "Ich möchte an einer Verlosung teilnehmen, die besten Stellungen gewinnen Preise.",
+					"name": "Dein Name",
+					"email": "Deine Email-Adresse",
+					"address": "Adresse",
+					"18plus": "Ich bin mindestens 18 Jahre alt"
+				},
 				"save_button": "Speichern"
 			},
 			"icon_bar": {
@@ -92,6 +106,9 @@
 				"mp": "Mehrspieler",
 				"global": "Globaler Mehrspieler",
 				"mini": "Minischach"
+			},
+			"description": {
+				"creator": "Ersteller"
 			},
 			"footers": {
 				"sp": "Löse das Level in möglichst wenig Zügen in dem du alle schlagbaren Chips schlägst!",
@@ -182,7 +199,8 @@
 				"button": "Start!",
 				"cancel_search": "Suche abrechen",
 				"unbeatable": "Figuren nicht schlagbar",
-				"beatable": "Figuren schlagbar"
+				"beatable": "Figuren schlagbar",
+				"disables_kings": "Könige können sich nicht gegenseitig schlagen!"
 			},
 			"menu": {	
 				"sp_mp": {
@@ -195,13 +213,17 @@
 						"th2": "Level",
 						"th3": "Besetzung"
 					},
-					"create_title": "... oder ein eigenes Spiel erstellen?",
+					"no_levels_yet": "Noch keine Spiele offen",
+					"create_title": "Ein eigenes Spiel erstellen?",
 					"new_game_form": {
 						"name_input": "Spielname",
 						"new_level_select": "Level",
 						"game_mode_0": "Figuren nicht schlagbar",
 						"game_mode_1": "Figuren schlagbar",
-						"create_new_game": "Spiel erstellen"
+						"create_new_game": "Spiel erstellen",
+						"beatable": "schlagen an",
+						"unbeatable": "schlagen aus",
+						"disables_mini": "Minischach Level erlauben das Schlagen von Figuren"
 					},
 					"footer": "Hier kannst du ein neues Spiel erstellen oder bereits bestehenden Spielen beitreten."
 				},
@@ -222,6 +244,7 @@
 			"opponent_quit": "Dein Gegner hat das Spiel scheinbar verlassen.",
 			"inspecting_board": "Menü wird gleich wieder erscheinen.",
 			"editor_no_valid_config": "Einige Attribute des Levels wurden nicht korrekt ausgefüllt oder das Level ist leer.",
+			"editor_no_18": "Du musst bestätigen, dass du mindestens 18 Jahre alt bist",
 			"editor_valid_lvl": "Level wird erstellt!",
 			"not_available_yet": "Noch nicht verfügbar"
 		}
@@ -230,8 +253,8 @@
 		"general": {
 			"figures": [
 				"Pawn",
-				"Bishop",
 				"Knight",
+				"Bishop",
 				"Rook",
 				"Queen",
 				"King"
@@ -239,6 +262,12 @@
 			"players": [
 				"Yellow",
 				"Blue"
+			],
+			"modes": [
+				"Singleplayer",
+				"Multiplayer",
+				"Minichess",
+				"Classic Chess"
 			]
 		},
 		"editor": {
@@ -273,6 +302,14 @@
 					"Pawn to back-rank",
 					"Piece reaches field"
 				],
+				"contact": {
+					"doI": "Contact possibilities",
+					"wanna": "I want to enter a competition, the best levels win prices.",
+					"name": "Your name",
+					"email": "Your email adresse",
+					"address": "Your regular address",
+					"18plus": "I am at least 18 y.o."
+				},
 				"save_button": "Save"
 			},
 			"icon_bar": {
@@ -320,6 +357,9 @@
 				"global": "Global Multiplayer",
 				"mini": "Minichess"
 			},
+			"description": {
+				"creator": "Creator"
+			},
 			"footers": {
 				"sp": "Beat the level in as few moves as possible by capturing all available chips!",
 				"mp": "Capture more chips than your opponent!",
@@ -353,7 +393,7 @@
 			"finish": {
 				"winmsgYielded": "You've surrendered the level.",
 				"winmsgGenericYellow": "Yellow has won the game!",
-				"winmsgGenericBlue": "Blue has won the game`!",
+				"winmsgGenericBlue": "Blue has won the game!",
 				"winmsgGenericDraw": "Draw, nobody won, but nobody lost either.",
 				"winmsgMinturnsSuccess": "You've finished the level with as few moves as was possible! Congratulations!",
 				"winmsgMinturnsFailed": "You've finished the level! Maybe you can do even better with fewer moves.",
@@ -409,7 +449,8 @@
 				"button": "Start!",
 				"cancel_search": "Cancel search",
 				"unbeatable": "Pieces not beatable",
-				"beatable": "Pieces beatable"
+				"beatable": "Pieces beatable",
+				"disables_kings": "Kings may not beat each other!"
 			},
 			"menu": {	
 				"sp_mp": {
@@ -422,13 +463,17 @@
 						"th2": "Level",
 						"th3": "Players"
 					},
-					"create_title": "... or create an own game?",
+					"no_levels_yet": "No open games yet",
+					"create_title": "Open your own game?",
 					"new_game_form": {
 						"name_input": "Name",
 						"new_level_select": "Level",
 						"game_mode_0": "Pieces not beatable",
 						"game_mode_1": "Peaces beatable",
-						"create_new_game": "Create game"
+						"create_new_game": "Create game",
+						"beatable": "capturing allowed",
+						"unbeatable": "no capturing",
+						"disables_mini": "Minichess does not allow for non-beatable mode"
 					},
 					"footer": "Here you may create a new game or join others."
 				},
@@ -449,6 +494,7 @@
 			"opponent_quit": "You opponent has left the game.",
 			"inspecting_board": "Menu will be displayed again soon.",
 			"editor_no_valid_config": "Some attributes may not be filled out correctly or the level is empty.",
+			"editor_no_18": "You must be at least 18 years old to participate",
 			"editor_valid_lvl": "Level created!",
 			"not_available_yet": "Not available yet"
 		}
