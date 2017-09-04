@@ -54,7 +54,7 @@
 				],
 				"contact": {
 					"doI": "Kontakt Möglichkeit",
-					"wanna": "Ich will kontaktiert werden (und vielleicht Preise gewinnen!)",
+					"wanna": "Ich möchte an einer Verlosung teilnehmen, die besten Stellungen gewinnen Preise.",
 					"name": "Dein Name",
 					"email": "Deine Email-Adresse",
 					"address": "Adresse",
@@ -304,7 +304,7 @@
 				],
 				"contact": {
 					"doI": "Contact possibilities",
-					"wanna": "I want to keep in touch (and maybe win prizes!)",
+					"wanna": "I want to enter a competition, the best levels win prices.",
 					"name": "Your name",
 					"email": "Your email adresse",
 					"address": "Your regular address",
