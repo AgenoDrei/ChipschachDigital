@@ -13,7 +13,7 @@ before_install:
 deploy:
   provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/ChipschachDigital <ssh-user>@<deploy-host>:~/travis
+  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR/ChipschachDigital simon@agenodrei.de:~/travis
   on:
     branch: development
 
