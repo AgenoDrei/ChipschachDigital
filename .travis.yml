@@ -14,9 +14,9 @@ before_install:
 deploy:
 - provider: script
   skip_cleanup: true
-  script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR simon@agenodrei.de:~/travis
+  script: rsync -r --exclude=$TRAVIS_BUILD_DIR/config --delete-after --quiet $TRAVIS_BUILD_DIR simon@agenodrei.de:~/travis
   on:
-    branch: development
+    branch: development 
 - provider: script
   skip_cleanup: true
   script: rsync -r --delete-after --quiet $TRAVIS_BUILD_DIR --password-file server.pass
