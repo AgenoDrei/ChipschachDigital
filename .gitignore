@@ -9,4 +9,3 @@ frontend/app/.baseDir.ts
 # files
 *.tmp.txt
 *.log
-config.js

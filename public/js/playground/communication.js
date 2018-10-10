@@ -5,7 +5,7 @@ var comHandle = {
 		let ws = null; 
     		if (window.WebSocket) {
 		if(url) ws = new WebSocket('ws://'+url+':'+port, 'kekse');
-		else ws = new WebSocket('ws://localhost:4001', 'kekse');
+		else ws = new WebSocket('ws://83.169.43.18:5001', 'kekse');
         	
         	ws.onopen = function() {
             	var conObj = {
