@@ -39,7 +39,7 @@ class DisplayController {
             $('#btn_menu').hide();
         }   // later if condition: adjust for if sidebar is opened, vmin on width of board-container is not accurate anymore
     	this.boardSize = $('#board-anchor').width();
-        if(PixiEngine) PixiEngine.resize(this.boardSize());
+        if(PixiEngine) PixiEngine.resize(this.boardSize);
     }
 
     static toggleClick() {
