@@ -148,7 +148,7 @@ class GameEngine {
         this.figureSize = figureSize = this.width / 8;
         
         for(figIdx in this.figures) {
-        	fig = this.figures[figIdx);
+        	fig = this.figures[figIdx];
         	fig.size = this.figureSize;
         	let pos = Helper.getPixelPos(fig.x, fig.y);
         	fig.sprite.position.x = pos.x;
