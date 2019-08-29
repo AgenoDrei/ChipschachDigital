@@ -139,6 +139,13 @@ class GameEngine {
         this.turn = 0;
         PIXI.loader.reset();
     }
+    
+    resize(size) {
+    	this.width = size;
+        this.height = size;
+        this.renderer.resize(this.width, this.height);
+        this.render();
+    }
 
     switchTurn() {
         this.turn = (this.turn == playerType.PLAYERONE) ? playerType.PLAYERTWO : playerType.PLAYERONE;

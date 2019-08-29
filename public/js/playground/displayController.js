@@ -33,10 +33,14 @@ class DisplayController {
             $('#nav').css("left", "-250px");
             $('#board-container').css("left", "0px");
             $('#btn_menu').show();
+            this.boardSize = $('#board-anchor').width();
+            PixiEngine.resize(this.boardSize());
         } else if ($('#nav').css("left") == "-250px" && window.innerWidth > 900 && (window.innerWidth - window.innerHeight) >= 250) {
             $('#nav').css("left", "0px");
             $('#board-container').css("left", "250px");
             $('#btn_menu').hide();
+            this.boardSize = $('#board-anchor').width();
+            PixiEngine.resize(this.boardSize());
         }   // later if condition: adjust for if sidebar is opened, vmin on width of board-container is not accurate anymore
     }
 
