@@ -147,7 +147,7 @@ class GameEngine {
         this.background.height = this.height;
         this.figureSize = figureSize = this.width / 8;
         
-        for(figIdx in this.figures) {
+        for(let figIdx in this.figures) {
         	fig = this.figures[figIdx];
         	fig.size = this.figureSize;
         	let pos = Helper.getPixelPos(fig.x, fig.y);
