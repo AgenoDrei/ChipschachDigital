@@ -146,6 +146,17 @@ class GameEngine {
         this.background.width = this.width;
         this.background.height = this.height;
         this.figureSize = figureSize = this.width / 8;
+        
+        for(figIdx in this.figures) {
+        	fig = this.figures[figIdx);
+        	fig.size = this.figureSize;
+        	let pos = Helper.getPixelPos(fig.x, fig.y);
+        	fig.sprite.position.x = pos.x;
+        	fig.sprite.position.y = pos.y;
+        	fig.sprite.height = fig.sprite.width = fig.size;
+        }
+        
+        
         this.renderer.resize(this.width, this.height);
         this.render();
     }
