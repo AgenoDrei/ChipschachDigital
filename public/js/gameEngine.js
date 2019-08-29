@@ -139,6 +139,29 @@ class GameEngine {
         this.turn = 0;
         PIXI.loader.reset();
     }
+    
+    resize(size) {
+    	this.width = size;
+        this.height = size;
+        this.background.width = this.width;
+        this.background.height = this.height;
+        this.figureSize = figureSize = this.width / 8;
+        
+        for(let figIdx in this.figures) {
+        	let fig = this.figures[figIdx];
+        	if(fig.destroyed)
+        		continue;
+        	fig.size = this.figureSize;
+        	let pos = Helper.getPixelPos(fig.x, fig.y);
+        	fig.sprite.position.x = pos.x;
+        	fig.sprite.position.y = pos.y;
+        	fig.sprite.height = fig.sprite.width = fig.size;
+        }
+        
+        
+        this.renderer.resize(this.width, this.height);
+        this.render();
+    }
 
     switchTurn() {
         this.turn = (this.turn == playerType.PLAYERONE) ? playerType.PLAYERTWO : playerType.PLAYERONE;
@@ -351,12 +374,14 @@ class Figure {
         this.color = color;
         this.chip = false;
         this.sprite = null;
+        this.destroyed = false;
     }
 
     destroy() { //ToDo Remove from figures list
         this.x = -99;
         this.y = -99;
         this.sprite.destroy();
+        this.destroyed = true;
     }
 
     move(x, y) {

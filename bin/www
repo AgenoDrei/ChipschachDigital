@@ -12,6 +12,7 @@ var config = require('../config/config');
 var program = require('commander'); //cmd line arguments
 
 let changeHost  = (directory,options) => {
+  if(!options) return;
   console.log("Changing default client host url from " + config.socket.url + " to: " + options.args[0]);
   config.socket.url = options.args[0];
 }
