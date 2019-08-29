@@ -149,6 +149,8 @@ class GameEngine {
         
         for(let figIdx in this.figures) {
         	let fig = this.figures[figIdx];
+        	if(fig.destroyed)
+        		continue;
         	fig.size = this.figureSize;
         	let pos = Helper.getPixelPos(fig.x, fig.y);
         	fig.sprite.position.x = pos.x;
@@ -372,12 +374,14 @@ class Figure {
         this.color = color;
         this.chip = false;
         this.sprite = null;
+        this.destroyed = false;
     }
 
     destroy() { //ToDo Remove from figures list
         this.x = -99;
         this.y = -99;
         this.sprite.destroy();
+        this.destroyed = true;
     }
 
     move(x, y) {
