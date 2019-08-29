@@ -143,6 +143,9 @@ class GameEngine {
     resize(size) {
     	this.width = size;
         this.height = size;
+        this.background.width = this.width;
+        this.background.height = this.height;
+        this.figureSize = figureSize = this.width / 8;
         this.renderer.resize(this.width, this.height);
         this.render();
     }
