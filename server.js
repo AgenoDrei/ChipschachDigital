@@ -30,6 +30,7 @@ app.use('/config', require('./controller/configExposer')(config));
 app.use('/api/v1', require('./controller/index'));
 app.use('/api/v1', require('./controller/level')(dataAccess));
 app.use('/api/v1', require('./controller/game')(dataAccess, gameHandler));
+app.use('/api/v1', require('./controller/editor')(dataAccess));
 
 //set ejs and general view stuff
 app.set('view engine', 'ejs');

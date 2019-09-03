@@ -141,11 +141,4 @@ module.exports = function(app, dataAccess) {
             strings: strings[lang]
         });
     });
-    app.post('/editor', function(req, res) {
-        let level = JSON.parse(req.body.level);
-        console.log('Retrieved EditorLvl: ', level);
-        dataAccess.createLevel(level).done(function(doc) {
-            console.log('Received doc from dataAccess: ', doc);
-        });
-    });
 };
