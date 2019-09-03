@@ -19,7 +19,9 @@
     <div class="gridRow">
         <% row.forEach(function(icon) { %>
         <div class="gridCol">
-            <% if (icon.id == 'impressum') { %>
+            <% if (icon.id == 'spacer') { %>
+            <a class="menuIcon" style="cursor: default;"></a>
+            <% } else if (icon.id == 'impressum') { %>
             <a class="menuIcon" data-toggle="modal" data-target="#<%=icon.id%>"
                style="background-image: url('/img/<%= icon.picId %>.png'); background-size: 100%;">
                 <p><%= icon.name %></p>
