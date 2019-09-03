@@ -41,7 +41,7 @@ let saveLvl = function() {
     } else {
         toastr.success(strings[lang].toasts.editor_valid_lvl);
         console.log('Posting lvl:', lvl);
-        $.post('/api/v1/editor', lvl);
+        $.post('/api/v1/editor', {'level': JSON.stringify(lvl)});
     }
 };
 

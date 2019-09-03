@@ -4,9 +4,10 @@ var router = express.Router();
 module.exports = function(dataAccess) {	
 
 	router.post('/editor', function(req, res, next) {
-		var newLevel = req.body;
+		var newLevel = JSON.parse(req.body.level);
 
 		console.log('API POST /editor called; received level :', newLevel._id);
+		// console.log(newLevel);
 		
 		dataAccess.createLevel(newLevel).done(function(doc) {
 			console.log('DataAccess: Level inserted');
