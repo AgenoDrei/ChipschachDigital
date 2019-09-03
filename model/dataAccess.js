@@ -3,14 +3,23 @@ var f = require('util').format;
 
 module.exports = function(configuration, mongoClient) {
 	var baseUrl = configuration.database.url + ':' + configuration.database.port + '/' + configuration.database.db;
-	var user = encodeURIComponent(configuration.database.username);
-	var password = encodeURIComponent(configuration.database.password);
-	var authMechanism = 'DEFAULT';
-	var authSource = configuration.database.authSource;
-	this.db = null;
+	var url = null;
+	if (configuration.environment === 'production') {
+		var user = encodeURIComponent(configuration.database.username);
+		var password = encodeURIComponent(configuration.database.password);
+		var authMechanism = 'DEFAULT';
+		var authSource = configuration.database.authSource;
+		this.db = null;
 
-	var url = f('mongodb://%s:%s@%s?authMechanism=%s&authSource=%s', user, password, baseUrl, authMechanism, authSource);
-	//console.log('Connecting to database: ', url);
+		url = f('mongodb://%s:%s@%s?authMechanism=%s&authSource=%s', user, password, baseUrl, authMechanism, authSource);
+	} else if (configuration.environment === 'development') {
+		url = f('mongodb://' + baseUrl);
+	} else {
+		throw new Error('Invalid environment setting in configuration.');
+	}
+	
+	this.db = null;
+	console.log('Connecting to database: ', url);
 	
 	mongoClient.connect(url, function(err, db) {
   		if(err) {

@@ -1,14 +1,15 @@
 let config = {
+	environment: 'development',	// for server-deploy, switch to 'production'
 	database: {
 		url: '127.0.0.1',
 		port: '27017',
 		db: 'chipschach',
 		authSource: 'admin',
-		username: 'chipuser',
-		password: 'chiptown2018'
+		username: '',
+		password: ''
 	},
 	socket: {
-		url: '83.169.43.18',
+		url: '127.0.0.1',
 		port: '5001'
 	},
 	server: {
