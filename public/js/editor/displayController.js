@@ -97,7 +97,7 @@ class DisplayController {
             type: type,
             name: {},
             description: {},
-            reviewStatus: reviewStatus.FRESH
+            reviewStatus: reviewStatus.UNTESTED
         };
         Object.keys(strings).forEach(function(l){
             if (l !== lang) {

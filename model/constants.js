@@ -47,6 +47,7 @@ module.exports = {
 	},
 
 	reviewStatus: {
+		UNTESTED: -1,
     	FRESH: 0,
     	REVIEWED: 1,
     	OFFICIAL: 2
