@@ -21,10 +21,12 @@ module.exports = function(app, dataAccess) {
                 ],[
                     {id:'mini', picId:'mini', name: strings[lang].menu.iconRows_names[1][0], status: 'white'},
                     {id:'impressum', picId:'logoLg', name: strings[lang].menu.iconRows_names[1][1]},
-                    {id:'classic', picId:'classic', name: strings[lang].menu.iconRows_names[1][2], status: 'red'}
-                ],[
                     {id:'editor', picId:'editor', name: strings[lang].menu.iconRows_names[2][0], status: 'white'},
+                    // {id:'classic', picId:'classic', name: strings[lang].menu.iconRows_names[1][2], status: 'red'}
+                ],[
+                    // {id:'editor', picId:'editor', name: strings[lang].menu.iconRows_names[2][0], status: 'white'},
                     {id:'help', picId:'help', name: strings[lang].menu.iconRows_names[2][1], status: 'white'},
+                    {id:'spacer'},
                     {id:'exit', picId:'close_.75opacity', name: strings[lang].menu.iconRows_names[2][2]}
                 ]
             ],
@@ -139,13 +141,6 @@ module.exports = function(app, dataAccess) {
                 {value: 1, name: strings[lang].general.players[1]}
             ],
             strings: strings[lang]
-        });
-    });
-    app.post('/editor', function(req, res) {
-        let level = JSON.parse(req.body.level);
-        console.log('Retrieved EditorLvl: ', level);
-        dataAccess.createLevel(level).done(function(doc) {
-            console.log('Received doc from dataAccess: ', doc);
         });
     });
 };

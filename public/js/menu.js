@@ -120,7 +120,8 @@ $('document').ready(function() {
             }
 
             if (lvl.type === 'sp' || lvl.type === 'mp')
-                if (lvl.reviewStatus !== reviewStatus.FRESH)
+                if (lvl.reviewStatus !== reviewStatus.FRESH) {
+                    try {
                     $('#' + lvl.type + lvl.subtype + '_panel-body').append(`
                         <p>
                             <a href="/${lang}/${lvl.type}/${lvl.subtype}/${lvl._id}">
@@ -128,6 +129,10 @@ $('document').ready(function() {
                             </a>
                         </p>
                     `);
+                    } catch (e) {
+                        console.log(lvl);
+                    }
+                }
                 else
                     $('#' + lvl.type + '__fresh_panel-body').append(`
                         <p>

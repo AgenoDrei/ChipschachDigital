@@ -1,4 +1,4 @@
-#ChipschachDigital
+# ChipschachDigital
 
 Zweite Auflage von Chipschach mit verbessertem responsive Design, verbesserter Server Nutzung und ausgereifterem deployment.
 
@@ -7,7 +7,10 @@ Entwickler: Simon Müller, Oliver Berg
 ## How to build
 
 > $ npm install<br>
+> $ mv config/example.config.js config/config.js  # afterwards, enter correct credentials
 > $ npm start
+
+Note: When freshly deploying, please find Chipschach-Levels in Google Drive & intel on how to load in Google Docs.
 
 ## Specifications
 

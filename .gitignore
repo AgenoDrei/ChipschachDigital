@@ -1,11 +1,18 @@
-# dir
+# IDE
 .idea/
+.vs/
 .vscode/
 .tscache/
+
+# building
 node_modules/
 frontend/build/
 frontend/app/.baseDir.ts
 
-# files
+# tmp files
 *.tmp.txt
 *.log
+package-lock.json
+
+# private files
+config/config.js
