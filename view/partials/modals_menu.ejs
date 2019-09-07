@@ -29,6 +29,21 @@
                             <div class="panel-heading">
                                 <h4 class="panel-title">
                                     <a class="accordion-toggle" data-toggle="collapse" data-parent="#acc_<%= type.id %>" 
+                                        href="#<%= type.id %>__reviewed">
+                                        <%=strings.modals.menu.sp_mp.acc_editor_rev_title%>
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="<%= type.id %>__reviewed" class="panel-collapse collapse">
+                                <div id="<%= type.id %>__reviewed_panel-body" class="panel-body">
+                                    <!-- Filled with js -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a class="accordion-toggle" data-toggle="collapse" data-parent="#acc_<%= type.id %>" 
                                         href="#<%= type.id %>__fresh">
                                         <%=strings.modals.menu.sp_mp.acc_editor_title%>
                                     </a>
@@ -123,6 +138,21 @@
                     <!-- Filled with js -->
                 </div>
                 <div id="acc_mini" class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="#acc_mini" 
+                                    href="#mini__reviewed">
+                                    <%=strings.modals.menu.mini.acc_editor_rev_title%>
+                                </a>
+                            </h4>
+                        </div>
+                        <div id="mini__reviewed" class="panel-collapse collapse">
+                            <div id="mini__reviewed_panel-body" class="panel-body">
+                                <!-- ... Filled with js ... -->
+                            </div>
+                        </div>
+                    </div>
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h4 class="panel-title">

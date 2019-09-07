@@ -104,36 +104,48 @@ $('document').ready(function() {
 
     $.get('/api/v1/level', function(availLvls) {
         availLvls.forEach(function(lvl) {
-            if (lvl.type === 'mp' && lvl.reviewStatus !== reviewStatus.FRESH)
-                $('#newLevel-select').append(`
-                    <option category="${lvl.subtype}" value="${lvl._id}">
-                        ${lvl.name[lang]}
-                    </option>
-                `);
-            if (lvl.type === 'minischach' && lvl.reviewStatus !== reviewStatus.FRESH) {
-                $('#newLevel-select').append(`
-                    <option category="mini" value="${lvl._id}">
-                        ${lvl.name[lang]}
-                    </option>
-                `);
-                globalCheckForMini();       // checked for each lvl inserted in case it is the latest one; not the best way to handle this
+            /* filling global */
+            if (lvl.reviewStatus === reviewStatus.OFFICIAL) {
+                if (lvl.type === 'mp') {
+                    $('#newLevel-select').append(`
+                        <option category="${lvl.subtype}" value="${lvl._id}">
+                            ${lvl.name[lang]}
+                        </option>
+                    `);
+                }
+                if (lvl.type === 'minischach') {
+                    $('#newLevel-select').append(`
+                        <option category="mini" value="${lvl._id}">
+                            ${lvl.name[lang]}
+                        </option>
+                    `);
+                    globalCheckForMini();       // checked for each lvl inserted in case it is the latest one; not the best way to handle this
+                }
             }
 
+            /* filling sp & mp local */
             if (lvl.type === 'sp' || lvl.type === 'mp')
-                if (lvl.reviewStatus !== reviewStatus.FRESH) {
+                if (lvl.reviewStatus === reviewStatus.OFFICIAL) {
                     try {
-                    $('#' + lvl.type + lvl.subtype + '_panel-body').append(`
-                        <p>
-                            <a href="/${lang}/${lvl.type}/${lvl.subtype}/${lvl._id}">
-                                ${lvl.name[lang]}
-                            </a>
-                        </p>
-                    `);
+                        $('#' + lvl.type + lvl.subtype + '_panel-body').append(`
+                            <p>
+                                <a href="/${lang}/${lvl.type}/${lvl.subtype}/${lvl._id}">
+                                    ${lvl.name[lang]}
+                                </a>
+                            </p>
+                        `);
                     } catch (e) {
                         console.log(lvl);
                     }
-                }
-                else
+                } else if (lvl.reviewStatus === reviewStatus.REVIEWED) {
+                    $('#' + lvl.type + '__reviewed_panel-body').append(`
+                    <p>
+                        <a href="/${lang}/${lvl.type}/${lvl.subtype}/${lvl._id}">
+                            ${lvl.name[lang]}
+                        </a>
+                    </p>
+                `);
+                } else if (lvl.reviewStatus === reviewStatus.FRESH) {
                     $('#' + lvl.type + '__fresh_panel-body').append(`
                         <p>
                             <a href="/${lang}/${lvl.type}/${lvl.subtype}/${lvl._id}">
@@ -141,9 +153,13 @@ $('document').ready(function() {
                             </a>
                         </p>
                     `);
+                } else {
+                    throw new Error('Invalid review-status');
+                }
 
+            /* fillling mini local */
             if (lvl.type === 'minischach')
-                if (lvl.reviewStatus !== reviewStatus.FRESH)
+                if (lvl.reviewStatus === reviewStatus.OFFICIAL) {
                     $('#miniLevels').append(`
                         <p>
                             <a href="/${lang}/mini/${lvl._id}">
@@ -151,14 +167,25 @@ $('document').ready(function() {
                             </a>
                         </p>
                     `);
-                else 
+                } else if (lvl.reviewStatus === reviewStatus.REVIEWED) {
+                    $('#mini__reviewed_panel-body').append(`
+                        <p>
+                            <a href="/${lang}/mini/${lvl._id}">
+                                ${lvl.name[lang]}
+                            </a>
+                        </p>
+                    `);   
+                } else if (lvl.reviewStatus === reviewStatus.FRESH) {
                     $('#mini__fresh_panel-body').append(`
                         <p>
                             <a href="/${lang}/mini/${lvl._id}">
                                 ${lvl.name[lang]}
                             </a>
                         </p>
-                    `);                    
+                    `);   
+                } else {
+                    throw new Error('Invalid review-status');
+                }                 
         });
     });
 });
