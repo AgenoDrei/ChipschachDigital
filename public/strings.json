@@ -159,8 +159,8 @@
 				"contributors": [
                 	"Ralf Schreiber, SfK (Initiator)",
                 	"Peter Kusterer, IBM (Leitung)",
-                	"Simon Müller, IBM (Programmierung)",
-                	"Oliver Berg, IBM (Programmierung)"
+                	"Simon Müller, Fraunhofer SCAI (Programmierung)",
+                	"Oliver Berg, BASF (Programmierung)"
                 ],
                 "footer": {
                 	"txts": [
@@ -411,8 +411,8 @@
 				"contributors": [
                 	"Ralf Schreiber, SfK (Initiator)",
                 	"Peter Kusterer, IBM (Administration)",
-                	"Simon Müller, IBM (Development)",
-                	"Oliver Berg, IBM (Development)"
+                	"Simon Müller, Fraunhofer SCAI (Development)",
+                	"Oliver Berg, BASF (Development)"
                 ],
                 "footer": {
                 	"txts": [
