@@ -204,7 +204,8 @@
 			},
 			"menu": {	
 				"sp_mp": {
-					"acc_editor_title": "Brandneue Level aus dem Editor (Achtung: Nicht geprüft / getestet)"
+					"acc_editor_title": "Brandneue Level aus dem Editor (Achtung: Nicht geprüft / getestet)",
+					"acc_editor_rev_title": "Geprüfte, aber noch nicht veröffentlichte Level"
 				},
 				"mp_g": {
 					"title": "Mehrspieler Global - Lobby",
@@ -230,6 +231,7 @@
 				"mini": {
 					"title": "Mehrspieler Lokal - Minischach",
 					"acc_editor_title": "Brandneue Level aus dem Editor (Achtung: Nicht geprüft / getestet)",
+					"acc_editor_rev_title": "Geprüfte, aber noch nicht veröffentlichte Level",
 					"footer": "Wähle ein Minischach-Level aus und löse das knifflige Schach-Rätsel!!"
 				}
 			}
@@ -454,7 +456,8 @@
 			},
 			"menu": {	
 				"sp_mp": {
-					"acc_editor_title": "New editor-levels (Caution: not veryfied / tested)"
+					"acc_editor_title": "New editor-levels (Caution: not veryfied / tested)",
+					"acc_editor_rev_title": "Reviewed, yet still non-public level"
 				},
 				"mp_g": {
 					"title": "Multiplayer global - Lobby",
@@ -480,6 +483,7 @@
 				"mini": {
 					"title": "Multiplayer local - Minichess",
 					"acc_editor_title": "New editor-levels (Caution: not veryfied / tested)",
+					"acc_editor_rev_title": "Reviewed, yet still non-public level",
 					"footer": "Choose a Minichess-level and solve tricky chess puzzles!!"
 				}
 			}
